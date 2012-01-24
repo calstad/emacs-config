@@ -1,4 +1,4 @@
-;; Main config file.
+;; Where all the magic starts!
 
 ;; Turn off mouse interface early in startup to avoid momentary display
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
@@ -6,24 +6,32 @@
 ;; Maybe I do like the scroll bar
 ;; (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
-;; Some modes need to call stuff on the exec-path
-(push "/usr/local/bin" exec-path)
-
-;; Load path etc.
+;; Add base emacs config root directory to load path
 (setq dotfiles-dir (file-name-directory
                     (or (buffer-file-name) load-file-name)))
 (add-to-list 'load-path dotfiles-dir)
-;; Add directories to the load path
-(dolist (dirs '("colin" "vendor"))
+
+;; Add needed directories to the load path
+(dolist (dirs '("customizations" "vendor" "utils"))
   (add-to-list 'load-path (concat dotfiles-dir dirs)))
 
-;; Load up ELPA, the package manager
+;; For the love of all that is holy do not litter the file system with
+;; backup and autosave files!
+(require 'backup-autosave-mgr)
+(set-backup-and-autosave-file-locale)
+
+;; Ensure PATH is correctly setup
+(require 'init-exec-path)
+(if window-system (set-exec-path-from-shell-PATH))
+
+;; Load up ELPA, the package manager with marmalade
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
+
 ;; Create a list to add needed packages to.
-(defvar colin-required-packages '())
+(setq my-required-packages '())
 
 (setq autoload-file (concat dotfiles-dir "loaddefs.el"))
 (setq package-user-dir (concat dotfiles-dir "elpa"))
