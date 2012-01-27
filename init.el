@@ -30,18 +30,21 @@
 (if window-system (set-exec-path-from-shell-PATH))
 
 (setq autoload-file (concat dotfiles-dir "loaddefs.el"))
-(setq package-user-dir (concat dotfiles-dir "elpa"))
-;; config changes made through the customize UI will be store here
 (setq custom-file (concat dotfiles-dir "custom.el"))
 
 ;; Load up ELPA, the package manager with marmalade
+(setq package-user-dir (concat dotfiles-dir "elpa"))
 (require 'elpa-utils)
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
-;; Load customizations
+;; Load core customizations
+(require 'my-editor)
+(require 'my-ui)
+
+;; Load support for programming and markup languages
 (require 'my-magit)
 
 ;; Keep system type specific customiztions in own files
