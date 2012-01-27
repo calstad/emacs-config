@@ -12,8 +12,12 @@
 (add-to-list 'load-path dotfiles-dir)
 
 ;; Add needed directories to the load path
-(dolist (dirs '("customizations" "vendor" "utils"))
-  (add-to-list 'load-path (concat dotfiles-dir dirs)))
+(setq customization-dir (concat dotfiles-dir "customizations"))
+(setq utils-dir (concat dotfiles-dir "utils"))
+(setq vendor-dir (concat dotfiles-dir "vendor"))
+(add-to-list 'load-path customization-dir)
+(add-to-list 'load-path utils-dir)
+(add-to-list 'load-path vendor-dir)
 
 ;; For the love of all that is holy do not litter the file system with
 ;; backup and autosave files!
