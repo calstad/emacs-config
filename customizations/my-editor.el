@@ -1,6 +1,21 @@
 ;; Basic and universal customizations for editing all kinds of text
 ;; Lots of this taken from the emacs starter kit v2 and emacs prelude
 
+;; Set various configuration variables
+
+(setq sentence-end-double-space nil
+      shift-select-mode nil
+      mouse-yank-at-point t
+      whitespace-style '(face trailing lines-tail tabs)
+      whitespace-line-column 80
+      ediff-window-setup-function 'ediff-setup-windows-plain
+      oddmuse-directory (concat user-emacs-directory "oddmuse")
+      save-place-file (concat user-emacs-directory "places")
+      diff-switches "-u")
+
+;; Unique buffer names
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
 
 ;; Death to the tabs!
 (setq-default indent-tabs-mode nil)
