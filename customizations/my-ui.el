@@ -13,10 +13,13 @@
 ;; Disable startup screen
 (setq inhibit-startup-message t)
 
-;; mode line settings
+;; Mode line settings
 (line-number-mode t)
 (column-number-mode t)
 (size-indication-mode t)
+
+;; Add indication at bottom of buffer for empty lines
+(set-default 'indicate-empty-lines t)
 
 ;; Enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
