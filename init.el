@@ -17,6 +17,7 @@
 (add-to-list 'load-path customization-dir)
 (add-to-list 'load-path utils-dir)
 (add-to-list 'load-path vendor-dir)
+ (require 'vendor)
 
 ;; For the love of all that is holy do not litter the file system with
 ;; backup and autosave files!
