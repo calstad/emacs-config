@@ -78,6 +78,12 @@
       ido-handle-duplicate-virtual-buffers 2
       ido-max-prospects 10)
 
+;; Smex adds ido magic to function calls
+(ensure-package 'smex)
+(setq smex-save-file (concat user-temporary-file-directory "semex-items"))
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+
 ;; auto-completion in minibuffer
 (icomplete-mode +1)
 
