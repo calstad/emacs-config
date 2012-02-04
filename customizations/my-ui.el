@@ -1,8 +1,11 @@
+(vendor 'maxframe)
+
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
-  (tooltip-mode -1)
-  (mouse-wheel-mode t)
-  (blink-cursor-mode -1))
+  (tooltip-mode -1)       ; dont need mouse tootips!
+  (mouse-wheel-mode t)    ; stupid mice
+  (blink-cursor-mode -1)  ; about to give me seizures
+  (add-hook 'window-setup-hook 'maximize-frame t))
 
 ;; Dont play audio bell
 (setq visible-bell t)

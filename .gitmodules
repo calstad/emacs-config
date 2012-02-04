@@ -1,0 +1,3 @@
+[submodule "vendor/maxframe"]
+	path = vendor/maxframe
+	url = https://github.com/rmm5t/maxframe.el.git
