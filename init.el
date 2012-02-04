@@ -41,11 +41,11 @@
 (package-initialize)
 
 ;; Load core customizations
-(require 'my-editor)
-(require 'my-ui)
+(require 'editor-config)
+(require 'ui-config)
 
 ;; Load support for programming and markup languages
-(require 'my-magit)
+(require 'programming-config)
 
 ;; Keep system type specific customiztions in own files
 (if (string-equal system-type "gnu/linux")

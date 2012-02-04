@@ -31,4 +31,4 @@
 ;; Set zenburn as the color theme
 (load-theme 'zenburn t)
 
-(provide 'my-ui)
+(provide 'ui-config)

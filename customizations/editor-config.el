@@ -97,4 +97,10 @@
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'text-mode-hook 'turn-on-flyspell)
 
-(provide 'my-editor)
+;; dired - reuse current buffer by pressing 'a'
+(put 'dired-find-alternate-file 'disabled nil)
+
+(defalias 'yes-or-no-p 'y-or-n-p)
+(defalias 'auto-tail-revert-mode 'tail-mode)
+
+(provide 'editor-config)
