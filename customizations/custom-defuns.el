@@ -53,6 +53,39 @@
   (cf-untabify-buffer)
   (delete-trailing-whitespace))
 
+(defun cf-swap-windows ()
+  "If you have 2 windows, it swaps them."
+  (interactive)
+  (if (/= (count-windows) 2)
+      (message "You need exactly 2 windows to do this.")
+    (let* ((w1 (first (window-list)))
+           (w2 (second (window-list)))
+           (b1 (window-buffer w1))
+           (b2 (window-buffer w2))
+           (s1 (window-start w1))
+           (s2 (window-start w2)))
+      (set-window-buffer w1 b2)
+      (set-window-buffer w2 b1)
+      (set-window-start w1 s2)
+      (set-window-start w2 s1)))
+  (other-window 1))
+
+(defun cf-kill-other-buffers ()
+  "Kill all buffers but the current one. Doesn't mess with special buffers."
+  (interactive)
+  (dolist (buffer (buffer-list))
+    (unless (or (eql buffer (current-buffer)) (not (buffer-file-name buffer)))
+      (kill-buffer buffer))))
+
+(defun cf-delete-file-and-buffer ()
+  "Kills the current buffer and deletes the file it is visiting"
+  (interactive)
+  (let ((filename (buffer-file-name)))
+    (when filename
+      (delete-file filename)
+      (message "Deleted file %s" filename)))
+  (kill-buffer))
+
 (provide 'custom-defuns)
 
 
