@@ -64,6 +64,8 @@
       savehist-file (concat user-temporary-file-directory "savehist"))
 (savehist-mode t)
 
+(ensure-package 'find-file-in-project)
+
 ;; ido-mode is like magic pixie dust!
 ;; May want to add ido-default-buffer-method and ido-default-file-method 
 (ensure-package 'ido-ubiquitous)
