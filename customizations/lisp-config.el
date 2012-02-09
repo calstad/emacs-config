@@ -1,6 +1,7 @@
 (ensure-package 'paredit)
 (ensure-package 'clojure-mode)
 (ensure-package 'clojurescript-mode)
+(ensure-package 'elisp-slime-nav)
 
 ;; Emacs Lisp
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
@@ -30,6 +31,7 @@
 (define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
 (define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
 
+;; Turn on paredit for all lisp modes.
 (dolist (mode '(scheme emacs-lisp lisp clojure clojurescript))
   (when (> (display-color-cells) 8)
     (add-hook (intern (concat (symbol-name mode) "-mode-hook"))
