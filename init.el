@@ -44,6 +44,7 @@
 
 ;; Load core customizations
 (require 'custom-defuns)
+(require 'custom-keybindings)
 (require 'editor-config)
 (require 'ui-config)
 
