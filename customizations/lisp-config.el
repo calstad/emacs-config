@@ -1,4 +1,6 @@
 (ensure-package 'paredit)
+(ensure-package 'clojure-mode)
+(ensure-package 'clojurescript-mode)
 
 ;; Emacs Lisp
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
