@@ -102,6 +102,10 @@
 ;; dired - reuse current buffer by pressing 'a'
 (put 'dired-find-alternate-file 'disabled nil)
 
+;; Text expansion
+(vendor 'yasnippet)
+(yas/global-mode 1)
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 (defalias 'auto-tail-revert-mode 'tail-mode)
 
