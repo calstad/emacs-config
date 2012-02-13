@@ -1,3 +1,4 @@
 elpa/*
 .emacs-tmp-files/*
 .#*
+swank/*
