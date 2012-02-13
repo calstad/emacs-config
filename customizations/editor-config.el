@@ -102,6 +102,14 @@
 ;; dired - reuse current buffer by pressing 'a'
 (put 'dired-find-alternate-file 'disabled nil)
 
+;; Eshell customizations
+(setq eshell-cmpl-cycle-completions nil
+      eshell-history-file-name (concat user-temporary-file-directory "eshell-history")
+      eshell-last-dir-ring-file-name (concat user-temporary-file-directory "eshell-lastdir")
+      eshell-save-history-on-exit t
+      eshell-buffer-shorthand t
+      eshell-cmpl-dir-ignore "\\`\\(\\.\\.?\\|CVS\\|\\.svn\\|\\.git\\)/\\'")
+
 ;; Text expansion
 (vendor 'yasnippet)
 (yas/global-mode 1)
