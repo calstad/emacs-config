@@ -104,6 +104,7 @@
 
 ;; Eshell customizations
 (setq eshell-cmpl-cycle-completions nil
+      eshell-directory-name user-temporary-file-directory
       eshell-history-file-name (concat user-temporary-file-directory "eshell-history")
       eshell-last-dir-ring-file-name (concat user-temporary-file-directory "eshell-lastdir")
       eshell-save-history-on-exit t
