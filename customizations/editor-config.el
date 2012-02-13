@@ -78,6 +78,7 @@
 (ido-mode t)
 (ido-ubiquitous t)
 (setq ido-enable-prefix nil
+      ido-save-directory-list-file (concat user-temporary-file-directory "ido-last")
       ido-enable-flex-matching t
       ido-auto-merge-work-directories-length nil
       ido-create-new-buffer 'always
