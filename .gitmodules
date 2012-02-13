@@ -4,3 +4,6 @@
 [submodule "vendor/yasnippet"]
 	path = vendor/yasnippet
 	url = https://github.com/capitaomorte/yasnippet.git
+[submodule "vendor/browse-kill-ring"]
+	path = vendor/browse-kill-ring
+	url = https://github.com/T-J-Teru/browse-kill-ring.git

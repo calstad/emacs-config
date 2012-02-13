@@ -66,6 +66,12 @@
 
 (ensure-package 'find-file-in-project)
 
+;; Better navigation of the kill ring
+(vendor 'browse-kill-ring)
+(when (require 'browse-kill-ring nil 'noerror)
+  (browse-kill-ring-default-keybindings))
+(setq browse-kill-ring-quit-action 'save-and-restore)
+
 ;; ido-mode is like magic pixie dust!
 ;; May want to add ido-default-buffer-method and ido-default-file-method 
 (ensure-package 'ido-ubiquitous)
