@@ -1,5 +1,6 @@
 (ensure-package 'paredit)
 (ensure-package 'clojure-mode)
+(ensure-package 'clojure-test-mode)
 (ensure-package 'clojurescript-mode)
 (ensure-package 'elisp-slime-nav)
 
@@ -36,5 +37,12 @@
   (when (> (display-color-cells) 8)
     (add-hook (intern (concat (symbol-name mode) "-mode-hook"))
               'cf-turn-on-paredit)))
+
+;; Use paredit in SLIME repl
+(defun override-slime-repl-bindings-with-paredit ()
+  (define-key slime-repl-mode-map
+    (read-kbd-macro paredit-backward-delete-key) nil))
+(add-hook 'slime-repl-mode-hook 'override-slime-repl-bindings-with-paredit)
+(add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
 
 (provide 'lisp-config)
