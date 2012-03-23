@@ -2,3 +2,6 @@ elpa/*
 .emacs-tmp-files/*
 .#*
 swank/*
+/.DS_Store
+/tramp
+/url/cookies
