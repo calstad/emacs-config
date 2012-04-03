@@ -10,3 +10,6 @@
 [submodule "snippets/clojure-mode"]
 	path = snippets/clojure-mode
 	url = git@github.com:calstad/clojure-snippets.git
+[submodule "vendor/restclient"]
+	path = vendor/restclient
+	url = https://github.com/pashky/restclient.el.git
