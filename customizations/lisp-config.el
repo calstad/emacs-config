@@ -3,6 +3,7 @@
 (ensure-package 'clojure-test-mode)
 (ensure-package 'clojurescript-mode)
 (ensure-package 'elisp-slime-nav)
+(ensure-package 'slime-repl)
 
 ;; Emacs Lisp
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
