@@ -29,7 +29,8 @@
 
 ;; Ensure PATH is correctly setup
 (require 'init-exec-path)
-(if window-system (set-exec-path-from-shell-PATH))
+(if window-system
+    (setenv "PATH" (shell-command-to-string "echo $PATH")))
 
 (setq autoload-file (concat dotfiles-dir "loaddefs.el"))
 (setq custom-file (concat dotfiles-dir "custom.el"))
