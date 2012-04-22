@@ -39,11 +39,27 @@
     (add-hook (intern (concat (symbol-name mode) "-mode-hook"))
               'cf-turn-on-paredit)))
 
-;; Use paredit in SLIME repl
+;;SLIME repl
+;; Fix paredit keybindings
 (defun override-slime-repl-bindings-with-paredit ()
-  (define-key slime-repl-mode-map
-    (read-kbd-macro paredit-backward-delete-key) nil))
+  (progn
+    (define-key slime-repl-mode-map
+      (read-kbd-macro paredit-backward-delete-key) nil)
+    (define-key slime-repl-mode-map
+      (kbd "M-s") 'paredit-splice-sexp)))
+
+;; Add clojure paredit support for vectors and maps
+(defun fix-paredit-repl ()
+  (interactive)
+  (local-set-key "{" 'paredit-open-curly)
+  (local-set-key "}" 'paredit-close-curly)
+  (modify-syntax-entry ?\{ "(}") 
+  (modify-syntax-entry ?\} "){")
+  (modify-syntax-entry ?\[ "(]")
+  (modify-syntax-entry ?\] ")["))
+
 (add-hook 'slime-repl-mode-hook 'override-slime-repl-bindings-with-paredit)
+(add-hook 'slime-repl-mode-hook 'fix-paredit-repl)
 (add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
 
 (provide 'lisp-config)

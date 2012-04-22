@@ -122,7 +122,6 @@
 (vendor 'yasnippet)
 (yas/global-mode 1)
 
-
 ;; HTTP client
 (vendor 'restclient)
 (add-to-list 'auto-mode-alist '("\\.http$" . restclient-mode))
