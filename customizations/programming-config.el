@@ -8,7 +8,13 @@
 (defun custom-prog-mode-hook ()
   (run-hooks 'prog-mode-hook))
 
+;; Autoload octave mode for octave files.
+(autoload 'octave-mode "octave-mod" nil t)
+(setq auto-mode-alist
+      (cons '("\\.m$" . octave-mode) auto-mode-alist))
+
 (require 'magit-config)
 (require 'lisp-config)
+
 
 (provide 'programming-config)
