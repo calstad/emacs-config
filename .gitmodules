@@ -13,3 +13,6 @@
 [submodule "vendor/restclient"]
 	path = vendor/restclient
 	url = https://github.com/pashky/restclient.el.git
+[submodule "vendor/powerline"]
+	path = vendor/powerline
+	url = https://github.com/jonathanchu/emacs-powerline.git
