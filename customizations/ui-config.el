@@ -25,7 +25,16 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Custom Emacs 24 color themes support
-(add-to-list 'custom-theme-load-path (concat dotfiles-dir "themes/"))
+;; Add all subdirectories to theme path.
+(let ((base (concat dotfiles-dir "themes")))
+  (add-to-list 'custom-theme-load-path base)
+  (dolist (f (directory-files base))
+    (let ((name (concat base "/" f)))
+      (when (and (file-directory-p name) 
+                 (not (equal f ".."))
+                 (not (equal f ".")))
+        (add-to-list 'custom-theme-load-path name)))))
+
 (setq color-theme-is-global t)
 
 ;; Set zenburn as the color theme

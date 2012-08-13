@@ -16,3 +16,6 @@
 [submodule "vendor/powerline"]
 	path = vendor/powerline
 	url = https://github.com/jonathanchu/emacs-powerline.git
+[submodule "themes/solarized"]
+	path = themes/solarized
+	url = git://github.com/sellout/emacs-color-theme-solarized.git
