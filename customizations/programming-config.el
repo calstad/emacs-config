@@ -15,6 +15,6 @@
 
 (require 'magit-config)
 (require 'lisp-config)
-
+(require 'ruby-config)
 
 (provide 'programming-config)
