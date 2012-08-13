@@ -40,7 +40,4 @@
 ;; Set zenburn as the color theme
 (load-theme 'zenburn t)
 
-;; Better status line
-(vendor 'powerline)
-
 (provide 'ui-config)
