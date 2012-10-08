@@ -16,3 +16,6 @@
 [submodule "themes/solarized"]
 	path = themes/solarized
 	url = git://github.com/sellout/emacs-color-theme-solarized.git
+[submodule "vendor/rinari"]
+	path = vendor/rinari
+	url = git://github.com/eschulte/rinari.git
