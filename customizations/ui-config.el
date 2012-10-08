@@ -1,5 +1,3 @@
-(vendor 'maxframe)
-
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
   (tooltip-mode -1)       ; dont need mouse tootips!
