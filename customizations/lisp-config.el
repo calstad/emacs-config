@@ -62,4 +62,10 @@
 (add-hook 'slime-repl-mode-hook 'fix-paredit-repl)
 (add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
 
+;; Clojure nREPL
+(add-hook 'nrepl-interaction-mode-hook
+          'nrepl-turn-on-eldoc-mode)
+(setq nrepl-popup-stacktraces nil)
+ (add-to-list 'same-window-buffer-names "*nrepl*")
+
 (provide 'lisp-config)
