@@ -3,7 +3,7 @@
 
 (defun vendor (library)
   (let* ((file (symbol-name library))
-         (normal (concat vendor-dir "/" file))
+         (normal (concat colin-vendor-dir "/" file))
          (suffix (concat normal ".el")))
     (cond
      ((file-directory-p normal)
