@@ -1,9 +1,9 @@
-(ensure-package 'paredit)
-(ensure-package 'clojure-mode)
-(ensure-package 'clojure-test-mode)
-(ensure-package 'clojurescript-mode)
-(ensure-package 'elisp-slime-nav)
-(ensure-package 'slime-repl)
+(colin-add-package 'paredit)
+(colin-add-package 'clojure-mode)
+(colin-add-package 'clojure-test-mode)
+(colin-add-package 'clojurescript-mode)
+(colin-add-package 'elisp-slime-nav)
+(colin-add-package 'slime-repl)
 
 ;; Emacs Lisp
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)

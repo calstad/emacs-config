@@ -64,7 +64,7 @@
       savehist-file (concat user-temporary-file-directory "savehist"))
 (savehist-mode t)
 
-(ensure-package 'find-file-in-project)
+(colin-add-package 'find-file-in-project)
 
 ;; Better navigation of the kill ring
 (vendor 'browse-kill-ring)
@@ -74,7 +74,7 @@
 
 ;; ido-mode is like magic pixie dust!
 ;; May want to add ido-default-buffer-method and ido-default-file-method 
-(ensure-package 'ido-ubiquitous)
+(colin-add-package 'ido-ubiquitous)
 (ido-mode t)
 (ido-ubiquitous t)
 (setq ido-enable-prefix nil
@@ -88,7 +88,7 @@
       ido-max-prospects 10)
 
 ;; Smex adds ido magic to function calls
-(ensure-package 'smex)
+(colin-add-package 'smex)
 (setq smex-save-file (concat user-temporary-file-directory "semex-items"))
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)

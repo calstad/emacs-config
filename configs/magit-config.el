@@ -1,7 +1,7 @@
 ;; Customizations for the magit emacs interface to git.
 
 ;; Make sure the package is installed
-(ensure-package 'magit)
+(colin-add-package 'magit)
 
 ;; Set keybinding for magit status
 (global-set-key (kbd "C-x g") 'magit-status)
