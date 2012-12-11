@@ -8,17 +8,17 @@
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 ;; Add base emacs config root directory to load path
-(setq dotfiles-dir (file-name-directory
+(setq colin-dotfiles-dir (file-name-directory
                     (or (buffer-file-name) load-file-name)))
-(add-to-list 'load-path dotfiles-dir)
+(add-to-list 'load-path colin-dotfiles-dir)
 
 ;; Add needed directories to the load path
-(setq customization-dir (concat dotfiles-dir "customizations"))
-(setq utils-dir (concat dotfiles-dir "utils"))
-(setq vendor-dir (concat dotfiles-dir "vendor"))
-(add-to-list 'load-path customization-dir)
-(add-to-list 'load-path utils-dir)
-(add-to-list 'load-path vendor-dir)
+(setq colin-configs-dir (concat colin-dotfiles-dir "configs"))
+(setq colin-utils-dir (concat colin-dotfiles-dir "utils"))
+(setq colin-vendor-dir (concat colin-dotfiles-dir "vendor"))
+(add-to-list 'load-path colin-configs-dir)
+(add-to-list 'load-path colin-utils-dir)
+(add-to-list 'load-path colin-vendor-dir)
 (require 'vendor)
 
 ;; For the love of all that is holy do not litter the file system with
