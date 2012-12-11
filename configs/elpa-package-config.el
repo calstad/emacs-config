@@ -10,22 +10,13 @@
 (defvar colin-packages '())
 
 (defun colin-add-package (package-name)
-  (add-to-list 'colin-packages))
+  (add-to-list 'colin-packages package-name))
 
-(defun colin-package-not-installed-p (p)
-  (not (package-installed-p p)))
+(defun colin-package-not-installed-p (pkg)
+  (not (package-installed-p pkg)))
 
-(defun colin-check-packages ()
-  ())
+(defun colin-install-needed-packages ()
+  (dolist (pkg (remove-if-not 'colin-package-not-installed-p colin-packages))
+    (package-install pkg)))
 
-(unless (tad-packages-installed-p)
-  ;; check for new packages (package version)
-  (message "%s" "Refreshing package database...")
-  (package-refresh-contents)
-  (message "%s" " done.")
-  ;; install the missing packages
-  (dolist (p colin-packages)
-    (when (not (package-installed-p p))
-      (package-install p))))
-
-(provide 'elpa-package-config.el)
+(provide 'elpa-package-config)
