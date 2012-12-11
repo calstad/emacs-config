@@ -24,7 +24,7 @@
 
 ;; Custom Emacs 24 color themes support
 ;; Add all subdirectories to theme path.
-(let ((base (concat dotfiles-dir "themes")))
+(let ((base (concat colin-dotfiles-dir "themes")))
   (add-to-list 'custom-theme-load-path base)
   (dolist (f (directory-files base))
     (let ((name (concat base "/" f)))
