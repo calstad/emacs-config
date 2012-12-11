@@ -21,6 +21,9 @@
 (add-to-list 'load-path colin-vendor-dir)
 (require 'vendor)
 
+;; Initialize package system
+(require 'elpa-package-config)
+
 ;; For the love of all that is holy do not litter the file system with
 ;; backup and autosave files!
 (setq user-temporary-file-directory (concat colin-dotfiles-dir ".emacs-tmp-files/"))
@@ -31,13 +34,6 @@
 (if window-system
     (setenv "PATH" (shell-command-to-string "echo $PATH")))
 
-;; Load up ELPA, the package manager with marmalade
-(setq package-user-dir (concat dotfiles-dir "elpa"))
-(require 'elpa-utils)
-(require 'package)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
-(package-initialize)
 (setq autoload-file (concat colin-dotfiles-dir "loaddefs.el"))
 (setq custom-file (concat colin-dotfiles-dir "custom.el"))
 
@@ -55,3 +51,6 @@
     (setq system-type-specific-config (concat colin-dotfiles-dir "linux" ".el"))
   (setq system-type-specific-config (concat colin-dotfiles-dir (symbol-name system-type) ".el")))
 (if (file-exists-p system-type-specific-config) (load system-type-specific-config))
+
+;; Install all needed packages
+(colin-install-needed-packages)
