@@ -23,16 +23,13 @@
 
 ;; For the love of all that is holy do not litter the file system with
 ;; backup and autosave files!
-(setq user-temporary-file-directory (concat dotfiles-dir ".emacs-tmp-files/"))
+(setq user-temporary-file-directory (concat colin-dotfiles-dir ".emacs-tmp-files/"))
 (require 'backup-autosave-mgr)
 (set-backup-and-autosave-file-locale)
 
 ;; Ensure PATH is correctly setup
 (if window-system
     (setenv "PATH" (shell-command-to-string "echo $PATH")))
-
-(setq autoload-file (concat dotfiles-dir "loaddefs.el"))
-(setq custom-file (concat dotfiles-dir "custom.el"))
 
 ;; Load up ELPA, the package manager with marmalade
 (setq package-user-dir (concat dotfiles-dir "elpa"))
@@ -41,6 +38,8 @@
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
+(setq autoload-file (concat colin-dotfiles-dir "loaddefs.el"))
+(setq custom-file (concat colin-dotfiles-dir "custom.el"))
 
 ;; Load core customizations
 (require 'custom-defuns)
@@ -53,6 +52,6 @@
 
 ;; Keep system type specific customiztions in own files
 (if (string-equal system-type "gnu/linux")
-    (setq system-type-specific-config (concat dotfiles-dir "linux" ".el"))
-  (setq system-type-specific-config (concat dotfiles-dir (symbol-name system-type) ".el")))
+    (setq system-type-specific-config (concat colin-dotfiles-dir "linux" ".el"))
+  (setq system-type-specific-config (concat colin-dotfiles-dir (symbol-name system-type) ".el")))
 (if (file-exists-p system-type-specific-config) (load system-type-specific-config))
