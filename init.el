@@ -21,8 +21,9 @@
 (add-to-list 'load-path colin-vendor-dir)
 (require 'vendor)
 
-;; Initialize package system
+;; Initialize package system and install needed packages
 (require 'elpa-package-config)
+(colin-install-needed-packages)
 
 ;; For the love of all that is holy do not litter the file system with
 ;; backup and autosave files!
@@ -51,6 +52,3 @@
     (setq system-type-specific-config (concat colin-dotfiles-dir "linux" ".el"))
   (setq system-type-specific-config (concat colin-dotfiles-dir (symbol-name system-type) ".el")))
 (if (file-exists-p system-type-specific-config) (load system-type-specific-config))
-
-;; Install all needed packages
-(colin-install-needed-packages)

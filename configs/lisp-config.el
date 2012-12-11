@@ -1,10 +1,3 @@
-(colin-add-package 'paredit)
-(colin-add-package 'clojure-mode)
-(colin-add-package 'clojure-test-mode)
-(colin-add-package 'clojurescript-mode)
-(colin-add-package 'elisp-slime-nav)
-(colin-add-package 'slime-repl)
-
 ;; Emacs Lisp
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'emacs-lisp-mode-hook 'cf-remove-elc-on-save)
@@ -29,7 +22,6 @@
 (define-key emacs-lisp-mode-map (kbd "C-c v") 'eval-buffer)
 
 ;; General Lisp configs
-
 (define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
 (define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
 

@@ -7,16 +7,36 @@
 (package-initialize)
 
 ;; Packages to be installed
-(defvar colin-packages '())
+(defconst colin-elpa-dependencies
+  '(;; General Editor stuff
+    find-file-in-project
+    ido-ubiquitous
+    smex
+    magit
 
-(defun colin-add-package (package-name)
-  (add-to-list 'colin-packages package-name))
+    ;; Lisp
+    paredit
+    clojure-mode
+    clojure-test-mode
+    clojurescript-mode
+    elisp-slime-nav
+    slime-repl
 
-(defun colin-package-not-installed-p (pkg)
-  (not (package-installed-p pkg)))
+    ;; Ruby
+    yaml-mode
+    inf-ruby
+    haml-mode
+
+    ))
+
+(defun colin-needed-packages ()
+  (remove-if 'package-installed-p colin-elpa-dependencies))
 
 (defun colin-install-needed-packages ()
-  (dolist (pkg (remove-if-not 'colin-package-not-installed-p colin-packages))
-    (package-install pkg)))
+  (let ((needed-pkgs (colin-needed-packages)))
+    (when needed-pkgs
+      (package-refresh-contents)
+      (dolist (pkg needed-pkgs)
+        (package-install pkg)))))
 
 (provide 'elpa-package-config)
