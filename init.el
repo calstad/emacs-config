@@ -28,7 +28,6 @@
 (set-backup-and-autosave-file-locale)
 
 ;; Ensure PATH is correctly setup
-(require 'init-exec-path)
 (if window-system
     (setenv "PATH" (shell-command-to-string "echo $PATH")))
 
