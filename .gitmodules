@@ -1,9 +1,6 @@
 [submodule "vendor/maxframe"]
 	path = vendor/maxframe
 	url = https://github.com/rmm5t/maxframe.el.git
-[submodule "vendor/yasnippet"]
-	path = vendor/yasnippet
-	url = https://github.com/capitaomorte/yasnippet.git
 [submodule "vendor/browse-kill-ring"]
 	path = vendor/browse-kill-ring
 	url = https://github.com/T-J-Teru/browse-kill-ring.git
