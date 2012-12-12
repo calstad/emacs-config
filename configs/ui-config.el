@@ -3,7 +3,7 @@
   (tooltip-mode -1)       ; dont need mouse tootips!
   (mouse-wheel-mode t)    ; stupid mice
   (blink-cursor-mode -1)  ; about to give me seizures
-  (add-hook 'window-setup-hook 'maximize-frame t))
+  (tool-bar-mode -1))
 
 ;; Dont play audio bell
 (setq visible-bell t)
