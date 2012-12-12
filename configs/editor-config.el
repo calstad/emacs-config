@@ -117,8 +117,7 @@
       eshell-cmpl-dir-ignore "\\`\\(\\.\\.?\\|CVS\\|\\.svn\\|\\.git\\)/\\'")
 
 ;; Text expansion
-(vendor 'yasnippet)
-(yas/global-mode 1)
+(yas-global-mode 1)
 
 ;; HTTP client
 (vendor 'restclient)

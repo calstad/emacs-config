@@ -13,6 +13,7 @@
     ido-ubiquitous
     smex
     magit
+    yasnippet
 
     ;; Lisp
     paredit
