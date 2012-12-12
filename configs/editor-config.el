@@ -64,6 +64,8 @@
       savehist-file (concat user-temporary-file-directory "savehist"))
 (savehist-mode t)
 
+(setq recentf-save-file (concat user-temporary-file-directory "recentf"))
+
 ;; Better navigation of the kill ring
 (vendor 'browse-kill-ring)
 (when (require 'browse-kill-ring nil 'noerror)
