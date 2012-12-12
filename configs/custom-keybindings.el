@@ -11,7 +11,7 @@
 (global-set-key (kbd "M-/") 'hippie-expand)
 
 ;; Perform general cleanup.
-(global-set-key (kbd "C-c n") 'cf-cleanup-buffer)
+(global-set-key (kbd "C-c n") 'colin-cleanup-buffer)
 
 ;; Jump to a definition in the current file. (Protip: this is awesome.)
 (global-set-key (kbd "C-x C-i") 'imenu)
@@ -35,7 +35,7 @@
 (global-set-key (kbd "C-c x") 'execute-extended-command)
 
 ;; swap windows
-(global-set-key (kbd "C-c s") 'cf-swap-windows)
+(global-set-key (kbd "C-c s") 'colin-swap-windows)
 
 ;; replace buffer-menu with ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
