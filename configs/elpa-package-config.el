@@ -21,12 +21,13 @@
     clojurescript-mode
     elisp-slime-nav
     slime-repl
+    nrepl
 
     ;; Ruby
     yaml-mode
     inf-ruby
     haml-mode
-
+    rinari
     ))
 
 (defun colin-needed-packages ()
