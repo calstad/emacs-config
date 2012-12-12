@@ -6,4 +6,4 @@
 
 ;; Set font
 (if window-system
-    (setq default-frame-alist '((font . "-apple-inconsolata-medium-r-normal--14-0-72-72-m-0-iso10646-1"))))
+    (setq default-frame-alist '((font . "-apple-inconsolata-medium-r-normal--16-0-72-72-m-0-iso10646-1"))))
