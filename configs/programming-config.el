@@ -4,6 +4,7 @@
 (add-hook 'prog-mode-hook 'colin-turn-on-hl-line-mode)
 (add-hook 'prog-mode-hook 'colin-pretty-lambdas)
 (add-hook 'prog-mode-hook 'colin-add-watchwords)
+(add-hook 'prog-mode-hook (lambda () (yas-minor-mode)))
 
 (defun custom-prog-mode-hook ()
   (run-hooks 'prog-mode-hook))
