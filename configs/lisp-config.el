@@ -1,10 +1,10 @@
 ;; Emacs Lisp
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'emacs-lisp-mode-hook 'colin-remove-elc-on-save)
+(add-hook 'emacs-lisp-mode-hook 'calstad-remove-elc-on-save)
 (add-hook 'emacs-lisp-mode-hook 'custom-prog-mode-hook)
 (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)
 
-(defun colin-remove-elc-on-save ()
+(defun calstad-remove-elc-on-save ()
   "If you're saving an elisp file, likely the .elc is no longer valid."
   (make-local-variable 'after-save-hook)
   (add-hook 'after-save-hook
@@ -13,11 +13,11 @@
                   (delete-file (concat buffer-file-name "c"))))))
 
 ;; Customizations for interactive elisp mode
-(defun colin-ielm-mode-hook ()
-  (colin-turn-on-paredit)
+(defun calstad-ielm-mode-hook ()
+  (calstad-turn-on-paredit)
   (turn-on-eldoc-mode))
 
-(add-hook 'ielm-mode-hook 'colin-ielm-mode-hook)
+(add-hook 'ielm-mode-hook 'calstad-ielm-mode-hook)
 
 (define-key emacs-lisp-mode-map (kbd "C-c v") 'eval-buffer)
 
@@ -29,7 +29,7 @@
 (dolist (mode '(scheme emacs-lisp lisp clojure clojurescript))
   (when (> (display-color-cells) 8)
     (add-hook (intern (concat (symbol-name mode) "-mode-hook"))
-              'colin-turn-on-paredit)))
+              'calstad-turn-on-paredit)))
 
 ;;SLIME repl
 ;; Fix paredit keybindings

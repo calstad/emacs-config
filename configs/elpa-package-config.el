@@ -1,13 +1,13 @@
 ;; Load up ELPA, the package manager with marmalade
 
-(setq package-user-dir (concat colin-dotfiles-dir "elpa"))
+(setq package-user-dir (concat calstad-dotfiles-dir "elpa"))
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
 ;; Packages to be installed
-(defconst colin-elpa-dependencies
+(defconst calstad-elpa-dependencies
   '(;; General Editor stuff
     find-file-in-project
     ido-ubiquitous
@@ -31,11 +31,11 @@
     rinari
     ))
 
-(defun colin-needed-packages ()
-  (remove-if 'package-installed-p colin-elpa-dependencies))
+(defun calstad-needed-packages ()
+  (remove-if 'package-installed-p calstad-elpa-dependencies))
 
-(defun colin-install-needed-packages ()
-  (let ((needed-pkgs (colin-needed-packages)))
+(defun calstad-install-needed-packages ()
+  (let ((needed-pkgs (calstad-needed-packages)))
     (when needed-pkgs
       (package-refresh-contents)
       (dolist (pkg needed-pkgs)

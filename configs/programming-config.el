@@ -1,9 +1,9 @@
 ;; Hooks for all programming modes
-(add-hook 'prog-mode-hook 'colin-local-column-number-mode)
-(add-hook 'prog-mode-hook 'colin-local-comment-auto-fill)
-(add-hook 'prog-mode-hook 'colin-turn-on-hl-line-mode)
-(add-hook 'prog-mode-hook 'colin-pretty-lambdas)
-(add-hook 'prog-mode-hook 'colin-add-watchwords)
+(add-hook 'prog-mode-hook 'calstad-local-column-number-mode)
+(add-hook 'prog-mode-hook 'calstad-local-comment-auto-fill)
+(add-hook 'prog-mode-hook 'calstad-turn-on-hl-line-mode)
+(add-hook 'prog-mode-hook 'calstad-pretty-lambdas)
+(add-hook 'prog-mode-hook 'calstad-add-watchwords)
 (add-hook 'prog-mode-hook (lambda () (yas-minor-mode)))
 
 (defun custom-prog-mode-hook ()
