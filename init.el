@@ -22,7 +22,7 @@
 
 ;; For the love of all that is holy do not litter the file system with
 ;; backup and autosave files!
-(setq user-temporary-file-directory (concat calstad-dotfiles-dir ".emacs-tmp-files/"))
+(setq calstad-temporary-file-directory (concat calstad-dotfiles-dir ".emacs-tmp-files/"))
 (require 'backup-autosave-mgr)
 (set-backup-and-autosave-file-locale)
 

@@ -49,7 +49,7 @@
 (setq show-paren-style 'parenthesis)
 
 ;; Saveplace remembers your location in a file when saving files
-(setq save-place-file (concat  user-temporary-file-directory "saveplace"))
+(setq save-place-file (concat  calstad-temporary-file-directory "saveplace"))
 ;; activate it for all buffers
 (setq-default save-place t)
 (require 'saveplace)
@@ -61,10 +61,10 @@
       ;; save every minute
       savehist-autosave-interval 60
       ;; keep the home clean
-      savehist-file (concat user-temporary-file-directory "savehist"))
+      savehist-file (concat calstad-temporary-file-directory "savehist"))
 (savehist-mode t)
 
-(setq recentf-save-file (concat user-temporary-file-directory "recentf"))
+(setq recentf-save-file (concat calstad-temporary-file-directory "recentf"))
 
 ;; Better navigation of the kill ring
 (vendor 'browse-kill-ring)
@@ -77,7 +77,7 @@
 (ido-mode t)
 (ido-ubiquitous t)
 (setq ido-enable-prefix nil
-      ido-save-directory-list-file (concat user-temporary-file-directory "ido-last")
+      ido-save-directory-list-file (concat calstad-temporary-file-directory "ido-last")
       ido-enable-flex-matching t
       ido-auto-merge-work-directories-length nil
       ido-create-new-buffer 'always
@@ -87,7 +87,7 @@
       ido-max-prospects 10)
 
 ;; Smex adds ido magic to function calls
-(setq smex-save-file (concat user-temporary-file-directory "semex-items"))
+(setq smex-save-file (concat calstad-temporary-file-directory "semex-items"))
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
 
@@ -109,9 +109,9 @@
 
 ;; Eshell customizations
 (setq eshell-cmpl-cycle-completions nil
-      eshell-directory-name user-temporary-file-directory
-      eshell-history-file-name (concat user-temporary-file-directory "eshell-history")
-      eshell-last-dir-ring-file-name (concat user-temporary-file-directory "eshell-lastdir")
+      eshell-directory-name calstad-temporary-file-directory
+      eshell-history-file-name (concat calstad-temporary-file-directory "eshell-history")
+      eshell-last-dir-ring-file-name (concat calstad-temporary-file-directory "eshell-lastdir")
       eshell-save-history-on-exit t
       eshell-buffer-shorthand t
       eshell-cmpl-dir-ignore "\\`\\(\\.\\.?\\|CVS\\|\\.svn\\|\\.git\\)/\\'")
