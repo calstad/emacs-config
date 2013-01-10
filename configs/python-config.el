@@ -5,7 +5,6 @@
 (setq jedi:setup-keys t)
 (vendor 'jedi)
 (autoload 'jedi:setup "jedi" nil t)
-(add-hook 'python-mode-hook 'jedi:setup)
 
 (defun calstad-python-mode-defaults ()
   (jedi:setup)
