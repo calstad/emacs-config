@@ -36,6 +36,6 @@
 (setq color-theme-is-global t)
 
 ;; Set zenburn as the color theme
-;; (load-theme 'zenburn t)
+(load-theme 'zenburn t)
 
 (provide 'ui-config)

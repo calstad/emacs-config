@@ -3,7 +3,10 @@
 (setq package-user-dir (concat calstad-dotfiles-dir "elpa"))
 (require 'package)
 (add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/"))
+(add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
+
 (package-initialize)
 
 ;; Packages to be installed
@@ -14,6 +17,7 @@
     smex
     magit
     yasnippet
+    zenburn-theme
 
     ;; Lisp
     paredit
