@@ -7,9 +7,14 @@
 (autoload 'jedi:setup "jedi" nil t)
 (add-hook 'python-mode-hook 'jedi:setup)
 
-;; Turn off electric indention due to conflict with python-mode
-(add-hook 'python-mode-hook
-          #'(lambda () (setq electric-indent-mode nil)))
+(defun calstad-python-mode-defaults ()
+  (jedi:setup)
+  (electric-indent-mode -1))
+
+(setq calstad-python-mode-hook 'calstad-python-mode-defaults)
+
+(add-hook 'python-mode-hook (lambda ()
+                              (run-hooks 'calstad-python-mode-hook)))
 
 (provide 'python-config)
 
