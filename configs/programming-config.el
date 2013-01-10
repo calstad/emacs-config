@@ -18,5 +18,6 @@
 (require 'lisp-config)
 (require 'ruby-config)
 (require 'r-config)
+(require 'python-config)
 
 (provide 'programming-config)

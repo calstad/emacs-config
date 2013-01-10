@@ -13,3 +13,9 @@
 [submodule "vendor/ess"]
 	path = vendor/ess
 	url = git://github.com/emacs-ess/ESS.git
+[submodule "vendor/python"]
+	path = vendor/python
+	url = git://github.com/fgallina/python.el.git
+[submodule "vendor/jedi"]
+	path = vendor/jedi
+	url = git://github.com/tkf/emacs-jedi.git

@@ -29,6 +29,9 @@
     inf-ruby
     haml-mode
     rinari
+
+    ;; Python
+    virtualenv
     ))
 
 (defun calstad-needed-packages ()
