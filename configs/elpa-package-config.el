@@ -36,6 +36,9 @@
 
     ;; Python
     virtualenv
+
+    ;; Javascript
+    coffee-mode
     ))
 
 (defun calstad-needed-packages ()
