@@ -19,5 +19,6 @@
 (require 'ruby-config)
 (require 'r-config)
 (require 'python-config)
+(require 'javascript-config)
 
 (provide 'programming-config)
