@@ -19,6 +19,10 @@
 (defun calstad-turn-on-paredit ()
   (paredit-mode t))
 
+(defun calstad-turn-off-electric-indent ()
+  (set (make-local-variable 'electric-indent-functions)
+       (list (lambda (arg) 'no-indent))))
+
 (defun calstad-pretty-lambdas ()
   (font-lock-add-keywords
    nil `(("(?\\(lambda\\>\\)"

@@ -8,7 +8,9 @@
 
 (defun calstad-python-mode-defaults ()
   (jedi:setup)
-  (electric-indent-mode -1))
+  (setq jedi:tooltip-method nil)
+  ;; (auto-complete-mode 1)
+  (calstad-turn-off-electric-indent))
 
 (setq calstad-python-mode-hook 'calstad-python-mode-defaults)
 
