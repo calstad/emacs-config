@@ -1,21 +1,3 @@
-[submodule "vendor/browse-kill-ring"]
-	path = vendor/browse-kill-ring
-	url = https://github.com/T-J-Teru/browse-kill-ring.git
 [submodule "snippets/clojure-mode"]
 	path = snippets/clojure-mode
 	url = git@github.com:calstad/clojure-snippets.git
-[submodule "vendor/restclient"]
-	path = vendor/restclient
-	url = https://github.com/pashky/restclient.el.git
-[submodule "themes/solarized"]
-	path = themes/solarized
-	url = git://github.com/sellout/emacs-color-theme-solarized.git
-[submodule "vendor/ess"]
-	path = vendor/ess
-	url = git://github.com/emacs-ess/ESS.git
-[submodule "vendor/python"]
-	path = vendor/python
-	url = git://github.com/fgallina/python.el.git
-[submodule "vendor/jedi"]
-	path = vendor/jedi
-	url = git://github.com/tkf/emacs-jedi.git
