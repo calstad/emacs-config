@@ -67,7 +67,6 @@
 (setq recentf-save-file (concat calstad-temporary-file-directory "recentf"))
 
 ;; Better navigation of the kill ring
-(vendor 'browse-kill-ring)
 (when (require 'browse-kill-ring nil 'noerror)
   (browse-kill-ring-default-keybindings))
 (setq browse-kill-ring-quit-action 'save-and-restore)
@@ -117,7 +116,6 @@
       eshell-cmpl-dir-ignore "\\`\\(\\.\\.?\\|CVS\\|\\.svn\\|\\.git\\)/\\'")
 
 ;; HTTP client
-(vendor 'restclient)
 (add-to-list 'auto-mode-alist '("\\.http$" . restclient-mode))
 
 (defalias 'yes-or-no-p 'y-or-n-p)

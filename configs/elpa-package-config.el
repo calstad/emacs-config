@@ -18,6 +18,8 @@
     magit
     yasnippet
     zenburn-theme
+    browse-kill-ring
+    restclient
 
     ;; Lisp
     paredit
