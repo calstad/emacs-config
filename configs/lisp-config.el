@@ -26,7 +26,7 @@
 (define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
 
 ;; Turn on paredit for all lisp modes.
-(dolist (mode '(scheme emacs-lisp lisp clojure clojurescript))
+(dolist (mode '(scheme emacs-lisp lisp clojure clojurescript nrepl))
   (when (> (display-color-cells) 8)
     (add-hook (intern (concat (symbol-name mode) "-mode-hook"))
               'calstad-turn-on-paredit)))
