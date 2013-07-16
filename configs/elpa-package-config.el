@@ -32,9 +32,7 @@
     quack
 
     ;; Ruby
-    yaml-mode
     inf-ruby
-    haml-mode
     rinari
 
     ;; Python
@@ -43,6 +41,11 @@
 
     ;; Javascript
     coffee-mode
+
+    ;; Markups
+    yaml-mode
+    haml-mode
+    markdown-mode
     ))
 
 (defun calstad-needed-packages ()
