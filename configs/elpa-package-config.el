@@ -29,6 +29,7 @@
     elisp-slime-nav
     slime-repl
     nrepl
+    quack
 
     ;; Ruby
     yaml-mode
