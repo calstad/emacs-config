@@ -38,6 +38,7 @@
 
     ;; Python
     virtualenv
+    ein
 
     ;; Javascript
     coffee-mode
