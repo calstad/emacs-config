@@ -45,7 +45,7 @@
   (interactive)
   (local-set-key "{" 'paredit-open-curly)
   (local-set-key "}" 'paredit-close-curly)
-  (modify-syntax-entry ?\{ "(}") 
+  (modify-syntax-entry ?\{ "(}")
   (modify-syntax-entry ?\} "){")
   (modify-syntax-entry ?\[ "(]")
   (modify-syntax-entry ?\] ")["))
@@ -58,6 +58,10 @@
 (add-hook 'nrepl-interaction-mode-hook
           'nrepl-turn-on-eldoc-mode)
 (setq nrepl-popup-stacktraces nil)
- (add-to-list 'same-window-buffer-names "*nrepl*")
+(add-to-list 'same-window-buffer-names "*nrepl*")
+
+;; Church
+(vendor 'church)
+(add-to-list 'auto-mode-alist '("\\.church$" . scheme-mode))
 
 (provide 'lisp-config)
