@@ -24,8 +24,6 @@
     ;; Lisp
     paredit
     clojure-mode
-    clojure-test-mode
-    clojurescript-mode
     elisp-slime-nav
     slime-repl
     nrepl
@@ -36,6 +34,7 @@
     rinari
 
     ;; Python
+    elpy
     virtualenv
     ein
 
@@ -44,8 +43,10 @@
 
     ;; Markups
     yaml-mode
-    haml-mode
     markdown-mode
+
+    ;; Databases
+    inf-mongo
     ))
 
 (defun calstad-needed-packages ()
