@@ -36,8 +36,6 @@
 
     ;; Python
     elpy
-    virtualenv
-    ein
 
     ;; Markups
     yaml-mode
