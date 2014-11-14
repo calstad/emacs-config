@@ -39,9 +39,6 @@
     virtualenv
     ein
 
-    ;; Javascript
-    coffee-mode
-
     ;; Markups
     yaml-mode
     markdown-mode
