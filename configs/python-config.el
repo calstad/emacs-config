@@ -13,6 +13,16 @@
 
 ;; Use default indent level of 4 spaces
 (setq python-indent-guess-indent-offset nil)
+;; Elpy configuration
+(elpy-enable)
+(elpy-use-ipython)
+(setq elpy-modules
+      '(elpy-module-company
+        elpy-module-eldoc
+        elpy-module-flymake
+        elpy-module-pyvenv
+        elpy-module-yasnippet
+        elpy-module-sane-defaults))
 
 ;; Emacs IPython Notebook settings
 (setq
@@ -27,10 +37,6 @@
   #'(lambda ()
       (define-key python-mode-map "\C-m" 'newline-and-indent)))
 
-;; Elpy configuration
-(package-initialize)
-(elpy-enable)
-(elpy-use-ipython)
 
 (defun calstad-python-mode-defaults ()
   (calstad-turn-off-electric-indent))
