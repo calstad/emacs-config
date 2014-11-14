@@ -20,6 +20,7 @@
     zenburn-theme
     browse-kill-ring
     restclient
+    exec-path-from-shell
 
     ;; Lisp
     paredit

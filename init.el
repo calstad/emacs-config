@@ -5,7 +5,6 @@
 ;; Add base emacs config root directory to load path
 (setq calstad-dotfiles-dir (file-name-directory
                     (or (buffer-file-name) load-file-name)))
-(add-to-list 'load-path calstad-dotfiles-dir)
 
 ;; Add needed directories to the load path
 (setq calstad-configs-dir (concat calstad-dotfiles-dir "configs"))
@@ -27,8 +26,7 @@
 (set-backup-and-autosave-file-locale)
 
 ;; Ensure PATH is correctly setup
-(if window-system
-    (setenv "PATH" (shell-command-to-string "echo $PATH")))
+(exec-path-from-shell-initialize)
 
 (setq autoload-file (concat calstad-dotfiles-dir "loaddefs.el"))
 (setq custom-file (concat calstad-dotfiles-dir "custom.el"))
