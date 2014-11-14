@@ -24,11 +24,7 @@
 
     ;; Lisp
     paredit
-    clojure-mode
     elisp-slime-nav
-    slime-repl
-    nrepl
-    quack
 
     ;; Ruby
     inf-ruby
