@@ -9,11 +9,8 @@
 ;; Add needed directories to the load path
 (setq calstad-configs-dir (concat calstad-dotfiles-dir "configs"))
 (setq calstad-utils-dir (concat calstad-dotfiles-dir "utils"))
-(setq calstad-vendor-dir (concat calstad-dotfiles-dir "vendor"))
 (add-to-list 'load-path calstad-configs-dir)
 (add-to-list 'load-path calstad-utils-dir)
-(add-to-list 'load-path calstad-vendor-dir)
-(require 'vendor)
 
 ;; Initialize package system and install needed packages
 (require 'elpa-package-config)
