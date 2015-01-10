@@ -24,15 +24,10 @@
     paredit
     elisp-slime-nav
 
-    ;; Ruby
-    inf-ruby
-    rinari
-
     ;; Python
-    elpy
+
 
     ;; Markups
-    yaml-mode
     markdown-mode
 
     ;; Databases

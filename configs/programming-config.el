@@ -16,8 +16,6 @@
 
 (require 'magit-config)
 (require 'lisp-config)
-(require 'ruby-config)
 (require 'python-config)
-(require 'javascript-config)
 
 (provide 'programming-config)

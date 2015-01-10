@@ -11,31 +11,29 @@
 ;;  python-shell-completion-string-code
 ;;    "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
-;; Use default indent level of 4 spaces
-(setq python-indent-guess-indent-offset nil)
 ;; Elpy configuration
-(elpy-enable)
-(elpy-use-ipython)
-(setq elpy-modules
-      '(elpy-module-company
-        elpy-module-eldoc
-        elpy-module-flymake
-        elpy-module-pyvenv
-        elpy-module-yasnippet
-        elpy-module-sane-defaults))
+;; (elpy-enable)
+;; (elpy-use-ipython)
+;; (setq elpy-modules
+;;       '(elpy-module-company
+;;         elpy-module-eldoc
+;;         elpy-module-flymake
+;;         elpy-module-pyvenv
+;;         elpy-module-yasnippet
+;;         elpy-module-sane-defaults))
 
 ;; Emacs IPython Notebook settings
-(setq
- ein:notebook-modes '(ein:notebook-mumamo-mode ein:notebook-python-mode)
- ein:use-auto-complete t
- ein:console-security-dir "/Users/colin/.ipython/profile_default/security"
- ein:console-args '("--profile" "default")
-)
+;; (setq
+;;  ein:notebook-modes '(ein:notebook-mumamo-mode ein:notebook-python-mode)
+;;  ein:use-auto-complete t
+;;  ein:console-security-dir "/Users/colin/.ipython/profile_default/security"
+;;  ein:console-args '("--profile" "default")
+;; )
 
 ;; Emacs IPython Notebook keybindings
-(add-hook 'ein:notebook-python-mode-hook
-  #'(lambda ()
-      (define-key python-mode-map "\C-m" 'newline-and-indent)))
+;; (add-hook 'ein:notebook-python-mode-hook
+;;   #'(lambda ()
+;;       (define-key python-mode-map "\C-m" 'newline-and-indent)))
 
 
 (defun calstad-python-mode-defaults ()
