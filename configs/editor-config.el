@@ -118,6 +118,11 @@
 ;; HTTP client
 (add-to-list 'auto-mode-alist '("\\.http$" . restclient-mode))
 
+;; TRAMP support for vagrant.
+(eval-after-load 'tramp
+  '(vagrant-tramp-enable))
+
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 (defalias 'auto-tail-revert-mode 'tail-mode)
 

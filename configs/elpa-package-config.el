@@ -25,7 +25,9 @@
     elisp-slime-nav
 
     ;; Python
-
+    ;; jedi
+    ;; epc
+    auto-complete
 
     ;; Markups
     markdown-mode

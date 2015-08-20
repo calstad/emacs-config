@@ -42,3 +42,5 @@
     (setq system-type-specific-config (concat calstad-dotfiles-dir "linux" ".el"))
   (setq system-type-specific-config (concat calstad-dotfiles-dir (symbol-name system-type) ".el")))
 (if (file-exists-p system-type-specific-config) (load system-type-specific-config))
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
