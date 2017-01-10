@@ -36,7 +36,7 @@
     Set font
     #+begin_src emacs-lisp
       (if window-system
-	  (setq default-frame-alist '((font . "-apple-inconsolata-medium-r-normal--16-0-72-72-m-0-iso10646-1"))))
+          (setq default-frame-alist '((font . "-apple-inconsolata-medium-r-normal--16-0-72-72-m-0-iso10646-1"))))
     #+end_src
 ** Package Management
    Use the Emacs Lisp Package Archive ([[http://www.emacswiki.org/emacs/ELPA][ELPA]]) and Milkypostman's
@@ -46,16 +46,18 @@
     installed.
     #+begin_src emacs-lisp
       (defvar calstad/packages '(auctex
-				 company
-				 elisp-slime-nav
-				 elpy
-				 helm
-				 magit
-				 org
-				 paredit
-				 yasnippet
-				 zenburn-theme)
-	"Default packages")
+                                 company
+                                 elisp-slime-nav
+                                 elpy
+                                 haskell-mode
+                                 helm
+                                 intero
+                                 magit
+                                 org
+                                 paredit
+                                 yasnippet
+                                 zenburn-theme)
+        "Default packages")
     #+end_src
 *** Install default packages
     When Emacs boots, check to make sure all of the packages defined
@@ -259,6 +261,13 @@
       (define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
       (define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
     #+end_src
+*** Haskell
+**** Intero
+     [[https://commercialhaskell.github.io/intero/][Intero]] is an interactive development environment for Haskell that
+     uses the =stack= project management tool under the hood.
+     #+begin_src emacs-lisp :tangle yes
+       (add-hook 'haskell-mode-hook 'intero-mode)
+     #+end_src
 *** Latex
 **** Auto pair "$"
      #+begin_src emacs-lisp

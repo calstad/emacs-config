@@ -1,3 +1,4 @@
+
 (setq user-full-name "Colin Alstad")
 (setq user-mail-address "colin.alstad@gmail.com")
 
@@ -11,21 +12,23 @@
     (setq default-frame-alist '((font . "-apple-inconsolata-medium-r-normal--16-0-72-72-m-0-iso10646-1"))))
 
 (defvar calstad/packages '(auctex
-			   company
-			   elisp-slime-nav
-			   elpy
-			   helm
-			   magit
-			   org
-			   paredit
-			   yasnippet
-			   zenburn-theme)
+                           company
+                           elisp-slime-nav
+                           elpy
+                           haskell-mode
+                           helm
+                           intero
+                           magit
+                           org
+                           paredit
+                           yasnippet
+                           zenburn-theme)
   "Default packages")
 
 (defun calstad/packages-installed-p ()
   (loop for pkg in calstad/packages
-	when (not (package-installed-p pkg)) do (return nil)
-	finally (return t)))
+        when (not (package-installed-p pkg)) do (return nil)
+        finally (return t)))
 
 (unless (calstad/packages-installed-p)
   (message "%s" "Refreshing package database...")
@@ -81,11 +84,11 @@
   (if (/= (count-windows) 2)
       (message "You need exactly 2 windows to do this.")
     (let* ((w1 (first (window-list)))
-	   (w2 (second (window-list)))
-	   (b1 (window-buffer w1))
-	   (b2 (window-buffer w2))
-	   (s1 (window-start w1))
-	   (s2 (window-start w2)))
+           (w2 (second (window-list)))
+           (b1 (window-buffer w1))
+           (b2 (window-buffer w2))
+           (s1 (window-start w1))
+           (s2 (window-start w2)))
       (set-window-buffer w1 b2)
       (set-window-buffer w2 b1)
       (set-window-start w1 s2)
@@ -135,9 +138,11 @@
 (define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
 (define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
 
+(add-hook 'haskell-mode-hook 'intero-mode)
+
 (add-hook 'TeX-mode-hook
-	  '(lambda ()
-	     (define-key LaTeX-mode-map (kbd "$") 'self-insert-command)))
+          '(lambda ()
+             (define-key LaTeX-mode-map (kbd "$") 'self-insert-command)))
 
 (setq TeX-electric-sub-and-superscript 't)
 
