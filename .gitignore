@@ -1,8 +1,7 @@
 elpa/*
-.emacs-tmp-files/*
-.#*
-swank/*
 *.DS_Store
 /tramp
-/url/cookies
-/ac-comphist.dat
+/url/*
+
+/recentf
+/eshell/*
