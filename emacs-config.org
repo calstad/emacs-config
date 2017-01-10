@@ -1,0 +1,328 @@
+#+TITLE: Colin's Emacs Configuration
+#+AUTHOR: Colin Alstad
+#+EMAIL: colin.alstad@gmail.com
+
+* Emacs Configuration
+  This is my "dot emacs" configuration using =org-mode=.  It has been
+  heavily influenced/stolen from [[https://github.com/abedra/emacs.d][Aaron Bedra's emacs config]].
+** User details
+   Emacs will normally pick this up automatically, but this way I can
+   be sure the right information is always present.
+   #+begin_src emacs-lisp
+     (setq user-full-name "Colin Alstad")
+     (setq user-mail-address "colin.alstad@gmail.com")
+   #+end_src
+** Environment
+   Emacs lisp is really only a subset of common lisp, and I need to
+   have some of the additional functionality to make the configuration
+   and its dependencies work properly, which we get by requiring
+   [[http://www.emacswiki.org/emacs/CommonLispForEmacs][Common Lisp for Emacs]].
+   #+begin_src emacs-lisp
+     (require 'cl)
+   #+end_src
+*** Mac OS X
+    Here are some OSX specfic configurations
+
+    Set meta to apple key
+    #+begin_src emacs-lisp
+      (setq mac-command-modifier 'meta)
+    #+end_src
+
+    Keep visual bell from displaying black box in cocoa emacs
+    #+begin_src emacs-lisp
+      (setq ring-bell-function 'ignore)
+    #+end_src
+
+    Set font
+    #+begin_src emacs-lisp
+      (if window-system
+	  (setq default-frame-alist '((font . "-apple-inconsolata-medium-r-normal--16-0-72-72-m-0-iso10646-1"))))
+    #+end_src
+** Package Management
+   Use the Emacs Lisp Package Archive ([[http://www.emacswiki.org/emacs/ELPA][ELPA]]) and Milkypostman's
+   Experimental Lisp Package Archive ([[https://github.com/melpa/melpa][MELPA]]) for package management.
+*** Specify default packages
+    Define a list of default packages to make sure are always
+    installed.
+    #+begin_src emacs-lisp
+      (defvar calstad/packages '(auctex
+				 company
+				 elisp-slime-nav
+				 elpy
+				 helm
+				 magit
+				 org
+				 paredit
+				 yasnippet
+				 zenburn-theme)
+	"Default packages")
+    #+end_src
+*** Install default packages
+    When Emacs boots, check to make sure all of the packages defined
+    in =calstad/packages= are installed. If not, have ELPA take care of
+    it.
+    #+begin_src emacs-lisp
+      (defun calstad/packages-installed-p ()
+	(loop for pkg in calstad/packages
+	      when (not (package-installed-p pkg)) do (return nil)
+	      finally (return t)))
+
+      (unless (calstad/packages-installed-p)
+	(message "%s" "Refreshing package database...")
+	(package-refresh-contents)
+	(dolist (pkg calstad/packages)
+	  (when (not (package-installed-p pkg))
+	    (package-install pkg))))
+    #+end_src
+** Global Configs
+*** Keybindings
+    Miscellaneous key binding stuff that doesn't fit anywhere else.
+    #+begin_src emacs-lisp
+      (global-set-key (kbd "RET") 'newline-and-indent)
+      (global-set-key (kbd "C-;") 'comment-or-uncomment-region)
+      (global-set-key (kbd "C-+") 'text-scale-increase)
+      (global-set-key (kbd "C--") 'text-scale-decrease)
+    #+end_src
+*** Unique buffer names
+    Make it so that buffers have unique names if the files dont.
+    #+begin_src emacs-lisp
+      (require 'uniquify)
+      (setq uniquify-buffer-name-style 'forward)
+      (setq uniquify-separator "/")
+      (setq uniquify-after-kill-buffer-p t)     ; rename after killing uniquified
+      (setq uniquify-ignore-buffers-re "^\\*")  ; don't muck with special buffers
+    #+end_src
+*** Highlight matching parens and auto pair
+    #+begin_src emacs-lisp
+      (show-paren-mode t)
+      (setq show-paren-style 'parenthesis)
+      (electric-pair-mode)
+    #+end_src
+*** TODO Not sure if I want to keep [[file:~/emacs-config/configs/editor-config.el::(setq%20sentence-end-double-space%20nil][these]]
+*** Backup and temporary files
+    Dont create backup or temporary files
+    #+begin_src emacs-lisp
+      (setq make-backup-files nil)
+      (setq backup-directory-alist `((".*" . ,temporary-file-directory)))
+      (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
+      (setq auto-save-list-file-prefix nil)
+    #+end_src
+*** Enable y/n answers
+    #+begin_src emacs-lisp
+      (fset 'yes-or-no-p 'y-or-n-p)
+    #+end_src
+*** UI Settings
+**** GUI options
+     #+begin_src emacs-lisp
+       (when window-system
+	 (setq frame-title-format '(buffer-file-name "%f" ("%b")))
+	 (tooltip-mode -1)       ; dont need mouse tootips!
+	 (mouse-wheel-mode t)    ; stupid mice
+	 (blink-cursor-mode -1)  ; about to give me seizures
+	 (tool-bar-mode -1))
+     #+end_src
+**** Set a color theme
+     #+begin_src emacs-lisp
+       (load-theme 'zenburn t)
+     #+end_src
+**** Dont play the auio bell
+     #+begin_src emacs-lisp
+       (setq visible-bell t)
+     #+end_src
+**** Add indication at bottom of buffer for empty lines
+     #+begin_src emacs-lisp
+       (set-default 'indicate-empty-lines t)
+     #+end_src
+**** Mode line settings
+     #+begin_src emacs-lisp
+       (line-number-mode t)
+       (column-number-mode t)
+       (size-indication-mode t)
+     #+end_src
+*** Marking text
+    Be able to write over the marked region and also highlight the
+    marked region.
+    #+begin_src emacs-lisp
+      (delete-selection-mode t)
+      (transient-mark-mode t)
+    #+end_src
+*** TODO Filing
+*** TODO Spell check
+*** Swap windows
+    If I have two windows open, it swaps them.
+    #+begin_src emacs-lisp
+      (defun calstad/swap-windows ()
+	(interactive)
+	(if (/= (count-windows) 2)
+	    (message "You need exactly 2 windows to do this.")
+	  (let* ((w1 (first (window-list)))
+		 (w2 (second (window-list)))
+		 (b1 (window-buffer w1))
+		 (b2 (window-buffer w2))
+		 (s1 (window-start w1))
+		 (s2 (window-start w2)))
+	    (set-window-buffer w1 b2)
+	    (set-window-buffer w2 b1)
+	    (set-window-start w1 s2)
+	    (set-window-start w2 s1)))
+	(other-window 1))
+    #+end_src
+**** Keybinding
+     #+begin_src emacs-lisp
+       (global-set-key (kbd "C-c s") 'calstad/swap-windows)
+     #+end_src
+*** Kill other buffers
+    Kills all the buffers but the current one.  Doesent mess with
+    earmuffed buffers.
+    #+begin_src emacs-lisp
+      (defun calstad/kill-other-buffers ()
+	(interactive)
+	(dolist (buffer (buffer-list))
+	  (unless (or (eql buffer (current-buffer)) (not (buffer-file-name buffer)))
+	    (kill-buffer buffer))))
+    #+end_src
+*** Kill the buffer and delete file
+    Kills the current buffer and deletes the file it is visiting.
+    #+begin_src emacs-lisp
+      (defun calstad/delete-file-and-buffer ()
+	(interactive)
+	(let ((filename (buffer-file-name)))
+	  (when filename
+	    (delete-file filename)
+	    (message "Deleted file %s" filename)))
+	(kill-buffer))
+    #+end_src
+**** Keybinding
+     #+begin_src emacs-lisp
+       (global-set-key (kbd "C-c C-k") 'calstad/delete-file-and-buffer)
+     #+end_src
+** Mode and Language Specific Configs
+*** Company
+    Enable =company-mode= everywhere for completions
+    #+begin_src emacs-lisp
+      (add-hook 'after-init-hook 'global-company-mode)
+    #+end_src
+**** TODO Figure out how to get this to work
+*** Helm
+    =helm= is an Emacs framework for incremental completions and
+    narrowing selections. I use it as a replacement for =ido= and
+    =smex=.
+
+    Require and start =helm= on emacs init
+    #+begin_src emacs-lisp
+      (require 'helm)
+      (helm-mode 1)
+    #+end_src
+
+    Use =helm= to find commands, files, and buffers
+    #+begin_src emacs-lisp
+      (global-set-key (kbd "M-x") 'helm-M-x)
+      (global-set-key (kbd "C-x C-f") 'helm-find-files)
+      (global-set-key (kbd "C-x b") 'helm-mini)
+      (global-set-key (kbd "M-y") 'helm-show-kill-ring)
+    #+end_src
+
+    Automatically resize the result window when results get smaller
+    #+begin_src emacs-lisp
+      (helm-autoresize-mode 1)
+    #+end_src
+*** Python
+**** IPython
+     Newer verions of IPython break the =inferior-python= shell in
+     Emacs so we have to set an environment variable to use a simple
+     prompt.
+     #+begin_src emacs-lisp
+       (setenv "IPY_TEST_SIMPLE_PROMPT" "1")
+     #+end_src
+**** Elpy
+    =elpy= Emacs package to bring powerful Python editing to Emacs. It
+    combines and configures a number of other packages, both written
+    in Emacs Lisp as well as Python.  Documentation can be found [[https://elpy.readthedocs.io/en/latest/index.html][here]].
+    #+begin_src emacs-lisp
+      (elpy-enable)
+    #+end_src
+
+    Use IPython for inferior python processes
+    #+begin_src emacs-lisp
+      (elpy-use-ipython)
+    #+end_src
+*** Emacs lisp
+    Add hooks for navigation and documentation
+    #+begin_src emacs-lisp
+      (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+      (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)
+      (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
+    #+end_src
+
+    Key bindings
+    #+begin_src emacs-lisp
+      (define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
+      (define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
+    #+end_src
+*** Latex
+**** Auto pair "$"
+     #+begin_src emacs-lisp
+       (add-hook 'TeX-mode-hook
+		 '(lambda ()
+		    (define-key LaTeX-mode-map (kbd "$") 'self-insert-command)))
+    #+end_src
+**** Subscripts and superscripts
+     Insert braces after =_= and =^=
+     #+begin_src emacs-lisp
+       (setq TeX-electric-sub-and-superscript 't)
+     #+end_src
+*** Magit
+    Keep file revert warning from showing everytime magit starts.
+    #+begin_src emacs-lisp
+      (setq magit-last-seen-setup-instructions "1.4.0")
+    #+end_src
+**** Keybindings
+     #+begin_src emacs-lisp
+       (global-set-key (kbd "C-x g") 'magit-status)
+     #+end_src
+*** Org
+    =org-mode= is one of the most powerful and amazing features of
+    Emacs. I use it for task managment, notes, journal, habit tracker,
+    latex, and development environment.
+**** Global keybindings
+     #+begin_src emacs-lisp
+       (global-set-key "\C-cl" 'org-store-link)
+       (global-set-key "\C-ca" 'org-agenda)
+       (global-set-key "\C-cb" 'org-iswitchb)
+     #+end_src
+**** org-babel
+     Syntax highlighting for code blocks
+     #+begin_src emacs-lisp
+       (setq org-src-fontify-natively t)
+     #+end_src
+**** org-abbrev
+     #+begin_src emacs-lisp
+       (add-hook 'org-mode-hook (lambda () (abbrev-mode 1)))
+
+       (define-skeleton skel-org-block-elisp
+	 "Insert an emacs-lisp block"
+	 ""
+	 "#+begin_src emacs-lisp\n"
+	 _ - \n
+	 "#+end_src")
+
+       (define-abbrev org-mode-abbrev-table "elsrc" "" 'skel-org-block-elisp)
+
+       (define-skeleton skel-org-block-latex
+	 "Insert an emacs-lisp block"
+	 ""
+	 "#+begin_src latex\n"
+	 _ - \n
+	 "#+end_src")
+
+       (define-abbrev org-mode-abbrev-table "lasrc" "" 'skel-org-block-latex)
+     #+end_src
+*** YASnippet
+    =yasnippet= is a template system for Emacs that allows type an
+    abbreviation and automatically expand it into function templates.
+
+    Load =yasnippet= on programming langauge major modes.
+    #+begin_src emacs-lisp
+      (require 'yasnippet)
+      (yas-global-mode 1)
+    #+end_src
