@@ -1,3 +1,0 @@
-[submodule "snippets/clojure-mode"]
-	path = snippets/clojure-mode
-	url = git@github.com:calstad/clojure-snippets.git
