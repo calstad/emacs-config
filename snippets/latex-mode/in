@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: element in
+# key: in
+# --
+${1:element} \in ${0:set}

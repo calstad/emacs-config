@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: definitie integral
+# key: dint
+# --
+\int_{$1}^{$2}$0d

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: left right curly
+# key: lrc
+# --
+\left\\{$0\right\\}

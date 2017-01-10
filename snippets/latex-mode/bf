@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: math bold face
+# key: bf
+# --
+\mathbf{$0}

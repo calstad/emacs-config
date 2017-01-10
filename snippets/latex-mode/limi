@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: limit to infinity
+# key: limi
+# --
+\lim_{$1 \rightarrow \infty}$0

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: left right parens
+# key: lrp
+# --
+\left($0\right)

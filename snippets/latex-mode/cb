@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: curly braces
+# key: cb
+# --
+\\{$0\\}
