@@ -123,6 +123,12 @@
   '(vagrant-tramp-enable))
 
 
+;; LaTex Stuff
+(add-hook 'LaTeX-mode-hook
+          '(lambda ()
+             (define-key LaTeX-mode-map (kbd "$") 'self-insert-command)))
+
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 (defalias 'auto-tail-revert-mode 'tail-mode)
 

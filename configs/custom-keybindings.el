@@ -40,7 +40,7 @@
 ;; replace buffer-menu with ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-;; Window switching. 
+;; Window switching.
 (global-set-key (kbd "C-x O") (lambda () (interactive) (other-window -1))) ;; back one
 (global-set-key (kbd "C-x C-o") (lambda () (interactive) (other-window 2))) ;; forward two
 

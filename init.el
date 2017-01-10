@@ -27,6 +27,7 @@
 
 (setq autoload-file (concat calstad-dotfiles-dir "loaddefs.el"))
 (setq custom-file (concat calstad-dotfiles-dir "custom.el"))
+(load custom-file t)
 
 ;; Load core customizations
 (require 'custom-defuns)

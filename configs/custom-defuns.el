@@ -25,14 +25,14 @@
 (defun calstad-pretty-lambdas ()
   (font-lock-add-keywords
    nil `(("(?\\(lambda\\>\\)"
-          (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                    ,(make-char 'greek-iso8859-7 107))
-                    nil))))))
+	  (0 (progn (compose-region (match-beginning 1) (match-end 1)
+				    ,(make-char 'greek-iso8859-7 107))
+		    nil))))))
 
 (defun calstad-add-watchwords ()
   (font-lock-add-keywords
    nil '(("\\<\\(FIXME\\|TODO\\|FIX\\|HACK\\|REFACTOR\\|NOCOMMIT\\)"
-          1 font-lock-warning-face t))))
+	  1 font-lock-warning-face t))))
 
 (defun calstad-sudo-edit (&optional arg)
   (interactive "p")
@@ -62,11 +62,11 @@
   (if (/= (count-windows) 2)
       (message "You need exactly 2 windows to do this.")
     (let* ((w1 (first (window-list)))
-           (w2 (second (window-list)))
-           (b1 (window-buffer w1))
-           (b2 (window-buffer w2))
-           (s1 (window-start w1))
-           (s2 (window-start w2)))
+	   (w2 (second (window-list)))
+	   (b1 (window-buffer w1))
+	   (b2 (window-buffer w2))
+	   (s1 (window-start w1))
+	   (s2 (window-start w2)))
       (set-window-buffer w1 b2)
       (set-window-buffer w2 b1)
       (set-window-start w1 s2)
@@ -90,5 +90,3 @@
   (kill-buffer))
 
 (provide 'custom-defuns)
-
-
