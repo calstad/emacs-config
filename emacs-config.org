@@ -107,8 +107,7 @@
       (setq show-paren-style 'parenthesis)
       (electric-pair-mode)
     #+end_src
-*** TODO Not sure if I want to keep [[file:~/emacs-config/configs/editor-config.el::(setq%20sentence-end-double-space%20nil][these]]
-*** Backup and temporary files
+*** Forget Backup and temporary files
     Dont create backup or temporary files
     #+begin_src emacs-lisp
       (setq make-backup-files nil)
@@ -332,6 +331,14 @@
 	 "#+end_src")
 
        (define-abbrev org-mode-abbrev-table "lasrc" "" 'skel-org-block-latex)
+     #+end_src
+*** Dired
+**** Use =a= to reuse dired buffer
+     The command =dired-find-alternate-file= is disabled by default so
+     we enable it which allows us to use the =a= key to reuse the
+     current dired buffer
+     #+begin_src emacs-lisp :tangle yes
+       (put 'dired-find-alternate-file 'disabled nil)
      #+end_src
 *** YASnippet
     =yasnippet= is a template system for Emacs that allows type an

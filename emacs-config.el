@@ -42,6 +42,8 @@
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
+(setq custom-file "customize.el")
+
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 (setq uniquify-separator "/")
@@ -175,6 +177,8 @@
   "#+end_src")
 
 (define-abbrev org-mode-abbrev-table "lasrc" "" 'skel-org-block-latex)
+
+(put 'dired-find-alternate-file 'disabled nil)
 
 (require 'yasnippet)
 (yas-global-mode 1)
