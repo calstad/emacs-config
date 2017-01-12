@@ -89,8 +89,9 @@
     By default, settings changed through the Customize UI are added to
     the =init.el= file.  This saves those customizations into a
     separate file.
-    #+begin_src emacs-lisp :tangle yes
-      (setq custom-file "customize.el")
+    #+begin_src emacs-lisp
+      (setq custom-file "~/.emacs_custom.el")
+      (load custom-file)
     #+end_src
 *** Unique buffer names
     Make it so that buffers have unique names if the files dont.
