@@ -272,8 +272,8 @@
 **** Intero
      [[https://commercialhaskell.github.io/intero/][Intero]] is an interactive development environment for Haskell that
      uses the =stack= project management tool under the hood.
-     #+begin_src emacs-lips
-       ; (add-hook 'haskell-mode-hook 'intero-mode)
+     #+begin_src emacs-lisp
+       (add-hook 'haskell-mode-hook 'intero-mode)
      #+end_src
 *** Latex
 **** Auto pair "$"
