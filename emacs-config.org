@@ -272,8 +272,8 @@
 **** Intero
      [[https://commercialhaskell.github.io/intero/][Intero]] is an interactive development environment for Haskell that
      uses the =stack= project management tool under the hood.
-     #+begin_src emacs-lisp :tangle yes
-       (add-hook 'haskell-mode-hook 'intero-mode)
+     #+begin_src emacs-lips
+       ; (add-hook 'haskell-mode-hook 'intero-mode)
      #+end_src
 *** Latex
 **** Auto pair "$"
@@ -338,7 +338,7 @@
      The command =dired-find-alternate-file= is disabled by default so
      we enable it which allows us to use the =a= key to reuse the
      current dired buffer
-     #+begin_src emacs-lisp :tangle yes
+     #+begin_src emacs-lisp
        (put 'dired-find-alternate-file 'disabled nil)
      #+end_src
 *** YASnippet
