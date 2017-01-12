@@ -108,7 +108,7 @@
       (setq show-paren-style 'parenthesis)
       (electric-pair-mode)
     #+end_src
-*** Forget Backup and temporary files
+*** Forget backup and temporary files
     Dont create backup or temporary files
     #+begin_src emacs-lisp
       (setq make-backup-files nil)
