@@ -158,26 +158,6 @@
 
 (setq org-src-fontify-natively t)
 
-(add-hook 'org-mode-hook (lambda () (abbrev-mode 1)))
-
-(define-skeleton skel-org-block-elisp
-  "Insert an emacs-lisp block"
-  ""
-  "#+begin_src emacs-lisp\n"
-  _ - \n
-  "#+end_src")
-
-(define-abbrev org-mode-abbrev-table "elsrc" "" 'skel-org-block-elisp)
-
-(define-skeleton skel-org-block-latex
-  "Insert an emacs-lisp block"
-  ""
-  "#+begin_src latex\n"
-  _ - \n
-  "#+end_src")
-
-(define-abbrev org-mode-abbrev-table "lasrc" "" 'skel-org-block-latex)
-
 (put 'dired-find-alternate-file 'disabled nil)
 
 (require 'yasnippet)

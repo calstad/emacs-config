@@ -311,28 +311,6 @@
      #+begin_src emacs-lisp
        (setq org-src-fontify-natively t)
      #+end_src
-**** org-abbrev
-     #+begin_src emacs-lisp
-       (add-hook 'org-mode-hook (lambda () (abbrev-mode 1)))
-
-       (define-skeleton skel-org-block-elisp
-	 "Insert an emacs-lisp block"
-	 ""
-	 "#+begin_src emacs-lisp\n"
-	 _ - \n
-	 "#+end_src")
-
-       (define-abbrev org-mode-abbrev-table "elsrc" "" 'skel-org-block-elisp)
-
-       (define-skeleton skel-org-block-latex
-	 "Insert an emacs-lisp block"
-	 ""
-	 "#+begin_src latex\n"
-	 _ - \n
-	 "#+end_src")
-
-       (define-abbrev org-mode-abbrev-table "lasrc" "" 'skel-org-block-latex)
-     #+end_src
 *** Dired
 **** Use =a= to reuse dired buffer
      The command =dired-find-alternate-file= is disabled by default so
