@@ -81,6 +81,13 @@
 (delete-selection-mode t)
 (transient-mark-mode t)
 
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+(defun calstad/unfill-region ()
+  (interactive)
+  (let ((fill-column (point-max)))
+    (fill-region (region-beginning) (region-end) nil)))
+
 (defun calstad/swap-windows ()
   (interactive)
   (if (/= (count-windows) 2)

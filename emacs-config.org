@@ -155,7 +155,18 @@
       (delete-selection-mode t)
       (transient-mark-mode t)
     #+end_src
-*** TODO Filing
+*** Filling
+**** Add auto fill to certain modes
+     #+begin_src emacs-lisp
+       (add-hook 'text-mode-hook 'turn-on-auto-fill)
+     #+end_src
+**** Unfill a region
+     #+begin_src emacs-lisp
+       (defun calstad/unfill-region ()
+         (interactive)
+         (let ((fill-column (point-max)))
+           (fill-region (region-beginning) (region-end) nil)))
+     #+end_src
 *** TODO Spell check
 *** Swap windows
     If I have two windows open, it swaps them.
