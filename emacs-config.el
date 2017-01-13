@@ -165,6 +165,13 @@
 
 (setq org-src-fontify-natively t)
 
+(setq org-todo-keywords
+ '((sequence "TODO" "IN-PROGRESS" "|" "DONE")))
+
+(setq org-log-done 'time)
+
+(add-to-list 'org-modules 'org-habit)
+
 (put 'dired-find-alternate-file 'disabled nil)
 
 (require 'yasnippet)

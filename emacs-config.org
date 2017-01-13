@@ -322,6 +322,22 @@
      #+begin_src emacs-lisp
        (setq org-src-fontify-natively t)
      #+end_src
+**** Todo Items
+     Add an in progress state for todo items
+     #+begin_src emacs-lisp
+       (setq org-todo-keywords
+     	'((sequence "TODO" "IN-PROGRESS" "|" "DONE")))
+     #+end_src
+
+     Add a closed timestamp when todos are marked done
+     #+begin_src emacs-lisp
+        (setq org-log-done 'time)
+     #+end_src
+
+     Enable habit tracking
+     #+begin_src emacs-lisp
+       (add-to-list 'org-modules 'org-habit)
+     #+end_src
 *** Dired
 **** Use =a= to reuse dired buffer
      The command =dired-find-alternate-file= is disabled by default so
