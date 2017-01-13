@@ -36,7 +36,7 @@
     Set font
     #+begin_src emacs-lisp
       (if window-system
-          (setq default-frame-alist '((font . "-apple-inconsolata-medium-r-normal--16-0-72-72-m-0-iso10646-1"))))
+          (setq default-frame-alist '((font . "-*-Consolas-medium-r-normal--16-0-72-72-m-0-iso10646-1"))))
     #+end_src
 ** Package Management
    Use the Emacs Lisp Package Archive ([[http://www.emacswiki.org/emacs/ELPA][ELPA]]) and Milkypostman's
