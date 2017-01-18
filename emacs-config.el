@@ -12,6 +12,7 @@
 
 (defvar calstad/packages '(auctex
                            company
+			   dockerfile-mode
                            elisp-slime-nav
                            elpy
                            haskell-mode
