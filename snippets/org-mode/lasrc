@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: lasrc
+# key: lasrc
+# --
+#+begin_src latex :tangle yes
+$0
+#+end_src
