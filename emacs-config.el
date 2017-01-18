@@ -23,6 +23,7 @@
                            paredit
 			   restclient
 			   restclient-helm
+			   yaml-mode
                            yasnippet
                            zenburn-theme)
   "Default packages")
