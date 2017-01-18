@@ -21,6 +21,8 @@
                            magit
                            org
                            paredit
+			   restclient
+			   restclient-helm
                            yasnippet
                            zenburn-theme)
   "Default packages")
