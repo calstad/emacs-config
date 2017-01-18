@@ -125,6 +125,10 @@
       (fset 'yes-or-no-p 'y-or-n-p)
     #+end_src
 *** UI Settings
+**** Skip splash screen on startup
+     #+begin_src emacs-lisp
+       (setq initial-buffer-choice t)
+     #+end_src
 **** GUI options
      #+begin_src emacs-lisp
        (when window-system

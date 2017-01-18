@@ -65,6 +65,8 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
+(setq initial-buffer-choice t)
+
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
   (tooltip-mode -1)       ; dont need mouse tootips!
