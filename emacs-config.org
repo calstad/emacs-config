@@ -294,7 +294,7 @@
      #+begin_src emacs-lisp
        (add-hook 'haskell-mode-hook 'intero-mode)
      #+end_src
-*** Latex
+*** LaTeX
 **** Auto pair "$"
      #+begin_src emacs-lisp
        (add-hook 'TeX-mode-hook

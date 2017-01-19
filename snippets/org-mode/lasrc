@@ -2,6 +2,6 @@
 # name: lasrc
 # key: lasrc
 # --
-#+begin_src latex :tangle yes
+#+begin_src latex
 $0
 #+end_src
