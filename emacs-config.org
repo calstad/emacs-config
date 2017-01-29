@@ -175,7 +175,11 @@
          (let ((fill-column (point-max)))
            (fill-region (region-beginning) (region-end) nil)))
      #+end_src
-*** TODO Spell check
+*** Spell check
+    #+begin_src emacs-lisp
+      (add-hook 'text-mode-hook 'flyspell-mode)
+      (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+    #+end_src
 *** Swap windows
     If I have two windows open, it swaps them.
     #+begin_src emacs-lisp

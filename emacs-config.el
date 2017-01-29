@@ -94,6 +94,9 @@
   (let ((fill-column (point-max)))
     (fill-region (region-beginning) (region-end) nil)))
 
+(add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+
 (defun calstad/swap-windows ()
   (interactive)
   (if (/= (count-windows) 2)
