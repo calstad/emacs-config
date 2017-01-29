@@ -172,14 +172,23 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 
-(setq org-src-fontify-natively t)
-
 (setq org-todo-keywords
- '((sequence "TODO" "IN-PROGRESS" "|" "DONE")))
+  '((sequence "TODO" "IN-PROGRESS" "|" "DONE")))
 
 (setq org-log-done 'time)
 
 (add-to-list 'org-modules 'org-habit)
+
+(setq org-highest-priority ?1)
+(setq org-lowest-priority ?9)
+(setq org-default-priority ?5)
+
+(setq org-agenda-custom-commands
+'(("wd" "Work Day"
+   ((tags "CATEGORY=\"work\"")
+    (agenda "" ((org-agenda-ndays 1))) ))))
+
+(setq org-src-fontify-natively t)
 
 (put 'dired-find-alternate-file 'disabled nil)
 
