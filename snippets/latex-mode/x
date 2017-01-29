@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: times
+# key: x
+# --
+$1 \times $0
