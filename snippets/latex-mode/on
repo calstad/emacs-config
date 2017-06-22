@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: operator name
+# key: on
+# --
+\operatorname{$0}

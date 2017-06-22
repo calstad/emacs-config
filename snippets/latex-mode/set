@@ -2,4 +2,4 @@
 # name: set
 # key: set
 # --
-\\{$1 \mid $2\\}$0
+\left\\{$1 \mid $2\right\\}$0
