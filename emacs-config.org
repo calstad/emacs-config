@@ -346,9 +346,10 @@
       (use-package smex
         :bind (("M-x" . smex)
                ("M-X" . smex-major-mode-commands))
+        :init
+        (setq smex-save-file (expand-file-name "smex-items" calstad/persistence-dir)))
         :config
         (smex-initialize)
-        (setq smex-save-file (expand-file-name "smex-items" calstad/persistence-dir)))
     #+end_src
 
     For any case where =ido= cannot be used, there is another older mode
