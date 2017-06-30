@@ -122,6 +122,10 @@
        (eval-after-load 'flyspell
 	 '(define-key flyspell-mode-map (kbd "C-;") nil))
      #+end_src
+**** Death to tabs
+     #+begin_src emacs-lisp
+       (setq-default indent-tabs-mode nil)
+     #+end_src
 **** Highlight matching parens and auto pair
      #+begin_src emacs-lisp
        (show-paren-mode t)
