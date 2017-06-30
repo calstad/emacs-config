@@ -291,6 +291,64 @@
 		    (interactive)
 		    (eshell t)))
     #+end_src
+*** IDO and Smex
+    [[https://www.emacswiki.org/emacs/InteractivelyDoThings][=ido=]] supercharges Emacs's completion engine.
+    #+begin_src emacs-lisp
+      (ido-mode t)
+      (ido-everywhere t)
+      (setq ido-enable-prefix nil
+            ido-enable-flex-matching t
+            ido-auto-merge-work-directories-length nil
+            ido-create-new-buffer 'always
+            ido-use-filename-at-point 'guess
+            ido-use-url-at-point nil
+            ido-use-virtual-buffers t
+            ido-handle-duplicate-virtual-buffers 2
+            ido-max-prospects 10)
+    #+end_src
+
+    [[https://github.com/DarwinAwardWinner/ido-ubiquitous][=ido-ubiquitous=]] replaces stock emacs completion with =ido=
+    completion wherever it is possible to do so without breaking
+    things.
+    #+begin_src emacs-lisp
+      (use-package ido-ubiquitous
+        :config
+        (ido-ubiquitous-mode t)
+        ;; Let magit use its own ido interface
+        (setq magit-completing-read-function 'magit-ido-completing-read))
+    #+end_src
+
+    [[https://github.com/lewang/flx][=flx-ido=]] brings fuzzy matching to =ido= completions.
+    #+begin_src emacs-lisp
+      (use-package flx-ido
+        :config
+        (flx-ido-mode 1)
+        ;; disable ido faces to see flx highlights.
+        (setq ido-enable-flex-matching t)
+        (setq ido-use-faces nil))
+    #+end_src
+
+    [[https://github.com/nonsequitur/smex][Smex]] is a =M-x= enhancement for Emacs. Built on top of =ido=, it
+    provides a convenient interface to recently and most
+    frequently used commands.
+    #+begin_src emacs-lisp
+      (use-package smex
+        :bind (("M-x" . smex)
+               ("M-X" . smex-major-mode-commands))
+        :config (smex-initialize))
+    #+end_src
+
+    For any case where =ido= cannot be used, there is another older mode
+    called =icomplete-mode= that integrates with standard emacs completion
+    and adds some ido-like behavior.
+    #+begin_src emacs-lisp
+      (icomplete-mode +1)
+    #+end_src
+**** TODO May want to add:
+     - ido-default-buffer-method
+     - ido-default-file-method
+**** TODO Not sure about this
+     (set-default 'imenu-auto-rescan t)
 *** Magit
     #+begin_src emacs-lisp
       (use-package magit
