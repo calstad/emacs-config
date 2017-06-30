@@ -195,14 +195,30 @@
        (setq uniquify-after-kill-buffer-p t)     ; rename after killing uniquified
        (setq uniquify-ignore-buffers-re "^\\*")  ; don't muck with special buffers
      #+end_src
-*** Settings files
+*** Persistence Files
+    Several Emacs major modes use files for persistence between
+    sessions and I keep them all in the same directory.
+    #+begin_src emacs-lisp
+      (setq calstad/persistence-dir (expand-file-name "persistence/" user-emacs-directory))
+      (unless (file-exists-p calstad/persistence-dir)
+        (make-directory calstad/persistence-dir t))
+    #+end_src
 **** Save settings from Customize into seperate file
      By default, settings changed through the Customize UI are added to
      the =init.el= file.  This saves those customizations into a
      separate file.
      #+begin_src emacs-lisp
-       (setq custom-file "~/.emacs_custom.el")
-       (load custom-file)
+       (setq calstad/custom-file (expand-file-name "custom.el" calstad/persistence-dir))
+       (if (file-exists-p calstad/custom-file)
+           (load custom-file))
+     #+end_src
+**** Recently accessed files
+     #+begin_src emacs-lisp
+       (setq recentf-save-file (expand-file-name "recentf" calstad/persistence-dir))
+     #+end_src
+**** Tramp Connections
+     #+begin_src emacs-lisp
+       (setq tramp-persistency-file-name (expand-file-name "tramp" calstad/persistence-dir))
      #+end_src
 **** Forget backup and temporary files
      Dont create backup or temporary files
@@ -212,7 +228,6 @@
        (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
        (setq auto-save-list-file-prefix nil)
      #+end_src
-
 ** System Configs
 *** Mac OS X
     Set meta to apple key
@@ -264,7 +279,8 @@
     #+begin_src emacs-lisp
       (use-package elisp-slime-nav
         :init
-        (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode))
+        (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
+          (add-hook hook 'turn-on-elisp-slime-nav-mode)))
 
       (use-package paredit
         :init
@@ -287,9 +303,14 @@
     Start a new eshell even if one is active.
     #+begin_src emacs-lisp
       (global-set-key (kbd "C-x M")
-		  (lambda ()
-		    (interactive)
-		    (eshell t)))
+                  (lambda ()
+                    (interactive)
+                    (eshell t)))
+    #+end_src
+
+    Save eshell persistence files out of the way
+    #+begin_src emacs-lisp
+      (setq eshell-directory-name (expand-file-name "eshell/" calstad/persistence-dir))
     #+end_src
 *** IDO and Smex
     [[https://www.emacswiki.org/emacs/InteractivelyDoThings][=ido=]] supercharges Emacs's completion engine.
@@ -304,7 +325,8 @@
             ido-use-url-at-point nil
             ido-use-virtual-buffers t
             ido-handle-duplicate-virtual-buffers 2
-            ido-max-prospects 10)
+            ido-max-prospects 10
+            ido-save-directory-list-file (expand-file-name "ido.last" calstad/persistence-dir))
     #+end_src
 
     [[https://github.com/DarwinAwardWinner/ido-ubiquitous][=ido-ubiquitous=]] replaces stock emacs completion with =ido=
@@ -335,7 +357,9 @@
       (use-package smex
         :bind (("M-x" . smex)
                ("M-X" . smex-major-mode-commands))
-        :config (smex-initialize))
+        :config
+        (smex-initialize)
+        (setq smex-save-file (expand-file-name "smex-items" calstad/persistence-dir)))
     #+end_src
 
     For any case where =ido= cannot be used, there is another older mode
