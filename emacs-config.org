@@ -241,26 +241,16 @@
 	  (setq default-frame-alist '((font . "-*-Consolas-medium-r-normal--18-0-72-72-m-0-iso10646-1"))))
     #+end_src
 ** Mode and Language Specific Configs
-*** Latex
-**** AUCTeX
-     [[https://www.emacswiki.org/emacs/AUCTeX][AUCTeX]] is a comprehensive customizable integrated environment for
-     writing input files for TeX/LaTeX/ConTeXt/Texinfo using Emacs.
-     #+begin_src emacs-lisp
-       (use-package tex
-	 :ensure auctex)
-     #+end_src
-**** Auto pair "$"
-     #+begin_src emacs-lisp
-       (add-hook 'TeX-mode-hook
-		 '(lambda ()
-		    (define-key LaTeX-mode-map (kbd "$") 'self-insert-command)))
+*** Company
+    [[http://company-mode.github.io][=company-mode=]] is a text completion framework for Emacs. The name
+    stands for "complete anything". It uses pluggable back-ends and
+    front-ends to retrieve and display completion candidates.
+    #+begin_src emacs-lisp
+      (use-package company
+        :bind (("<C-return>" . company-complete)
+               :map company-active-map ("M-d" . company-show-doc-buffer))
+        :init (add-hook 'after-init-hook 'global-company-mode))
     #+end_src
-**** Subscripts and superscripts
-     Insert braces after =_= and =^=
-     #+begin_src emacs-lisp
-       (setq TeX-electric-sub-and-superscript 't)
-     #+end_src
-
 *** Dired
 **** Use =a= to reuse dired buffer
      The command =dired-find-alternate-file= is disabled by default so
@@ -269,7 +259,6 @@
      #+begin_src emacs-lisp
        (put 'dired-find-alternate-file 'disabled nil)
      #+end_src
-
 *** Docker
     #+begin_src emacs-lisp
       (use-package dockerfile-mode)
@@ -373,6 +362,25 @@
      - ido-default-file-method
 **** TODO Not sure about this
      (set-default 'imenu-auto-rescan t)
+*** Latex
+**** AUCTeX
+     [[https://www.emacswiki.org/emacs/AUCTeX][AUCTeX]] is a comprehensive customizable integrated environment for
+     writing input files for TeX/LaTeX/ConTeXt/Texinfo using Emacs.
+     #+begin_src emacs-lisp
+       (use-package tex
+	 :ensure auctex)
+     #+end_src
+**** Auto pair "$"
+     #+begin_src emacs-lisp
+       (add-hook 'TeX-mode-hook
+		 '(lambda ()
+		    (define-key LaTeX-mode-map (kbd "$") 'self-insert-command)))
+    #+end_src
+**** Subscripts and superscripts
+     Insert braces after =_= and =^=
+     #+begin_src emacs-lisp
+       (setq TeX-electric-sub-and-superscript 't)
+     #+end_src
 *** Magit
     #+begin_src emacs-lisp
       (use-package magit
@@ -428,7 +436,6 @@
       #+begin_src emacs-lisp
 	(require 'ox-md nil t)
       #+end_src
-
 *** Python
 **** IPython
      Newer verions of IPython break the =inferior-python= shell in
