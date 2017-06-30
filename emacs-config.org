@@ -208,13 +208,18 @@
      the =init.el= file.  This saves those customizations into a
      separate file.
      #+begin_src emacs-lisp
-       (setq calstad/custom-file (expand-file-name "custom.el" calstad/persistence-dir))
-       (if (file-exists-p calstad/custom-file)
-           (load custom-file))
+       (setq custom-file (expand-file-name "custom.el" calstad/persistence-dir))
+       (unless (file-exists-p custom-file)
+         (write-region "" nil custom-file))
+       (load custom-file)
      #+end_src
 **** Recently accessed files
      #+begin_src emacs-lisp
        (setq recentf-save-file (expand-file-name "recentf" calstad/persistence-dir))
+     #+end_src
+**** URL Cache, Cookies, and History
+     #+begin_src emacs-lisp
+       (setq url-configuration-directory (expand-file-name "url/" calstad/persistence-dir))
      #+end_src
 **** Tramp Connections
      #+begin_src emacs-lisp
