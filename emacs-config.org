@@ -45,14 +45,6 @@
     #+begin_src emacs-lisp
       (setq use-package-always-ensure t)
     #+end_src
-*** Key bindings
-    Miscellaneous key binding stuff that doesn't fit anywhere else.
-    #+begin_src emacs-lisp
-      (global-set-key (kbd "RET") 'newline-and-indent)
-      (global-set-key (kbd "C-;") 'comment-or-uncomment-region)
-      (global-set-key (kbd "C-+") 'text-scale-increase)
-      (global-set-key (kbd "C--") 'text-scale-decrease)
-    #+end_src
 *** UI
 **** Skip splash screen on startup
      #+begin_src emacs-lisp
@@ -92,6 +84,14 @@
        (fset 'yes-or-no-p 'y-or-n-p)
      #+end_src
 *** Editing
+**** Key bindings
+     Miscellaneous editing keybindings
+     #+begin_src emacs-lisp
+       (global-set-key (kbd "RET") 'newline-and-indent)
+       (global-set-key (kbd "C-;") 'comment-or-uncomment-region)
+       (global-set-key (kbd "C-+") 'text-scale-increase)
+       (global-set-key (kbd "C--") 'text-scale-decrease)
+     #+end_src
 **** Marking text
      Be able to write over the marked region and also highlight the
      marked region.
@@ -133,6 +133,11 @@
        (electric-pair-mode)
      #+end_src
 *** Windows and Buffers
+**** Use better buffer list
+     =IBuffer= is a more feature rich buffer list than =Buffer Menu=.
+     #+begin_src emacs-lisp
+       (global-set-key (kbd "C-x C-b") 'ibuffer)
+     #+end_src
 **** Swap windows
      If I have two windows open, it swaps them.
      #+begin_src emacs-lisp
