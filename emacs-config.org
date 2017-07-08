@@ -191,6 +191,10 @@
 	(global-set-key (kbd "C-c C-k") 'calstad/delete-file-and-buffer)
       #+end_src
 
+**** Rename buffers
+     #+begin_src emacs-lisp
+       (global-set-key (kbd "C-c r") 'rename-buffer)
+     #+end_src
 **** Unique buffer names
      Make it so that buffers have unique names if the files dont.
      #+begin_src emacs-lisp
@@ -464,8 +468,8 @@
         :config
         (elpy-enable)
         ;; Use IPython for inferior python processes
-        (elpy-use-ipython))
-
+        ;; (elpy-use-ipython)
+        )
     #+end_src
 *** YAML
     #+begin_src emacs-lisp
