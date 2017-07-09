@@ -132,6 +132,11 @@
        (setq show-paren-style 'parenthesis)
        (electric-pair-mode)
      #+end_src
+**** GPG Support
+     #+begin_src emacs-lisp
+       (setq epg-gpg-program "gpg2")
+       (setf epa-pinentry-mode 'loopback)
+     #+end_src
 *** Windows and Buffers
 **** Use better buffer list
      =IBuffer= is a more feature rich buffer list than =Buffer Menu=.
@@ -252,7 +257,7 @@
     Set font
     #+begin_src emacs-lisp
       (if window-system
-	  (setq default-frame-alist '((font . "-*-Consolas-medium-r-normal--18-0-72-72-m-0-iso10646-1"))))
+	  (setq default-frame-alist '((font . "-*-Monaco-medium-r-normal--15-0-72-72-m-0-iso10646-1"))))
     #+end_src
 ** Mode and Language Specific Configs
 *** Company
@@ -336,7 +341,7 @@
     completion wherever it is possible to do so without breaking
     things.
     #+begin_src emacs-lisp
-      (use-package ido-ubiquitous
+      (use-package ido-completing-read+
         :config
         (ido-ubiquitous-mode t)
         ;; Let magit use its own ido interface
