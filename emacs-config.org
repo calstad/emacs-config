@@ -401,6 +401,12 @@
      #+begin_src emacs-lisp
        (setq TeX-electric-sub-and-superscript 't)
      #+end_src
+*** Macaulay2
+    Macaulay2 is a system for computing in commutative algebra,
+    algebraic geometry and related fields.
+    #+begin_src emacs-lisp
+      (load "~/.emacs-Macaulay2" t)
+    #+end_src
 *** Magit
     #+begin_src emacs-lisp
       (use-package magit
