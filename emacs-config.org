@@ -455,8 +455,14 @@
         (setq org-lowest-priority ?9)
         (setq org-default-priority ?9)
       #+end_src
-**** Agenda
-***** Custom Agenda Views
+**** Capture
+**** Refile
+     #+begin_src emacs-lisp
+       (setq org-refile-targets '((nil :maxlevel . 9)
+                                  (org-agenda-files :maxlevel . 9)))
+       ;; (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
+       ;; (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
+     #+end_src
 **** org-babel
      Syntax highlighting for code blocks
      #+begin_src emacs-lisp
