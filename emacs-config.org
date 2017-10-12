@@ -386,6 +386,12 @@
      - ido-default-file-method
 **** TODO Not sure about this
      (set-default 'imenu-auto-rescan t)
+*** Haskell
+    Intero is a development mode for Haskell
+    #+begin_src emacs-lisp
+      (use-package intero
+        :config (intero-global-mode 1))
+    #+end_src
 *** Latex
 **** AUCTeX
      [[https://www.emacswiki.org/emacs/AUCTeX][AUCTeX]] is a comprehensive customizable integrated environment for
@@ -455,7 +461,6 @@
         (setq org-lowest-priority ?9)
         (setq org-default-priority ?9)
       #+end_src
-**** Capture
 **** Refile
      #+begin_src emacs-lisp
        (setq org-refile-targets '((nil :maxlevel . 9)
@@ -464,10 +469,28 @@
        ;; (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
      #+end_src
 **** org-babel
-     Syntax highlighting for code blocks
+***** Language Support
+      #+begin_src emacs-lisp
+        (org-babel-do-load-languages
+         'org-babel-load-languages
+         '((emacs-lisp . t)
+           (haskell . t)
+           (latex . t)
+           (python . t)
+           (R . t)))
+      #+end_src
+***** Syntax highlighting for code blocks
      #+begin_src emacs-lisp
        (setq org-src-fontify-natively t)
      #+end_src
+***** Don't confirm executing source blocks
+      #+begin_src emacs-lisp
+        (setq org-confirm-babel-evaluate nil)
+      #+end_src
+***** Inline Images
+      #+begin_src emacs-lisp
+        (setq org-startup-with-inline-images t)
+      #+end_src
 **** Exporting
 ***** Markdown
       #+begin_src emacs-lisp
@@ -489,9 +512,8 @@
       (use-package elpy
         :config
         (elpy-enable)
-        ;; Use IPython for inferior python processes
-        ;; (elpy-use-ipython)
-        )
+        (setq elpy-rpc-python-command "python3")
+        (setq python-shell-interpreter "python3"))
     #+end_src
 *** YAML
     #+begin_src emacs-lisp
