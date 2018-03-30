@@ -386,12 +386,6 @@
      - ido-default-file-method
 **** TODO Not sure about this
      (set-default 'imenu-auto-rescan t)
-*** Haskell
-    Intero is a development mode for Haskell
-    #+begin_src emacs-lisp
-      (use-package intero
-        :config (intero-global-mode 1))
-    #+end_src
 *** Latex
 **** AUCTeX
      [[https://www.emacswiki.org/emacs/AUCTeX][AUCTeX]] is a comprehensive customizable integrated environment for
