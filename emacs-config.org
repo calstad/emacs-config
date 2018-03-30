@@ -520,5 +520,7 @@
     Load =yasnippet= on programming langauge major modes.
     #+begin_src emacs-lisp
       (use-package yasnippet
-        :config (yas-global-mode 1))
+        :config
+        (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+        (yas-global-mode 1))
     #+end_src
