@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: infinite sum
+# key: si
+# --
+\sum_{$1}^{\infty}$0
