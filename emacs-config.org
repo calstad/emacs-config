@@ -462,16 +462,58 @@
        ;; (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
        ;; (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
      #+end_src
+**** org-ref
+     Org-ref is a library for org-modethat provides rich support for
+     citations, labels, and cross-references in org-mode.
+     #+begin_src emacs-lisp
+       (use-package org-ref
+         :config
+         (setq org-ref-notes-directory "~/Dropbox/research/notes"
+               org-ref-bibliography-notes "~/Dropbox/research/papers.org"
+               org-ref-default-bibliography '("~/Dropbox/research/papers.bib")
+               org-ref-pdf-directory "~/Dropbox/research/pdfs/")
+         (setq helm-bibtex-bibliography org-ref-default-bibliography
+               helm-bibtex-library-path org-ref-pdf-directory
+               helm-bibtex-notes-path org-ref-bibliography-notes))
+     #+end_src
+***** Notes File Headline Format
+      Change the default format of the headlines that are inserted
+      into the =org-ref-bibliography-notes= file so that instead of
+      starting with the year, they start with the author's name.
+      #+begin_src emacs-lisp
+        (setq org-ref-note-title-format
+              "* %a (%y) - %t
+          :PROPERTIES:
+            :Custom_ID: %k
+            :AUTHOR: %9a
+            :JOURNAL: %j
+            :YEAR: %y
+            :VOLUME: %v
+            :PAGES: %p
+            :DOI: %D
+            :URL: %U
+            :INTERLEAVE_PDF: ./pdfs/%k.pdf
+          :END:
+        ")
+      #+end_src
+**** Interleave
+     [[https://github.com/rudolfochrist/interleave][Interleave]] is a major mode for using org mode to take notes on a
+     PDF file.  Adding a =#+INTERLEAVE_PDF= property to a headline
+     then invoking =M-x interleave-mode= will split the screen between
+     the PDF and the org-mode notes file.
+     #+begin_src emacs-lisp
+       (use-package interleave)
+     #+end_src
 **** org-babel
+     [[https://orgmode.org/worg/org-contrib/babel/][Babel]] is Org-mode's ability to execute source code within
+     Org-mode documents.
 ***** Language Support
       #+begin_src emacs-lisp
         (org-babel-do-load-languages
          'org-babel-load-languages
          '((emacs-lisp . t)
-           (haskell . t)
            (latex . t)
-           (python . t)
-           (R . t)))
+           (python . t)))
       #+end_src
 ***** Syntax highlighting for code blocks
      #+begin_src emacs-lisp
@@ -486,10 +528,23 @@
         (setq org-startup-with-inline-images t)
       #+end_src
 **** Exporting
+***** LaTex
+      #+begin_src emacs-lisp
+        (setq org-latex-pdf-process '("latexmk -pdflatex='%latex -shell-escape -interaction nonstopmode' -pdf -output-directory=%o -f %f"))
+      #+end_src
 ***** Markdown
       #+begin_src emacs-lisp
         (require 'ox-md nil t)
       #+end_src
+*** PDF Tools
+    [[https://github.com/politza/pdf-tools][PDF Tools]] is, among other things, a replacement of DocView for PDF
+    files. The key difference is that pages are not pre-rendered by
+    e.g. ghostscript and stored in the file-system, but rather created
+    on-demand and stored in memory.
+    #+begin_src emacs-lisp
+      (use-package pdf-tools
+        :mode ("\\.pdf\\'" . pdf-view-mode))
+    #+end_src
 *** Python
 **** IPython
      Newer verions of IPython break the =inferior-python= shell in
