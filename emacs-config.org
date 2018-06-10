@@ -542,6 +542,14 @@
       #+begin_src emacs-lisp
         (require 'ox-md nil t)
       #+end_src
+***** Hugo
+      [[https://ox-hugo.scripter.co][ox-hugo]] is an Org exporter backend that exports Org to
+      Hugo-compatible Markdown (Blackfriday) and also generates the
+      front-matter (in TOML or YAML format).
+      #+begin_src emacs-lisp
+        (use-package ox-hugo
+          :after ox)
+      #+end_src
 *** PDF Tools
     [[https://github.com/politza/pdf-tools][PDF Tools]] is, among other things, a replacement of DocView for PDF
     files. The key difference is that pages are not pre-rendered by
