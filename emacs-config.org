@@ -514,6 +514,11 @@
          '((emacs-lisp . t)
            (latex . t)
            (python . t)))
+
+        (use-package ob-sagemath
+          :config
+          (setq org-babel-default-header-args:sage '((:session . t)
+                                                     (:results . "output"))))
       #+end_src
 ***** Syntax highlighting for code blocks
      #+begin_src emacs-lisp
@@ -563,6 +568,12 @@
         (elpy-enable)
         (setq elpy-rpc-python-command "python3")
         (setq python-shell-interpreter "python3"))
+    #+end_src
+*** SageMath
+    [[http://www.sagemath.org][Sage]] is an open source mathematics software system that wraps a
+    lot of different math packages.
+    #+begin_src emacs-lisp
+      (use-package sage-shell-mode)
     #+end_src
 *** YAML
     #+begin_src emacs-lisp
