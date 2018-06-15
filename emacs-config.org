@@ -398,6 +398,14 @@
        (use-package tex
          :ensure auctex)
      #+end_src
+**** CDLaTex
+     [[https://orgmode.org/manual/CDLaTeX-mode.html#CDLaTeX-mode][CDLaTex]] is a minor mode for fast input methods for LaTex
+     environments and math.
+     #+begin_src emacs-lisp
+       (use-package cdlatex
+         :init
+         (add-hook 'org-mode-hook 'turn-on-org-cdlatex))
+     #+end_src
 **** Auto pair "$"
      #+begin_src emacs-lisp
        (add-hook 'TeX-mode-hook
