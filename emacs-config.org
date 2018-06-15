@@ -565,7 +565,9 @@
       front-matter (in TOML or YAML format).
       #+begin_src emacs-lisp
         (use-package ox-hugo
-          :after ox)
+          :after ox
+          :init
+          (add-hook 'after-save-hook 'org-hugo-export-wim-to-md-after-save))
       #+end_src
 *** PDF Tools
     [[https://github.com/politza/pdf-tools][PDF Tools]] is, among other things, a replacement of DocView for PDF
