@@ -474,6 +474,11 @@
        ;; (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
        ;; (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
      #+end_src
+**** LaTex
+     Highlight LaTex source in org documents
+     #+begin_src emacs-lisp
+       (setq org-highlight-latex-and-related '(latex script entites))
+     #+end_src
 **** org-ref
      Org-ref is a library for org-mode that provides rich support for
      citations, labels, and cross-references in org-mode.  A lot of
