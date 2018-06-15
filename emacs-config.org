@@ -59,6 +59,10 @@
          (blink-cursor-mode -1)  ; about to give me seizures
          (tool-bar-mode -1))
      #+end_src
+**** Terminal options
+     #+begin_src emacs-lisp
+       (menu-bar-mode -1)
+     #+end_src
 **** Set a color theme
      #+begin_src emacs-lisp
        (use-package zenburn-theme
@@ -394,6 +398,14 @@
        (use-package tex
          :ensure auctex)
      #+end_src
+**** CDLaTex
+     [[https://orgmode.org/manual/CDLaTeX-mode.html#CDLaTeX-mode][CDLaTex]] is a minor mode for fast input methods for LaTex
+     environments and math.
+     #+begin_src emacs-lisp
+       (use-package cdlatex
+         :init
+         (add-hook 'org-mode-hook 'turn-on-org-cdlatex))
+     #+end_src
 **** Auto pair "$"
      #+begin_src emacs-lisp
        (add-hook 'TeX-mode-hook
@@ -455,6 +467,11 @@
                                   (org-agenda-files :maxlevel . 9)))
        ;; (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
        ;; (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
+     #+end_src
+**** LaTex
+     Highlight LaTex source in org documents
+     #+begin_src emacs-lisp
+       (setq org-highlight-latex-and-related '(latex script entites))
      #+end_src
 **** org-ref
      Org-ref is a library for org-mode that provides rich support for
@@ -542,7 +559,9 @@
       front-matter (in TOML or YAML format).
       #+begin_src emacs-lisp
         (use-package ox-hugo
-          :after ox)
+          :after ox
+          :init
+          (add-hook 'after-save-hook 'org-hugo-export-wim-to-md-after-save))
       #+end_src
 *** PDF Tools
     [[https://github.com/politza/pdf-tools][PDF Tools]] is, among other things, a replacement of DocView for PDF
