@@ -59,6 +59,10 @@
          (blink-cursor-mode -1)  ; about to give me seizures
          (tool-bar-mode -1))
      #+end_src
+**** Terminal options
+     #+begin_src emacs-lisp
+       (menu-bar-mode -1)
+     #+end_src
 **** Set a color theme
      #+begin_src emacs-lisp
        (use-package zenburn-theme
