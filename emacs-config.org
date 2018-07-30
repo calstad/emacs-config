@@ -390,6 +390,13 @@
      - ido-default-file-method
 **** TODO Not sure about this
      (set-default 'imenu-auto-rescan t)
+*** Haskell
+    [[http://commercialhaskell.github.io/intero/][Intero]] is a stack based development environment for haskell
+    projects.
+    #+begin_src emacs-lisp
+      (use-package intero
+        :init (add-hook 'haskell-mode-hook 'intero-mode))
+    #+end_src
 *** Latex
 **** AUCTeX
      [[https://www.emacswiki.org/emacs/AUCTeX][AUCTeX]] is a comprehensive customizable integrated environment for
