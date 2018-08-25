@@ -30,7 +30,7 @@
       (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
     #+end_src
 
-    [[https://github.com/jwiegley/use-package][=use-package=]] is a macro that allows for isolation in requiring
+    [[https://github.com/jwiegley/use-package][use-package]] is a macro that allows for isolation in requiring
     and configuring emacs packages.
     #+begin_src emacs-lisp
       (unless (package-installed-p 'use-package)
@@ -277,7 +277,7 @@
      #+end_src
 ** Mode and Language Specific Configs
 *** Company
-    [[http://company-mode.github.io][=company-mode=]] is a text completion framework for Emacs. The name
+    [[http://company-mode.github.io][company-mode]] is a text completion framework for Emacs. The name
     stands for "complete anything". It uses pluggable back-ends and
     front-ends to retrieve and display completion candidates.
     #+begin_src emacs-lisp
@@ -341,7 +341,7 @@
       (setq eshell-directory-name (expand-file-name "eshell/" calstad/persistence-dir))
     #+end_src
 *** IDO and Smex
-    [[https://www.emacswiki.org/emacs/InteractivelyDoThings][=ido=]] supercharges Emacs's completion engine.
+    [[https://www.emacswiki.org/emacs/InteractivelyDoThings][ido]] supercharges Emacs's completion engine.
     #+begin_src emacs-lisp
       (ido-mode t)
       (ido-everywhere t)
@@ -357,7 +357,7 @@
             ido-save-directory-list-file (expand-file-name "ido.last" calstad/persistence-dir))
     #+end_src
 
-    [[https://github.com/DarwinAwardWinner/ido-ubiquitous][=ido-ubiquitous=]] replaces stock emacs completion with =ido=
+    [[https://github.com/DarwinAwardWinner/ido-ubiquitous][ido-ubiquitous]] replaces stock emacs completion with =ido=
     completion wherever it is possible to do so without breaking
     things.
     #+begin_src emacs-lisp
@@ -368,7 +368,7 @@
         (setq magit-completing-read-function 'magit-ido-completing-read))
     #+end_src
 
-    [[https://github.com/lewang/flx][=flx-ido=]] brings fuzzy matching to =ido= completions.
+    [[https://github.com/lewang/flx][flx-ido]] brings fuzzy matching to =ido= completions.
     #+begin_src emacs-lisp
       (use-package flx-ido
         :config
