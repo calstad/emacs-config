@@ -657,6 +657,11 @@
         (setq elpy-rpc-python-command "python3")
         (setq python-shell-interpreter "python3"))
     #+end_src
+*** Rest Client
+    [[https://github.com/pashky/restclient.el][Restclient]] is a major mode for exploring HTTP REST web services.
+    #+begin_src emacs-lisp
+      (use-package restclient)
+    #+end_src
 *** SageMath
     [[http://www.sagemath.org][Sage]] is an open source mathematics software system that wraps a
     lot of different math packages.
