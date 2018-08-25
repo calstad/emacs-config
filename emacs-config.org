@@ -404,10 +404,48 @@
      (set-default 'imenu-auto-rescan t)
 *** Haskell
     [[http://commercialhaskell.github.io/intero/][Intero]] is a stack based development environment for haskell
-    projects.
+    projects but I have not gotten it to work on the seller labs
+    project yet due to running =stack= in =docker= (see this [[https://stackoverflow.com/questions/51725510/running-emacs-intero-mode-with-stack-docker-integration][SO post]]
+    for updates).
     #+begin_src emacs-lisp
-      (use-package intero
-        :init (add-hook 'haskell-mode-hook 'intero-mode))
+      ;; (use-package intero
+      ;;   :init
+      ;;   (setq temporary-file-directory "/tmp/emacs/")
+      ;;   (add-hook 'haskell-mode-hook 'intero-mode))
+    #+end_src
+
+    [[https://github.com/jyp/dante][Dante]] aims to be a lighter weight alternative to =intero= but I
+    also had issues getting it setup with =stack= and =docker=.
+    #+begin_src emacs-lisp
+      ;; (use-package dante
+      ;;   :after haskell-mode
+      ;;   :commands 'dante-mode
+      ;;   :init
+      ;;   (add-hook 'haskell-mode-hook 'dante-mode)
+      ;;   (add-hook 'haskell-mode-hook 'flycheck-mode)
+      ;;   (setq dante-repl-command-line '("make" "ghci"))
+      ;;   (setq temporary-file-directory "/tmp/emacs/"))
+    #+end_src
+
+    [[http://haskell.github.io/haskell-mode/][Haskell-mode]] is the default mode for source code editing which I
+    am using until I can get =intero= or =dante= working.
+    #+begin_src emacs-lisp
+      (use-package haskell-mode
+        ;; :init
+        ;; (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+        :custom
+        (haskell-process-suggest-remove-import-lines t)
+        (haskell-process-auto-import-loaded-modules t)
+        (haskell-process-log t)
+        (haskell-process-type 'stack-ghci)
+        :bind
+        (:map haskell-mode-map
+         ("M-." . haskell-mode-jump-to-def-or-tag)
+         ("C-c C-t" . haskell-mode-show-type-at)
+         ("C-c C-l" . haskell-process-load-or-reload)
+         ("C-`" . haskell-interactive-bring)
+         ("C-c C-i" . haskell-process-do-info)
+         ("C-c C-k" . haskell-interactive-mode-clear)))
     #+end_src
 *** Latex
 **** AUCTeX
