@@ -294,6 +294,10 @@
      #+begin_src emacs-lisp
        (put 'dired-find-alternate-file 'disabled nil)
      #+end_src
+**** Human readable file sizes
+     #+begin_src emacs-lisp
+       (setq dired-listing-switches "-alh")
+     #+end_src
 *** Docker
     #+begin_src emacs-lisp
       (use-package dockerfile-mode)
