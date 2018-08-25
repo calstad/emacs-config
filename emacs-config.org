@@ -141,6 +141,14 @@
        (setq epg-gpg-program "gpg2")
        (setf epa-pinentry-mode 'loopback)
      #+end_src
+**** EditorConfig
+     [[https://github.com/editorconfig/editorconfig-emacs][EditorConfig]] helps developers define and maintain consistent
+     coding styles between different editors and IDEs.
+     #+begin_src emacs-lisp
+       (use-package editorconfig
+         :config
+         (editorconfig-mode 1))
+     #+end_src
 *** Windows and Buffers
 **** Use better buffer list
      =IBuffer= is a more feature rich buffer list than =Buffer Menu=.
