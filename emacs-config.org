@@ -614,7 +614,8 @@
 
       This package allows for GitHub flavored markdown
       #+begin_src emacs-lisp
-        (use-package ox-gfm)
+        (use-package ox-gfm
+          :after ox)
       #+end_src
 ***** Hugo
       [[https://ox-hugo.scripter.co][ox-hugo]] is an Org exporter backend that exports Org to
