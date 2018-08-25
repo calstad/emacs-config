@@ -611,6 +611,11 @@
       #+begin_src emacs-lisp
         (require 'ox-md nil t)
       #+end_src
+
+      This package allows for GitHub flavored markdown
+      #+begin_src emacs-lisp
+        (use-package ox-gfm)
+      #+end_src
 ***** Hugo
       [[https://ox-hugo.scripter.co][ox-hugo]] is an Org exporter backend that exports Org to
       Hugo-compatible Markdown (Blackfriday) and also generates the
