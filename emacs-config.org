@@ -340,6 +340,13 @@
     #+begin_src emacs-lisp
       (setq eshell-directory-name (expand-file-name "eshell/" calstad/persistence-dir))
     #+end_src
+*** Env Files
+    Major mode for editing =.env= files, which are used for storing
+    environment variables.
+    #+begin_src emacs-lisp
+      (use-package dotenv-mode
+        :mode "\\.env\\..*\\'")
+    #+end_src
 *** IDO and Smex
     [[https://www.emacswiki.org/emacs/InteractivelyDoThings][ido]] supercharges Emacs's completion engine.
     #+begin_src emacs-lisp
