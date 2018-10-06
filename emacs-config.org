@@ -347,6 +347,20 @@
       (use-package dotenv-mode
         :mode "\\.env\\..*\\'")
     #+end_src
+*** Helm
+    [[https://github.com/emacs-helm/helm][Helm]] is an Emacs framework for incremental completions and
+    narrowing selections.  There is a good tutorial [[http://tuhdo.github.io/helm-intro.html][here]] and the [[https://github.com/emacs-helm/helm/wiki][wiki]]
+    is also very helpful.
+    #+begin_src emacs-lisp
+      (use-package helm
+        :bind (("M-x" . helm-M-x)
+               ("C-x C-f" . helm-find-files)
+               ("C-x b" . helm-mini)
+               ("C-x r b" . helm-filtered-bookmarks))
+        :config
+        (helm-mode 1)
+        (helm-autoresize-mode 1))
+    #+end_src
 *** Haskell
     [[http://commercialhaskell.github.io/intero/][Intero]] is a stack based development environment for haskell
     projects but I have not gotten it to work on the seller labs
