@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: lasrc
-# key: lasrc
-# --
-#+begin_src latex
-$0
-#+end_src
