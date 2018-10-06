@@ -489,6 +489,10 @@
         (setq org-lowest-priority ?9)
         (setq org-default-priority ?9)
       #+end_src
+**** Capture
+     #+begin_src emacs-lisp
+       (setq org-default-notes-file "~/Dropbox/org/capture.org")
+     #+end_src
 **** Refile
      #+begin_src emacs-lisp
        (setq org-refile-targets '((nil :maxlevel . 9)
