@@ -361,16 +361,28 @@
         (helm-mode 1)
         (helm-autoresize-mode 1))
     #+end_src
+**** Helm BibTex
+     [[https://github.com/tmalsburg/helm-bibtex][Helm-bibtex]] is a [[*Helm][Helm]] interface for managing BibTex
+     biblographies.
+     #+begin_src emacs-lisp
+       (use-package helm-bibtex
+         :after helm
+         :custom
+         (bibtex-completion-bibliography "~/Dropbox/research/papers.bib")
+         (bibtex-completion-library-path "~/Dropbox/research/pdfs/")
+         (bibtex-completion-notes-path "~/Dropbox/research/papers.org")
+         (bibtex-completion-pdf-symbol "⌘")
+         (bibtex-completion-notes-symbol "✎"))
+     #+end_src
 *** Haskell
     [[http://commercialhaskell.github.io/intero/][Intero]] is a stack based development environment for haskell
     projects but I have not gotten it to work on the seller labs
     project yet due to running =stack= in =docker= (see this [[https://stackoverflow.com/questions/51725510/running-emacs-intero-mode-with-stack-docker-integration][SO post]]
     for updates).
     #+begin_src emacs-lisp
-      ;; (use-package intero
-      ;;   :init
-      ;;   (setq temporary-file-directory "/tmp/emacs/")
-      ;;   (add-hook 'haskell-mode-hook 'intero-mode))
+      (use-package intero
+        :init
+        (add-hook 'haskell-mode-hook 'intero-mode))
     #+end_src
 
     [[https://github.com/jyp/dante][Dante]] aims to be a lighter weight alternative to =intero= but I
@@ -500,10 +512,7 @@
          (org-ref-bibliography-notes "~/Dropbox/research/papers.org")
          (org-ref-default-bibliography '("~/Dropbox/research/papers.bib"))
          (org-ref-pdf-directory "~/Dropbox/research/pdfs/")
-         (helm-bibtex-bibliography org-ref-default-bibliography)
-         (helm-bibtex-library-path org-ref-pdf-directory)
-         (helm-bibtex-notes-path org-ref-bibliography-notes)
-         (reftex-default-bibliography org-ref-default-bibliography))
+         (reftex-default-bibliography "~/Dropbox/research/papers.bib"))
      #+end_src
 ***** Notes File Headline Format
       Change the default format of the headlines that are inserted
