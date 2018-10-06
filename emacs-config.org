@@ -365,15 +365,27 @@
 **** Helm BibTex
      [[https://github.com/tmalsburg/helm-bibtex][Helm-bibtex]] is a [[*Helm][Helm]] interface for managing BibTex
      biblographies.
+
+     Use the same functionality as =org-ref= for opening up notes for
+     a reference.
+     #+begin_src emacs-lisp
+       (defun calstad/org-ref-notes-function (candidates)
+         (let ((key (helm-marked-candidates)))
+           (funcall org-ref-notes-function (car key))))
+     #+end_src
+
      #+begin_src emacs-lisp
        (use-package helm-bibtex
-         :after helm
+         :after org-ref-helm-bibtex
          :custom
          (bibtex-completion-bibliography "~/Dropbox/research/papers.bib")
          (bibtex-completion-library-path "~/Dropbox/research/pdfs/")
          (bibtex-completion-notes-path "~/Dropbox/research/papers.org")
          (bibtex-completion-pdf-symbol "⌘")
-         (bibtex-completion-notes-symbol "✎"))
+         (bibtex-completion-notes-symbol "✎")
+         :config
+         (helm-delete-action-from-source "Edit notes" helm-source-bibtex)
+         (helm-add-action-to-source "Edit notes" 'calstad/org-ref-notes-function helm-source-bibtex 8))
      #+end_src
 *** Haskell
     [[http://commercialhaskell.github.io/intero/][Intero]] is a stack based development environment for haskell
