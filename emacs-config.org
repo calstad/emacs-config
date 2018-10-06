@@ -5,7 +5,7 @@
 * Emacs Configuration
   This is my "dot emacs" configuration using =org-mode=.  It has been
   heavily influenced/stolen from [[https://github.com/abedra/emacs.d][Aaron Bedra's emacs config]].
-** Global Configs
+** Global Configuration
 *** User details
     Emacs will normally pick this up automatically, but this way I can
     be sure the right information is always present.
@@ -259,7 +259,7 @@
        (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
        (setq auto-save-list-file-prefix nil)
      #+end_src
-** System Configs
+** System Specific Configuration
 *** Mac OS X
 **** Set meta to apple key
     #+begin_src emacs-lisp
@@ -275,7 +275,7 @@
        (use-package exec-path-from-shell
          :config (exec-path-from-shell-initialize))
      #+end_src
-** Mode and Language Specific Configs
+** Mode and Language Specific Configuration
 *** Company
     [[http://company-mode.github.io][company-mode]] is a text completion framework for Emacs. The name
     stands for "complete anything". It uses pluggable back-ends and
@@ -350,7 +350,8 @@
 *** Helm
     [[https://github.com/emacs-helm/helm][Helm]] is an Emacs framework for incremental completions and
     narrowing selections.  There is a good tutorial [[http://tuhdo.github.io/helm-intro.html][here]] and the [[https://github.com/emacs-helm/helm/wiki][wiki]]
-    is also very helpful.
+    is also very helpful.  The old =ido= and =smex= configuration can
+    be found at commit [[https://github.com/calstad/emacs-config/commit/667cbdcf10517f3495767536739e3fc74ffa7ac7][667cbdc]].
     #+begin_src emacs-lisp
       (use-package helm
         :bind (("M-x" . helm-M-x)
