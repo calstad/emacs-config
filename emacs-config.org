@@ -536,14 +536,15 @@
      the current =org-ref= workflow is taken from [[https://www.reddit.com/r/emacs/comments/4gudyw/help_me_with_my_orgmode_workflow_for_notetaking/][this reddit thread]].
      #+begin_src emacs-lisp
        (use-package org-ref
-         :config
-         (setq org-ref-notes-directory "~/Dropbox/research/notes"
-               org-ref-bibliography-notes "~/Dropbox/research/papers.org"
-               org-ref-default-bibliography '("~/Dropbox/research/papers.bib")
-               org-ref-pdf-directory "~/Dropbox/research/pdfs/")
-         (setq helm-bibtex-bibliography org-ref-default-bibliography
-               helm-bibtex-library-path org-ref-pdf-directory
-               helm-bibtex-notes-path org-ref-bibliography-notes))
+         :custom
+         (org-ref-notes-directory "~/Dropbox/research/notes")
+         (org-ref-bibliography-notes "~/Dropbox/research/papers.org")
+         (org-ref-default-bibliography '("~/Dropbox/research/papers.bib"))
+         (org-ref-pdf-directory "~/Dropbox/research/pdfs/")
+         (helm-bibtex-bibliography org-ref-default-bibliography)
+         (helm-bibtex-library-path org-ref-pdf-directory)
+         (helm-bibtex-notes-path org-ref-bibliography-notes)
+         (reftex-default-bibliography org-ref-default-bibliography))
      #+end_src
 ***** Notes File Headline Format
       Change the default format of the headlines that are inserted
