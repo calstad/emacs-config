@@ -547,7 +547,7 @@
             :PAGES: %p
             :DOI: %D
             :URL: %U
-            :INTERLEAVE_PDF: ./pdfs/%k.pdf
+            :INTERLEAVE_PDF: ~/Dropbox/research/pdfs/%k.pdf
           :END:
         ")
       #+end_src
