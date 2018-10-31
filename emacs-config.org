@@ -474,12 +474,12 @@
     Emacs. I use it for task managment, notes, journal, habit tracker,
     latex, and development environment.
     #+begin_src emacs-lisp
-            (use-package org
-              :pin org
-              :bind (("C-c a" . org-agenda)
-                     ("C-c b" . org-iswitchb)
-                     ("C-c c" . org-capture)
-                     ("C-c l" . org-store-link)))
+      (use-package org
+        :pin org
+        :bind (("C-c a" . org-agenda)
+               ("C-c b" . org-iswitchb)
+               ("C-c c" . org-capture)
+               ("C-c l" . org-store-link)))
     #+end_src
 **** Todo Items
 ***** Add an in progress state for todo items
@@ -515,7 +515,7 @@
 **** LaTex
      Highlight LaTex source in org documents
      #+begin_src emacs-lisp
-       (setq org-highlight-latex-and-related '(latex script entites))
+       (setq org-highlight-latex-and-related '(latex entites))
      #+end_src
 **** org-ref
      Org-ref is a library for org-mode that provides rich support for
