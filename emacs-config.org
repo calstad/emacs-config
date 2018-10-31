@@ -26,8 +26,7 @@
       (require 'package)
       (setq package-enable-at-startup nil)
       (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-      (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-      (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+      (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
     #+end_src
 
     [[https://github.com/jwiegley/use-package][use-package]] is a macro that allows for isolation in requiring
