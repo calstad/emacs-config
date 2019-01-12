@@ -384,7 +384,9 @@
          (bibtex-completion-notes-symbol "✎")
          :config
          (helm-delete-action-from-source "Edit notes" helm-source-bibtex)
-         (helm-add-action-to-source "Edit notes" 'calstad/org-ref-notes-function helm-source-bibtex 8))
+         (helm-add-action-to-source "Edit notes" 'calstad/org-ref-notes-function helm-source-bibtex 8)
+         :bind ("<f6>" . helm-bibtex))
+
      #+end_src
 *** Haskell
     [[http://commercialhaskell.github.io/intero/][Intero]] is a stack based development environment for haskell
