@@ -485,11 +485,7 @@
 ***** Add an in progress state for todo items
       #+begin_src emacs-lisp
         (setq org-todo-keywords
-          '((sequence "TODO" "IN-PROGRESS(!)" "|" "DONE")))
-      #+end_src
-***** Add a closed timestamp when todos are marked done
-      #+begin_src emacs-lisp
-        (setq org-log-done 'time)
+          '((sequence "TODO" "IN-PROGRESS" "|" "DONE")))
       #+end_src
 ***** Enable inline tasks
       #+begin_src emacs-lisp
