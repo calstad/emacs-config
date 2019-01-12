@@ -625,7 +625,8 @@
     on-demand and stored in memory.
     #+begin_src emacs-lisp
       (use-package pdf-tools
-        :mode ("\\.pdf\\'" . pdf-view-mode))
+        :mode ("\\.pdf\\'" . pdf-view-mode)
+        :config (pdf-tools-install))
     #+end_src
 *** PHP
     Just need syntax highlighting for Seller Labs legacy PHP projects
