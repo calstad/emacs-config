@@ -493,6 +493,11 @@
       #+begin_src emacs-lisp
         (setq org-log-done 'time)
       #+end_src
+***** Enable inline tasks
+      #+begin_src emacs-lisp
+        (require 'org-inlinetask)
+        (setq org-inlinetask-min-level 10)
+      #+end_src
 ***** Enable habit tracking
       #+begin_src emacs-lisp
         (add-to-list 'org-modules 'org-habit)
