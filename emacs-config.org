@@ -120,6 +120,10 @@
        (add-hook 'prog-mode-hook 'flyspell-prog-mode)
      #+end_src
 
+     Use a shared dictionary
+     #+begin_src emacs-lisp
+       (setq ispell-personal-dictionary "~/Dropbox/org/flyspell_dictionary")
+     #+end_src
      Remap keybinding
      #+begin_src emacs-lisp
        (eval-after-load 'flyspell
