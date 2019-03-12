@@ -120,6 +120,10 @@
        (add-hook 'prog-mode-hook 'flyspell-prog-mode)
      #+end_src
 
+     Use a shared dictionary
+     #+begin_src emacs-lisp
+       (setq ispell-personal-dictionary "~/Dropbox/org/flyspell_dictionary")
+     #+end_src
      Remap keybinding
      #+begin_src emacs-lisp
        (eval-after-load 'flyspell
@@ -386,7 +390,12 @@
          (helm-delete-action-from-source "Edit notes" helm-source-bibtex)
          (helm-add-action-to-source "Edit notes" 'calstad/org-ref-notes-function helm-source-bibtex 8)
          :bind ("<f6>" . helm-bibtex))
+     #+end_src
 
+     Sort BibTex entries in order they are in the BibTex file
+     #+begin_src emacs-lisp
+       (advice-add 'bibtex-completion-candidates
+                   :filter-return 'reverse)
      #+end_src
 *** Haskell
     [[http://commercialhaskell.github.io/intero/][Intero]] is a stack based development environment for haskell
@@ -531,8 +540,12 @@
          (org-ref-bibliography-notes "~/Dropbox/research/papers.org")
          (org-ref-default-bibliography '("~/Dropbox/research/papers.bib"))
          (org-ref-pdf-directory "~/Dropbox/research/pdfs/")
-         (reftex-default-bibliography "~/Dropbox/research/papers.bib"))
+         (reftex-default-bibliography "~/Dropbox/research/papers.bib")
+         (org-ref-show-broken-links nil))
      #+end_src
+     In the above configuration =org-ref-show-broken-links= is set to
+     =nil= because it causes lagging on large files.  See [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org#controlling-link-messages-and-tooltips][here]] for
+     some more details.
 ***** Notes File Headline Format
       Change the default format of the headlines that are inserted
       into the =org-ref-bibliography-notes= file so that instead of
