@@ -603,6 +603,14 @@
         (setq org-startup-with-inline-images t)
       #+end_src
 **** Exporting
+***** Beamer
+      Have earmuffs be =bold= like normal instead of =alert=.
+      #+begin_src emacs-lisp
+        (defun calstad/beamer-bold (contents backend info)
+          (when (eq backend 'beamer)
+            (replace-regexp-in-string "\\`\\\\[A-Za-z0-9]+" "\\\\textbf" contents)))
+        (add-to-list 'org-export-filter-bold-functions 'calstad/beamer-bold)
+      #+end_src
 ***** LaTex
       Define the command to use for creating PDFs
       #+begin_src emacs-lisp
