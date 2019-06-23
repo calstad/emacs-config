@@ -632,11 +632,6 @@
         :mode ("\\.pdf\\'" . pdf-view-mode)
         :config (pdf-tools-install))
     #+end_src
-*** PHP
-    Just need syntax highlighting for Seller Labs legacy PHP projects
-    #+begin_src emacs-lisp
-      (use-package php-mode)
-    #+end_src
 *** Python
 **** IPython
      Newer verions of IPython break the =inferior-python= shell in
