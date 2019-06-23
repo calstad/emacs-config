@@ -115,6 +115,12 @@
             (fill-region (region-beginning) (region-end) nil)))
       #+end_src
 **** Spell check
+     Use =ispell= as the spell checker
+     #+begin_src emacs-lisp
+       (setq ispell-program-name "ispell")
+     #+end_src
+
+     Check spelling on the fly
      #+begin_src emacs-lisp
        (add-hook 'text-mode-hook 'flyspell-mode)
        (add-hook 'prog-mode-hook 'flyspell-prog-mode)
@@ -279,6 +285,16 @@
          :config (exec-path-from-shell-initialize))
      #+end_src
 ** Mode and Language Specific Configuration
+*** Clojure
+    #+begin_src emacs-lisp
+    (use-package clojure-mode)
+    #+end_src
+
+    #+begin_src emacs-lisp
+      (use-package monroe
+        :init
+        (add-hook 'clojure-mode-hook 'clojure-enable-monroe))
+    #+end_src
 *** Company
     [[http://company-mode.github.io][company-mode]] is a text completion framework for Emacs. The name
     stands for "complete anything". It uses pluggable back-ends and
