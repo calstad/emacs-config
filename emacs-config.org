@@ -150,14 +150,6 @@
        (setq epg-gpg-program "gpg2")
        (setf epa-pinentry-mode 'loopback)
      #+end_src
-**** EditorConfig
-     [[https://github.com/editorconfig/editorconfig-emacs][EditorConfig]] helps developers define and maintain consistent
-     coding styles between different editors and IDEs.
-     #+begin_src emacs-lisp
-       (use-package editorconfig
-         :config
-         (editorconfig-mode 1))
-     #+end_src
 *** Windows and Buffers
 **** Use better buffer list
      =IBuffer= is a more feature rich buffer list than =Buffer Menu=.
@@ -285,16 +277,6 @@
          :config (exec-path-from-shell-initialize))
      #+end_src
 ** Mode and Language Specific Configuration
-*** Clojure
-    #+begin_src emacs-lisp
-    (use-package clojure-mode)
-    #+end_src
-
-    #+begin_src emacs-lisp
-      (use-package monroe
-        :init
-        (add-hook 'clojure-mode-hook 'clojure-enable-monroe))
-    #+end_src
 *** Company
     [[http://company-mode.github.io][company-mode]] is a text completion framework for Emacs. The name
     stands for "complete anything". It uses pluggable back-ends and
@@ -415,9 +397,7 @@
      #+end_src
 *** Haskell
     [[http://commercialhaskell.github.io/intero/][Intero]] is a stack based development environment for haskell
-    projects but I have not gotten it to work on the seller labs
-    project yet due to running =stack= in =docker= (see this [[https://stackoverflow.com/questions/51725510/running-emacs-intero-mode-with-stack-docker-integration][SO post]]
-    for updates).
+    projects.
     #+begin_src emacs-lisp
       (use-package intero
         :init
