@@ -631,6 +631,27 @@
         (setq elpy-rpc-python-command "python3")
         (setq python-shell-interpreter "python3"))
     #+end_src
+**** Pyenv and Pip
+     [[https://github.com/proofit404/pyenv-mode][Pyenv mode]] allows for using =pyenv= environments with
+     =python-mode=
+     #+begin_src emacs-lisp
+       (use-package pyenv-mode
+         :config
+         (pyenv-mode))
+     #+end_src
+
+     [[https://github.com/ssbb/pyenv-mode-auto#pyenv-mode-auto][Pyenv auto mode]] automatically activates a =pyenv= environment
+     from a =.python-version= file.
+     #+begin_src emacs-lisp
+       (use-package pyenv-mode-auto)
+     #+end_src
+
+     [[https://github.com/brotzeit/pippel][Pippel]] is an Emacs frontend for the Python package manager
+     =pip=. As pippel also uses =tabulated-list-mode=, it provides a
+     similiar package menu like =package-list-packages=.
+     #+begin_src emacs-lisp
+       (use-package pippel)
+     #+end_src
 *** Rest Client
     [[https://github.com/pashky/restclient.el][Restclient]] is a major mode for exploring HTTP REST web services.
     #+begin_src emacs-lisp
