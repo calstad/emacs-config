@@ -22,6 +22,13 @@
      (require 'cl)
     #+end_src
 *** Package Repositories
+    [[https://www.reddit.com/r/Fedora/comments/cd7s64/fedora_30_emacs_cant_communicate_with_elpa/][For some reason]] there is an issue with the =gnutls= TLS algorithm
+    when talking to the GNU ELPA repository.  This seems to fix it
+    #+begin_src emacs-lisp
+      (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+    #+end_src
+
+    Add additional package repositories
     #+begin_src emacs-lisp
       (require 'package)
       (setq package-enable-at-startup nil)
