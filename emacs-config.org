@@ -613,13 +613,6 @@
         :config (pdf-tools-install))
     #+end_src
 *** Python
-**** IPython
-     Newer verions of IPython break the =inferior-python= shell in
-     Emacs so we have to set an environment variable to use a simple
-     prompt.
-     #+begin_src emacs-lisp
-       (setenv "IPY_TEST_SIMPLE_PROMPT" "1")
-     #+end_src
 **** Elpy
     =elpy= Emacs package to bring powerful Python editing to Emacs. It
     combines and configures a number of other packages, both written
@@ -628,8 +621,11 @@
       (use-package elpy
         :config
         (elpy-enable)
-        (setq elpy-rpc-python-command "python3")
-        (setq python-shell-interpreter "python3"))
+        (setq python-shell-interpreter "jupyter"
+              python-shell-interpreter-args "console --simple-prompt"
+              python-shell-prompt-detect-failure-warning nil)
+        (add-to-list 'python-shell-completion-native-disabled-interpreters
+                     "jupyter"))
     #+end_src
 **** Pyenv and Pip
      [[https://github.com/proofit404/pyenv-mode][Pyenv mode]] allows for using =pyenv= environments with
