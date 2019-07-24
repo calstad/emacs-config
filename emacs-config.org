@@ -630,7 +630,14 @@
         (elpy-enable)
         (setq python-shell-interpreter "jupyter"
               python-shell-interpreter-args "console --simple-prompt"
-              python-shell-prompt-detect-failure-warning nil)
+              python-shell-prompt-detect-failure-warning nil
+              ;; Fixes bug in garbled console output
+              ;; https://github.com/jorgenschaefer/elpy/issues/1550#issuecomment-487039854
+              elpy-shell-echo-output nil
+              ;; Guess the offset but don't warn when it can't
+              python-indent-guess-indent-offset t
+              python-indent-guess-indent-offset-verbose nil
+              )
         (add-to-list 'python-shell-completion-native-disabled-interpreters
                      "jupyter"))
     #+end_src
