@@ -22,6 +22,13 @@
      (require 'cl)
     #+end_src
 *** Package Repositories
+    [[https://www.reddit.com/r/Fedora/comments/cd7s64/fedora_30_emacs_cant_communicate_with_elpa/][For some reason]] there is an issue with the =gnutls= TLS algorithm
+    when talking to the GNU ELPA repository.  This seems to fix it
+    #+begin_src emacs-lisp
+      (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+    #+end_src
+
+    Add additional package repositories
     #+begin_src emacs-lisp
       (require 'package)
       (setq package-enable-at-startup nil)
@@ -613,13 +620,6 @@
         :config (pdf-tools-install))
     #+end_src
 *** Python
-**** IPython
-     Newer verions of IPython break the =inferior-python= shell in
-     Emacs so we have to set an environment variable to use a simple
-     prompt.
-     #+begin_src emacs-lisp
-       (setenv "IPY_TEST_SIMPLE_PROMPT" "1")
-     #+end_src
 **** Elpy
     =elpy= Emacs package to bring powerful Python editing to Emacs. It
     combines and configures a number of other packages, both written
@@ -628,9 +628,33 @@
       (use-package elpy
         :config
         (elpy-enable)
-        (setq elpy-rpc-python-command "python3")
-        (setq python-shell-interpreter "python3"))
+        (setq python-shell-interpreter "jupyter"
+              python-shell-interpreter-args "console --simple-prompt"
+              python-shell-prompt-detect-failure-warning nil)
+        (add-to-list 'python-shell-completion-native-disabled-interpreters
+                     "jupyter"))
     #+end_src
+**** Pyenv and Pip
+     [[https://github.com/proofit404/pyenv-mode][Pyenv mode]] allows for using =pyenv= environments with
+     =python-mode=
+     #+begin_src emacs-lisp
+       (use-package pyenv-mode
+         :config
+         (pyenv-mode))
+     #+end_src
+
+     [[https://github.com/ssbb/pyenv-mode-auto#pyenv-mode-auto][Pyenv auto mode]] automatically activates a =pyenv= environment
+     from a =.python-version= file.
+     #+begin_src emacs-lisp
+       (use-package pyenv-mode-auto)
+     #+end_src
+
+     [[https://github.com/brotzeit/pippel][Pippel]] is an Emacs frontend for the Python package manager
+     =pip=. As pippel also uses =tabulated-list-mode=, it provides a
+     similiar package menu like =package-list-packages=.
+     #+begin_src emacs-lisp
+       (use-package pippel)
+     #+end_src
 *** Rest Client
     [[https://github.com/pashky/restclient.el][Restclient]] is a major mode for exploring HTTP REST web services.
     #+begin_src emacs-lisp
