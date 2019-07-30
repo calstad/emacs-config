@@ -571,6 +571,17 @@
       #+begin_src emacs-lisp
         (setq org-startup-with-inline-images t)
       #+end_src
+**** Importing
+     A function to convert a =markdown= buffer to a =org-mode= buffer
+     using =pandoc=.
+     #+begin_src emacs-lisp
+       (defun markdown-convert-buffer-to-org ()
+         "Convert the current buffer's content from markdown to orgmode format and save it with the current buffer's file name but with .org extension."
+         (interactive)
+         (shell-command-on-region (point-min) (point-max)
+                                  (format "pandoc -f markdown -t org -o %s"
+                                          (concat (file-name-sans-extension (buffer-file-name)) ".org"))))
+     #+end_src
 **** Exporting
 ***** Beamer
       Have earmuffs be =bold= like normal instead of =alert=.
