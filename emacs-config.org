@@ -559,13 +559,18 @@
          'org-babel-load-languages
          '((emacs-lisp . t)
            (latex . t)
-           (python . t)))
+           (python . t)
+           (jupyter . t)))
 
         (use-package ob-sagemath
           :config
           (setq org-babel-default-header-args:sage '((:session . t)
                                                      (:results . "output"))))
       #+end_src
+****** Use Jupyter for Python Source Blocks
+       #+begin_src emacs-lisp
+       (org-babel-jupyter-override-src-block "python")
+       #+end_src
 ***** Syntax highlighting for code blocks
      #+begin_src emacs-lisp
        (setq org-src-fontify-natively t)
