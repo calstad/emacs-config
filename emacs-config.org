@@ -157,6 +157,13 @@
        (setq epg-gpg-program "gpg2")
        (setf epa-pinentry-mode 'loopback)
      #+end_src
+**** Enable Disabled commands
+     These commands are disabled by default and I would like to use
+     them.
+     #+begin_src emacs-lisp
+       (put 'upcase-region 'disabled nil)
+       (put 'downcase-region 'disabled nil)
+     #+end_src
 *** Windows and Buffers
 **** Use better buffer list
      =IBuffer= is a more feature rich buffer list than =Buffer Menu=.
