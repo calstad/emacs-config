@@ -582,6 +582,7 @@
 ***** Inline Images
       #+begin_src emacs-lisp
         (setq org-startup-with-inline-images t)
+        (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
       #+end_src
 **** Importing
      A function to convert a =markdown= buffer to a =org-mode= buffer
