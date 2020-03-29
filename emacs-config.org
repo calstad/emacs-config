@@ -579,6 +579,13 @@
       #+begin_src emacs-lisp
         (setq org-confirm-babel-evaluate nil)
       #+end_src
+***** Tangle Source Blocks
+      According to [[https://www.reddit.com/r/orgmode/comments/5elk0z/prevent_org_from_tangling_certain_sections/][this]] reddit post, this needs to be done to allow
+      setting =:tangle no= as a =header-args= property for
+      sub-headings.
+      #+begin_src emacs-lisp
+      (setq org-use-property-inheritance t)
+      #+end_src
 ***** Inline Images
       #+begin_src emacs-lisp
         (setq org-startup-with-inline-images t)
