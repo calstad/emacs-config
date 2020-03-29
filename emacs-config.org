@@ -409,13 +409,11 @@
        (advice-add 'bibtex-completion-candidates
                    :filter-return 'reverse)
      #+end_src
-*** Haskell
-    [[http://commercialhaskell.github.io/intero/][Intero]] is a stack based development environment for haskell
-    projects.
+*** Jupyter
+    [[https://github.com/dzop/emacs-jupyter][emacs-jupyter]] is an interface to communicate with Jupyter
+    kernels with built-in REPL and =org-mode= frontends.
     #+begin_src emacs-lisp
-      (use-package intero
-        :init
-        (add-hook 'haskell-mode-hook 'intero-mode))
+      (use-package jupyter)
     #+end_src
 *** Latex
 **** AUCTeX
