@@ -515,7 +515,8 @@
          :custom
          (org-journal-date-prefix "#+TITLE: ")
          (org-journal-file-format "%Y-%m-%d.org")
-         (org-journal-dir calstad/org-roam-dir))
+         (org-journal-dir calstad/org-roam-dir)
+         (org-journal-cache-file (expand-file-name "org-journal.cache" calstad/persistence-dir)))
      #+end_src
 
      #+begin_src emacs-lisp
