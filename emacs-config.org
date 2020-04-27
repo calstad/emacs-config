@@ -258,6 +258,10 @@
      #+begin_src emacs-lisp
        (setq recentf-save-file (expand-file-name "recentf" calstad/persistence-dir))
      #+end_src
+**** Bookmarks
+     #+begin_src emacs-lisp
+       (setq bookmark-default-file (expand-file-name "bookmarks" calstad/persistence-dir))
+     #+end_src
 **** URL Cache, Cookies, and History
      #+begin_src emacs-lisp
        (setq url-configuration-directory (expand-file-name "url/" calstad/persistence-dir))
