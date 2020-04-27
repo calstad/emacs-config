@@ -491,6 +491,20 @@
         (setq org-lowest-priority ?9)
         (setq org-default-priority ?9)
       #+end_src
+**** org-ref
+     Org-ref is a library for org-mode that provides rich support for
+     citations, labels, and cross-references in org-mode.
+     #+begin_src emacs-lisp
+       (use-package org-ref
+         :custom
+         (org-ref-default-bibliography '("~/Dropbox/research/papers.bib"))
+         (org-ref-pdf-directory "~/Dropbox/research/pdfs/")
+         (reftex-default-bibliography "~/Dropbox/research/papers.bib")
+         (org-ref-show-broken-links nil))
+     #+end_src
+     In the above configuration =org-ref-show-broken-links= is set to
+     =nil= because it causes lagging on large files.  See [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org#controlling-link-messages-and-tooltips][here]] for
+     some more details.
 **** org-roam
      #+begin_src emacs-lisp
        (setq calstad/org-roam-dir "~/Dropbox/org/roam")
@@ -571,40 +585,6 @@
      #+begin_src emacs-lisp
        (setq org-highlight-latex-and-related '(latex entites))
      #+end_src
-**** org-ref
-     Org-ref is a library for org-mode that provides rich support for
-     citations, labels, and cross-references in org-mode.
-     #+begin_src emacs-lisp
-       (use-package org-ref
-         :custom
-         (org-ref-default-bibliography '("~/Dropbox/research/papers.bib"))
-         (org-ref-pdf-directory "~/Dropbox/research/pdfs/")
-         (reftex-default-bibliography "~/Dropbox/research/papers.bib")
-         (org-ref-show-broken-links nil))
-     #+end_src
-     In the above configuration =org-ref-show-broken-links= is set to
-     =nil= because it causes lagging on large files.  See [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org#controlling-link-messages-and-tooltips][here]] for
-     some more details.
-***** Notes File Headline Format
-      Change the default format of the headlines that are inserted
-      into the =org-ref-bibliography-notes= file so that instead of
-      starting with the year, they start with the author's name.
-      #+begin_src emacs-lisp
-        (setq org-ref-note-title-format
-              "* %a (%y) - %t
-          :PROPERTIES:
-            :Custom_ID: %k
-            :AUTHOR: %9a
-            :JOURNAL: %j
-            :YEAR: %y
-            :VOLUME: %v
-            :PAGES: %p
-            :DOI: %D
-            :URL: %U
-            :INTERLEAVE_PDF: ~/Dropbox/research/pdfs/%k.pdf
-          :END:
-        ")
-      #+end_src
 **** org-babel
      [[https://orgmode.org/worg/org-contrib/babel/][Babel]] is Org-mode's ability to execute source code within
      Org-mode documents.
