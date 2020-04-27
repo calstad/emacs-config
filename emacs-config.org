@@ -518,8 +518,10 @@
          ("C-c n j" . org-journal-new-entry)
          :custom
          (org-journal-date-prefix "#+TITLE: ")
+         (org-journal-time-prefix "* ")
          (org-journal-file-format "%Y-%m-%d.org")
          (org-journal-dir calstad/org-roam-dir)
+         (org-journal-enable-agenda-integration t)
          (org-journal-cache-file (expand-file-name "org-journal.cache" calstad/persistence-dir)))
      #+end_src
 
