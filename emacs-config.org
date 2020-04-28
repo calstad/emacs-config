@@ -541,9 +541,15 @@
      #+end_src
 **** org-journal
      #+begin_src emacs-lisp
+       (defun calstad/org-journal-go-to-today ()
+         (interactive)
+         (let ((current-prefix-arg '(4)))
+           (call-interactively 'org-journal-new-entry)))
+
        (use-package org-journal
          :bind
          ("C-c n j" . org-journal-new-entry)
+         ("C-c n d" . calstad/org-journal-go-to-today)
          :custom
          (org-journal-date-prefix "#+TITLE: ")
          (org-journal-time-prefix "* ")
