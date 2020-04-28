@@ -526,6 +526,19 @@
                      (("C-c n i" . org-roam-insert))))
      #+end_src
 
+
+     #+begin_src emacs-lisp
+       (require 'org-roam-protocol)
+       (defun my-org-protocol-focus-advice (orig &rest args)
+         (x-focus-frame nil)
+         (apply orig args))
+
+       (advice-add 'org-roam-protocol-open-ref :around
+                   #'my-org-protocol-focus-advice)
+       (advice-add 'org-roam-protocol-open-file :around
+                   #'my-org-protocol-focus-advice)
+     #+end_src
+**** org-journal
      #+begin_src emacs-lisp
        (use-package org-journal
          :bind
