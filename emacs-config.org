@@ -560,6 +560,15 @@
      #+end_src
 
      #+begin_src emacs-lisp
+       (defun calstad/org-journal-find-location ()
+         ;; Open today's journal, but specify a non-nil prefix argument in order to
+         ;; inhibit inserting the heading; org-capture will insert the heading.
+         (org-journal-new-entry t)
+         ;; Position point on the journal's top-level heading so that org-capture
+         ;; will add the new entry as a child entry.
+         (goto-char (point-min)))
+     #+end_src
+     #+begin_src emacs-lisp
        (use-package org-roam-bibtex
          :hook (org-roam-mode . org-roam-bibtex-mode)
          :after (helm-bibtex))
@@ -592,6 +601,15 @@
 **** Capture
      #+begin_src emacs-lisp
        (setq org-default-notes-file "~/Dropbox/org/capture.org")
+       (setq org-capture-templates
+             '(("j" "Journal entry" entry (function calstad/org-journal-find-location)
+                "* %(format-time-string org-journal-time-format)%^{Title}\n%i%?")
+               ("c" "OrgProtocol capture" entry (function calstad/org-journal-find-location)
+                "* TODO %(format-time-string org-journal-time-format) [[%:link][%:description]]\n%i"
+                :immediate-finish t)
+               ("t" "Task" entry (function calstad/org-journal-find-location)
+                "* TODO %(format-time-string org-journal-time-format) %?\n%i")
+               ))
      #+end_src
 **** Refile
      #+begin_src emacs-lisp
