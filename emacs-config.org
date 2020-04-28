@@ -790,3 +790,8 @@
         (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
         (yas-global-mode 1))
     #+end_src
+* Emacs Server
+  Start the emacs server so that clients can connect
+  #+begin_src emacs-lisp
+    (server-start)
+  #+end_src
