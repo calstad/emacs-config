@@ -568,33 +568,31 @@
          ;; will add the new entry as a child entry.
          (goto-char (point-min)))
      #+end_src
+**** org-roam-bibtex
+     To get =org-roam-bibtex= to work I had to delete the
+     =bibtex-completion= files from the =helm-bibtex= package so that
+     the =bibtex-completion= package from MELPA would be used instead
      #+begin_src emacs-lisp
        (use-package org-roam-bibtex
-         :hook (org-roam-mode . org-roam-bibtex-mode)
-         :after (helm-bibtex))
+         :hook (org-roam-mode . org-roam-bibtex-mode))
 
        (setq org-roam-bibtex-preformat-keywords
-          '("=key=" "title" "url" "file" "author-or-editor" "keywords"))
+          '("=key=" "title" "author-or-editor" ))
 
        (setq org-roam-bibtex-templates
              '(("r" "ref" plain (function org-roam-capture--get-point)
                 ""
                 :file-name "${slug}"
-                :head "#+TITLE: ${=key=}: ${title}\n#+ROAM_KEY: ${ref}
+                :head "#+TITLE: ${title}\n#+ROAM_KEY: ${ref}
 
        - tags ::
-       - keywords :: ${keywords}
 
-       ,* ${title}
+       ,* Detailed Nodes
        :PROPERTIES:
-       :Custom_ID: ${=key=}
-       :URL: ${url}
        :AUTHOR: ${author-or-editor}
        :NOTER_DOCUMENT: %(org-roam-bibtex-process-file-field \"${=key=}\")
-       :NOTER_PAGE:
        :END:")))
      #+end_src
-
      #+begin_src emacs-lisp
        (use-package org-noter)
      #+end_src
