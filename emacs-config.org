@@ -399,7 +399,6 @@
          :custom
          (bibtex-completion-bibliography "~/Dropbox/research/papers.bib")
          (bibtex-completion-library-path "~/Dropbox/research/pdfs/")
-         (bibtex-completion-notes-path "~/Dropbox/research/papers.org")
          (bibtex-completion-pdf-symbol "⌘")
          (bibtex-completion-notes-symbol "✎")
          :config
