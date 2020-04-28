@@ -506,6 +506,7 @@
      =nil= because it causes lagging on large files.  See [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org#controlling-link-messages-and-tooltips][here]] for
      some more details.
 **** org-roam
+     Directory where we keep all of the =org-roam= files.
      #+begin_src emacs-lisp
        (setq calstad/org-roam-dir "~/Dropbox/org/roam")
      #+end_src
