@@ -593,6 +593,7 @@
        :NOTER_DOCUMENT: %(org-roam-bibtex-process-file-field \"${=key=}\")
        :END:")))
      #+end_src
+**** org-noter
      #+begin_src emacs-lisp
        (use-package org-noter)
      #+end_src
