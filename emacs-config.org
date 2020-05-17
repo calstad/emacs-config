@@ -617,10 +617,15 @@
        ;; (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
        ;; (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
      #+end_src
-**** LaTex
-     Highlight LaTex source in org documents
+**** LaTeX
+     Highlight LaTeX source in org documents
      #+begin_src emacs-lisp
        (setq org-highlight-latex-and-related '(latex entites))
+     #+end_src
+
+     Use [[https://tex.stackexchange.com/questions/78501/change-size-of-the-inline-image-for-latex-fragment-in-emacs-org-mode][this tip]] to increase the scale of inline LaTeX images
+     #+begin_src emacs-lisp
+       (plist-put org-format-latex-options :scale 1.5)
      #+end_src
 **** org-babel
      [[https://orgmode.org/worg/org-contrib/babel/][Babel]] is Org-mode's ability to execute source code within
