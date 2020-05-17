@@ -607,7 +607,7 @@
                 "* TODO %(format-time-string org-journal-time-format) [[%:link][%:description]]\n%i"
                 :immediate-finish t)
                ("t" "Task" entry (function calstad/org-journal-find-location)
-                "* TODO %(format-time-string org-journal-time-format) %?\n%i")
+                "* TODO %(format-time-string org-journal-time-format)%?\n%i")
                ))
      #+end_src
 **** Refile
