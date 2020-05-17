@@ -517,6 +517,7 @@
          :custom
          (org-roam-directory calstad/org-roam-dir)
          (org-roam-completion-system 'helm)
+         (org-roam-link-title-format "R:%s")
          :bind (:map org-roam-mode-map
                      (("C-c n r" . org-roam)
                       ("C-c n f" . org-roam-find-file)
