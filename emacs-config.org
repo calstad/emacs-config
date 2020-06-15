@@ -93,6 +93,10 @@
      #+begin_src emacs-lisp
        (fset 'yes-or-no-p 'y-or-n-p)
      #+end_src
+**** Confirm exiting Emacs
+     #+begin_src emacs-lisp
+       (setq confirm-kill-emacs 'y-or-n-p)
+     #+end_src
 *** Editing
 **** Key bindings
      Miscellaneous editing keybindings
