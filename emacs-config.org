@@ -13,14 +13,6 @@
       (setq user-full-name "Colin Alstad")
       (setq user-mail-address "colin.alstad@gmail.com")
     #+end_src
-*** Common Lisp for Emacs
-    Emacs lisp is really only a subset of common lisp, and I need to
-    have some of the additional functionality to make the configuration
-    and its dependencies work properly, which we get by requiring
-    [[http://www.emacswiki.org/emacs/CommonLispForEmacs][Common Lisp for Emacs]].
-    #+begin_src emacs-lisp
-     (require 'cl)
-    #+end_src
 *** Package Repositories
     [[https://www.reddit.com/r/Fedora/comments/cd7s64/fedora_30_emacs_cant_communicate_with_elpa/][For some reason]] there is an issue with the =gnutls= TLS algorithm
     when talking to the GNU ELPA repository.  This seems to fix it
