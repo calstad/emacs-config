@@ -407,8 +407,7 @@
      [[https://www.emacswiki.org/emacs/AUCTeX][AUCTeX]] is a comprehensive customizable integrated environment for
      writing input files for TeX/LaTeX/ConTeXt/Texinfo using Emacs.
      #+begin_src emacs-lisp
-       (use-package tex
-         :ensure auctex)
+       (use-package tex)
      #+end_src
 **** CDLaTex
      [[https://orgmode.org/manual/CDLaTeX-mode.html#CDLaTeX-mode][CDLaTex]] is a minor mode for fast input methods for LaTex
