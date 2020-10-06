@@ -16,7 +16,6 @@
 *** Packages
     We use the [[https://github.com/raxod502/straight.el][straight]] package manager to take care of dependency
     management. First we bootstrap the package manager
-
     #+begin_src emacs-lisp
       (defvar bootstrap-version)
       (let ((bootstrap-file
@@ -30,6 +29,15 @@
             (goto-char (point-max))
             (eval-print-last-sexp)))
         (load bootstrap-file nil 'nomessage))
+    #+end_src
+
+    Next we setup straight to use the [[https://github.com/jwiegley/use-package][use-package]] macro for package
+    configuration.
+    #+begin_src emacs-lisp
+      ;; Use straight to install use-package
+      (straight-use-package 'use-package)
+      ;; Tell use-package to always install from straight
+      (setq straight-use-package-by-default t)
     #+end_src
 *** UI
 **** Skip splash screen on startup
@@ -407,7 +415,8 @@
      [[https://www.emacswiki.org/emacs/AUCTeX][AUCTeX]] is a comprehensive customizable integrated environment for
      writing input files for TeX/LaTeX/ConTeXt/Texinfo using Emacs.
      #+begin_src emacs-lisp
-       (use-package tex)
+       (use-package tex
+         :straight auctex)
      #+end_src
 **** CDLaTex
      [[https://orgmode.org/manual/CDLaTeX-mode.html#CDLaTeX-mode][CDLaTex]] is a minor mode for fast input methods for LaTex
@@ -446,7 +455,6 @@
     latex, and development environment.
     #+begin_src emacs-lisp
       (use-package org
-        :pin org
         :bind (("C-c a" . org-agenda)
                ("C-c b" . org-iswitchb)
                ("C-c c" . org-capture)
