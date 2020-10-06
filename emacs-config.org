@@ -13,35 +13,23 @@
       (setq user-full-name "Colin Alstad")
       (setq user-mail-address "colin.alstad@gmail.com")
     #+end_src
-*** Package Repositories
-    [[https://www.reddit.com/r/Fedora/comments/cd7s64/fedora_30_emacs_cant_communicate_with_elpa/][For some reason]] there is an issue with the =gnutls= TLS algorithm
-    when talking to the GNU ELPA repository.  This seems to fix it
-    #+begin_src emacs-lisp
-      (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-    #+end_src
+*** Packages
+    We use the [[https://github.com/raxod502/straight.el][straight]] package manager to take care of dependency
+    management. First we bootstrap the package manager
 
-    Add additional package repositories
     #+begin_src emacs-lisp
-      (require 'package)
-      (setq package-enable-at-startup nil)
-      (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-      (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-    #+end_src
-
-    [[https://github.com/jwiegley/use-package][use-package]] is a macro that allows for isolation in requiring
-    and configuring emacs packages.
-    #+begin_src emacs-lisp
-      (unless (package-installed-p 'use-package)
-        (package-refresh-contents)
-        (package-install 'use-package))
-
-      (eval-when-compile
-        (require 'use-package))
-    #+end_src
-
-    Always ensure that packages are installed from =package.el=
-    #+begin_src emacs-lisp
-      (setq use-package-always-ensure t)
+      (defvar bootstrap-version)
+      (let ((bootstrap-file
+             (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+            (bootstrap-version 5))
+        (unless (file-exists-p bootstrap-file)
+          (with-current-buffer
+              (url-retrieve-synchronously
+               "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+               'silent 'inhibit-cookies)
+            (goto-char (point-max))
+            (eval-print-last-sexp)))
+        (load bootstrap-file nil 'nomessage))
     #+end_src
 *** UI
 **** Skip splash screen on startup
