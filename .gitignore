@@ -1,4 +1,7 @@
 elpa/*
+straight/build/*
+straight/repos/*
 *.DS_Store
 /emacs-config.el
 transient/*
+/straight/build-cache.el
