@@ -12,5 +12,6 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 ;; Have straight immediately load org-mode so the correct version is loaded
-(straight-use-package 'org)
+;; Right now we are using the built in version due to issues in getting the newer versions to work
+(straight-use-package '(org :type built-in))
 (org-babel-load-file (expand-file-name "emacs-config.org" user-emacs-directory))
