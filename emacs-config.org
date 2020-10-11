@@ -15,21 +15,8 @@
     #+end_src
 *** Packages
     We use the [[https://github.com/raxod502/straight.el][straight]] package manager to take care of dependency
-    management. First we bootstrap the package manager
-    #+begin_src emacs-lisp
-      (defvar bootstrap-version)
-      (let ((bootstrap-file
-             (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-            (bootstrap-version 5))
-        (unless (file-exists-p bootstrap-file)
-          (with-current-buffer
-              (url-retrieve-synchronously
-               "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-               'silent 'inhibit-cookies)
-            (goto-char (point-max))
-            (eval-print-last-sexp)))
-        (load bootstrap-file nil 'nomessage))
-    #+end_src
+    management. The straight package is bootstrapped in the [[file:init.el::;; Install straight.el to manage packages][init file]]
+    so that the [[https://github.com/raxod502/straight.el#the-wrong-version-of-my-package-was-loaded][wrong version]] of =org-mode= is not loaded.
 
     Next we setup straight to use the [[https://github.com/jwiegley/use-package][use-package]] macro for package
     configuration.
