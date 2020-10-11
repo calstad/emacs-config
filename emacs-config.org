@@ -614,13 +614,8 @@
        (plist-put org-format-latex-options :scale 1.5)
      #+end_src
 
-     Automatically display LaTeX fragments after they have been
-     edited.
-
      #+begin_src emacs-lisp
-       (use-package org-fragtog
-         :init
-         (add-hook 'org-mode-hook 'org-fragtog-mode))
+       (setq org-latex-preview-ltxpng-directory "/tmp/org_latex_prevs/")
      #+end_src
 **** org-babel
      [[https://orgmode.org/worg/org-contrib/babel/][Babel]] is Org-mode's ability to execute source code within
