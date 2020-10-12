@@ -445,7 +445,9 @@
         :bind (("C-c a" . org-agenda)
                ("C-c b" . org-iswitchb)
                ("C-c c" . org-capture)
-               ("C-c l" . org-store-link)))
+               ("C-c l" . org-store-link))
+        :custom
+        (org-startup-indented t))
     #+end_src
 **** Todo Items
 ***** Add an in progress state for todo items
