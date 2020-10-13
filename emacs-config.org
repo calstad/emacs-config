@@ -509,7 +509,7 @@ Directory where we keep all of the =org-roam= files.
      #+begin_src emacs-lisp
        (use-package org-ref
          :custom
-         (org-ref-default-bibliography '(calstad/lib-bib))
+         (org-ref-default-bibliography (list calstad/lib-bib))
          (org-ref-pdf-directory calstad/lib-docs)
          (reftex-default-bibliography calstad/lib-bib)
          (org-ref-show-broken-links nil))
