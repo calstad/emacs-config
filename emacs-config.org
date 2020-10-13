@@ -556,17 +556,15 @@ Directory where we keep all of the =org-roam= files.
          :after org-roam
          :hook (org-roam-mode . org-roam-bibtex-mode)
          :bind (:map org-mode-map
-                (("C-c n a" . orb-note-actions))))
-
-       (setq orb-preformat-keywords
+                     (("C-c n a" . orb-note-actions)))
+         :custom
+         (orb-preformat-keywords
           '(("citekey" . "=key=") "title" "url" "file" "author-or-editor" "keywords"))
-
-       (setq orb-templates
-             '(("r" "ref" plain (function org-roam-capture--get-point)
-                ""
-                :file-name "${citekey}"
-                :head "#+TITLE: ${citekey}: ${title}\n#+ROAM_KEY: ${ref}
-
+         (orb-templates
+          '(("r" "ref" plain (function org-roam-capture--get-point)
+             ""
+             :file-name "${citekey}"
+             :head "#+TITLE: ${citekey}: ${title}\n#+ROAM_KEY: ${ref}
        - tags ::
        - keywords :: ${keywords}
 
@@ -577,7 +575,7 @@ Directory where we keep all of the =org-roam= files.
        :AUTHOR: ${author-or-editor}
        :NOTER_DOCUMENT: %(orb-process-file-field \"${citekey}\")
        :NOTER_PAGE:
-       :END:")))
+       :END:"))))
      #+end_src
 **** org-journal
      #+begin_src emacs-lisp
