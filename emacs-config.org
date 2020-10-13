@@ -597,7 +597,7 @@ Directory where we keep all of the =org-roam= files.
          :custom
          (org-journal-date-prefix "#+TITLE: ")
          (org-journal-time-prefix "* ")
-         (org-journal-file-format "%Y-%m-%d.org")
+         (org-journal-file-format "%Y%m%d.org")
          (org-journal-dir calstad/org-roam-dir)
          (org-journal-enable-agenda-integration t)
          (org-journal-cache-file (expand-file-name "org-journal.cache" calstad/persistence-dir)))
