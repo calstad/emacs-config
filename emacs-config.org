@@ -395,7 +395,7 @@ Directory where we keep all of the =org-roam= files.
     #+end_src
 **** Helm BibTex
      [[https://github.com/tmalsburg/helm-bibtex][Helm-bibtex]] is a [[*Helm][Helm]] interface for managing BibTex
-     biblographies.
+     bibliographies.
 
      Use the same functionality as =org-ref= for opening up notes for
      a reference.
