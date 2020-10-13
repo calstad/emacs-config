@@ -30,9 +30,9 @@ The directory for all things =org-mode= related.
 The location of my reference library including bibliographies and
 PDFs.
 #+begin_src emacs-lisp
-  (setq calstad/ref-lib-dir (expand-file-name "library" calstad/sync-dir))
-  (setq calstad/lib-bib (expand-file-name "library.bib" calstad/ref-lib-dir))
-  (setq calstad/lib-docs (expand-file-name "documents/" calstad/ref-lib-dir))
+  (setq calstad/ref-lib-dir (expand-file-name "library" calstad/sync-dir)
+        calstad/lib-bib (expand-file-name "library.bib" calstad/ref-lib-dir)
+        calstad/lib-docs (expand-file-name "documents/" calstad/ref-lib-dir))
 #+end_src
 
 Directory where we keep all of the =org-roam= files.
@@ -43,8 +43,8 @@ Directory where we keep all of the =org-roam= files.
     Emacs will normally pick this up automatically, but this way I can
     be sure the right information is always present.
     #+begin_src emacs-lisp
-      (setq user-full-name "Colin Alstad")
-      (setq user-mail-address "colin.alstad@gmail.com")
+      (setq user-full-name "Colin Alstad"
+            user-mail-address "colin.alstad@gmail.com")
     #+end_src
 *** Packages
     We use the [[https://github.com/raxod502/straight.el][straight]] package manager to take care of dependency
@@ -84,8 +84,8 @@ Directory where we keep all of the =org-roam= files.
      #+end_src
 **** Turn off visual and audio bells
      #+begin_src emacs-lisp
-       (setq visible-bell t)
-       (setq ring-bell-function 'ignore)
+       (setq visible-bell t
+             ring-bell-function 'ignore)
      #+end_src
 **** Add indication at bottom of buffer for empty lines
      #+begin_src emacs-lisp
@@ -243,10 +243,11 @@ Directory where we keep all of the =org-roam= files.
      Make it so that buffers have unique names if the files dont.
      #+begin_src emacs-lisp
        (require 'uniquify)
-       (setq uniquify-buffer-name-style 'forward)
-       (setq uniquify-separator "/")
-       (setq uniquify-after-kill-buffer-p t)     ; rename after killing uniquified
-       (setq uniquify-ignore-buffers-re "^\\*")  ; don't muck with special buffers
+       (setq uniquify-buffer-name-style 'forward
+             uniquify-separator "/"
+             uniquify-after-kill-buffer-p t ; rename after killing uniquified
+             uniquify-ignore-buffers-re "^\\*" ; don't muck with special buffers
+             )
      #+end_src
 *** Persistence Files
     Several Emacs major modes use files for persistence between
@@ -284,10 +285,10 @@ Directory where we keep all of the =org-roam= files.
 **** Forget backup and temporary files
      Dont create backup or temporary files
      #+begin_src emacs-lisp
-       (setq make-backup-files nil)
-       (setq backup-directory-alist `((".*" . ,temporary-file-directory)))
-       (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
-       (setq auto-save-list-file-prefix nil)
+       (setq make-backup-files nil
+             backup-directory-alist `((".*" . ,temporary-file-directory))
+             auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
+             auto-save-list-file-prefix nil)
      #+end_src
 ** System Specific Configuration
 *** Mac OS X
@@ -498,9 +499,9 @@ Directory where we keep all of the =org-roam= files.
       #+end_src
 ***** Change Priorities to be 1-9
       #+begin_src emacs-lisp
-        (setq org-highest-priority ?1)
-        (setq org-lowest-priority ?9)
-        (setq org-default-priority ?9)
+        (setq org-highest-priority ?1
+              org-lowest-priority ?9
+              org-default-priority ?9)
       #+end_src
 **** org-ref
      Org-ref is a library for org-mode that provides rich support for
