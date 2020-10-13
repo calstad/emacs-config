@@ -2,10 +2,43 @@
 #+AUTHOR: Colin Alstad
 #+EMAIL: colin.alstad@gmail.com
 
+#+PROPERTY: header-args:emacs-lisp :results none
+
 * Emacs Configuration
   This is my "dot emacs" configuration using =org-mode=.  It has been
   heavily influenced/stolen from [[https://github.com/abedra/emacs.d][Aaron Bedra's emacs config]].
 ** Global Configuration
+*** Constants
+These are constants that are used throughout the configuration (mostly
+for file path locations).
+
+Where we persist files between emacs sessions.
+#+begin_src emacs-lisp
+  (setq calstad/persistence-dir (expand-file-name "persistence/" user-emacs-directory))
+#+end_src
+
+The directory that will sync files across all machines.
+#+begin_src emacs-lisp
+  (setq calstad/sync-dir "~/Dropbox")
+#+end_src
+
+The directory for all things =org-mode= related.
+#+begin_src emacs-lisp
+  (setq calstad/org-dir (expand-file-name "org" calstad/sync-dir))
+#+end_src
+
+The location of my reference library including bibliographies and
+PDFs.
+#+begin_src emacs-lisp
+  (setq calstad/ref-lib-dir (expand-file-name "library" calstad/sync-dir))
+  (setq calstad/lib-bib (expand-file-name "library.bib" calstad/ref-lib-dir))
+  (setq calstad/lib-docs (expand-file-name "documents/" calstad/ref-lib-dir))
+#+end_src
+
+Directory where we keep all of the =org-roam= files.
+#+begin_src emacs-lisp
+  (setq calstad/org-roam-dir (expand-file-name "roam" calstad/org-dir))
+#+end_src
 *** User details
     Emacs will normally pick this up automatically, but this way I can
     be sure the right information is always present.
