@@ -664,9 +664,9 @@ Directory where we keep all of the =org-roam= files.
            (jupyter . t)))
 
         (use-package ob-sagemath
-          :config
-          (setq org-babel-default-header-args:sage '((:session . t)
-                                                     (:results . "output"))))
+          :custom
+          (org-babel-default-header-args:sage '((:session . t)
+                                                (:results . "output"))))
       #+end_src
 ****** Use Jupyter for Python Source Blocks
        #+begin_src emacs-lisp
