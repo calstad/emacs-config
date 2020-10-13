@@ -147,7 +147,7 @@ Directory where we keep all of the =org-roam= files.
 
      Use a shared dictionary
      #+begin_src emacs-lisp
-       (setq ispell-personal-dictionary "~/Dropbox/org/flyspell_dictionary")
+       (setq ispell-personal-dictionary (expand-file-name "flyspell_dictionary" calstad/org-dir))
      #+end_src
      Remap keybinding
      #+begin_src emacs-lisp
@@ -252,7 +252,6 @@ Directory where we keep all of the =org-roam= files.
     Several Emacs major modes use files for persistence between
     sessions and I keep them all in the same directory.
     #+begin_src emacs-lisp
-      (setq calstad/persistence-dir (expand-file-name "persistence/" user-emacs-directory))
       (unless (file-exists-p calstad/persistence-dir)
         (make-directory calstad/persistence-dir t))
     #+end_src
@@ -409,8 +408,8 @@ Directory where we keep all of the =org-roam= files.
        (use-package helm-bibtex
          :after org-ref-helm-bibtex
          :custom
-         (bibtex-completion-bibliography "~/Dropbox/research/papers.bib")
-         (bibtex-completion-library-path "~/Dropbox/research/pdfs/")
+         (bibtex-completion-bibliography calstad/lib-bib)
+         (bibtex-completion-library-path calstad/lib-docs)
          (bibtex-completion-pdf-symbol "⌘")
          (bibtex-completion-notes-symbol "✎")
          :config
@@ -509,20 +508,15 @@ Directory where we keep all of the =org-roam= files.
      #+begin_src emacs-lisp
        (use-package org-ref
          :custom
-         (org-ref-default-bibliography '("~/Dropbox/research/papers.bib"))
-         (org-ref-pdf-directory "~/Dropbox/research/pdfs/")
-         (reftex-default-bibliography "~/Dropbox/research/papers.bib")
+         (org-ref-default-bibliography '(calstad/lib-bib))
+         (org-ref-pdf-directory calstad/lib-docs)
+         (reftex-default-bibliography calstad/lib-bib)
          (org-ref-show-broken-links nil))
      #+end_src
      In the above configuration =org-ref-show-broken-links= is set to
      =nil= because it causes lagging on large files.  See [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org#controlling-link-messages-and-tooltips][here]] for
      some more details.
 **** org-roam
-     Directory where we keep all of the =org-roam= files.
-     #+begin_src emacs-lisp
-       (setq calstad/org-roam-dir "~/Dropbox/org/roam")
-     #+end_src
-
      #+begin_src emacs-lisp
        (use-package org-roam
          :hook
@@ -620,7 +614,7 @@ Directory where we keep all of the =org-roam= files.
      #+end_src
 **** Capture
      #+begin_src emacs-lisp
-       (setq org-default-notes-file "~/Dropbox/org/capture.org")
+       (setq org-default-notes-file (expand-file-name "capture.org" calstad/org-dir))
        (setq org-capture-templates
              '(("j" "Journal entry" entry (function calstad/org-journal-find-location)
                 "* %(format-time-string org-journal-time-format)%^{Title}\n%i%?")
