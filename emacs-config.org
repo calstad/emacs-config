@@ -583,21 +583,22 @@
                      (("C-c n a" . orb-note-actions)))
          :custom
          (orb-preformat-keywords
-          '(("citekey" . "=key=") "title" "url" "file" "author-or-editor" "keywords"))
+          '(("citekey" . "=key=") "title" "file" "author-or-editor"))
+         (orb-process-file-field t)
+         (orb-file-field-extensions "pdf")
          (orb-templates
           '(("r" "ref" plain (function org-roam-capture--get-point)
              ""
-             :file-name "${citekey}"
-             :head "#+TITLE: ${citekey}: ${title}\n#+ROAM_KEY: ${ref}
-       - tags ::
-       - keywords :: ${keywords}
+             :file-name "%<%Y%m%d%H%M%S%2N>"
+             :head "#+TITLE: ${title}\n#+ROAM_KEY: ${ref}
 
-       ,* ${title}
+       - tags ::
+
+       ,* Notes
        :PROPERTIES:
        :Custom_ID: ${citekey}
-       :URL: ${url}
        :AUTHOR: ${author-or-editor}
-       :NOTER_DOCUMENT: %(orb-process-file-field \"${citekey}\")
+       :NOTER_DOCUMENT: ${file}
        :NOTER_PAGE:
        :END:"))))
      #+end_src
