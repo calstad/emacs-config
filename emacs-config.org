@@ -487,7 +487,7 @@
                ("C-c c" . org-capture)
                ("C-c l" . org-store-link))
         :custom
-        (org-startup-indented t))
+        (org-hide-leading-stars t))
     #+end_src
 **** Todo Items
 ***** Add an in progress state for todo items
