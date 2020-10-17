@@ -538,7 +538,7 @@
           '(("d" "default" plain (function org-roam-capture--get-point)
              "%?"
              :file-name "%<%Y%m%d%H%M%S%2N>"
-             :head "#+title: ${title}\n"
+             :head "#+TITLE: ${title}\n"
              :unnarrowed t)))
          :bind (:map org-roam-mode-map
                      (("C-c n r" . org-roam)
