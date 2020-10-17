@@ -490,10 +490,10 @@
         (org-hide-leading-stars t))
     #+end_src
 **** Todo Items
-***** Add an in progress state for todo items
+***** Todo States
       #+begin_src emacs-lisp
         (setq org-todo-keywords
-          '((sequence "TODO" "IN-PROGRESS" "|" "DONE")))
+          '((sequence "TODO(t)" "IN-PROGRESS(p)" "WAITING(w@/!)" "|" "DONE(d!)" "CANCELLED(c@)")))
       #+end_src
 ***** Enable inline tasks
       #+begin_src emacs-lisp
