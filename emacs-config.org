@@ -638,16 +638,15 @@
      #+end_src
 **** Capture
      #+begin_src emacs-lisp
-       (setq org-default-notes-file (expand-file-name "capture.org" calstad/org-dir))
+       (setq org-default-notes-file (expand-file-name "inbox.org" calstad/org-dir))
        (setq org-capture-templates
              '(("j" "Journal entry" entry (function calstad/org-journal-find-location)
                 "* %(format-time-string org-journal-time-format)%^{Title}\n%i%?")
-               ("c" "OrgProtocol capture" entry (function calstad/org-journal-find-location)
-                "* TODO %(format-time-string org-journal-time-format) [[%:link][%:description]]\n%i"
+               ("c" "OrgProtocol capture" entry (file+headline org-default-notes-file "Links")
+                "* TODO [[%:link][%:description]]\n%i"
                 :immediate-finish t)
-               ("t" "Task" entry (function calstad/org-journal-find-location)
-                "* TODO %(format-time-string org-journal-time-format)%?\n%i")
-               ))
+               ("t" "Task" entry (file+headline org-default-notes-file "Tasks")
+                "* TODO %i%?")))
      #+end_src
 **** Refile
      #+begin_src emacs-lisp
