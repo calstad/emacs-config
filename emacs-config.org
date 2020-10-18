@@ -490,12 +490,6 @@
         (org-hide-leading-stars t)
         (org-archive-location "%s_archive::datetree/"))
     #+end_src
-**** Agenda
-     Tell org-mode what files to include in the agenda
-     #+begin_src emacs-lisp
-       (setq calstad/org-agenda-files (expand-file-name "tasks" calstad/org-dir))
-       (setq org-agenda-files (append org-agenda-files calstad/org-agenda-files))
-     #+end_src
 **** Todo Items
 ***** Todo States
       #+begin_src emacs-lisp
