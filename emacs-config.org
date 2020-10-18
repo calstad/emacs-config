@@ -560,7 +560,9 @@
                      (("C-c n i" . org-roam-insert))
                      (("C-c n I" . org-roam-insert-immediate))))
      #+end_src
-
+     =org-roam='s [[https://www.orgroam.com/manual/Roam-Protocol.html#Roam-Protocol][protocol extensions]] allow external programs to
+     interact with the =org-roam= database.  This requires [[https://www.orgroam.com/manual/Installation-_00281_0029.html#Installation-_00281_0029][installing]]
+     an application that can interact with emacs.
      #+begin_src emacs-lisp
        (require 'org-roam-protocol)
        (defun calstad/org-protocol-focus-advice (orig &rest args)
