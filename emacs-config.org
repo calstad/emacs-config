@@ -487,7 +487,8 @@
                ("C-c c" . org-capture)
                ("C-c l" . org-store-link))
         :custom
-        (org-hide-leading-stars t))
+        (org-hide-leading-stars t)
+        (org-archive-location "%s_archive::datetree/"))
     #+end_src
 **** Agenda
      Tell org-mode what files to include in the agenda
