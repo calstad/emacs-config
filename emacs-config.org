@@ -545,6 +545,7 @@
          (org-roam-db-location (expand-file-name "org-roam.db" calstad/persistence-dir))
          (org-roam-completion-system 'helm)
          (org-roam-link-title-format "R:%s")
+         (org-roam-link-file-path-type 'absolute)
          (org-roam-capture-templates
           '(("d" "default" plain (function org-roam-capture--get-point)
              "%?"
