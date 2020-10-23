@@ -642,7 +642,7 @@
      #+end_src
 **** Capture
      #+begin_src emacs-lisp
-       (setq org-default-notes-file (expand-file-name "inbox.org" calstad/org-dir))
+       (setq org-default-notes-file (expand-file-name "tasks/inbox.org" calstad/org-dir))
        (setq org-capture-templates
              '(("j" "Journal entry" entry (function calstad/org-journal-find-location)
                 "* %(format-time-string org-journal-time-format)%^{Title}\n%i%?")
