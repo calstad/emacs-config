@@ -488,7 +488,7 @@
                ("C-c l" . org-store-link))
         :custom
         (org-hide-leading-stars t)
-        (org-sort-agenda-notime-is-late ni) ; have no time todos at top of agenda views
+        (org-sort-agenda-notime-is-late nil) ; have no time todos at top of agenda views
         (org-archive-location "%s_archive::datetree/"))
     #+end_src
 **** Todo Items
