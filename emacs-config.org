@@ -617,6 +617,7 @@
        (use-package org-journal
          :bind
          ("C-c n j" . org-journal-new-entry)
+         ("C-c n J" . org-journal-new-scheduled-entry)
          ("C-c n d" . calstad/org-journal-go-to-today)
          :custom
          (org-journal-date-prefix "#+TITLE: ")
