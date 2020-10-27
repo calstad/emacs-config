@@ -489,6 +489,7 @@
         :custom
         (org-hide-leading-stars t)
         (org-sort-agenda-notime-is-late nil) ; have no time todos at top of agenda views
+        (org-agenda-span 'day)
         (org-archive-location "%s_archive::datetree/"))
     #+end_src
 **** Todo Items
