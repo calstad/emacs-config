@@ -488,10 +488,19 @@
                ("C-c l" . org-store-link))
         :custom
         (org-hide-leading-stars t)
-        (org-sort-agenda-notime-is-late nil) ; have no time todos at top of agenda views
-        (org-agenda-span 'day)
         (org-archive-location "%s_archive::datetree/"))
     #+end_src
+**** Agenda
+     Have todo items with no associated timestamp show up at the top
+     of the agenda view above the time slots instead of below.
+     #+begin_src emacs-lisp
+       (setq org-sort-agenda-notime-is-late nil)
+     #+end_src
+
+     Default the agenda view to the daily instead of weekly view.
+     #+begin_src emacs-lisp
+       (setq org-agenda-span 'day)
+     #+end_src
 **** Todo Items
 ***** Todo States
       #+begin_src emacs-lisp
