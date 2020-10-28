@@ -779,6 +779,50 @@
         '(("\\.docx" . default)
           ("\\.pptx" . default)))
      #+end_src
+**** Saving Org Buffers
+     Use =advice= to save all the current =org-mode= buffers
+     before/certain actions are taken.
+     #+begin_src emacs-lisp
+       (setq calstad/org-save-funcs
+             '((:before . (org-agenda-quit))
+               (:after . (org-todo
+                          org-store-log-note
+                          org-deadline
+                          org-schedule
+                          org-time-stamp
+                          org-refile
+                          org-archive-subtree))))
+     #+end_src
+
+     In order to apply the advice to save all =org-mode= buffers to
+     interactivce functions, we need all to allow the save function to
+     take arbitrary arguments.  See this [[https://emacs.stackexchange.com/a/52897][SO answer]] for more details. 
+     #+begin_src emacs-lisp
+       (defun calstad/org-save-all-org-buffers (&rest _ignore)
+         "Apply `org-save-all-org-buffers' ignoring all arguments."
+         (org-save-all-org-buffers))
+     #+end_src
+
+     Now we use our custom save function to advise the previously
+     specified =org-mode= functions.
+     #+begin_src emacs-lisp
+       (defun calstad/advise-org-funcs (org-func-alist)
+         (mapcar
+          (lambda (elem)
+            (let ((action (car elem))
+                  (org-funcs (cdr elem)))
+              (mapcar (lambda (org-func)
+                        (advice-add org-func action 'calstad/org-save-all-org-buffers))
+                      org-funcs)))
+          org-func-alist))
+
+       (calstad/advise-org-funcs calstad/org-save-funcs)
+     #+end_src
+
+     Save buffers after capture has finished
+     #+begin_src emacs-lisp
+       (add-hook 'org-capture-after-finalize-hook 'org-save-all-org-buffers)
+     #+end_src
 *** PDF Tools
     [[https://github.com/politza/pdf-tools][PDF Tools]] is, among other things, a replacement of DocView for PDF
     files. The key difference is that pages are not pre-rendered by
