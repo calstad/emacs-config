@@ -525,6 +525,7 @@
 ***** Enable habit tracking
       #+begin_src emacs-lisp
         (add-to-list 'org-modules 'org-habit)
+        (add-to-list 'org-modules 'org-checklist)
       #+end_src
 ***** Change Priorities to be 1-9
       #+begin_src emacs-lisp
