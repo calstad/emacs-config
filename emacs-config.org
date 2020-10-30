@@ -528,12 +528,6 @@
         (add-to-list 'org-modules 'org-habit)
         (add-to-list 'org-modules 'org-checklist)
       #+end_src
-***** Change Priorities to be 1-9
-      #+begin_src emacs-lisp
-        (setq org-highest-priority ?1
-              org-lowest-priority ?9
-              org-default-priority ?9)
-      #+end_src
 **** org-ref
      Org-ref is a library for org-mode that provides rich support for
      citations, labels, and cross-references in org-mode.
