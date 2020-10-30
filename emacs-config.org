@@ -488,6 +488,7 @@
                ("C-c l" . org-store-link))
         :custom
         (org-hide-leading-stars t)
+        (org-startup-folded t)
         (org-archive-location "%s_archive::datetree/"))
     #+end_src
 **** Agenda
