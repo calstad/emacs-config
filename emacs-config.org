@@ -495,7 +495,7 @@
      Have todo items with no associated timestamp show up at the top
      of the agenda view above the time slots instead of below.
      #+BEGIN_SRC emacs-lisp
-       (setq org-sort-agenda-notime-is-late nil)
+       (setq org-agenda-sort-notime-is-late nil)
      #+END_SRC
 
      Default the agenda view to the daily instead of weekly view.
