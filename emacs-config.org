@@ -443,7 +443,12 @@
      writing input files for TeX/LaTeX/ConTeXt/Texinfo using Emacs.
      #+BEGIN_SRC emacs-lisp
        (use-package tex
-         :straight auctex)
+         :straight auctex
+         :custom
+         ;; Treat environments defined in other packages as math envs
+         (TeX-parse-self 't)
+         ;; Follow underscores and carets by brackets
+         (TeX-electric-sub-and-superscript 't))
      #+END_SRC
 **** CDLaTex
      [[https://orgmode.org/manual/CDLaTeX-mode.html#CDLaTeX-mode][CDLaTex]] is a minor mode for fast input methods for LaTex
@@ -459,11 +464,6 @@
                  '(lambda ()
                     (define-key LaTeX-mode-map (kbd "$") 'self-insert-command)))
     #+END_SRC
-**** Subscripts and superscripts
-     Insert braces after =_= and =^=
-     #+BEGIN_SRC emacs-lisp
-       (setq TeX-electric-sub-and-superscript 't)
-     #+END_SRC
 *** Magit
     #+BEGIN_SRC emacs-lisp
       (use-package magit
@@ -488,6 +488,7 @@
                ("C-c l" . org-store-link))
         :custom
         (org-hide-leading-stars t)
+        (org-link-file-path-type 'absolute)
         (org-startup-folded t)
         (org-archive-location "%s_archive::datetree/"))
     #+END_SRC
@@ -688,6 +689,7 @@
         (org-babel-do-load-languages
          'org-babel-load-languages
          '((emacs-lisp . t)
+           (shell . t)
            (latex . t)
            (python . t)
            (jupyter . t)))
@@ -851,7 +853,7 @@
       ;;   (add-to-list 'python-shell-completion-native-disabled-interpreters
       ;;                "jupyter"))
     #+END_SRC
-**** Pyenv and Pip
+**** Pyenv, Pyvenv, and Pip
      [[https://github.com/proofit404/pyenv-mode][Pyenv mode]] allows for using =pyenv= environments with
      =python-mode=
      #+BEGIN_SRC emacs-lisp
@@ -867,6 +869,12 @@
      from a =.python-version= file.
      #+BEGIN_SRC emacs-lisp
        (use-package pyenv-mode-auto)
+     #+END_SRC
+
+     [[https://github.com/jorgenschaefer/pyvenv][Pyvenv]] is global minor mode for managing Python virtual
+     environments.
+     #+BEGIN_SRC emacs-lisp
+       (use-package pyvenv)
      #+END_SRC
 
      [[https://github.com/brotzeit/pippel][Pippel]] is an Emacs frontend for the Python package manager
