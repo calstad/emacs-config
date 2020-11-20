@@ -324,6 +324,21 @@
                :map company-active-map ("M-d" . company-show-doc-buffer))
         :init (add-hook 'after-init-hook 'global-company-mode))
     #+END_SRC
+*** Conda
+    [[https://github.com/necaris/conda.el][Conda.el]] provides an interface for working with [[https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html][conda
+    environments.]]
+    #+BEGIN_SRC emacs-lisp
+      (use-package conda
+        :config
+        (custom-set-variables
+         '(conda-anaconda-home (expand-file-name "~/opt/conda")))
+        (conda-env-initialize-interactive-shells)
+        (conda-env-initialize-eshell)
+        (conda-env-activate "base")
+        :custom
+        (mode-line-format
+         (cons mode-line-format '(:exec conda-env-current-name))))
+    #+END_SRC
 *** Dired
 **** Use =a= to reuse dired buffer
      The command =dired-find-alternate-file= is disabled by default so
@@ -831,58 +846,6 @@
         :mode ("\\.pdf\\'" . pdf-view-mode)
         :config (pdf-tools-install))
     #+END_SRC
-*** Python
-**** Elpy
-    =elpy= Emacs package to bring powerful Python editing to Emacs. It
-    combines and configures a number of other packages, both written
-    in Emacs Lisp as well as Python.  Documentation can be found [[https://elpy.readthedocs.io/en/latest/index.html][here]].
-    #+BEGIN_SRC emacs-lisp
-      ;; (use-package elpy
-      ;;   :config
-      ;;   (elpy-enable)
-      ;;   (setq python-shell-interpreter "jupyter"
-      ;;         python-shell-interpreter-args "console --simple-prompt"
-      ;;         python-shell-prompt-detect-failure-warning nil
-      ;;         ;; Fixes bug in garbled console output
-      ;;         ;; https://github.com/jorgenschaefer/elpy/issues/1550#issuecomment-487039854
-      ;;         elpy-shell-echo-output nil
-      ;;         ;; Guess the offset but don't warn when it can't
-      ;;         python-indent-guess-indent-offset t
-      ;;         python-indent-guess-indent-offset-verbose nil
-      ;;         )
-      ;;   (add-to-list 'python-shell-completion-native-disabled-interpreters
-      ;;                "jupyter"))
-    #+END_SRC
-**** Pyenv, Pyvenv, and Pip
-     [[https://github.com/proofit404/pyenv-mode][Pyenv mode]] allows for using =pyenv= environments with
-     =python-mode=
-     #+BEGIN_SRC emacs-lisp
-       (use-package pyenv-mode
-         :config
-         (pyenv-mode)
-         ;; Keybindings conflict with org-mode
-         (unbind-key "C-c C-u" pyenv-mode-map)
-         (unbind-key "C-c C-s" pyenv-mode-map))
-     #+END_SRC
-
-     [[https://github.com/ssbb/pyenv-mode-auto#pyenv-mode-auto][Pyenv auto mode]] automatically activates a =pyenv= environment
-     from a =.python-version= file.
-     #+BEGIN_SRC emacs-lisp
-       (use-package pyenv-mode-auto)
-     #+END_SRC
-
-     [[https://github.com/jorgenschaefer/pyvenv][Pyvenv]] is global minor mode for managing Python virtual
-     environments.
-     #+BEGIN_SRC emacs-lisp
-       (use-package pyvenv)
-     #+END_SRC
-
-     [[https://github.com/brotzeit/pippel][Pippel]] is an Emacs frontend for the Python package manager
-     =pip=. As pippel also uses =tabulated-list-mode=, it provides a
-     similiar package menu like =package-list-packages=.
-     #+BEGIN_SRC emacs-lisp
-       (use-package pippel)
-     #+END_SRC
 *** Rest Client
     [[https://github.com/pashky/restclient.el][Restclient]] is a major mode for exploring HTTP REST web services.
     #+BEGIN_SRC emacs-lisp
