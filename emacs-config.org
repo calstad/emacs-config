@@ -846,6 +846,14 @@
         :mode ("\\.pdf\\'" . pdf-view-mode)
         :config (pdf-tools-install))
     #+END_SRC
+*** Python
+    #+BEGIN_SRC emacs-lisp
+      (use-package elpy
+        :init
+        (elpy-enable)
+        :custom
+        (elpy-rpc-virtualenv-path 'current))
+    #+END_SRC
 *** Rest Client
     [[https://github.com/pashky/restclient.el][Restclient]] is a major mode for exploring HTTP REST web services.
     #+BEGIN_SRC emacs-lisp
