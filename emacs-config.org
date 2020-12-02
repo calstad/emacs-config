@@ -5,883 +5,883 @@
 #+PROPERTY: header-args:emacs-lisp :results none
 
 * Emacs Configuration
-  This is my "dot emacs" configuration using =org-mode=.  It has been
-  heavily influenced/stolen from [[https://github.com/abedra/emacs.d][Aaron Bedra's emacs config]].
+This is my "dot emacs" configuration using =org-mode=.  It has been
+heavily influenced/stolen from [[https://github.com/abedra/emacs.d][Aaron Bedra's emacs config]].
 ** Global Configuration
 *** Constants
-    These are constants that are used throughout the configuration
-    (mostly for file path locations).
+These are constants that are used throughout the configuration
+(mostly for file path locations).
 
-    Where we persist files between emacs sessions.
-    #+BEGIN_SRC emacs-lisp
-      (setq calstad/persistence-dir
-            (expand-file-name "persistence/" user-emacs-directory))
-    #+END_SRC
+Where we persist files between emacs sessions.
+#+BEGIN_SRC emacs-lisp
+  (setq calstad/persistence-dir
+        (expand-file-name "persistence/" user-emacs-directory))
+#+END_SRC
 
-    The directory that will sync files across all machines.
-    #+BEGIN_SRC emacs-lisp
-      (setq calstad/sync-dir "~/Dropbox")
-    #+END_SRC
+The directory that will sync files across all machines.
+#+BEGIN_SRC emacs-lisp
+  (setq calstad/sync-dir "~/Dropbox")
+#+END_SRC
 
-    The directory for all things =org-mode= related.
-    #+BEGIN_SRC emacs-lisp
-      (setq calstad/org-dir (expand-file-name "org" calstad/sync-dir))
-    #+END_SRC
+The directory for all things =org-mode= related.
+#+BEGIN_SRC emacs-lisp
+  (setq calstad/org-dir (expand-file-name "org" calstad/sync-dir))
+#+END_SRC
 
-    Where we keep capture templates for =org-mode= and related packages.
-    #+BEGIN_SRC emacs-lisp
-      (setq calstad/org-capture-templates
-            (expand-file-name "org_capture_templates/" user-emacs-directory))
-    #+END_SRC
+Where we keep capture templates for =org-mode= and related packages.
+#+BEGIN_SRC emacs-lisp
+  (setq calstad/org-capture-templates
+        (expand-file-name "org_capture_templates/" user-emacs-directory))
+#+END_SRC
 
-    The location of my reference library including bibliographies and
-    PDFs.
-    #+BEGIN_SRC emacs-lisp
-      (setq calstad/ref-lib-dir (expand-file-name "library" calstad/sync-dir)
-            calstad/lib-bib (expand-file-name "library.bib" calstad/ref-lib-dir)
-            calstad/lib-docs (expand-file-name "documents/" calstad/ref-lib-dir))
-    #+END_SRC
+The location of my reference library including bibliographies and
+PDFs.
+#+BEGIN_SRC emacs-lisp
+  (setq calstad/ref-lib-dir (expand-file-name "library" calstad/sync-dir)
+        calstad/lib-bib (expand-file-name "library.bib" calstad/ref-lib-dir)
+        calstad/lib-docs (expand-file-name "documents/" calstad/ref-lib-dir))
+#+END_SRC
 
-    Directory where we keep all of the =org-roam= files.
-    #+BEGIN_SRC emacs-lisp
-      (setq calstad/org-roam-dir (expand-file-name "roam" calstad/org-dir))
-    #+END_SRC
+Directory where we keep all of the =org-roam= files.
+#+BEGIN_SRC emacs-lisp
+  (setq calstad/org-roam-dir (expand-file-name "roam" calstad/org-dir))
+#+END_SRC
 *** User details
-    Emacs will normally pick this up automatically, but this way I can
-    be sure the right information is always present.
-    #+BEGIN_SRC emacs-lisp
-      (setq user-full-name "Colin Alstad"
-            user-mail-address "colin.alstad@gmail.com")
-    #+END_SRC
+Emacs will normally pick this up automatically, but this way I can
+be sure the right information is always present.
+#+BEGIN_SRC emacs-lisp
+  (setq user-full-name "Colin Alstad"
+        user-mail-address "colin.alstad@gmail.com")
+#+END_SRC
 *** Packages
-    We use the [[https://github.com/raxod502/straight.el][straight]] package manager to take care of dependency
-    management. The straight package is bootstrapped in the [[file:init.el::;; Install straight.el to manage packages][init file]]
-    so that the [[https://github.com/raxod502/straight.el#the-wrong-version-of-my-package-was-loaded][wrong version]] of =org-mode= is not loaded.
+We use the [[https://github.com/raxod502/straight.el][straight]] package manager to take care of dependency
+management. The straight package is bootstrapped in the [[file:init.el::;; Install straight.el to manage packages][init file]]
+so that the [[https://github.com/raxod502/straight.el#the-wrong-version-of-my-package-was-loaded][wrong version]] of =org-mode= is not loaded.
 
-    Next we setup straight to use the [[https://github.com/jwiegley/use-package][use-package]] macro for package
-    configuration.
-    #+BEGIN_SRC emacs-lisp
-      ;; Use straight to install use-package
-      (straight-use-package 'use-package)
-      ;; Tell use-package to always install from straight
-      (setq straight-use-package-by-default t)
-    #+END_SRC
+Next we setup straight to use the [[https://github.com/jwiegley/use-package][use-package]] macro for package
+configuration.
+#+BEGIN_SRC emacs-lisp
+  ;; Use straight to install use-package
+  (straight-use-package 'use-package)
+  ;; Tell use-package to always install from straight
+  (setq straight-use-package-by-default t)
+#+END_SRC
 *** UI
 **** Skip splash screen on startup
-     #+BEGIN_SRC emacs-lisp
-       (setq initial-buffer-choice t)
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq initial-buffer-choice t)
+#+END_SRC
 **** GUI options
-     #+BEGIN_SRC emacs-lisp
-       (when window-system
-         (setq frame-title-format '(buffer-file-name "%f" ("%b")))
-         (tooltip-mode -1)       ; dont need mouse tootips!
-         (mouse-wheel-mode t)    ; stupid mice
-         (blink-cursor-mode -1)  ; about to give me seizures
-         (tool-bar-mode -1))
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (when window-system
+    (setq frame-title-format '(buffer-file-name "%f" ("%b")))
+    (tooltip-mode -1)       ; dont need mouse tootips!
+    (mouse-wheel-mode t)    ; stupid mice
+    (blink-cursor-mode -1)  ; about to give me seizures
+    (tool-bar-mode -1))
+#+END_SRC
 **** Terminal options
-     #+BEGIN_SRC emacs-lisp
-       (menu-bar-mode -1)
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (menu-bar-mode -1)
+#+END_SRC
 **** Set a color theme
-     #+BEGIN_SRC emacs-lisp
-       (use-package zenburn-theme
-         :config (load-theme 'zenburn t))
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (use-package zenburn-theme
+    :config (load-theme 'zenburn t))
+#+END_SRC
 **** Turn off visual and audio bells
-     #+BEGIN_SRC emacs-lisp
-       (setq visible-bell t
-             ring-bell-function 'ignore)
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq visible-bell t
+        ring-bell-function 'ignore)
+#+END_SRC
 **** Add indication at bottom of buffer for empty lines
-     #+BEGIN_SRC emacs-lisp
-       (set-default 'indicate-empty-lines t)
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (set-default 'indicate-empty-lines t)
+#+END_SRC
 **** Mode line settings
-     #+BEGIN_SRC emacs-lisp
-       (line-number-mode t)
-       (column-number-mode t)
-       (size-indication-mode t)
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (line-number-mode t)
+  (column-number-mode t)
+  (size-indication-mode t)
+#+END_SRC
 **** Enable y/n answers
-     #+BEGIN_SRC emacs-lisp
-       (fset 'yes-or-no-p 'y-or-n-p)
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
 **** Confirm exiting Emacs
-     #+BEGIN_SRC emacs-lisp
-       (setq confirm-kill-emacs 'y-or-n-p)
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq confirm-kill-emacs 'y-or-n-p)
+#+END_SRC
 *** Editing
 **** Key bindings
-     Miscellaneous editing keybindings
-     #+BEGIN_SRC emacs-lisp
-       (global-set-key (kbd "RET") 'newline-and-indent)
-       (global-set-key (kbd "C-;") 'comment-or-uncomment-region)
-       (global-set-key (kbd "C-+") 'text-scale-increase)
-       (global-set-key (kbd "C--") 'text-scale-decrease)
-     #+END_SRC
+Miscellaneous editing keybindings
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "RET") 'newline-and-indent)
+  (global-set-key (kbd "C-;") 'comment-or-uncomment-region)
+  (global-set-key (kbd "C-+") 'text-scale-increase)
+  (global-set-key (kbd "C--") 'text-scale-decrease)
+#+END_SRC
 **** Marking text
-     Be able to write over the marked region and also highlight the
-     marked region.
-     #+BEGIN_SRC emacs-lisp
-       (delete-selection-mode t)
-       (transient-mark-mode t)
-     #+END_SRC
+Be able to write over the marked region and also highlight the
+marked region.
+#+BEGIN_SRC emacs-lisp
+  (delete-selection-mode t)
+  (transient-mark-mode t)
+#+END_SRC
 **** Filling
 ***** Add auto fill to certain modes
-      #+BEGIN_SRC emacs-lisp
-        (add-hook 'text-mode-hook 'turn-on-auto-fill)
-      #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'text-mode-hook 'turn-on-auto-fill)
+#+END_SRC
 ***** Unfill a region
-      #+BEGIN_SRC emacs-lisp
-        (defun calstad/unfill-region ()
-          (interactive)
-          (let ((fill-column (point-max)))
-            (fill-region (region-beginning) (region-end) nil)))
-      #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (defun calstad/unfill-region ()
+    (interactive)
+    (let ((fill-column (point-max)))
+      (fill-region (region-beginning) (region-end) nil)))
+#+END_SRC
 **** Spell check
-     Use =ispell= as the spell checker
-     #+BEGIN_SRC emacs-lisp
-       (setq ispell-program-name "ispell")
-     #+END_SRC
+Use =ispell= as the spell checker
+#+BEGIN_SRC emacs-lisp
+  (setq ispell-program-name "ispell")
+#+END_SRC
 
-     Check spelling on the fly
-     #+BEGIN_SRC emacs-lisp
-       (add-hook 'text-mode-hook 'flyspell-mode)
-       (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-     #+END_SRC
+Check spelling on the fly
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'text-mode-hook 'flyspell-mode)
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+#+END_SRC
 
-     Use a shared dictionary
-     #+BEGIN_SRC emacs-lisp
-       (setq ispell-personal-dictionary (expand-file-name "flyspell_dictionary" calstad/org-dir))
-     #+END_SRC
-     Remap keybinding
-     #+BEGIN_SRC emacs-lisp
-       (eval-after-load 'flyspell
-         '(define-key flyspell-mode-map (kbd "C-;") nil))
-     #+END_SRC
+Use a shared dictionary
+#+BEGIN_SRC emacs-lisp
+  (setq ispell-personal-dictionary (expand-file-name "flyspell_dictionary" calstad/org-dir))
+#+END_SRC
+Remap keybinding
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'flyspell
+    '(define-key flyspell-mode-map (kbd "C-;") nil))
+#+END_SRC
 **** Death to tabs
-     #+BEGIN_SRC emacs-lisp
-       (setq-default indent-tabs-mode nil)
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq-default indent-tabs-mode nil)
+#+END_SRC
 **** Highlight matching parens and auto pair
-     #+BEGIN_SRC emacs-lisp
-       (show-paren-mode t)
-       (setq show-paren-style 'parenthesis)
-       (electric-pair-mode)
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (show-paren-mode t)
+  (setq show-paren-style 'parenthesis)
+  (electric-pair-mode)
+#+END_SRC
 **** GPG Support
-     #+BEGIN_SRC emacs-lisp
-       (setq epg-gpg-program "gpg2")
-       (setf epa-pinentry-mode 'loopback)
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq epg-gpg-program "gpg2")
+  (setf epa-pinentry-mode 'loopback)
+#+END_SRC
 **** Enable Disabled commands
-     These commands are disabled by default and I would like to use
-     them.
-     #+BEGIN_SRC emacs-lisp
-       (put 'upcase-region 'disabled nil)
-       (put 'downcase-region 'disabled nil)
-     #+END_SRC
+These commands are disabled by default and I would like to use
+them.
+#+BEGIN_SRC emacs-lisp
+  (put 'upcase-region 'disabled nil)
+  (put 'downcase-region 'disabled nil)
+#+END_SRC
 *** Windows and Buffers
 **** Use better buffer list
-     =IBuffer= is a more feature rich buffer list than =Buffer Menu=.
-     #+BEGIN_SRC emacs-lisp
-       (global-set-key (kbd "C-x C-b") 'ibuffer)
-     #+END_SRC
+=IBuffer= is a more feature rich buffer list than =Buffer Menu=.
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
+#+END_SRC
 **** Swap windows
-     If I have two windows open, it swaps them.
-     #+BEGIN_SRC emacs-lisp
-       (defun calstad/swap-windows ()
-         (interactive)
-         (if (/= (count-windows) 2)
-             (message "You need exactly 2 windows to do this.")
-           (let* ((w1 (first (window-list)))
-                  (w2 (second (window-list)))
-                  (b1 (window-buffer w1))
-                  (b2 (window-buffer w2))
-                  (s1 (window-start w1))
-                  (s2 (window-start w2)))
-             (set-window-buffer w1 b2)
-             (set-window-buffer w2 b1)
-             (set-window-start w1 s2)
-             (set-window-start w2 s1)))
-         (other-window 1))
-     #+END_SRC
+If I have two windows open, it swaps them.
+#+BEGIN_SRC emacs-lisp
+  (defun calstad/swap-windows ()
+    (interactive)
+    (if (/= (count-windows) 2)
+        (message "You need exactly 2 windows to do this.")
+      (let* ((w1 (first (window-list)))
+             (w2 (second (window-list)))
+             (b1 (window-buffer w1))
+             (b2 (window-buffer w2))
+             (s1 (window-start w1))
+             (s2 (window-start w2)))
+        (set-window-buffer w1 b2)
+        (set-window-buffer w2 b1)
+        (set-window-start w1 s2)
+        (set-window-start w2 s1)))
+    (other-window 1))
+#+END_SRC
 ***** Keybinding
-      #+BEGIN_SRC emacs-lisp
-        (global-set-key (kbd "C-c s") 'calstad/swap-windows)
-      #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-c s") 'calstad/swap-windows)
+#+END_SRC
 **** Kill other buffers
-     Kills all the buffers but the current one.  Doesent mess with
-     earmuffed buffers.
-     #+BEGIN_SRC emacs-lisp
-       (defun calstad/kill-other-buffers ()
-         (interactive)
-         (dolist (buffer (buffer-list))
-           (unless (or (eql buffer (current-buffer)) (not (buffer-file-name buffer)))
-             (kill-buffer buffer))))
-     #+END_SRC
+Kills all the buffers but the current one.  Doesent mess with
+earmuffed buffers.
+#+BEGIN_SRC emacs-lisp
+  (defun calstad/kill-other-buffers ()
+    (interactive)
+    (dolist (buffer (buffer-list))
+      (unless (or (eql buffer (current-buffer)) (not (buffer-file-name buffer)))
+        (kill-buffer buffer))))
+#+END_SRC
 **** Kill the buffer and delete file
-     Kills the current buffer and deletes the file it is visiting.
-     #+BEGIN_SRC emacs-lisp
-       (defun calstad/delete-file-and-buffer ()
-         (interactive)
-         (let ((filename (buffer-file-name)))
-           (when filename
-             (delete-file filename)
-             (message "Deleted file %s" filename)))
-         (kill-buffer))
-     #+END_SRC
+Kills the current buffer and deletes the file it is visiting.
+#+BEGIN_SRC emacs-lisp
+  (defun calstad/delete-file-and-buffer ()
+    (interactive)
+    (let ((filename (buffer-file-name)))
+      (when filename
+        (delete-file filename)
+        (message "Deleted file %s" filename)))
+    (kill-buffer))
+#+END_SRC
 **** Revert buffers automatically when underlying files change
-     #+BEGIN_SRC emacs-lisp
-       (global-auto-revert-mode t)
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (global-auto-revert-mode t)
+#+END_SRC
 ***** Keybinding
-      #+BEGIN_SRC emacs-lisp
-        (global-set-key (kbd "C-c C-k") 'calstad/delete-file-and-buffer)
-      #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-c C-k") 'calstad/delete-file-and-buffer)
+#+END_SRC
 
 **** Rename buffers
-     #+BEGIN_SRC emacs-lisp
-       (global-set-key (kbd "C-c r") 'rename-buffer)
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-c r") 'rename-buffer)
+#+END_SRC
 **** Unique buffer names
-     Make it so that buffers have unique names if the files dont.
-     #+BEGIN_SRC emacs-lisp
-       (require 'uniquify)
-       (setq uniquify-buffer-name-style 'forward
-             uniquify-separator "/"
-             uniquify-after-kill-buffer-p t ; rename after killing uniquified
-             uniquify-ignore-buffers-re "^\\*" ; don't muck with special buffers
-             )
-     #+END_SRC
+Make it so that buffers have unique names if the files dont.
+#+BEGIN_SRC emacs-lisp
+  (require 'uniquify)
+  (setq uniquify-buffer-name-style 'forward
+        uniquify-separator "/"
+        uniquify-after-kill-buffer-p t ; rename after killing uniquified
+        uniquify-ignore-buffers-re "^\\*" ; don't muck with special buffers
+        )
+#+END_SRC
 *** Persistence Files
-    Several Emacs major modes use files for persistence between
-    sessions and I keep them all in the same directory.
-    #+BEGIN_SRC emacs-lisp
-      (unless (file-exists-p calstad/persistence-dir)
-        (make-directory calstad/persistence-dir t))
-    #+END_SRC
+Several Emacs major modes use files for persistence between
+sessions and I keep them all in the same directory.
+#+BEGIN_SRC emacs-lisp
+  (unless (file-exists-p calstad/persistence-dir)
+    (make-directory calstad/persistence-dir t))
+#+END_SRC
 **** Save settings from Customize into seperate file
-     By default, settings changed through the Customize UI are added to
-     the =init.el= file.  This saves those customizations into a
-     separate file.
-     #+BEGIN_SRC emacs-lisp
-       (setq custom-file (expand-file-name "custom.el" calstad/persistence-dir))
-       (unless (file-exists-p custom-file)
-         (write-region "" nil custom-file))
-       (load custom-file)
-     #+END_SRC
+By default, settings changed through the Customize UI are added to
+the =init.el= file.  This saves those customizations into a
+separate file.
+#+BEGIN_SRC emacs-lisp
+  (setq custom-file (expand-file-name "custom.el" calstad/persistence-dir))
+  (unless (file-exists-p custom-file)
+    (write-region "" nil custom-file))
+  (load custom-file)
+#+END_SRC
 **** Recently accessed files
-     #+BEGIN_SRC emacs-lisp
-       (setq recentf-save-file (expand-file-name "recentf" calstad/persistence-dir))
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq recentf-save-file (expand-file-name "recentf" calstad/persistence-dir))
+#+END_SRC
 **** Bookmarks
-     #+BEGIN_SRC emacs-lisp
-       (setq bookmark-default-file (expand-file-name "bookmarks" calstad/persistence-dir))
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq bookmark-default-file (expand-file-name "bookmarks" calstad/persistence-dir))
+#+END_SRC
 **** URL Cache, Cookies, and History
-     #+BEGIN_SRC emacs-lisp
-       (setq url-configuration-directory (expand-file-name "url/" calstad/persistence-dir))
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq url-configuration-directory (expand-file-name "url/" calstad/persistence-dir))
+#+END_SRC
 **** Tramp Connections
-     #+BEGIN_SRC emacs-lisp
-       (setq tramp-persistency-file-name (expand-file-name "tramp" calstad/persistence-dir))
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq tramp-persistency-file-name (expand-file-name "tramp" calstad/persistence-dir))
+#+END_SRC
 **** Forget backup and temporary files
-     Dont create backup or temporary files
-     #+BEGIN_SRC emacs-lisp
-       (setq make-backup-files nil
-             backup-directory-alist `((".*" . ,temporary-file-directory))
-             auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
-             auto-save-list-file-prefix nil)
-     #+END_SRC
+Dont create backup or temporary files
+#+BEGIN_SRC emacs-lisp
+  (setq make-backup-files nil
+        backup-directory-alist `((".*" . ,temporary-file-directory))
+        auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
+        auto-save-list-file-prefix nil)
+#+END_SRC
 ** System Specific Configuration
 *** Mac OS X
 **** Set meta to apple key
-     #+BEGIN_SRC emacs-lisp
-       (setq mac-command-modifier 'meta)
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq mac-command-modifier 'meta)
+#+END_SRC
 **** Set font
-     #+BEGIN_SRC emacs-lisp
-       (if window-system
-           (setq default-frame-alist '((font . "-*-Monaco-medium-r-normal--15-0-72-72-m-0-iso10646-1"))))
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (if window-system
+      (setq default-frame-alist '((font . "-*-Monaco-medium-r-normal--15-0-72-72-m-0-iso10646-1"))))
+#+END_SRC
 **** Setup path for GUI emacs
-     #+BEGIN_SRC emacs-lisp
-       (use-package exec-path-from-shell
-         :config (exec-path-from-shell-initialize))
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (use-package exec-path-from-shell
+    :config (exec-path-from-shell-initialize))
+#+END_SRC
 ** Mode and Language Specific Configuration
 *** Company
-    [[http://company-mode.github.io][company-mode]] is a text completion framework for Emacs. The name
-    stands for "complete anything". It uses pluggable back-ends and
-    front-ends to retrieve and display completion candidates.
-    #+BEGIN_SRC emacs-lisp
-      (use-package company
-        :bind (("<C-return>" . company-complete)
-               :map company-active-map ("M-d" . company-show-doc-buffer))
-        :init (add-hook 'after-init-hook 'global-company-mode))
-    #+END_SRC
+[[http://company-mode.github.io][company-mode]] is a text completion framework for Emacs. The name
+stands for "complete anything". It uses pluggable back-ends and
+front-ends to retrieve and display completion candidates.
+#+BEGIN_SRC emacs-lisp
+  (use-package company
+    :bind (("<C-return>" . company-complete)
+           :map company-active-map ("M-d" . company-show-doc-buffer))
+    :init (add-hook 'after-init-hook 'global-company-mode))
+#+END_SRC
 *** Conda
-    [[https://github.com/necaris/conda.el][Conda.el]] provides an interface for working with [[https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html][conda
-    environments.]]
-    #+BEGIN_SRC emacs-lisp
-      (use-package conda
-        :config
-        (custom-set-variables
-         '(conda-anaconda-home (expand-file-name "~/opt/conda")))
-        (conda-env-initialize-interactive-shells)
-        (conda-env-initialize-eshell)
-        (conda-env-activate "base")
-        :custom
-        (mode-line-format
-         (cons mode-line-format '(:exec conda-env-current-name))))
-    #+END_SRC
+[[https://github.com/necaris/conda.el][Conda.el]] provides an interface for working with [[https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html][conda
+environments.]]
+#+BEGIN_SRC emacs-lisp
+  (use-package conda
+    :config
+    (custom-set-variables
+     '(conda-anaconda-home (expand-file-name "~/opt/conda")))
+    (conda-env-initialize-interactive-shells)
+    (conda-env-initialize-eshell)
+    (conda-env-activate "base")
+    :custom
+    (mode-line-format
+     (cons mode-line-format '(:exec conda-env-current-name))))
+#+END_SRC
 *** Dired
 **** Use =a= to reuse dired buffer
-     The command =dired-find-alternate-file= is disabled by default so
-     we enable it which allows us to use the =a= key to reuse the
-     current dired buffer
-     #+BEGIN_SRC emacs-lisp
-       (put 'dired-find-alternate-file 'disabled nil)
-     #+END_SRC
+The command =dired-find-alternate-file= is disabled by default so
+we enable it which allows us to use the =a= key to reuse the
+current dired buffer
+#+BEGIN_SRC emacs-lisp
+  (put 'dired-find-alternate-file 'disabled nil)
+#+END_SRC
 **** Human readable file sizes
-     #+BEGIN_SRC emacs-lisp
-       (setq dired-listing-switches "-alh")
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq dired-listing-switches "-alh")
+#+END_SRC
 *** Docker
-    #+BEGIN_SRC emacs-lisp
-      (use-package dockerfile-mode)
-    #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (use-package dockerfile-mode)
+#+END_SRC
 *** Emacs Lisp
-    Add hooks for navigation and documentation
-    #+BEGIN_SRC emacs-lisp
-      (use-package elisp-slime-nav
-        :init
-        (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
-          (add-hook hook 'turn-on-elisp-slime-nav-mode)))
+Add hooks for navigation and documentation
+#+BEGIN_SRC emacs-lisp
+  (use-package elisp-slime-nav
+    :init
+    (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
+      (add-hook hook 'turn-on-elisp-slime-nav-mode)))
 
-      (use-package paredit
-        :init
-        (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode))
+  (use-package paredit
+    :init
+    (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode))
 
-      (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-    #+END_SRC
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+#+END_SRC
 
-    Key bindings
-    #+BEGIN_SRC emacs-lisp
-      (define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
-      (define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
-    #+END_SRC
+Key bindings
+#+BEGIN_SRC emacs-lisp
+  (define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
+  (define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
+#+END_SRC
 *** Eshell
-    Start eshell or switch to it if it's active.
-    #+BEGIN_SRC emacs-lisp
-      (global-set-key (kbd "C-x m") 'eshell)
-    #+END_SRC
+Start eshell or switch to it if it's active.
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x m") 'eshell)
+#+END_SRC
 
-    Start a new eshell even if one is active.
-    #+BEGIN_SRC emacs-lisp
-      (global-set-key (kbd "C-x M")
-                      (lambda ()
-                        (interactive)
-                        (eshell t)))
-    #+END_SRC
+Start a new eshell even if one is active.
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x M")
+                  (lambda ()
+                    (interactive)
+                    (eshell t)))
+#+END_SRC
 
-    Save eshell persistence files out of the way
-    #+BEGIN_SRC emacs-lisp
-      (setq eshell-directory-name (expand-file-name "eshell/" calstad/persistence-dir))
-    #+END_SRC
+Save eshell persistence files out of the way
+#+BEGIN_SRC emacs-lisp
+  (setq eshell-directory-name (expand-file-name "eshell/" calstad/persistence-dir))
+#+END_SRC
 *** Env Files
-    Major mode for editing =.env= files, which are used for storing
-    environment variables.
-    #+BEGIN_SRC emacs-lisp
-      (use-package dotenv-mode
-        :mode "\\.env\\..*\\'")
-    #+END_SRC
+Major mode for editing =.env= files, which are used for storing
+environment variables.
+#+BEGIN_SRC emacs-lisp
+  (use-package dotenv-mode
+    :mode "\\.env\\..*\\'")
+#+END_SRC
 *** Helm
-    [[https://github.com/emacs-helm/helm][Helm]] is an Emacs framework for incremental completions and
-    narrowing selections.  There is a good tutorial [[http://tuhdo.github.io/helm-intro.html][here]] and the [[https://github.com/emacs-helm/helm/wiki][wiki]]
-    is also very helpful.  The old =ido= and =smex= configuration can
-    be found at commit [[https://github.com/calstad/emacs-config/commit/667cbdcf10517f3495767536739e3fc74ffa7ac7][667cbdc]].
-    #+BEGIN_SRC emacs-lisp
-      (use-package helm
-        :bind (("M-x" . helm-M-x)
-               ("C-x C-f" . helm-find-files)
-               ("C-x b" . helm-mini)
-               ("C-x r b" . helm-filtered-bookmarks))
-        :config
-        (helm-mode 1)
-        (helm-autoresize-mode 1))
-    #+END_SRC
+[[https://github.com/emacs-helm/helm][Helm]] is an Emacs framework for incremental completions and
+narrowing selections.  There is a good tutorial [[http://tuhdo.github.io/helm-intro.html][here]] and the [[https://github.com/emacs-helm/helm/wiki][wiki]]
+is also very helpful.  The old =ido= and =smex= configuration can
+be found at commit [[https://github.com/calstad/emacs-config/commit/667cbdcf10517f3495767536739e3fc74ffa7ac7][667cbdc]].
+#+BEGIN_SRC emacs-lisp
+  (use-package helm
+    :bind (("M-x" . helm-M-x)
+           ("C-x C-f" . helm-find-files)
+           ("C-x b" . helm-mini)
+           ("C-x r b" . helm-filtered-bookmarks))
+    :config
+    (helm-mode 1)
+    (helm-autoresize-mode 1))
+#+END_SRC
 **** Helm BibTex
-     [[https://github.com/tmalsburg/helm-bibtex][Helm-bibtex]] is a [[*Helm][Helm]] interface for managing BibTex
-     bibliographies.
+[[https://github.com/tmalsburg/helm-bibtex][Helm-bibtex]] is a [[*Helm][Helm]] interface for managing BibTex
+bibliographies.
 
-     Use the same functionality as =org-ref= for opening up notes for
-     a reference.
-     #+BEGIN_SRC emacs-lisp
-       (defun calstad/org-ref-notes-function (candidates)
-         (let ((key (helm-marked-candidates)))
-           (funcall org-ref-notes-function (car key))))
-     #+END_SRC
+Use the same functionality as =org-ref= for opening up notes for
+a reference.
+#+BEGIN_SRC emacs-lisp
+  (defun calstad/org-ref-notes-function (candidates)
+    (let ((key (helm-marked-candidates)))
+      (funcall org-ref-notes-function (car key))))
+#+END_SRC
 
-     #+BEGIN_SRC emacs-lisp
-       (use-package helm-bibtex
-         :after org-ref-helm-bibtex
-         :custom
-         (bibtex-completion-bibliography calstad/lib-bib)
-         (bibtex-completion-library-path calstad/lib-docs)
-         (bibtex-completion-pdf-symbol "⌘")
-         (bibtex-completion-notes-symbol "✎")
-         :config
-         (helm-delete-action-from-source "Edit notes" helm-source-bibtex)
-         (helm-add-action-to-source "Edit notes" 'calstad/org-ref-notes-function helm-source-bibtex 8)
-         :bind ("<f6>" . helm-bibtex))
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (use-package helm-bibtex
+    :after org-ref-helm-bibtex
+    :custom
+    (bibtex-completion-bibliography calstad/lib-bib)
+    (bibtex-completion-library-path calstad/lib-docs)
+    (bibtex-completion-pdf-symbol "⌘")
+    (bibtex-completion-notes-symbol "✎")
+    :config
+    (helm-delete-action-from-source "Edit notes" helm-source-bibtex)
+    (helm-add-action-to-source "Edit notes" 'calstad/org-ref-notes-function helm-source-bibtex 8)
+    :bind ("<f6>" . helm-bibtex))
+#+END_SRC
 
-     Sort BibTex entries in order they are in the BibTex file
-     #+BEGIN_SRC emacs-lisp
-       (advice-add 'bibtex-completion-candidates
-                   :filter-return 'reverse)
-     #+END_SRC
+Sort BibTex entries in order they are in the BibTex file
+#+BEGIN_SRC emacs-lisp
+  (advice-add 'bibtex-completion-candidates
+              :filter-return 'reverse)
+#+END_SRC
 *** Jupyter
-    [[https://github.com/dzop/emacs-jupyter][emacs-jupyter]] is an interface to communicate with Jupyter
-    kernels with built-in REPL and =org-mode= frontends.
-    #+BEGIN_SRC emacs-lisp
-      (use-package jupyter)
-    #+END_SRC
+[[https://github.com/dzop/emacs-jupyter][emacs-jupyter]] is an interface to communicate with Jupyter
+kernels with built-in REPL and =org-mode= frontends.
+#+BEGIN_SRC emacs-lisp
+  (use-package jupyter)
+#+END_SRC
 *** Latex
 **** AUCTeX
-     [[https://www.emacswiki.org/emacs/AUCTeX][AUCTeX]] is a comprehensive customizable integrated environment for
-     writing input files for TeX/LaTeX/ConTeXt/Texinfo using Emacs.
-     #+BEGIN_SRC emacs-lisp
-       (use-package tex
-         :straight auctex
-         :custom
-         ;; Treat environments defined in other packages as math envs
-         (TeX-parse-self 't)
-         ;; Follow underscores and carets by brackets
-         (TeX-electric-sub-and-superscript 't))
-     #+END_SRC
+[[https://www.emacswiki.org/emacs/AUCTeX][AUCTeX]] is a comprehensive customizable integrated environment for
+writing input files for TeX/LaTeX/ConTeXt/Texinfo using Emacs.
+#+BEGIN_SRC emacs-lisp
+  (use-package tex
+    :straight auctex
+    :custom
+    ;; Treat environments defined in other packages as math envs
+    (TeX-parse-self 't)
+    ;; Follow underscores and carets by brackets
+    (TeX-electric-sub-and-superscript 't))
+#+END_SRC
 **** CDLaTex
-     [[https://orgmode.org/manual/CDLaTeX-mode.html#CDLaTeX-mode][CDLaTex]] is a minor mode for fast input methods for LaTex
-     environments and math.
-     #+BEGIN_SRC emacs-lisp
-       (use-package cdlatex
-         :init
-         (add-hook 'org-mode-hook 'turn-on-org-cdlatex))
-     #+END_SRC
+[[https://orgmode.org/manual/CDLaTeX-mode.html#CDLaTeX-mode][CDLaTex]] is a minor mode for fast input methods for LaTex
+environments and math.
+#+BEGIN_SRC emacs-lisp
+  (use-package cdlatex
+    :init
+    (add-hook 'org-mode-hook 'turn-on-org-cdlatex))
+#+END_SRC
 **** Auto pair "$"
-     #+BEGIN_SRC emacs-lisp
-       (add-hook 'TeX-mode-hook
-                 '(lambda ()
-                    (define-key LaTeX-mode-map (kbd "$") 'self-insert-command)))
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'TeX-mode-hook
+            '(lambda ()
+               (define-key LaTeX-mode-map (kbd "$") 'self-insert-command)))
+#+END_SRC
 *** Magit
-    #+BEGIN_SRC emacs-lisp
-      (use-package magit
-        :bind ("C-x g" . magit-status)
-        :config
-        ;; Keep file revert warning from showing everytime magit starts
-        (setq magit-last-seen-setup-instructions "1.4.0"))
-    #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+    :bind ("C-x g" . magit-status)
+    :config
+    ;; Keep file revert warning from showing everytime magit starts
+    (setq magit-last-seen-setup-instructions "1.4.0"))
+#+END_SRC
 *** Markdown
-    #+BEGIN_SRC emacs-lisp
-      (use-package markdown-mode)
-    #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (use-package markdown-mode)
+#+END_SRC
 *** Org
-    =org-mode= is one of the most powerful and amazing features of
-    Emacs. I use it for task managment, notes, journal, habit tracker,
-    latex, and development environment.
-    #+BEGIN_SRC emacs-lisp
-      (use-package org
-        :bind (("C-c a" . org-agenda)
-               ("C-c b" . org-iswitchb)
-               ("C-c c" . org-capture)
-               ("C-c l" . org-store-link))
-        :custom
-        (org-startup-indented t)
-        (org-link-file-path-type 'absolute)
-        (org-startup-folded t)
-        (org-archive-location "%s_archive::datetree/"))
-    #+END_SRC
+=org-mode= is one of the most powerful and amazing features of
+Emacs. I use it for task managment, notes, journal, habit tracker,
+latex, and development environment.
+#+BEGIN_SRC emacs-lisp
+  (use-package org
+    :bind (("C-c a" . org-agenda)
+           ("C-c b" . org-iswitchb)
+           ("C-c c" . org-capture)
+           ("C-c l" . org-store-link))
+    :custom
+    (org-startup-indented t)
+    (org-link-file-path-type 'absolute)
+    (org-startup-folded t)
+    (org-archive-location "%s_archive::datetree/"))
+#+END_SRC
 **** Agenda
-     Have todo items with no associated timestamp show up at the top
-     of the agenda view above the time slots instead of below.
-     #+BEGIN_SRC emacs-lisp
-       (setq org-agenda-sort-notime-is-late nil)
-     #+END_SRC
+Have todo items with no associated timestamp show up at the top
+of the agenda view above the time slots instead of below.
+#+BEGIN_SRC emacs-lisp
+  (setq org-agenda-sort-notime-is-late nil)
+#+END_SRC
 
-     Default the agenda view to the daily instead of weekly view.
-     #+BEGIN_SRC emacs-lisp
-       (setq org-agenda-span 'day)
-     #+END_SRC
+Default the agenda view to the daily instead of weekly view.
+#+BEGIN_SRC emacs-lisp
+  (setq org-agenda-span 'day)
+#+END_SRC
 **** Todo Items
 ***** Todo States
-      #+BEGIN_SRC emacs-lisp
-        (setq org-todo-keywords
-              '((sequence "TODO(t)" "IN-PROGRESS(p)" "WAITING(w@/!)" "|" "DONE(d!)" "CANCELLED(c@)")))
-      #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "IN-PROGRESS(p)" "WAITING(w@/!)" "|" "DONE(d!)" "CANCELLED(c@)")))
+#+END_SRC
 
-      Log state changes into a property drawer
-      #+BEGIN_SRC emacs-lisp
-        (setq org-log-into-drawer t)
-      #+END_SRC
+Log state changes into a property drawer
+#+BEGIN_SRC emacs-lisp
+  (setq org-log-into-drawer t)
+#+END_SRC
 
-      Add a =CLOSED= timestamp to todo items
-      #+BEGIN_SRC emacs-lisp
-        (setq org-log-done t)
-      #+END_SRC
+Add a =CLOSED= timestamp to todo items
+#+BEGIN_SRC emacs-lisp
+  (setq org-log-done t)
+#+END_SRC
 ***** Enable inline tasks
-      #+BEGIN_SRC emacs-lisp
-        (require 'org-inlinetask)
-        (setq org-inlinetask-min-level 10)
-      #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (require 'org-inlinetask)
+  (setq org-inlinetask-min-level 10)
+#+END_SRC
 ***** Enable habit tracking
-      #+BEGIN_SRC emacs-lisp
-        (add-to-list 'org-modules 'org-habit)
-        (add-to-list 'org-modules 'org-checklist)
-      #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'org-modules 'org-habit)
+  (add-to-list 'org-modules 'org-checklist)
+#+END_SRC
 **** org-ref
-     Org-ref is a library for org-mode that provides rich support for
-     citations, labels, and cross-references in org-mode.
-     #+BEGIN_SRC emacs-lisp
-       (use-package org-ref
-         :custom
-         (org-ref-default-bibliography (list calstad/lib-bib))
-         (org-ref-pdf-directory calstad/lib-docs)
-         (reftex-default-bibliography calstad/lib-bib)
-         (org-ref-show-broken-links nil))
-     #+END_SRC
-     In the above configuration =org-ref-show-broken-links= is set to
-     =nil= because it causes lagging on large files.  See [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org#controlling-link-messages-and-tooltips][here]] for
-     some more details.
+Org-ref is a library for org-mode that provides rich support for
+citations, labels, and cross-references in org-mode.
+#+BEGIN_SRC emacs-lisp
+  (use-package org-ref
+    :custom
+    (org-ref-default-bibliography (list calstad/lib-bib))
+    (org-ref-pdf-directory calstad/lib-docs)
+    (reftex-default-bibliography calstad/lib-bib)
+    (org-ref-show-broken-links nil))
+#+END_SRC
+In the above configuration =org-ref-show-broken-links= is set to
+=nil= because it causes lagging on large files.  See [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org#controlling-link-messages-and-tooltips][here]] for
+some more details.
 **** org-roam
-     #+BEGIN_SRC emacs-lisp
-       (use-package org-roam
-         :hook
-         (after-init . org-roam-mode)
-         :custom
-         (org-roam-directory calstad/org-roam-dir)
-         (org-roam-db-location (expand-file-name "org-roam.db" calstad/persistence-dir))
-         (org-roam-completion-system 'helm)
-         (org-roam-link-title-format "R:%s")
-         (org-roam-link-file-path-type 'absolute)
-         (org-roam-capture-templates
-          '(("d" "default" plain (function org-roam-capture--get-point)
-             "%?"
-             :file-name "%<%Y%m%d%H%M%S%2N>"
-             :head "#+TITLE: ${title}\n"
-             :unnarrowed t)))
-         :bind (:map org-roam-mode-map
-                     (("C-c n r" . org-roam)
-                      ("C-c n f" . org-roam-find-file)
-                      ("C-c n b" . org-roam-switch-to-buffer)
-                      ("C-c n g" . org-roam-graph))
-                     :map org-mode-map
-                     (("C-c n i" . org-roam-insert))
-                     (("C-c n I" . org-roam-insert-immediate))))
-     #+END_SRC
-     =org-roam='s [[https://www.orgroam.com/manual/Roam-Protocol.html#Roam-Protocol][protocol extensions]] allow external programs to
-     interact with the =org-roam= database.  This requires [[https://www.orgroam.com/manual/Installation-_00281_0029.html#Installation-_00281_0029][installing]]
-     an application that can interact with emacs.
-     #+BEGIN_SRC emacs-lisp
-       (require 'org-roam-protocol)
-       (defun calstad/org-protocol-focus-advice (orig &rest args)
-         (x-focus-frame nil)
-         (apply orig args))
+#+BEGIN_SRC emacs-lisp
+  (use-package org-roam
+    :hook
+    (after-init . org-roam-mode)
+    :custom
+    (org-roam-directory calstad/org-roam-dir)
+    (org-roam-db-location (expand-file-name "org-roam.db" calstad/persistence-dir))
+    (org-roam-completion-system 'helm)
+    (org-roam-link-title-format "R:%s")
+    (org-roam-link-file-path-type 'absolute)
+    (org-roam-capture-templates
+     '(("d" "default" plain (function org-roam-capture--get-point)
+        "%?"
+        :file-name "%<%Y%m%d%H%M%S%2N>"
+        :head "#+TITLE: ${title}\n"
+        :unnarrowed t)))
+    :bind (:map org-roam-mode-map
+                (("C-c n r" . org-roam)
+                 ("C-c n f" . org-roam-find-file)
+                 ("C-c n b" . org-roam-switch-to-buffer)
+                 ("C-c n g" . org-roam-graph))
+                :map org-mode-map
+                (("C-c n i" . org-roam-insert))
+                (("C-c n I" . org-roam-insert-immediate))))
+#+END_SRC
+=org-roam='s [[https://www.orgroam.com/manual/Roam-Protocol.html#Roam-Protocol][protocol extensions]] allow external programs to
+interact with the =org-roam= database.  This requires [[https://www.orgroam.com/manual/Installation-_00281_0029.html#Installation-_00281_0029][installing]]
+an application that can interact with emacs.
+#+BEGIN_SRC emacs-lisp
+  (require 'org-roam-protocol)
+  (defun calstad/org-protocol-focus-advice (orig &rest args)
+    (x-focus-frame nil)
+    (apply orig args))
 
-       (advice-add 'org-roam-protocol-open-ref :around
-                   #'calstad/org-protocol-focus-advice)
-       (advice-add 'org-roam-protocol-open-file :around
-                   #'calstad/org-protocol-focus-advice)
-     #+END_SRC
+  (advice-add 'org-roam-protocol-open-ref :around
+              #'calstad/org-protocol-focus-advice)
+  (advice-add 'org-roam-protocol-open-file :around
+              #'calstad/org-protocol-focus-advice)
+#+END_SRC
 **** org-roam-bibtex
-     To get =org-roam-bibtex= to work I had to delete the
-     =bibtex-completion= files from the =helm-bibtex= package so that
-     the =bibtex-completion= package from MELPA would be used instead
-     #+BEGIN_SRC emacs-lisp
-       (use-package org-roam-bibtex
-         :after org-roam
-         :hook (org-roam-mode . org-roam-bibtex-mode)
-         :bind (:map org-mode-map
-                     (("C-c n a" . orb-note-actions)))
-         :custom
-         (orb-preformat-keywords
-          '(("citekey" . "=key=") "title" "file" "author-or-editor"))
-         (orb-process-file-field t)
-         (orb-file-field-extensions "pdf")
-         (orb-templates
-          '(("r" "ref" plain (function org-roam-capture--get-point)
-             ""
-             :file-name "%<%Y%m%d%H%M%S%2N>"
-             :head "#+TITLE: ${title}\n#+ROAM_KEY: ${ref}
+To get =org-roam-bibtex= to work I had to delete the
+=bibtex-completion= files from the =helm-bibtex= package so that
+the =bibtex-completion= package from MELPA would be used instead
+#+BEGIN_SRC emacs-lisp
+  (use-package org-roam-bibtex
+    :after org-roam
+    :hook (org-roam-mode . org-roam-bibtex-mode)
+    :bind (:map org-mode-map
+                (("C-c n a" . orb-note-actions)))
+    :custom
+    (orb-preformat-keywords
+     '(("citekey" . "=key=") "title" "file" "author-or-editor"))
+    (orb-process-file-field t)
+    (orb-file-field-extensions "pdf")
+    (orb-templates
+     '(("r" "ref" plain (function org-roam-capture--get-point)
+        ""
+        :file-name "%<%Y%m%d%H%M%S%2N>"
+        :head "#+TITLE: ${title}\n#+ROAM_KEY: ${ref}
 
-       - tags ::
+  - tags ::
 
-       ,* Notes
-       :PROPERTIES:
-       :Custom_ID: ${citekey}
-       :AUTHOR: ${author-or-editor}
-       :NOTER_DOCUMENT: ${file}
-       :NOTER_PAGE:
-       :END:"))))
-     #+END_SRC
+  ,* Notes
+  :PROPERTIES:
+  :Custom_ID: ${citekey}
+  :AUTHOR: ${author-or-editor}
+  :NOTER_DOCUMENT: ${file}
+  :NOTER_PAGE:
+  :END:"))))
+#+END_SRC
 **** org-journal
-     #+BEGIN_SRC emacs-lisp
-       (defun calstad/org-journal-go-to-today ()
-         (interactive)
-         (let ((current-prefix-arg '(4)))
-           (call-interactively 'org-journal-new-entry)))
+#+BEGIN_SRC emacs-lisp
+  (defun calstad/org-journal-go-to-today ()
+    (interactive)
+    (let ((current-prefix-arg '(4)))
+      (call-interactively 'org-journal-new-entry)))
 
-       (use-package org-journal
-         :bind
-         ("C-c n j" . org-journal-new-entry)
-         ("C-c n J" . org-journal-new-scheduled-entry)
-         ("C-c n d" . calstad/org-journal-go-to-today)
-         :custom
-         (org-journal-date-prefix "#+TITLE: ")
-         (org-journal-time-prefix "* ")
-         (org-journal-file-format "%Y%m%d.org")
-         (org-journal-dir calstad/org-roam-dir)
-         (org-journal-enable-agenda-integration t)
-         (org-journal-cache-file (expand-file-name "org-journal.cache" calstad/persistence-dir)))
-     #+END_SRC
+  (use-package org-journal
+    :bind
+    ("C-c n j" . org-journal-new-entry)
+    ("C-c n J" . org-journal-new-scheduled-entry)
+    ("C-c n d" . calstad/org-journal-go-to-today)
+    :custom
+    (org-journal-date-prefix "#+TITLE: ")
+    (org-journal-time-prefix "* ")
+    (org-journal-file-format "%Y%m%d.org")
+    (org-journal-dir calstad/org-roam-dir)
+    (org-journal-enable-agenda-integration t)
+    (org-journal-cache-file (expand-file-name "org-journal.cache" calstad/persistence-dir)))
+#+END_SRC
 
-     #+BEGIN_SRC emacs-lisp
-       (defun calstad/org-journal-find-location ()
-         ;; Open today's journal, but specify a non-nil prefix argument in order to
-         ;; inhibit inserting the heading; org-capture will insert the heading.
-         (org-journal-new-entry t)
-         ;; Position point on the journal's top-level heading so that org-capture
-         ;; will add the new entry as a child entry.
-         (goto-char (point-min)))
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (defun calstad/org-journal-find-location ()
+    ;; Open today's journal, but specify a non-nil prefix argument in order to
+    ;; inhibit inserting the heading; org-capture will insert the heading.
+    (org-journal-new-entry t)
+    ;; Position point on the journal's top-level heading so that org-capture
+    ;; will add the new entry as a child entry.
+    (goto-char (point-min)))
+#+END_SRC
 **** org-noter
-     #+BEGIN_SRC emacs-lisp
-       (use-package org-noter)
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (use-package org-noter)
+#+END_SRC
 **** Capture
-     #+BEGIN_SRC emacs-lisp
-       (setq org-default-notes-file (expand-file-name "tasks/inbox.org" calstad/org-dir))
-       (setq org-capture-templates
-             '(("j" "Journal entry" entry (function calstad/org-journal-find-location)
-                "* %(format-time-string org-journal-time-format)%^{Title}\n%i%?")
-               ("c" "OrgProtocol capture" entry (file+headline org-default-notes-file "Links")
-                "* TODO [[%:link][%:description]]\n%i"
-                :immediate-finish t)
-               ("t" "Task" entry (file+headline org-default-notes-file "Tasks")
-                "* TODO %i%?")))
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq org-default-notes-file (expand-file-name "tasks/inbox.org" calstad/org-dir))
+  (setq org-capture-templates
+        '(("j" "Journal entry" entry (function calstad/org-journal-find-location)
+           "* %(format-time-string org-journal-time-format)%^{Title}\n%i%?")
+          ("c" "OrgProtocol capture" entry (file+headline org-default-notes-file "Links")
+           "* TODO [[%:link][%:description]]\n%i"
+           :immediate-finish t)
+          ("t" "Task" entry (file+headline org-default-notes-file "Tasks")
+           "* TODO %i%?")))
+#+END_SRC
 **** Refile
-     #+BEGIN_SRC emacs-lisp
-       (setq org-refile-targets '((nil :maxlevel . 3)
-                                  (org-agenda-files :maxlevel . 1)))
-       ;; (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
-       ;; (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq org-refile-targets '((nil :maxlevel . 3)
+                             (org-agenda-files :maxlevel . 1)))
+  ;; (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
+  ;; (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
+#+END_SRC
 **** LaTeX
-     Highlight LaTeX source in org documents
-     #+BEGIN_SRC emacs-lisp
-       (setq org-highlight-latex-and-related '(latex entites))
-     #+END_SRC
+Highlight LaTeX source in org documents
+#+BEGIN_SRC emacs-lisp
+  (setq org-highlight-latex-and-related '(latex entites))
+#+END_SRC
 
-     Use [[https://tex.stackexchange.com/questions/78501/change-size-of-the-inline-image-for-latex-fragment-in-emacs-org-mode][this tip]] to increase the scale of inline LaTeX images
-     #+BEGIN_SRC emacs-lisp
-       (plist-put org-format-latex-options :scale 1.5)
-     #+END_SRC
+Use [[https://tex.stackexchange.com/questions/78501/change-size-of-the-inline-image-for-latex-fragment-in-emacs-org-mode][this tip]] to increase the scale of inline LaTeX images
+#+BEGIN_SRC emacs-lisp
+  (plist-put org-format-latex-options :scale 1.5)
+#+END_SRC
 
-     #+BEGIN_SRC emacs-lisp
-       (setq org-latex-preview-ltxpng-directory "/tmp/org_latex_prevs/")
-     #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq org-latex-preview-ltxpng-directory "/tmp/org_latex_prevs/")
+#+END_SRC
 **** org-babel
-     [[https://orgmode.org/worg/org-contrib/babel/][Babel]] is Org-mode's ability to execute source code within
-     Org-mode documents.
+[[https://orgmode.org/worg/org-contrib/babel/][Babel]] is Org-mode's ability to execute source code within
+Org-mode documents.
 ***** Language Support
-      #+BEGIN_SRC emacs-lisp
-        (org-babel-do-load-languages
-         'org-babel-load-languages
-         '((emacs-lisp . t)
-           (shell . t)
-           (latex . t)
-           (python . t)
-           (jupyter . t)))
+#+BEGIN_SRC emacs-lisp
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (shell . t)
+     (latex . t)
+     (python . t)
+     (jupyter . t)))
 
-        (use-package ob-sagemath
-          :custom
-          (org-babel-default-header-args:sage '((:session . t)
-                                                (:results . "output"))))
-      #+END_SRC
+  (use-package ob-sagemath
+    :custom
+    (org-babel-default-header-args:sage '((:session . t)
+                                          (:results . "output"))))
+#+END_SRC
 ****** Use Jupyter for Python Source Blocks
-       #+BEGIN_SRC emacs-lisp
-         (org-babel-jupyter-override-src-block "python")
-       #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (org-babel-jupyter-override-src-block "python")
+#+END_SRC
 ***** Syntax highlighting for code blocks
-      #+BEGIN_SRC emacs-lisp
-        (setq org-src-fontify-natively t)
-      #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq org-src-fontify-natively t)
+#+END_SRC
 ***** Don't confirm executing source blocks
-      #+BEGIN_SRC emacs-lisp
-        (setq org-confirm-babel-evaluate nil)
-      #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq org-confirm-babel-evaluate nil)
+#+END_SRC
 ***** Tangle Source Blocks
-      According to [[https://www.reddit.com/r/orgmode/comments/5elk0z/prevent_org_from_tangling_certain_sections/][this]] reddit post, this needs to be done to allow
-      setting =:tangle no= as a =header-args= property for
-      sub-headings.
-      #+BEGIN_SRC emacs-lisp
-        (setq org-use-property-inheritance t)
-      #+END_SRC
+According to [[https://www.reddit.com/r/orgmode/comments/5elk0z/prevent_org_from_tangling_certain_sections/][this]] reddit post, this needs to be done to allow
+setting =:tangle no= as a =header-args= property for
+sub-headings.
+#+BEGIN_SRC emacs-lisp
+  (setq org-use-property-inheritance t)
+#+END_SRC
 ***** Inline Images
-      Display images generated by source blocks.
-      #+BEGIN_SRC emacs-lisp
-        (setq org-startup-with-inline-images t)
-        (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
-      #+END_SRC
+Display images generated by source blocks.
+#+BEGIN_SRC emacs-lisp
+  (setq org-startup-with-inline-images t)
+  (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
+#+END_SRC
 **** Importing
-     A function to convert a =markdown= buffer to a =org-mode= buffer
-     using =pandoc=.
-     #+BEGIN_SRC emacs-lisp
-       (defun markdown-convert-buffer-to-org ()
-         "Convert the current buffer's content from markdown to orgmode format and save it with the current buffer's file name but with .org extension."
-         (interactive)
-         (shell-command-on-region (point-min) (point-max)
-                                  (format "pandoc -f markdown -t org -o %s"
-                                          (concat (file-name-sans-extension (buffer-file-name)) ".org"))))
-     #+END_SRC
+A function to convert a =markdown= buffer to a =org-mode= buffer
+using =pandoc=.
+#+BEGIN_SRC emacs-lisp
+  (defun markdown-convert-buffer-to-org ()
+    "Convert the current buffer's content from markdown to orgmode format and save it with the current buffer's file name but with .org extension."
+    (interactive)
+    (shell-command-on-region (point-min) (point-max)
+                             (format "pandoc -f markdown -t org -o %s"
+                                     (concat (file-name-sans-extension (buffer-file-name)) ".org"))))
+#+END_SRC
 **** Exporting
 ***** Beamer
-      Have earmuffs be =bold= like normal instead of =alert=.
-      #+BEGIN_SRC emacs-lisp
-        (defun calstad/beamer-bold (contents backend info)
-          (when (eq backend 'beamer)
-            (replace-regexp-in-string "\\`\\\\[A-Za-z0-9]+" "\\\\textbf" contents)))
-        (add-to-list 'org-export-filter-bold-functions 'calstad/beamer-bold)
-      #+END_SRC
+Have earmuffs be =bold= like normal instead of =alert=.
+#+BEGIN_SRC emacs-lisp
+  (defun calstad/beamer-bold (contents backend info)
+    (when (eq backend 'beamer)
+      (replace-regexp-in-string "\\`\\\\[A-Za-z0-9]+" "\\\\textbf" contents)))
+  (add-to-list 'org-export-filter-bold-functions 'calstad/beamer-bold)
+#+END_SRC
 ***** LaTex
-      Define the command to use for creating PDFs
-      #+BEGIN_SRC emacs-lisp
-        ;; (setq org-latex-pdf-process '("latexmk -pdflatex='%latex -shell-escape -bibtex -interaction nonstopmode' -pdf -output-directory=%o -f %f"))
-        (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
-      #+END_SRC
+Define the command to use for creating PDFs
+#+BEGIN_SRC emacs-lisp
+  ;; (setq org-latex-pdf-process '("latexmk -pdflatex='%latex -shell-escape -bibtex -interaction nonstopmode' -pdf -output-directory=%o -f %f"))
+  (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
+#+END_SRC
 
-      Use the =tabularx= package for exporting org-mode tables
-      #+BEGIN_SRC emacs-lisp
-        (add-to-list 'org-latex-packages-alist '("" "tabularx"))
-      #+END_SRC
+Use the =tabularx= package for exporting org-mode tables
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'org-latex-packages-alist '("" "tabularx"))
+#+END_SRC
 ***** Markdown
-      This package allows for GitHub flavored markdown
-      #+BEGIN_SRC emacs-lisp
-        (use-package ox-gfm
-          :after ox)
-      #+END_SRC
+This package allows for GitHub flavored markdown
+#+BEGIN_SRC emacs-lisp
+  (use-package ox-gfm
+    :after ox)
+#+END_SRC
 ***** Pandoc
-      [[https://github.com/kawabata/ox-pandoc][ox-pandoc]] is an =org-mode= exporter backend that utilizes
-      =pandoc= for exporting to multiple formats.
-      #+BEGIN_SRC emacs-lisp
-        (use-package ox-pandoc
-          :after ox)
-      #+END_SRC
+[[https://github.com/kawabata/ox-pandoc][ox-pandoc]] is an =org-mode= exporter backend that utilizes
+=pandoc= for exporting to multiple formats.
+#+BEGIN_SRC emacs-lisp
+  (use-package ox-pandoc
+    :after ox)
+#+END_SRC
 **** External Applications
-     Tell =org-mode= to open certain file types using an external
-     application.
-     #+BEGIN_SRC emacs-lisp
-       (mapcar
-        (lambda (file-type) (add-to-list 'org-file-apps file-type :append))
-        '(("\\.docx" . default)
-          ("\\.pptx" . default)))
-     #+END_SRC
+Tell =org-mode= to open certain file types using an external
+application.
+#+BEGIN_SRC emacs-lisp
+  (mapcar
+   (lambda (file-type) (add-to-list 'org-file-apps file-type :append))
+   '(("\\.docx" . default)
+     ("\\.pptx" . default)))
+#+END_SRC
 **** Saving Org Buffers
-     Use =advice= to save all the current =org-mode= buffers
-     before/certain actions are taken.
-     #+BEGIN_SRC emacs-lisp
-       (setq calstad/org-save-funcs
-             '((:before . (org-agenda-quit))
-               (:after . (org-todo
-                          org-store-log-note
-                          org-deadline
-                          org-schedule
-                          org-time-stamp
-                          org-refile
-                          org-archive-subtree))))
-     #+END_SRC
+Use =advice= to save all the current =org-mode= buffers
+before/certain actions are taken.
+#+BEGIN_SRC emacs-lisp
+  (setq calstad/org-save-funcs
+        '((:before . (org-agenda-quit))
+          (:after . (org-todo
+                     org-store-log-note
+                     org-deadline
+                     org-schedule
+                     org-time-stamp
+                     org-refile
+                     org-archive-subtree))))
+#+END_SRC
 
-     In order to apply the advice to save all =org-mode= buffers to
-     interactivce functions, we need all to allow the save function to
-     take arbitrary arguments.  See this [[https://emacs.stackexchange.com/a/52897][SO answer]] for more details. 
-     #+BEGIN_SRC emacs-lisp
-       (defun calstad/org-save-all-org-buffers (&rest _ignore)
-         "Apply `org-save-all-org-buffers' ignoring all arguments."
-         (org-save-all-org-buffers))
-     #+END_SRC
+In order to apply the advice to save all =org-mode= buffers to
+interactivce functions, we need all to allow the save function to
+take arbitrary arguments.  See this [[https://emacs.stackexchange.com/a/52897][SO answer]] for more details. 
+#+BEGIN_SRC emacs-lisp
+  (defun calstad/org-save-all-org-buffers (&rest _ignore)
+    "Apply `org-save-all-org-buffers' ignoring all arguments."
+    (org-save-all-org-buffers))
+#+END_SRC
 
-     Now we use our custom save function to advise the previously
-     specified =org-mode= functions.
-     #+BEGIN_SRC emacs-lisp
-       (defun calstad/advise-org-funcs (org-func-alist)
-         (mapcar
-          (lambda (elem)
-            (let ((action (car elem))
-                  (org-funcs (cdr elem)))
-              (mapcar (lambda (org-func)
-                        (advice-add org-func action 'calstad/org-save-all-org-buffers))
-                      org-funcs)))
-          org-func-alist))
+Now we use our custom save function to advise the previously
+specified =org-mode= functions.
+#+BEGIN_SRC emacs-lisp
+  (defun calstad/advise-org-funcs (org-func-alist)
+    (mapcar
+     (lambda (elem)
+       (let ((action (car elem))
+             (org-funcs (cdr elem)))
+         (mapcar (lambda (org-func)
+                   (advice-add org-func action 'calstad/org-save-all-org-buffers))
+                 org-funcs)))
+     org-func-alist))
 
-       (calstad/advise-org-funcs calstad/org-save-funcs)
-     #+END_SRC
+  (calstad/advise-org-funcs calstad/org-save-funcs)
+#+END_SRC
 
-     Save buffers after capture has finished
-     #+BEGIN_SRC emacs-lisp
-       (add-hook 'org-capture-after-finalize-hook 'org-save-all-org-buffers)
-     #+END_SRC
+Save buffers after capture has finished
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'org-capture-after-finalize-hook 'org-save-all-org-buffers)
+#+END_SRC
 *** PDF Tools
-    [[https://github.com/politza/pdf-tools][PDF Tools]] is, among other things, a replacement of DocView for PDF
-    files. The key difference is that pages are not pre-rendered by
-    e.g. ghostscript and stored in the file-system, but rather created
-    on-demand and stored in memory.
-    #+BEGIN_SRC emacs-lisp
-      (use-package pdf-tools
-        :mode ("\\.pdf\\'" . pdf-view-mode)
-        :config (pdf-tools-install))
-    #+END_SRC
+[[https://github.com/politza/pdf-tools][PDF Tools]] is, among other things, a replacement of DocView for PDF
+files. The key difference is that pages are not pre-rendered by
+e.g. ghostscript and stored in the file-system, but rather created
+on-demand and stored in memory.
+#+BEGIN_SRC emacs-lisp
+  (use-package pdf-tools
+    :mode ("\\.pdf\\'" . pdf-view-mode)
+    :config (pdf-tools-install))
+#+END_SRC
 *** Python
-    #+BEGIN_SRC emacs-lisp
-      (use-package elpy
-        :init
-        (elpy-enable)
-        :custom
-        (elpy-rpc-virtualenv-path 'current))
-    #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (use-package elpy
+    :init
+    (elpy-enable)
+    :custom
+    (elpy-rpc-virtualenv-path 'current))
+#+END_SRC
 *** Rest Client
-    [[https://github.com/pashky/restclient.el][Restclient]] is a major mode for exploring HTTP REST web services.
-    #+BEGIN_SRC emacs-lisp
-      (use-package restclient)
-    #+END_SRC
+[[https://github.com/pashky/restclient.el][Restclient]] is a major mode for exploring HTTP REST web services.
+#+BEGIN_SRC emacs-lisp
+  (use-package restclient)
+#+END_SRC
 *** SageMath
-    [[http://www.sagemath.org][Sage]] is an open source mathematics software system that wraps a
-    lot of different math packages.
-    #+BEGIN_SRC emacs-lisp
-      (use-package sage-shell-mode)
-    #+END_SRC
+[[http://www.sagemath.org][Sage]] is an open source mathematics software system that wraps a
+lot of different math packages.
+#+BEGIN_SRC emacs-lisp
+  (use-package sage-shell-mode)
+#+END_SRC
 *** YAML
-    #+BEGIN_SRC emacs-lisp
-      (use-package yaml-mode)
-    #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (use-package yaml-mode)
+#+END_SRC
 *** YASnippet
-    =yasnippet= is a template system for Emacs that allows type an
-    abbreviation and automatically expand it into function templates.
+=yasnippet= is a template system for Emacs that allows type an
+abbreviation and automatically expand it into function templates.
 
-    Load =yasnippet= on programming langauge major modes.
-    #+BEGIN_SRC emacs-lisp
-      (use-package yasnippet
-        :config
-        (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
-        (yas-global-mode 1))
-    #+END_SRC
+Load =yasnippet= on programming langauge major modes.
+#+BEGIN_SRC emacs-lisp
+  (use-package yasnippet
+    :config
+    (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+    (yas-global-mode 1))
+#+END_SRC
 * Emacs Server
-  Start the emacs server so that clients can connect
-  #+BEGIN_SRC emacs-lisp
-    (server-start)
-  #+END_SRC
+Start the emacs server so that clients can connect
+#+BEGIN_SRC emacs-lisp
+  (server-start)
+#+END_SRC
