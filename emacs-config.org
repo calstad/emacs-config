@@ -693,6 +693,7 @@ Use [[https://tex.stackexchange.com/questions/78501/change-size-of-the-inline-im
   (plist-put org-format-latex-options :scale 1.5)
 #+END_SRC
 
+Save all LaTeX preview images in the same temp directory.
 #+BEGIN_SRC emacs-lisp
   (setq org-latex-preview-ltxpng-directory "/tmp/org_latex_prevs/")
 #+END_SRC
@@ -845,14 +846,6 @@ on-demand and stored in memory.
   (use-package pdf-tools
     :mode ("\\.pdf\\'" . pdf-view-mode)
     :config (pdf-tools-install))
-#+END_SRC
-*** Python
-#+BEGIN_SRC emacs-lisp
-  (use-package elpy
-    :init
-    (elpy-enable)
-    :custom
-    (elpy-rpc-virtualenv-path 'current))
 #+END_SRC
 *** Rest Client
 [[https://github.com/pashky/restclient.el][Restclient]] is a major mode for exploring HTTP REST web services.
