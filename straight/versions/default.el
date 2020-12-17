@@ -1,4 +1,4 @@
-(("auctex" . "59e251c4c82d878e605a13aec3752e544a99f21a")
+(("auctex" . "fb062a364fbc7d791707ff574b0f0a7f4c7a7269")
  ("biblio.el" . "eb9baf1d2bf6a073d24ccb717025baa693e98f3e")
  ("cdlatex" . "480387b39f6ddd9cd2a9511ecee064ad8e1dd324")
  ("company-mode" . "25f6a2717ade173c37dc4d013ce68312673596d7")
