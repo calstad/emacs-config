@@ -2,6 +2,7 @@
  ("biblio.el" . "eb9baf1d2bf6a073d24ccb717025baa693e98f3e")
  ("cdlatex" . "480387b39f6ddd9cd2a9511ecee064ad8e1dd324")
  ("company-mode" . "25f6a2717ade173c37dc4d013ce68312673596d7")
+ ("conda.el" . "9f7eea16e9ad3eb34fe3d1cbd9d6162b8046c2f8")
  ("dash.el" . "b92ab5a39b987e4fe69317b9d9fda452300baf20")
  ("dockerfile-mode" . "d31f7685ebc5832d957e25070a930aa42984327d")
  ("elisp-slime-nav" . "9ab52362600af9f97f1590f05a295538025170b3")
