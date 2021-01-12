@@ -697,6 +697,11 @@ Save all LaTeX preview images in the same temp directory.
 #+BEGIN_SRC emacs-lisp
   (setq org-latex-preview-ltxpng-directory "/tmp/org_latex_prevs/")
 #+END_SRC
+
+Load these LaTeX packages by default in all org-mode documents.
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'org-latex-packages-alist '("" "amsthm"))
+#+END_SRC
 **** org-babel
 [[https://orgmode.org/worg/org-contrib/babel/][Babel]] is Org-mode's ability to execute source code within
 Org-mode documents.
