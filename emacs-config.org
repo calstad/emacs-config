@@ -331,7 +331,7 @@ environments.]]
   (use-package conda
     :config
     (custom-set-variables
-     '(conda-anaconda-home (expand-file-name "~/opt/conda")))
+     '(conda-anaconda-home (expand-file-name "/usr/local/Caskroom/miniconda/base")))
     (conda-env-initialize-interactive-shells)
     (conda-env-initialize-eshell)
     (conda-env-activate "base")
