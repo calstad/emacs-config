@@ -518,6 +518,18 @@ Default the agenda view to the daily instead of weekly view.
 #+BEGIN_SRC emacs-lisp
   (setq org-agenda-span 'day)
 #+END_SRC
+
+Show breadcrumbs for nested headline todos in the agenda views.
+#+BEGIN_SRC emacs-lisp
+  (setq org-agenda-prefix-format
+        '((agenda . " %i %-12:c%?-12t% s")
+          (timeline . "  % s")
+          (todo .
+                " %i %-12:c %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
+          (tags .
+                " %i %-12:c %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
+          (search . " %i %-12:c")))
+#+END_SRC
 **** Todo Items
 ***** Todo States
 #+BEGIN_SRC emacs-lisp
