@@ -667,7 +667,8 @@ the =bibtex-completion= package from MELPA would be used instead
     (org-journal-encrypt-journal t)
     (org-journal-enable-cache t)
     (org-journal-enable-agenda-integration t)
-    (org-journal-cache-file (expand-file-name "org-journal.cache" calstad/persistence-dir)))
+    :config
+    (setq org-journal--cache-file (expand-file-name "org-journal.cache" calstad/persistence-dir)))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
