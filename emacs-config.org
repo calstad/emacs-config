@@ -171,11 +171,6 @@ Remap keybinding
   (setq show-paren-style 'parenthesis)
   (electric-pair-mode)
 #+END_SRC
-**** GPG Support
-#+BEGIN_SRC emacs-lisp
-  (setq epg-gpg-program "gpg2")
-  (setf epa-pinentry-mode 'loopback)
-#+END_SRC
 **** Enable Disabled commands
 These commands are disabled by default and I would like to use
 them.
@@ -255,6 +250,17 @@ Make it so that buffers have unique names if the files dont.
         uniquify-after-kill-buffer-p t ; rename after killing uniquified
         uniquify-ignore-buffers-re "^\\*" ; don't muck with special buffers
         )
+#+END_SRC
+*** Encrypting/Decrypting Files
+Specify the GPG key to use to encrypt/decrypt files.
+#+BEGIN_SRC emacs-lisp
+  (setq epa-file-encrypt-to "me@colinalstad.com")
+#+END_SRC
+
+Specify which GPG program to use.
+#+BEGIN_SRC emacs-lisp
+  (setq epg-gpg-program "gpg2")
+  (setf epa-pinentry-mode 'loopback)
 #+END_SRC
 *** Persistence Files
 Several Emacs major modes use files for persistence between
@@ -657,7 +663,9 @@ the =bibtex-completion= package from MELPA would be used instead
     (org-journal-date-prefix "#+CATEGORY: journal\n#+TITLE: ")
     (org-journal-time-prefix "* ")
     (org-journal-file-format "%Y%m%d.org")
-    (org-journal-dir calstad/org-roam-dir)
+    (org-journal-dir (expand-file-name "journal" calstad/org-dir))
+    (org-journal-encrypt-journal t)
+    (org-journal-enable-cache t)
     (org-journal-enable-agenda-integration t)
     (org-journal-cache-file (expand-file-name "org-journal.cache" calstad/persistence-dir)))
 #+END_SRC
