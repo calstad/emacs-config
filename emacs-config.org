@@ -791,7 +791,7 @@ Have earmuffs be =bold= like normal instead of =alert=.
 Define the command to use for creating PDFs
 #+BEGIN_SRC emacs-lisp
   ;; (setq org-latex-pdf-process '("latexmk -pdflatex='%latex -shell-escape -bibtex -interaction nonstopmode' -pdf -output-directory=%o -f %f"))
-  (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
+  (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -output-directory=%o -cd -f -pdf %f"))
 #+END_SRC
 
 Use the =tabularx= package for exporting org-mode tables
