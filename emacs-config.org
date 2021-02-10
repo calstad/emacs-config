@@ -660,7 +660,8 @@ the =bibtex-completion= package from MELPA would be used instead
     ("C-c n J" . org-journal-new-scheduled-entry)
     ("C-c n d" . calstad/org-journal-go-to-today)
     :custom
-    (org-journal-date-prefix "#+CATEGORY: journal\n#+TITLE: ")
+    (org-journal-file-header "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+CATEGORY: journal\n")
+    (org-journal-date-prefix "#+TITLE: ")
     (org-journal-time-prefix "* ")
     (org-journal-file-format "%Y%m%d.org")
     (org-journal-dir (expand-file-name "journal" calstad/org-dir))
