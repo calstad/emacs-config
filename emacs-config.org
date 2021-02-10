@@ -577,6 +577,10 @@ In the above configuration =org-ref-show-broken-links= is set to
 =nil= because it causes lagging on large files.  See [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org#controlling-link-messages-and-tooltips][here]] for
 some more details.
 **** org-roam
+The format to use for naming =org-roam= files.
+#+BEGIN_SRC emacs-lisp
+  (setq calstad/org-roam-file-fmt "%<%Y%m%d%H%M%S%2N>")
+#+END_SRC
 #+BEGIN_SRC emacs-lisp
   (use-package org-roam
     :hook
@@ -590,8 +594,14 @@ some more details.
     (org-roam-capture-templates
      '(("d" "default" plain (function org-roam-capture--get-point)
         "%?"
-        :file-name "%<%Y%m%d%H%M%S%2N>"
+        :file-name calstad/org-roam-file-fmt
         :head "#+TITLE: ${title}\n"
+        :unnarrowed t)))
+    (org-roam-capture-ref-templates
+     '(("r" "ref" plain #'org-roam-capture--get-point
+        "%?"
+        :file-name "%<%Y%m%d%H%M%S%2N>"
+        :head "#+TITLE: ${title}\n#+ROAM_KEY: ${ref}"
         :unnarrowed t)))
     :bind (:map org-roam-mode-map
                 (("C-c n r" . org-roam)
