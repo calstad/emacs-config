@@ -252,6 +252,11 @@ Make it so that buffers have unique names if the files dont.
         )
 #+END_SRC
 *** Encrypting/Decrypting Files
+Enable the =EasyPG= package
+#+BEGIN_SRC emacs-lisp
+  (epa-file-enable)
+#+END_SRC
+
 Specify the GPG key to use to encrypt/decrypt files.
 #+BEGIN_SRC emacs-lisp
   (setq epa-file-encrypt-to "me@colinalstad.com")
