@@ -589,10 +589,11 @@ some more details.
     :custom
     (org-roam-directory calstad/org-roam-dir)
     (org-roam-db-location (expand-file-name "org-roam.db" calstad/persistence-dir))
+    (org-roam-link-file-path-type 'absolute)
     (org-roam-encrypt-files t)
     (org-roam-completion-system 'helm)
     (org-roam-link-title-format "R:%s")
-    (org-roam-link-file-path-type 'absolute)
+    (org-roam-graph-viewer "/Applications/Safari.app/Contents/MacOS/Safari")
     (org-roam-capture-templates
      '(("d" "default" plain (function org-roam-capture--get-point)
         "%?"
