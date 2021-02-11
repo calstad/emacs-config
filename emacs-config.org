@@ -584,6 +584,7 @@ some more details.
     :custom
     (org-roam-directory calstad/org-roam-dir)
     (org-roam-db-location (expand-file-name "org-roam.db" calstad/persistence-dir))
+    (org-roam-encrypt-files t)
     (org-roam-completion-system 'helm)
     (org-roam-link-title-format "R:%s")
     (org-roam-link-file-path-type 'absolute)
@@ -591,13 +592,13 @@ some more details.
      '(("d" "default" plain (function org-roam-capture--get-point)
         "%?"
         :file-name "%<%Y%m%d%H%M%S%2N>"
-        :head "#+TITLE: ${title}\n"
+        :head "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+TITLE: ${title}\n"
         :unnarrowed t)))
     (org-roam-capture-ref-templates
      '(("r" "ref" plain #'org-roam-capture--get-point
         "%?"
         :file-name "%<%Y%m%d%H%M%S%2N>"
-        :head "#+TITLE: ${title}\n#+ROAM_KEY: ${ref}"
+        :head "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+TITLE: ${title}\n#+ROAM_KEY: ${ref}"
         :unnarrowed t)))
     :bind (:map org-roam-mode-map
                 (("C-c n r" . org-roam)
