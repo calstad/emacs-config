@@ -661,12 +661,24 @@ the =bibtex-completion= package from MELPA would be used instead
   :END:"))))
 #+END_SRC
 **** org-journal
+A helper function to find the journal file for today or create it if
+need be.
 #+BEGIN_SRC emacs-lisp
   (defun calstad/org-journal-go-to-today ()
     (interactive)
     (let ((current-prefix-arg '(4)))
       (call-interactively 'org-journal-new-entry)))
+#+END_SRC
 
+Insert a string into every journal file right after the title line.
+#+BEGIN_SRC emacs-lisp
+  (defun calstad/insert-journal-body ()
+    (save-excursion
+      (goto-char (point-max))
+      (insert "\n* Appointments\n* Journal\n")))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
   (use-package org-journal
     :bind
     ("C-c n j" . org-journal-new-entry)
@@ -675,18 +687,20 @@ the =bibtex-completion= package from MELPA would be used instead
     :custom
     (org-journal-file-header "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+CATEGORY: journal\n")
     (org-journal-date-prefix "#+TITLE: ")
-    (org-journal-time-prefix "* ")
     (org-journal-file-format "%Y%m%d.org")
-    (org-journal-dir (expand-file-name "journal" calstad/org-dir))
+    (org-journal-dir calstad/org-roam-dir)
     (org-journal-encrypt-journal t)
     (org-journal-enable-cache t)
     (org-journal-enable-agenda-integration t)
     :config
-    (setq org-journal--cache-file (expand-file-name "org-journal.cache" calstad/persistence-dir)))
+    (setq org-journal--cache-file (expand-file-name "org-journal.cache" calstad/persistence-dir))
+    :init
+    (add-hook 'org-journal-after-header-create-hook #'calstad/insert-journal-body))
 #+END_SRC
 
+Find the location to insert a new entry into the journal file
 #+BEGIN_SRC emacs-lisp
-  (defun calstad/org-journal-find-location ()
+  (defun alstad/org-journal-find-location ()
     ;; Open today's journal, but specify a non-nil prefix argument in order to
     ;; inhibit inserting the heading; org-capture will insert the heading.
     (org-journal-new-entry t)
@@ -850,7 +864,7 @@ before/certain actions are taken.
 
 In order to apply the advice to save all =org-mode= buffers to
 interactivce functions, we need all to allow the save function to
-take arbitrary arguments.  See this [[https://emacs.stackexchange.com/a/52897][SO answer]] for more details. 
+take arbitrary arguments.  See this [[https://emacs.stackexchange.com/a/52897][SO answer]] for more details.
 #+BEGIN_SRC emacs-lisp
   (defun calstad/org-save-all-org-buffers (&rest _ignore)
     "Apply `org-save-all-org-buffers' ignoring all arguments."
