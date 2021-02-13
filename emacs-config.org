@@ -712,6 +712,15 @@ Find the location to insert a new entry into the journal file
 #+BEGIN_SRC emacs-lisp
   (use-package org-noter)
 #+END_SRC
+**** elfeed-org
+#+BEGIN_SRC emacs-lisp
+  (use-package elfeed-org
+    :custom
+    (rmh-elfeed-org-files
+     (list (expand-file-name "feeds.org" calstad/org-dir)))
+    :config
+    (elfeed-org))
+#+END_SRC
 **** Capture
 #+BEGIN_SRC emacs-lisp
   (setq org-default-notes-file (expand-file-name "tasks/inbox.org" calstad/org-dir))

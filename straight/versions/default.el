@@ -5,6 +5,8 @@
  ("conda.el" . "9f7eea16e9ad3eb34fe3d1cbd9d6162b8046c2f8")
  ("dash.el" . "b92ab5a39b987e4fe69317b9d9fda452300baf20")
  ("dockerfile-mode" . "d31f7685ebc5832d957e25070a930aa42984327d")
+ ("elfeed" . "362bbe5b38353d033c5299f621fea39e2c75a5e0")
+ ("elfeed-org" . "77b6bbf222487809813de260447d31c4c59902c9")
  ("elisp-slime-nav" . "9ab52362600af9f97f1590f05a295538025170b3")
  ("emacs-async" . "14f48de586b0977e3470f053b810d77b07ea427a")
  ("emacs-deferred" . "2239671d94b38d92e9b28d4e12fd79814cfb9c16")
