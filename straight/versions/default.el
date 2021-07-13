@@ -12,7 +12,7 @@
  ("emacs-deferred" . "2239671d94b38d92e9b28d4e12fd79814cfb9c16")
  ("emacs-dotenv-mode" . "e3701bf739bde44f6484eb7753deadaf691b73fb")
  ("emacs-htmlize" . "49205105898ba8993b5253beec55d8bddd820a70")
- ("emacs-jupyter" . "360cae2c70ab28c7a7848c0c56473d984f0243e5")
+ ("emacs-jupyter" . "1f0612eb936d36abab0f27b09cca691e81fc6e74")
  ("emacs-web-server" . "22ce66ea43e0eadb9ec1d691a35d9695fc29cee6")
  ("emacs-websocket" . "be99c4636ad72bcea535392d9097c32b98ec0056")
  ("emacs-zmq" . "eb4e01715cbf2f356a8ae5e678ffec3380a907dc")
