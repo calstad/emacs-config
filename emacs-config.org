@@ -584,129 +584,22 @@ some more details.
 **** org-roam
 #+BEGIN_SRC emacs-lisp
   (use-package org-roam
-    :hook
-    (after-init . org-roam-mode)
     :custom
-    (org-roam-directory calstad/org-roam-dir)
-    (org-roam-db-location (expand-file-name "org-roam.db" calstad/persistence-dir))
-    (org-roam-encrypt-files t)
-    (org-roam-db-update-method 'immediate)
-    (org-roam-completion-system 'helm)
-    (org-roam-link-title-format "R:%s")
-    (org-roam-graph-viewer "/Applications/Safari.app/Contents/MacOS/Safari")
-    (org-roam-capture-templates
-     '(("d" "default" plain (function org-roam-capture--get-point)
-        "%?"
-        :file-name "%<%Y%m%d%H%M%S%2N>"
-        :head "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+TITLE: ${title}\n"
-        :unnarrowed t)))
-    (org-roam-capture-ref-templates
-     '(("r" "ref" plain #'org-roam-capture--get-point
-        "%?"
-        :file-name "%<%Y%m%d%H%M%S%2N>"
-        :head "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+TITLE: ${title}\n#+ROAM_KEY: ${ref}"
-        :unnarrowed t)))
-    :bind (:map org-roam-mode-map
-                (("C-c n r" . org-roam)
-                 ("C-c n f" . org-roam-find-file)
-                 ("C-c n b" . org-roam-switch-to-buffer)
-                 ("C-c n g" . org-roam-graph))
-                :map org-mode-map
-                (("C-c n i" . org-roam-insert))
-                (("C-c n I" . org-roam-insert-immediate))))
-#+END_SRC
-=org-roam='s [[https://www.orgroam.com/manual/Roam-Protocol.html#Roam-Protocol][protocol extensions]] allow external programs to
-interact with the =org-roam= database.  This requires [[https://www.orgroam.com/manual/Installation-_00281_0029.html#Installation-_00281_0029][installing]]
-an application that can interact with emacs.
-#+BEGIN_SRC emacs-lisp
-  (require 'org-roam-protocol)
-  (defun calstad/org-protocol-focus-advice (orig &rest args)
-    (x-focus-frame nil)
-    (apply orig args))
-
-  (advice-add 'org-roam-protocol-open-ref :around
-              #'calstad/org-protocol-focus-advice)
-  (advice-add 'org-roam-protocol-open-file :around
-              #'calstad/org-protocol-focus-advice)
-#+END_SRC
-**** org-roam-bibtex
-To get =org-roam-bibtex= to work I had to delete the
-=bibtex-completion= files from the =helm-bibtex= package so that
-the =bibtex-completion= package from MELPA would be used instead
-#+BEGIN_SRC emacs-lisp
-  (use-package org-roam-bibtex
-    :after org-roam
-    :hook (org-roam-mode . org-roam-bibtex-mode)
-    :bind (:map org-mode-map
-                (("C-c n a" . orb-note-actions)))
-    :custom
-    (orb-preformat-keywords
-     '(("citekey" . "=key=") "title" "file" "author-or-editor"))
-    (orb-process-file-field t)
-    (orb-file-field-extensions "pdf")
-    (orb-templates
-     '(("r" "ref" plain (function org-roam-capture--get-point)
-        ""
-        :file-name "%<%Y%m%d%H%M%S%2N>"
-        :head "#+TITLE: ${title}\n#+ROAM_KEY: ${ref}
-
-  - tags ::
-
-  ,* Notes
-  :PROPERTIES:
-  :Custom_ID: ${citekey}
-  :AUTHOR: ${author-or-editor}
-  :NOTER_DOCUMENT: ${file}
-  :NOTER_PAGE:
-  :END:"))))
-#+END_SRC
-**** org-journal
-A helper function to find the journal file for today or create it if
-need be.
-#+BEGIN_SRC emacs-lisp
-  (defun calstad/org-journal-go-to-today ()
-    (interactive)
-    (let ((current-prefix-arg '(4)))
-      (call-interactively 'org-journal-new-entry)))
-#+END_SRC
-
-Insert a string into every journal file right after the title line.
-#+BEGIN_SRC emacs-lisp
-  (defun calstad/insert-journal-body ()
-    (save-excursion
-      (goto-char (point-max))
-      (insert "\n* Appointments\n* Journal\n")))
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-  (use-package org-journal
-    :bind
-    ("C-c n j" . org-journal-new-entry)
-    ("C-c n J" . org-journal-new-scheduled-entry)
-    ("C-c n d" . calstad/org-journal-go-to-today)
-    :custom
-    (org-journal-file-header "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+CATEGORY: journal\n")
-    (org-journal-date-prefix "#+TITLE: ")
-    (org-journal-file-format "%Y%m%d.org")
-    (org-journal-dir calstad/org-roam-dir)
-    (org-journal-encrypt-journal t)
-    (org-journal-enable-cache t)
-    (org-journal-enable-agenda-integration t)
+    (org-roam-directory (file-truename calstad/org-roam-dir))
+    (org-roam-mode-sections
+     (list #'org-roam-backlinks-section
+           #'org-roam-reflinks-section
+           #'org-roam-unlinked-references-section))
+    (org-roam-v2-ack t)
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n g" . org-roam-graph)
+           ("C-c n i" . org-roam-node-insert)
+           ("C-c n c" . org-roam-capture)
+           ;; Dailies
+           ("C-c n j" . org-roam-dailies-capture-today))
     :config
-    (setq org-journal--cache-file (expand-file-name "org-journal.cache" calstad/persistence-dir))
-    :init
-    (add-hook 'org-journal-after-header-create-hook #'calstad/insert-journal-body))
-#+END_SRC
-
-Find the location to insert a new entry into the journal file
-#+BEGIN_SRC emacs-lisp
-  (defun alstad/org-journal-find-location ()
-    ;; Open today's journal, but specify a non-nil prefix argument in order to
-    ;; inhibit inserting the heading; org-capture will insert the heading.
-    (org-journal-new-entry t)
-    ;; Position point on the journal's top-level heading so that org-capture
-    ;; will add the new entry as a child entry.
-    (goto-char (point-min)))
+    (org-roam-setup))
 #+END_SRC
 **** org-noter
 #+BEGIN_SRC emacs-lisp
