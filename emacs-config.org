@@ -565,7 +565,7 @@ Add a =CLOSED= timestamp to todo items
 ***** Enable habit tracking
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'org-modules 'org-habit)
-  (add-to-list 'org-modules 'org-checklist)
+  ;; (add-to-list 'org-modules 'org-checklist)
 #+END_SRC
 **** org-ref
 Org-ref is a library for org-mode that provides rich support for
