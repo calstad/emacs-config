@@ -599,7 +599,7 @@ some more details.
         :if-new (file+head "%<%Y%m%d%H%M%S%2N>.org.gpg"
                            "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+TITLE: ${title}\n")
         :unnarrowed t)
-       ("r" "bibliography reference" plain
+       ("b" "bibliography reference" plain
         "%?"
         :if-new (file+head "%<%Y%m%d%H%M%S%2N>.org.gpg"
                            "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+TITLE: ${title}
