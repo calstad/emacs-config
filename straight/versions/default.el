@@ -35,6 +35,7 @@
  ("org-noter" . "9ead81d42dd4dd5074782d239b2efddf9b8b7b3d")
  ("org-ref" . "f582e9c53e8e4c5dcc1d3889f1b5c536c9a9b524")
  ("org-roam" . "e997c017deab234a0a067914d7bb6e81e3fa9d88")
+ ("org-roam-bibtex" . "c9865196efe7cfdfcced0d47ea3e5b39bdddd162")
  ("ox-gfm" . "99f93011b069e02b37c9660b8fcb45dab086a07f")
  ("ox-pandoc" . "aa37dc7e94213d4ebedb85c384c1ba35007da18e")
  ("paredit" . "8330a41e8188fe18d3fa805bb9aa529f015318e8")
