@@ -597,19 +597,28 @@ some more details.
     (org-roam-capture-templates
      '(("d" "default" plain "%?"
         :if-new (file+head "%<%Y%m%d%H%M%S%2N>.org.gpg"
-                       "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+TITLE: ${title}\n")
-        :unnarrowed t)))
+                           "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+TITLE: ${title}\n")
+        :unnarrowed t)
+       ("r" "bibliography reference" plain
+        "%?"
+        :if-new (file+head "%<%Y%m%d%H%M%S%2N>.org.gpg"
+                           "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+TITLE: ${title}
+
+  ,* Notes
+  :PROPERTIES:
+  :Custom_ID: ${citekey}
+  :AUTHOR: ${author-or-editor}
+  :NOTER_DOCUMENT: %(orb-process-file-field \"${citekey}\")
+  :NOTER_PAGE:
+  :END:")
+        :unnarrowed t)
+       ))
     (org-roam-dailies-capture-templates
      '(("d" "default" entry
         "* %?"
         :if-new (file+head "%<%Y%m%d>.org.gpg"
                            "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+TITLE: %<%A, %m/%d/%y>\n")
         :jump-to-captured t)))
-    ;; (org-roam-capture-ref-templates
-    ;;  '(("r" "ref" plain "%?" :if-new
-    ;;     (file+head "%<%Y%m%d%H%M%S%2N>.org.gpg"
-    ;;                "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+TITLE: ${title}\n#+ROAM_KEY: ${ref}")
-    ;;     :unnarrowed t)))
     :bind (("C-c n l" . org-roam-buffer-toggle)
            ("C-c n f" . org-roam-node-find)
            ("C-c n g" . org-roam-graph)
@@ -627,7 +636,14 @@ some more details.
 #+BEGIN_SRC emacs-lisp
   (use-package org-roam-bibtex
     :after org-roam
+    :straight (:host github :repo "org-roam/org-roam-bibtex" :branch "org-roam-v2")
+    :demand t
     :hook (org-roam-mode . org-roam-bibtex-mode)
+    :custom
+    (orb-insert-interface 'helm-bibtex)
+    (orb-note-actions-interface 'helm)
+    (orb-preformat-keywords
+     '(("citekey" . "=key=") "title" "file" "author-or-editor" "year"))
     :config
     (require 'org-ref))
 #+END_SRC
