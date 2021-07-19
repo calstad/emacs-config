@@ -622,6 +622,15 @@ some more details.
     (org-roam-setup)
     (require 'org-roam-protocol))
 #+END_SRC
+***** TODO Fix capture from Safari via org-protocol
+**** org-ref-bibtex
+#+BEGIN_SRC emacs-lisp
+  (use-package org-roam-bibtex
+    :after org-roam
+    :hook (org-roam-mode . org-roam-bibtex-mode)
+    :config
+    (require 'org-ref))
+#+END_SRC
 **** org-noter
 #+BEGIN_SRC emacs-lisp
   (use-package org-noter)
