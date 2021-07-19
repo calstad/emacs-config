@@ -615,7 +615,8 @@ some more details.
            ("C-c n i" . org-roam-node-insert)
            ("C-c n c" . org-roam-capture)
            ;; Dailies
-           ("C-c n j" . org-roam-dailies-capture-today))
+           ("C-c n j" . org-roam-dailies-capture-today)
+           ("C-c n d" . org-roam-dailies-goto-today))
     :config
     (org-roam-setup))
 #+END_SRC
@@ -636,9 +637,7 @@ some more details.
 #+BEGIN_SRC emacs-lisp
   (setq org-default-notes-file (expand-file-name "tasks/inbox.org" calstad/org-dir))
   (setq org-capture-templates
-        '(("j" "Journal entry" entry (function calstad/org-journal-find-location)
-           "* %(format-time-string org-journal-time-format)%^{Title}\n%i%?")
-          ("c" "OrgProtocol capture" entry (file+headline org-default-notes-file "Links")
+        '(("c" "OrgProtocol capture" entry (file+headline org-default-notes-file "Links")
            "* TODO [[%:link][%:description]]\n%i"
            :immediate-finish t)
           ("t" "Task" entry (file+headline org-default-notes-file "Tasks")
