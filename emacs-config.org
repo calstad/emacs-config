@@ -516,7 +516,8 @@ latex, and development environment.
     (org-startup-indented t)
     (org-link-file-path-type 'absolute)
     (org-startup-folded t)
-    (org-archive-location "%s_archive::datetree/"))
+    (org-archive-location "%s_archive::datetree/")
+    (org-id-locations-file (expand-file-name "org-id-locations" calstad/persistence-dir)))
 #+END_SRC
 **** Agenda
 Have todo items with no associated timestamp show up at the top
