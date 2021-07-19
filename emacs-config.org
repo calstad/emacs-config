@@ -588,6 +588,7 @@ some more details.
     :custom
     (org-roam-v2-ack t)
     (org-roam-directory (file-truename calstad/org-roam-dir))
+    (org-roam-db-location (expand-file-name "org-roam.db" calstad/persistence-dir))
     (org-roam-mode-sections
      (list #'org-roam-backlinks-section
            #'org-roam-reflinks-section
