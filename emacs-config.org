@@ -586,6 +586,7 @@ some more details.
 #+BEGIN_SRC emacs-lisp
   (use-package org-roam
     :custom
+    (org-roam-v2-ack t)
     (org-roam-directory (file-truename calstad/org-roam-dir))
     (org-roam-mode-sections
      (list #'org-roam-backlinks-section
