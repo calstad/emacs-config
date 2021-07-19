@@ -520,6 +520,10 @@ latex, and development environment.
     (org-id-locations-file (expand-file-name "org-id-locations" calstad/persistence-dir)))
 #+END_SRC
 **** Agenda
+Set where agenda items are pulled from
+#+BEGIN_SRC emacs-lisp
+  (setq org-agenda-files (list calstad/org-roam-dir))
+#+END_SRC
 Have todo items with no associated timestamp show up at the top
 of the agenda view above the time slots instead of below.
 #+BEGIN_SRC emacs-lisp
@@ -631,7 +635,7 @@ some more details.
     (org-roam-setup)
     (require 'org-roam-protocol))
 #+END_SRC
-***** TODO Fix capture from Safari via org-protocol
+***** TODO Fix org-roam org-protocol capture
 **** org-ref-bibtex
 #+BEGIN_SRC emacs-lisp
   (use-package org-roam-bibtex
@@ -881,4 +885,5 @@ Load =yasnippet= on programming langauge major modes.
 Start the emacs server so that clients can connect
 #+BEGIN_SRC emacs-lisp
   (server-start)
+  (require 'org-protocol)
 #+END_SRC
