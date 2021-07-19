@@ -662,7 +662,7 @@ some more details.
 #+END_SRC
 **** Capture
 #+BEGIN_SRC emacs-lisp
-  (setq org-default-notes-file (expand-file-name "tasks/inbox.org" calstad/org-dir))
+  (setq org-default-notes-file (expand-file-name "roam/tasks/inbox.org.gpg" calstad/org-dir))
   (setq org-capture-templates
         '(("c" "OrgProtocol capture" entry (file+headline org-default-notes-file "Links")
            "* TODO [[%:link][%:description]]\n%i"
