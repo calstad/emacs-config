@@ -603,11 +603,10 @@ some more details.
         :if-new (file+head "%<%Y%m%d%H%M%S%2N>.org.gpg"
                            "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+TITLE: ${title}\n")
         :unnarrowed t)
-       ("b" "bibliography reference" plain
-        "%?"
+       ("b" "bibliography reference" plain "%?"
         :if-new (file+head "%<%Y%m%d%H%M%S%2N>.org.gpg"
                            "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+TITLE: ${title}
-
+  
   ,* Notes
   :PROPERTIES:
   :Custom_ID: ${citekey}
@@ -615,12 +614,16 @@ some more details.
   :NOTER_DOCUMENT: %(orb-process-file-field \"${citekey}\")
   :NOTER_PAGE:
   :END:")
-        :unnarrowed t)
-       ))
+        :unnarrowed t)))
+    (org-roam-capture-ref-templates
+     '(("r" "ref" plain "%?"
+       :if-new (file+head "%<%Y%m%d%H%M%S%2N>.org.gpg"
+                          "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+TITLE: ${title}")
+       :jump-to-captured t)))
     (org-roam-dailies-capture-templates
      '(("d" "default" entry
         "* %?"
-        :if-new (file+head "%<%Y%m%d>.org.gpg"
+        :if-new (file+head "%<%Y-%m-%d>.org.gpg"
                            "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+TITLE: %<%A, %m/%d/%y>\n")
         :jump-to-captured t)))
     :bind (("C-c n l" . org-roam-buffer-toggle)
