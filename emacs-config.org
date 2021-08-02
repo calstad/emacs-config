@@ -698,11 +698,10 @@ some more details.
     (require 'org-roam-protocol))
 #+END_SRC
 ***** TODO Fix org-roam org-protocol capture
-**** org-ref-bibtex
+**** org-roam-bibtex
 #+BEGIN_SRC emacs-lisp
   (use-package org-roam-bibtex
     :after org-roam
-    :straight (:host github :repo "org-roam/org-roam-bibtex" :branch "org-roam-v2")
     :demand t
     :hook (org-roam-mode . org-roam-bibtex-mode)
     :custom
