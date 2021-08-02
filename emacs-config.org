@@ -665,7 +665,7 @@ some more details.
        ("b" "bibliography reference" plain "%?"
         :if-new (file+head "%<%Y%m%d%H%M%S%2N>.org.gpg"
                            "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+TITLE: ${title}
-  
+
   ,* Notes
   :PROPERTIES:
   :Custom_ID: ${citekey}
@@ -739,9 +739,17 @@ some more details.
 **** Refile
 #+BEGIN_SRC emacs-lisp
   (setq org-refile-targets '((nil :maxlevel . 3)
-                             (org-agenda-files :maxlevel . 1)))
-  ;; (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
-  ;; (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
+                             (org-agenda-files :maxlevel . 3)))
+  (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
+  (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
+
+
+  (defun calstad/verify-refile-target ()
+    "Exclude task headings from refile target list"
+    (or (not (member (nth 2 (org-heading-components)) org-todo-keywords)))
+    (save-excursion (org-goto-first-child)))
+
+  (setq org-refile-target-verify-function 'calstad/verify-refile-target)
 #+END_SRC
 **** LaTeX
 Highlight LaTeX source in org documents
