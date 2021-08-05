@@ -33,6 +33,7 @@
  ("melpa" . "1b04b46020d56067898cb4445f271381d7996ddf")
  ("ob-sagemath" . "79645bce0c25a650bae61e550434bed836995dce")
  ("org" . "652430128896e690dc6ef2a83891a1209094b3da")
+ ("org-fragtog" . "479e0a1c3610dfe918d89a5f5a92c8aec37f131d")
  ("org-noter" . "9ead81d42dd4dd5074782d239b2efddf9b8b7b3d")
  ("org-pandoc-import" . "21807e51f4897652649852aebd4e62acbf644f52")
  ("org-ref" . "f582e9c53e8e4c5dcc1d3889f1b5c536c9a9b524")

@@ -766,6 +766,13 @@ Save all LaTeX preview images in the same temp directory.
   (setq org-latex-preview-ltxpng-directory "/tmp/org_latex_prevs/")
 #+END_SRC
 
+Automatically [[https://github.com/io12/org-fragtog][toggle]] LaTeX fragments when the cursor enters/leaves a
+fragment.
+#+BEGIN_SRC emacs-lisp
+  (use-package org-fragtog
+    :hook (org-mode . org-fragtog-mode))
+#+END_SRC
+
 Load these LaTeX packages by default in all org-mode documents.
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'org-latex-packages-alist '("" "amsthm"))
