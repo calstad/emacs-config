@@ -753,7 +753,7 @@ some more details.
 **** LaTeX
 Highlight LaTeX source in org documents
 #+BEGIN_SRC emacs-lisp
-  (setq org-highlight-latex-and-related '(latex entites))
+  (setq org-highlight-latex-and-related '(latex script entites))
 #+END_SRC
 
 Use [[https://tex.stackexchange.com/questions/78501/change-size-of-the-inline-image-for-latex-fragment-in-emacs-org-mode][this tip]] to increase the scale of inline LaTeX images
@@ -763,7 +763,12 @@ Use [[https://tex.stackexchange.com/questions/78501/change-size-of-the-inline-im
 
 Save all LaTeX preview images in the same temp directory.
 #+BEGIN_SRC emacs-lisp
-  (setq org-latex-preview-ltxpng-directory "/tmp/org_latex_prevs/")
+  (setq org-preview-latex-image-directory "/tmp/org_latex_prevs/")
+#+END_SRC
+
+Automatically preview LaTeX when opening an =org-mode= file.
+#+BEGIN_SRC emacs-lisp
+  (setq org-startup-with-latex-preview t)
 #+END_SRC
 
 Automatically [[https://github.com/io12/org-fragtog][toggle]] LaTeX fragments when the cursor enters/leaves a
@@ -775,7 +780,12 @@ fragment.
 
 Load these LaTeX packages by default in all org-mode documents.
 #+BEGIN_SRC emacs-lisp
-  (add-to-list 'org-latex-packages-alist '("" "amsthm"))
+  (add-to-list 'org-latex-packages-alist '("" "amsthm" t))
+  (add-to-list 'org-latex-packages-alist '("" "tikz-cd" t))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-preview-latex-default-process 'imagemagick)
 #+END_SRC
 **** org-babel
 [[https://orgmode.org/worg/org-contrib/babel/][Babel]] is Org-mode's ability to execute source code within
