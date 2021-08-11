@@ -514,10 +514,24 @@ latex, and development environment.
            ("C-c l" . org-store-link))
     :custom
     (org-startup-indented t)
-    (org-link-file-path-type 'absolute)
     (org-startup-folded t)
     (org-archive-location "%s_archive::datetree/")
     (org-id-locations-file (expand-file-name "org-id-locations" calstad/persistence-dir)))
+#+END_SRC
+**** UI
+#+BEGIN_SRC emacs-lisp
+  (use-package org-bullets
+      :config
+      (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-hide-emphasis-markers t)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  ;; (use-package mixed-pitch)
+
 #+END_SRC
 **** Agenda
 Set where agenda items are pulled from
