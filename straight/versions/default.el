@@ -1,6 +1,6 @@
 (("auctex" . "fb062a364fbc7d791707ff574b0f0a7f4c7a7269")
  ("biblio.el" . "eb9baf1d2bf6a073d24ccb717025baa693e98f3e")
- ("cdlatex" . "480387b39f6ddd9cd2a9511ecee064ad8e1dd324")
+ ("cdlatex" . "f215b70c5cb02bbc43f5a7d5c8e5e3460ff82428")
  ("company-mode" . "25f6a2717ade173c37dc4d013ce68312673596d7")
  ("conda.el" . "9f7eea16e9ad3eb34fe3d1cbd9d6162b8046c2f8")
  ("dash.el" . "2675596b9ac1c4b9d47b93e227f06f8ec6755ec6")
