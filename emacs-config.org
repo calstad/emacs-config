@@ -515,6 +515,7 @@ latex, and development environment.
     :custom
     (org-startup-indented t)
     (org-startup-folded t)
+    (org-insert-heading-respect-content t)
     (org-archive-location "%s_archive::datetree/")
     (org-id-locations-file (expand-file-name "org-id-locations" calstad/persistence-dir)))
 #+END_SRC
@@ -550,6 +551,18 @@ Default the agenda view to the daily instead of weekly view.
   (setq org-agenda-span 'day)
 #+END_SRC
 
+Show breadcrumbs for nested headline todos in the agenda views.
+#+BEGIN_SRC emacs-lisp
+  (setq org-agenda-prefix-format
+        '((agenda . " %i %-12:c%?-12t% s")
+          (timeline . "  % s")
+          (todo .
+                " %i %-12:c %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
+          (tags .
+                " %i %-12:c %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
+          (search . " %i %-12:c")))
+#+END_SRC
+
 Configure how the time grid is shown in the daily agenda view
 #+BEGIN_SRC emacs-lisp
   (setq org-agenda-time-grid
@@ -571,6 +584,7 @@ from [[https://thomasf.github.io/solarized-css/test/org-hacks.html#sec-1-9-7][he
     "Convert a number of minutes to an HHMM time"
     (+ (* (/ minutes 60) 100) (% minutes 60)))
 
+  (require 'cl)
 
   (defadvice org-agenda-add-time-grid-maybe (around mde-org-agenda-grid-tweakify
                                                     (list ndays todayp))
@@ -608,17 +622,6 @@ from [[https://thomasf.github.io/solarized-css/test/org-hacks.html#sec-1-9-7][he
   (ad-activate 'org-agenda-add-time-grid-maybe)
 #+END_SRC
 
-Show breadcrumbs for nested headline todos in the agenda views.
-#+BEGIN_SRC emacs-lisp
-  (setq org-agenda-prefix-format
-        '((agenda . " %i %-12:c%?-12t% s")
-          (timeline . "  % s")
-          (todo .
-                " %i %-12:c %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
-          (tags .
-                " %i %-12:c %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
-          (search . " %i %-12:c")))
-#+END_SRC
 **** Todo Items
 ***** Todo States
 #+BEGIN_SRC emacs-lisp
@@ -659,6 +662,14 @@ citations, labels, and cross-references in org-mode.
 In the above configuration =org-ref-show-broken-links= is set to
 =nil= because it causes lagging on large files.  See [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org#controlling-link-messages-and-tooltips][here]] for
 some more details.
+
+Update the color of =org-ref= cite links to be the same as other =org-mod=
+links instead of white.
+#+BEGIN_SRC emacs-lisp
+  (set-face-foreground
+   'org-ref-cite-face
+   (cdr (assoc "zenburn-yellow-2" zenburn-default-colors-alist)))
+#+END_SRC
 **** org-roam
 #+BEGIN_SRC emacs-lisp
   (use-package org-roam
@@ -682,7 +693,7 @@ some more details.
 
   ,* Notes
   :PROPERTIES:
-  :Custom_ID: ${citekey}
+  :CUSTOM_ID: ${citekey}
   :AUTHOR: ${author-or-editor}
   :NOTER_DOCUMENT: %(orb-process-file-field \"${citekey}\")
   :NOTER_PAGE:
@@ -695,9 +706,15 @@ some more details.
        :jump-to-captured t)))
     (org-roam-dailies-capture-templates
      '(("d" "default" entry
-        "* %?"
-        :if-new (file+head "%<%Y-%m-%d>.org.gpg"
-                           "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+TITLE: %<%A, %m/%d/%y>\n")
+        "** %<%H:%M> %i%?\n"
+        :if-new (file+head+olp "%<%Y-%m-%d>.org.gpg"
+                               "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-
+  ,#+CATEGORY: daily
+  ,#+TITLE: %<%A, %m/%d/%y>
+
+  ,* Appointments
+  ,* Journal"
+                               ("Journal"))
         :jump-to-captured t)))
     :bind (("C-c n l" . org-roam-buffer-toggle)
            ("C-c n f" . org-roam-node-find)
@@ -774,7 +791,7 @@ websites like allrecipes.com
 **** LaTeX
 Highlight LaTeX source in org documents
 #+BEGIN_SRC emacs-lisp
-  (setq org-highlight-latex-and-related '(latex script entites))
+  (setq org-highlight-latex-and-related '(latex entites))
 #+END_SRC
 
 Use [[https://tex.stackexchange.com/questions/78501/change-size-of-the-inline-image-for-latex-fragment-in-emacs-org-mode][this tip]] to increase the scale of inline LaTeX images
@@ -907,8 +924,8 @@ application.
      ("\\.pptx" . default)))
 #+END_SRC
 **** Saving Org Buffers
-Use =advice= to save all the current =org-mode= buffers
-before/certain actions are taken.
+Use =advice= to save all the current =org-mode= buffers before/certain
+actions are taken.
 #+BEGIN_SRC emacs-lisp
   (setq calstad/org-save-funcs
         '((:before . (org-agenda-quit))

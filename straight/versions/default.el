@@ -32,7 +32,7 @@
  ("markdown-mode" . "8c6775a000bf40d7c7b35a529011a99231a4a4f7")
  ("melpa" . "1b04b46020d56067898cb4445f271381d7996ddf")
  ("ob-sagemath" . "79645bce0c25a650bae61e550434bed836995dce")
- ("org" . "652430128896e690dc6ef2a83891a1209094b3da")
+ ("org" . "3664447eb2417b38f0053674f248d2b0f1592ff0")
  ("org-bullets" . "767f55feb58b840a5a04eabfc3fbbf0d257c4792")
  ("org-chef" . "a97232b4706869ecae16a1352487a99bc3cf97af")
  ("org-fragtog" . "479e0a1c3610dfe918d89a5f5a92c8aec37f131d")
