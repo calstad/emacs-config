@@ -739,6 +739,13 @@ some more details.
     :config
     (elfeed-org))
 #+END_SRC
+**** org-chef
+[[https://github.com/Chobbes/org-chef][org-chef]] is a package for managing recipes in org-mode. One of the
+main features is that it can automatically extract recipes from
+websites like allrecipes.com
+#+BEGIN_SRC emacs-lisp
+  (use-package org-chef)
+#+END_SRC
 **** Capture
 #+BEGIN_SRC emacs-lisp
   (setq org-default-notes-file (expand-file-name "roam/tasks/inbox.org.gpg" calstad/org-dir))

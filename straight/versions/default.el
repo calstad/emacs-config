@@ -34,6 +34,7 @@
  ("ob-sagemath" . "79645bce0c25a650bae61e550434bed836995dce")
  ("org" . "652430128896e690dc6ef2a83891a1209094b3da")
  ("org-bullets" . "767f55feb58b840a5a04eabfc3fbbf0d257c4792")
+ ("org-chef" . "a97232b4706869ecae16a1352487a99bc3cf97af")
  ("org-fragtog" . "479e0a1c3610dfe918d89a5f5a92c8aec37f131d")
  ("org-noter" . "9ead81d42dd4dd5074782d239b2efddf9b8b7b3d")
  ("org-pandoc-import" . "21807e51f4897652649852aebd4e62acbf644f52")
