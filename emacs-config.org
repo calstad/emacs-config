@@ -500,6 +500,7 @@ latex, and development environment.
     :custom
     (org-startup-indented t)
     (org-startup-folded t)
+    (org-list-allow-alphabetical t)
     (org-insert-heading-respect-content t)
     (org-archive-location "%s_archive::datetree/")
     (org-id-locations-file (expand-file-name "org-id-locations" calstad/persistence-dir)))
