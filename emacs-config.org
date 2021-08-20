@@ -731,7 +731,11 @@ links instead of white.
 #+END_SRC
 **** org-noter
 #+BEGIN_SRC emacs-lisp
-  (use-package org-noter)
+  (use-package org-noter
+    :custom
+    (org-noter-doc-property-in-notes t)
+    (org-noter-always-create-frame nil)
+    (org-noter-auto-save-last-location t))
 #+END_SRC
 **** elfeed-org
 #+BEGIN_SRC emacs-lisp
