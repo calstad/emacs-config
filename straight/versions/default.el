@@ -35,7 +35,7 @@
  ("org" . "3664447eb2417b38f0053674f248d2b0f1592ff0")
  ("org-bullets" . "767f55feb58b840a5a04eabfc3fbbf0d257c4792")
  ("org-chef" . "a97232b4706869ecae16a1352487a99bc3cf97af")
- ("org-fragtog" . "479e0a1c3610dfe918d89a5f5a92c8aec37f131d")
+ ("org-fragtog" . "15861261a437aca2ec858317de71603d2957b423")
  ("org-noter" . "9ead81d42dd4dd5074782d239b2efddf9b8b7b3d")
  ("org-pandoc-import" . "21807e51f4897652649852aebd4e62acbf644f52")
  ("org-ref" . "f582e9c53e8e4c5dcc1d3889f1b5c536c9a9b524")
