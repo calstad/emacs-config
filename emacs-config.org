@@ -335,21 +335,6 @@ front-ends to retrieve and display completion candidates.
            :map company-active-map ("M-d" . company-show-doc-buffer))
     :init (add-hook 'after-init-hook 'global-company-mode))
 #+END_SRC
-*** Conda
-[[https://github.com/necaris/conda.el][Conda.el]] provides an interface for working with [[https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html][conda
-environments.]]
-#+BEGIN_SRC emacs-lisp
-  (use-package conda
-    :config
-    (custom-set-variables
-     '(conda-anaconda-home (expand-file-name "/usr/local/Caskroom/miniconda/base")))
-    (conda-env-initialize-interactive-shells)
-    (conda-env-initialize-eshell)
-    (conda-env-activate "base")
-    :custom
-    (mode-line-format
-     (cons mode-line-format '(:exec conda-env-current-name))))
-#+END_SRC
 *** Dired
 **** Use =a= to reuse dired buffer
 The command =dired-find-alternate-file= is disabled by default so
@@ -976,6 +961,14 @@ on-demand and stored in memory.
   (use-package pdf-tools
     :mode ("\\.pdf\\'" . pdf-view-mode)
     :config (pdf-tools-install))
+#+END_SRC
+*** Pyvenv
+Use [[https://github.com/jorgenschaefer/pyvenv][pyvenv]] to manage python and conda virtual environments.
+#+BEGIN_SRC emacs-lisp
+  (setenv "WORKON_HOME" "/usr/local/Caskroom/miniforge/base/envs")
+  (use-package pyvenv
+    :config
+    (pyvenv-mode 1))
 #+END_SRC
 *** Rest Client
 [[https://github.com/pashky/restclient.el][Restclient]] is a major mode for exploring HTTP REST web services.
