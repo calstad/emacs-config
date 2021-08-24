@@ -728,7 +728,8 @@ links instead of white.
     (orb-preformat-keywords
      '(("citekey" . "=key=") "title" "file" "author-or-editor" "year"))
     :config
-    (require 'org-ref))
+    (require 'org-ref)
+    (org-roam-bibtex-mode))
 #+END_SRC
 **** org-noter
 #+BEGIN_SRC emacs-lisp
