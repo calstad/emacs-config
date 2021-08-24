@@ -709,7 +709,8 @@ links instead of white.
            ("C-c n c" . org-roam-capture)
            ;; Dailies
            ("C-c n j" . org-roam-dailies-capture-today)
-           ("C-c n d" . org-roam-dailies-goto-today))
+           ("C-c n d" . org-roam-dailies-goto-today)
+           ("C-c n D" . org-roam-dailies-goto-date))
     :config
     (org-roam-setup)
     (require 'org-roam-protocol))
