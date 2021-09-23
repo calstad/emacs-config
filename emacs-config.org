@@ -5,8 +5,7 @@
 #+PROPERTY: header-args:emacs-lisp :results none
 
 * Emacs Configuration
-This is my "dot emacs" configuration using =org-mode=.  It has been
-heavily influenced/stolen from [[https://github.com/abedra/emacs.d][Aaron Bedra's emacs config]].
+This is my "dot emacs" configuration using =org-mode=.  It has been heavily influenced/stolen from [[https://github.com/abedra/emacs.d][Aaron Bedra's emacs config]].
 ** Global Configuration
 *** Constants
 These are constants that are used throughout the configuration
@@ -34,8 +33,7 @@ Where we keep capture templates for =org-mode= and related packages.
         (expand-file-name "org_capture_templates/" user-emacs-directory))
 #+END_SRC
 
-The location of my reference library including bibliographies and
-PDFs.
+The location of my reference library including bibliographies and PDFs.
 #+BEGIN_SRC emacs-lisp
   (setq calstad/ref-lib-dir (expand-file-name "library" calstad/sync-dir)
         calstad/lib-bib (expand-file-name "library.bib" calstad/ref-lib-dir)
@@ -47,19 +45,15 @@ Directory where we keep all of the =org-roam= files.
   (setq calstad/org-roam-dir "/Users/colin/Library/Mobile Documents/com~apple~CloudDocs/org/roam")
 #+END_SRC
 *** User details
-Emacs will normally pick this up automatically, but this way I can
-be sure the right information is always present.
+Emacs will normally pick this up automatically, but this way I can be sure the right information is always present.
 #+BEGIN_SRC emacs-lisp
   (setq user-full-name "Colin Alstad"
         user-mail-address "colin.alstad@gmail.com")
 #+END_SRC
 *** Packages
-We use the [[https://github.com/raxod502/straight.el][straight]] package manager to take care of dependency
-management. The straight package is bootstrapped in the [[file:init.el::;; Install straight.el to manage packages][init file]]
-so that the [[https://github.com/raxod502/straight.el#the-wrong-version-of-my-package-was-loaded][wrong version]] of =org-mode= is not loaded.
+We use the [[https://github.com/raxod502/straight.el][straight]] package manager to take care of dependency management. The straight package is bootstrapped in the [[file:init.el::;; Install straight.el to manage packages][init file]] so that the [[https://github.com/raxod502/straight.el#the-wrong-version-of-my-package-was-loaded][wrong version]] of =org-mode= is not loaded.
 
-Next we setup straight to use the [[https://github.com/jwiegley/use-package][use-package]] macro for package
-configuration.
+Next we setup straight to use the [[https://github.com/jwiegley/use-package][use-package]] macro for package configuration.
 #+BEGIN_SRC emacs-lisp
   ;; Use straight to install use-package
   (straight-use-package 'use-package)
@@ -131,7 +125,7 @@ marked region.
 **** Filling
 ***** Add auto fill to certain modes
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'text-mode-hook 'turn-on-auto-fill)
+  (add-hook 'text-mode-hook 'visual-line-mode)
 #+END_SRC
 ***** Unfill a region
 #+BEGIN_SRC emacs-lisp
