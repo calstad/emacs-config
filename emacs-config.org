@@ -481,6 +481,10 @@ environments and math.
 #+BEGIN_SRC emacs-lisp
   (use-package markdown-mode)
 #+END_SRC
+*** Olivetti
+#+BEGIN_SRC emacs-lisp
+  (use-package olivetti)
+#+END_SRC
 *** Org
 =org-mode= is one of the most powerful and amazing features of
 Emacs. I use it for task managment, notes, journal, habit tracker,
