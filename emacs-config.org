@@ -516,8 +516,11 @@ latex, and development environment.
                                           ; Behavior
     (org-list-allow-alphabetical t)
     (org-insert-heading-respect-content t)
+                                          ; File locations
     (org-archive-location "%s_archive::datetree/")
-    (org-id-locations-file (expand-file-name "org-id-locations" calstad/persistence-dir)))
+    (org-id-locations-file (expand-file-name "org-id-locations" calstad/persistence-dir))
+    :hook
+    (org-mode . visual-line-mode))
 #+END_SRC
 **** UI
 #+BEGIN_SRC emacs-lisp
@@ -527,7 +530,33 @@ latex, and development environment.
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  (setq org-hide-emphasis-markers t)
+  (custom-theme-set-faces
+   'user
+   '(variable-pitch ((t (:family "CMU Serif" :height 1.25 :weight thin)))))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  ;; (let* ((variable-tuple
+  ;;         (cond ((x-list-fonts "ETBembo")         '(:font "ETBembo"))
+  ;;               ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
+  ;;               ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
+  ;;               ((x-list-fonts "Verdana")         '(:font "Verdana"))
+  ;;               ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
+  ;;               (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
+  ;;        (base-font-color     (face-foreground 'default nil 'default))
+  ;;        (headline           `(:inherit default :weight bold :foreground ,base-font-color)))
+
+  ;;   (custom-theme-set-faces
+  ;;    'user
+  ;;    `(org-level-8 ((t (,@headline ,@variable-tuple))))
+  ;;    `(org-level-7 ((t (,@headline ,@variable-tuple))))
+  ;;    `(org-level-6 ((t (,@headline ,@variable-tuple))))
+  ;;    `(org-level-5 ((t (,@headline ,@variable-tuple))))
+  ;;    `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.1))))
+  ;;    `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.25))))
+  ;;    `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.5))))
+  ;;    `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.75))))
+  ;;    `(org-document-title ((t (,@headline ,@variable-tuple :height 2.0))))))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
