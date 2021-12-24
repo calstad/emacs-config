@@ -840,14 +840,18 @@ Save all LaTeX preview images in the same temp directory.
 
 Automatically preview LaTeX when opening an =org-mode= file.
 #+BEGIN_SRC emacs-lisp
-  (setq org-startup-with-latex-preview t)
+  ;; (setq org-startup-with-latex-preview t)
 #+END_SRC
 
 Automatically [[https://github.com/io12/org-fragtog][toggle]] LaTeX fragments when the cursor enters/leaves a
 fragment.
 #+BEGIN_SRC emacs-lisp
   (use-package org-fragtog
-    :hook (org-mode . org-fragtog-mode))
+    :custom
+    (org-fragtog-preview-delay 0.5)
+    ;; :hook
+    ;; (org-mode . org-fragtog-mode)
+    )
 #+END_SRC
 
 Load these LaTeX packages by default in all org-mode documents.
