@@ -582,14 +582,14 @@ Default the agenda view to the daily instead of weekly view.
 
 Show breadcrumbs for nested headline todos in the agenda views.
 #+BEGIN_SRC emacs-lisp
-  (setq org-agenda-prefix-format
-        '((agenda . " %i %-12:c%?-12t% s")
-          (timeline . "  % s")
-          (todo .
-                " %i %-12:c %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
-          (tags .
-                " %i %-12:c %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
-          (search . " %i %-12:c")))
+  ;; (setq org-agenda-prefix-format
+  ;;       '((agenda . " %i %-12:c%?-12t% s")
+  ;;         (timeline . "  % s")
+  ;;         (todo .
+  ;;               " %i %-12:c %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
+  ;;         (tags .
+  ;;               " %i %-12:c %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
+  ;;         (search . " %i %-12:c")))
 #+END_SRC
 
 Configure how the time grid is shown in the daily agenda view
@@ -650,7 +650,6 @@ from [[https://thomasf.github.io/solarized-css/test/org-hacks.html#sec-1-9-7][he
       ad-do-it))
   (ad-activate 'org-agenda-add-time-grid-maybe)
 #+END_SRC
-
 **** Todo Items
 ***** Todo States
 #+BEGIN_SRC emacs-lisp
