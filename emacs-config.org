@@ -319,6 +319,13 @@ Dont create backup or temporary files
     :config (exec-path-from-shell-initialize))
 #+END_SRC
 ** Mode and Language Specific Configuration
+*** Anki
+#+BEGIN_SRC emacs-lisp
+  (use-package anki-editor
+    :after org-noter
+    :config
+    (setq anki-editor-create-decks 't))
+#+END_SRC
 *** Company
 [[http://company-mode.github.io][company-mode]] is a text completion framework for Emacs. The name
 stands for "complete anything". It uses pluggable back-ends and
