@@ -503,8 +503,17 @@ latex, and development environment.
            ("C-c c" . org-capture)
            ("C-c l" . org-store-link))
     :custom
+                                          ; UI
     (org-startup-indented t)
+    (org-hide-emphasis-markers t)
+    (org-emphasis-alist '(("*" bold)
+                          ("/" italic)
+                          ("_" underline)
+                          ("=" org-verbatim verbatim)
+                          ("~" org-code verbatim)
+                          ("+" (:strike-through nil))))
     (org-startup-folded t)
+                                          ; Behavior
     (org-list-allow-alphabetical t)
     (org-insert-heading-respect-content t)
     (org-archive-location "%s_archive::datetree/")
