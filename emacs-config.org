@@ -415,27 +415,14 @@ be found at commit [[https://github.com/calstad/emacs-config/commit/667cbdcf1051
 **** Helm BibTex
 [[https://github.com/tmalsburg/helm-bibtex][Helm-bibtex]] is a [[*Helm][Helm]] interface for managing BibTex
 bibliographies.
-
-Use the same functionality as =org-ref= for opening up notes for
-a reference.
-#+BEGIN_SRC emacs-lisp
-  (defun calstad/org-ref-notes-function (candidates)
-    (let ((key (helm-marked-candidates)))
-      (funcall org-ref-notes-function (car key))))
-#+END_SRC
-
 #+BEGIN_SRC emacs-lisp
   (use-package helm-bibtex
-    :after org-ref-helm-bibtex
     :custom
     (bibtex-completion-bibliography calstad/lib-bib)
     (bibtex-completion-library-path calstad/lib-docs)
     (bibtex-completion-pdf-symbol "⌘")
     (bibtex-completion-notes-symbol "✎")
-    :config
-    (helm-delete-action-from-source "Edit notes" helm-source-bibtex)
-    (helm-add-action-to-source "Edit notes" 'calstad/org-ref-notes-function helm-source-bibtex 8)
-    :bind ("<f6>" . helm-bibtex))
+    (bibtex-completion-additional-search-fields '(keywords)))
 #+END_SRC
 
 Sort BibTex entries in order they are in the BibTex file
@@ -601,55 +588,6 @@ Configure how the time grid is shown in the daily agenda view
                2000 2030 2100 2130 2200 2230 2300)
           "......" "----------------"))
 #+END_SRC
-
-Remove time grid lines that are in an appointment span.  Code taken
-from [[https://thomasf.github.io/solarized-css/test/org-hacks.html#sec-1-9-7][here]].
-#+BEGIN_SRC emacs-lisp
-  (defun calstad/time-to-minutes (time)
-    "Convert an HHMM time to minutes"
-    (+ (* (/ time 100) 60) (% time 100)))
-
-  (defun calstad/time-from-minutes (minutes)
-    "Convert a number of minutes to an HHMM time"
-    (+ (* (/ minutes 60) 100) (% minutes 60)))
-
-  (require 'cl)
-
-  (defadvice org-agenda-add-time-grid-maybe (around mde-org-agenda-grid-tweakify
-                                                    (list ndays todayp))
-    (if (member 'remove-match (car org-agenda-time-grid))
-        (flet ((extract-window
-                (line)
-                (let ((start (get-text-property 1 'time-of-day line))
-                      (dur (get-text-property 1 'duration line)))
-                  (cond
-                   ((and start dur)
-                    (cons start
-                          (calstad/time-from-minutes
-                           (truncate
-                            (+ dur (calstad/time-to-minutes start))))))
-                   (start start)
-                   (t nil)))))
-          (let* ((windows (delq nil (mapcar 'extract-window list)))
-                 (org-agenda-time-grid
-                  (list
-                   (car org-agenda-time-grid)
-                   (remove-if
-                    (lambda (time)
-                      (find-if (lambda (w)
-                                 (if (numberp w)
-                                     (equal w time)
-                                   (and (>= time (car w))
-                                        (< time (cdr w)))))
-                               windows))
-                    (cadr org-agenda-time-grid) )
-                   (caddr org-agenda-time-grid)
-                   (cadddr org-agenda-time-grid)
-                   )))
-            ad-do-it))
-      ad-do-it))
-  (ad-activate 'org-agenda-add-time-grid-maybe)
-#+END_SRC
 **** Todo Items
 ***** Todo States
 #+BEGIN_SRC emacs-lisp
@@ -682,14 +620,15 @@ citations, labels, and cross-references in org-mode.
 #+BEGIN_SRC emacs-lisp
   (use-package org-ref
     :custom
-    (org-ref-default-bibliography (list calstad/lib-bib))
-    (org-ref-pdf-directory calstad/lib-docs)
-    (reftex-default-bibliography calstad/lib-bib)
-    (org-ref-show-broken-links nil))
+    (org-ref-insert-link-function 'org-ref-insert-link-hydra/body)
+    (org-ref-insert-cite-function 'org-ref-cite-insert-helm)
+    (org-ref-insert-label-function 'org-ref-insert-label-link)
+    (org-ref-insert-ref-function 'org-ref-insert-ref-link)
+    (org-ref-cite-onclick-function (lambda (_) (org-ref-citation-hydra/body)))
+    :bind ("<f6>" . org-ref-cite-insert-helm))
+  (require 'org-ref-helm)
+
 #+END_SRC
-In the above configuration =org-ref-show-broken-links= is set to
-=nil= because it causes lagging on large files.  See [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org#controlling-link-messages-and-tooltips][here]] for
-some more details.
 
 Update the color of =org-ref= cite links to be the same as other =org-mod=
 links instead of white.
@@ -755,7 +694,8 @@ links instead of white.
            ("C-c n D" . org-roam-dailies-goto-date))
     :config
     (org-roam-setup)
-    (require 'org-roam-protocol))
+    ;; (require 'org-roam-protocol)
+    )
 #+END_SRC
 ***** TODO Fix org-roam org-protocol capture
 **** org-roam-bibtex
