@@ -352,6 +352,11 @@ current dired buffer
 #+BEGIN_SRC emacs-lisp
   (use-package dockerfile-mode)
 #+END_SRC
+*** Eglot
+[[https://github.com/joaotavora/eglot][Emacs Polyglot]] is a [[https://microsoft.github.io/language-server-protocol/][LSP]] client for Emacs.
+#+BEGIN_SRC emacs-lisp
+  (use-package eglot)
+#+END_SRC
 *** Emacs Lisp
 Add hooks for navigation and documentation
 #+BEGIN_SRC emacs-lisp
