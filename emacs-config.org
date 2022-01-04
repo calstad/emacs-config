@@ -593,6 +593,55 @@ Configure how the time grid is shown in the daily agenda view
                2000 2030 2100 2130 2200 2230 2300)
           "......" "----------------"))
 #+END_SRC
+
+Remove time slots from the agenda if they fall into the range of one of the items' timestamp.
+#+BEGIN_SRC emacs-lisp
+  (defun calstad/org-time-to-minutes (time)
+    "Convert an HHMM time to minutes"
+    (+ (* (/ time 100) 60) (% time 100)))
+
+  (defun calstad/org-time-from-minutes (minutes)
+    "Convert a number of minutes to an HHMM time"
+    (+ (* (/ minutes 60) 100) (% minutes 60)))
+
+  (defun calstad/extract-time-window (line)
+    "Gets the start and end times of each block in the agenda"
+    (let ((start (get-text-property 1 'time-of-day line))
+          (dur (get-text-property 1 'duration line)))
+      (cond
+       ((and start dur)
+        (cons start
+              (calstad/org-time-from-minutes
+               (truncate
+                (+ dur (calstad/org-time-to-minutes start))))))
+       (start start)
+       (t nil))))
+
+  (defun calstad/remove-spanned-time-slots (orig-fun &rest args)
+    "Removes time slots that fall within a scheduled block"
+    (let* ((list (car args))
+           (windows (delq nil (mapcar 'calstad/extract-time-window list)))
+           (org-agenda-time-grid
+            (list
+             (car org-agenda-time-grid)
+             (cl-remove-if
+              (lambda (time)
+                (cl-find-if (lambda (w)
+                              (if (numberp w)
+                                  (equal w time)
+                                (and (>= time (car w))
+                                     (< time (cdr w)))))
+                            windows))
+              (cadr org-agenda-time-grid) )
+             (caddr org-agenda-time-grid)
+             (cadddr org-agenda-time-grid)
+             ))
+           (res (apply orig-fun args)))
+      (message "Windows: %S" windows)
+      res))
+
+  (advice-add 'org-agenda-add-time-grid-maybe :around #'calstad/remove-spanned-time-slots)
+#+END_SRC
 **** Todo Items
 ***** Todo States
 #+BEGIN_SRC emacs-lisp
