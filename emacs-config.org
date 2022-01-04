@@ -558,7 +558,7 @@ latex, and development environment.
 **** Agenda
 Set where agenda items are pulled from
 #+BEGIN_SRC emacs-lisp
-  (setq org-agenda-files (directory-files-recursively calstad/org-roam-dir "\\.org.gpg$"))
+  (setq org-agenda-files (directory-files-recursively calstad/org-roam-dir "\\.org\\($\\|\\.gpg$\\)"))
 #+END_SRC
 
 Have todo items with no associated timestamp show up at the top
@@ -594,7 +594,7 @@ Configure how the time grid is shown in the daily agenda view
           "......" "----------------"))
 #+END_SRC
 
-Remove time slots from the agenda if they fall into the range of one of the items' timestamp.
+Remove time slots from the agenda if they fall into the range of one of the agenda items' timestamps.  This code is modified from [[https://emacs.stackexchange.com/questions/35865/org-agenda-remove-time-grid-lines-that-are-in-an-appointment?noredirect=1&lq=1][this StackExchange post]].
 #+BEGIN_SRC emacs-lisp
   (defun calstad/org-time-to-minutes (time)
     "Convert an HHMM time to minutes"
@@ -694,6 +694,8 @@ links instead of white.
 **** org-roam
 #+BEGIN_SRC emacs-lisp
   (use-package org-roam
+    :straight (:host github :repo "org-roam/org-roam"
+                     :files (:defaults "extensions/*"))
     :custom
     (org-roam-v2-ack t)
     (org-roam-directory (file-truename calstad/org-roam-dir))
@@ -703,6 +705,7 @@ links instead of white.
            #'org-roam-reflinks-section
            ;; #'org-roam-unlinked-references-section
            ))
+    (org-roam-dailies-directory "daily/")
     (org-roam-capture-templates
      '(("d" "default" plain "%?"
         :if-new (file+head "%<%Y%m%d%H%M%S%2N>.org.gpg"
@@ -733,7 +736,7 @@ links instead of white.
   ,#+CATEGORY: daily
   ,#+TITLE: %<%A, %m/%d/%y>
 
-  ,* Appointments
+  ,* Time Block Plan
   ,* Journal"
                                ("Journal"))
         :jump-to-captured t)))
@@ -747,8 +750,7 @@ links instead of white.
            ("C-c n d" . org-roam-dailies-goto-today)
            ("C-c n D" . org-roam-dailies-goto-date))
     :config
-    (org-roam-setup)
-    ;; (require 'org-roam-protocol)
+    (org-roam-db-autosync-mode)
     )
 #+END_SRC
 ***** TODO Fix org-roam org-protocol capture
