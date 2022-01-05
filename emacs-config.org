@@ -640,7 +640,6 @@ Remove time slots from the agenda if they fall into the range of one of the agen
              (cadddr org-agenda-time-grid)
              ))
            (res (apply orig-fun args)))
-      (message "Windows: %S" windows)
       res))
 
   (advice-add 'org-agenda-add-time-grid-maybe :around #'calstad/remove-spanned-time-slots)
