@@ -644,6 +644,15 @@ Remove time slots from the agenda if they fall into the range of one of the agen
 
   (advice-add 'org-agenda-add-time-grid-maybe :around #'calstad/remove-spanned-time-slots)
 #+END_SRC
+
+Change the agenda sort order to implement [[https://www.calnewport.com/blog/2013/12/21/deep-habits-the-importance-of-planning-every-minute-of-your-work-day/][time block planning]].  The idea for this came from [[https://emacs.stackexchange.com/questions/38742/implement-scheduling-as-suggested-in-deep-work-using-emacs-org-mode][this StackExchange thread]].
+#+BEGIN_SRC emacs-lisp
+  (setq org-agenda-sorting-strategy '((agenda habit-down time-up ts-up
+                                              priority-down category-keep)
+                                      (todo priority-down category-keep)
+                                      (tags priority-down category-keep)
+                                      (search category-keep)))
+#+END_SRC
 **** Todo Items
 ***** Todo States
 #+BEGIN_SRC emacs-lisp
