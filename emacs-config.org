@@ -558,7 +558,10 @@ latex, and development environment.
 **** Agenda
 Set where agenda items are pulled from
 #+BEGIN_SRC emacs-lisp
-  (setq org-agenda-files (directory-files-recursively calstad/org-roam-dir "\\.org\\($\\|\\.gpg$\\)"))
+  (defun calstad/refresh-org-agenda-files ()
+    (interactive)
+    (setq org-agenda-files (directory-files-recursively calstad/org-roam-dir "\\.org\\($\\|\\.gpg$\\)")))
+  (calstad/refresh-org-agenda-files)
 #+END_SRC
 
 Have todo items with no associated timestamp show up at the top
