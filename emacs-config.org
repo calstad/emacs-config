@@ -320,6 +320,10 @@ Dont create backup or temporary files
     :config (exec-path-from-shell-initialize))
 #+END_SRC
 ** Mode and Language Specific Configuration
+*** All the Icons
+#+BEGIN_SRC emacs-lisp
+  (use-package all-the-icons)
+#+END_SRC
 *** Anki
 #+BEGIN_SRC emacs-lisp
   (use-package anki-editor
@@ -737,9 +741,9 @@ links instead of white.
         :unnarrowed t)))
     (org-roam-capture-ref-templates
      '(("r" "ref" plain "%?"
-       :if-new (file+head "%<%Y%m%d%H%M%S%2N>.org.gpg"
-                          "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+TITLE: ${title}")
-       :jump-to-captured t)))
+        :if-new (file+head "%<%Y%m%d%H%M%S%2N>.org.gpg"
+                           "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+TITLE: ${title}")
+        :jump-to-captured t)))
     (org-roam-dailies-capture-templates
      '(("d" "default" entry
         "** %<%H:%M> %i%?\n"
@@ -763,7 +767,30 @@ links instead of white.
            ("C-c n D" . org-roam-dailies-goto-date))
     :config
     (org-roam-db-autosync-mode)
-    )
+    (cl-defmethod org-roam-node-hierarchy ((node org-roam-node))
+      "Return the hierarchy for the node."
+      (let* ((title (org-roam-node-title node))
+             (olp (mapcar (lambda (s) (if (> (length s) 10) (concat (substring s 0 10)  "…") s)) (org-roam-node-olp node)))
+             (level (org-roam-node-level node))
+             (filetitle (org-roam-node-file-title node))
+             (shortentitle (if (> (length filetitle) 20) (concat (substring filetitle 0 20)  "...") filetitle))
+             (separator (concat " " (all-the-icons-material "chevron_right") " "))
+             )
+        (cond
+         ((>= level 1) (concat (all-the-icons-material "list" :face 'all-the-icons-green :v-adjust 0.02 :height 0.8) " "
+                               (propertize shortentitle 'face 'org-roam-dim)
+                               (propertize separator 'face 'org-roam-dim)
+                               title))
+         ;; ((> level 1) (concat (all-the-icons-material "list" :face 'all-the-icons-dpurple :v-adjust 0.02 :height 0.8)
+         ;;                      " "
+         ;;                      (propertize (concat shortentitle separator (string-join olp separator)) 'face 'org-roam-dim)
+         ;;                      (propertize separator 'face 'org-roam-dim)
+         ;;                      title))
+         (t (concat (all-the-icons-faicon "file-text-o" :face 'all-the-icons-lyellow :v-adjust 0.02 :height 0.7) " " title))
+         )
+        ))
+    (setq org-roam-node-display-template
+          "${hierarchy:60} ${tags:10}"))
 #+END_SRC
 ***** TODO Fix org-roam org-protocol capture
 **** org-roam-bibtex
