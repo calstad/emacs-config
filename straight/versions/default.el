@@ -1,4 +1,5 @@
-(("anki-editor" . "546774a453ef4617b1bcb0d1626e415c67cc88df")
+(("all-the-icons.el" . "2c963ebb75f211d2f7ac3d2db5f4a9ee2f3e27da")
+ ("anki-editor" . "546774a453ef4617b1bcb0d1626e415c67cc88df")
  ("auctex" . "fb062a364fbc7d791707ff574b0f0a7f4c7a7269")
  ("avy" . "e92cb37457b43336b765630dbfbea8ba4be601fa")
  ("biblio.el" . "517ec18f00f91b61481214b178f7ae0b8fbc499b")
