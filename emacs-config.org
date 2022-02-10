@@ -19,7 +19,7 @@ Where we persist files between emacs sessions.
 
 The directory that will sync files across all machines.
 #+BEGIN_SRC emacs-lisp
-  (setq calstad/sync-dir "~/iCloud")
+  (setq calstad/sync-dir "~/Dropbox")
 #+END_SRC
 
 The directory for all things =org-mode= related.
@@ -42,7 +42,8 @@ The location of my reference library including bibliographies and PDFs.
 
 Directory where we keep all of the =org-roam= files.
 #+BEGIN_SRC emacs-lisp
-  (setq calstad/org-roam-dir "/Users/colin/Library/Mobile Documents/com~apple~CloudDocs/org/roam")
+  (setq calstad/org-roam-dir
+        (expand-file-name "roam" calstad/org-dir))
 #+END_SRC
 *** User details
 Emacs will normally pick this up automatically, but this way I can be sure the right information is always present.
