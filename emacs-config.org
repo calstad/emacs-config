@@ -19,7 +19,7 @@ Where we persist files between emacs sessions.
 
 The directory that will sync files across all machines.
 #+BEGIN_SRC emacs-lisp
-  (setq calstad/sync-dir "~/Dropbox")
+  (setq calstad/sync-dir "~/files")
 #+END_SRC
 
 The directory for all things =org-mode= related.
