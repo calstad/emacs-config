@@ -516,6 +516,7 @@ latex, and development environment.
                                           ; File locations
     (org-archive-location "%s_archive::datetree/")
     (org-id-locations-file (expand-file-name "org-id-locations" calstad/persistence-dir))
+    (org-persist-directory (expand-file-name "org-persist" calstad/persistence-dir))
     :hook
     (org-mode . visual-line-mode))
 #+END_SRC
