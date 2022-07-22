@@ -470,8 +470,8 @@ environments and math.
 **** Auto pair "$"
 #+BEGIN_SRC emacs-lisp
   (add-hook 'TeX-mode-hook
-            '(lambda ()
-               (define-key LaTeX-mode-map (kbd "$") 'self-insert-command)))
+            #'(lambda ()
+                (define-key LaTeX-mode-map (kbd "$") 'self-insert-command)))
 #+END_SRC
 *** Magit
 #+BEGIN_SRC emacs-lisp
