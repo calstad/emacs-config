@@ -674,6 +674,11 @@ Add a =CLOSED= timestamp to todo items
 #+BEGIN_SRC emacs-lisp
   (setq org-log-done t)
 #+END_SRC
+
+Add ability to bulk remove todo keywords from the agenda view, which is useful when I don't want the tasks to be moved to an archive file, but also don't want them junking up the =DONE= view.  Code taken from [[https://emacs.stackexchange.com/questions/41366/org-agenda-remove-todo-in-bulk][this stackexchange post]].
+#+BEGIN_SRC emacs-lisp
+  (setq org-agenda-bulk-custom-functions '((?R (lambda nil (org-agenda-todo "")))))
+#+END_SRC
 ***** Enable inline tasks
 #+BEGIN_SRC emacs-lisp
   (require 'org-inlinetask)
@@ -897,6 +902,16 @@ Load these LaTeX packages by default in all org-mode documents.
 
 #+BEGIN_SRC emacs-lisp
   (setq org-preview-latex-default-process 'imagemagick)
+#+END_SRC
+
+Don't treat angle brackets as matching delimiters like parenthesis.  Code taken from [[https://emacs.stackexchange.com/questions/50216/org-mode-code-block-parentheses-mismatch][this stackexchange thread]].
+#+BEGIN_SRC emacs-lisp
+  (defun org-syntax-table-modify ()
+    "Modify `org-mode-syntax-table' for the current org buffer."
+    (modify-syntax-entry ?< "." org-mode-syntax-table)
+    (modify-syntax-entry ?> "." org-mode-syntax-table))
+
+  (add-hook 'org-mode-hook #'org-syntax-table-modify)
 #+END_SRC
 **** org-babel
 [[https://orgmode.org/worg/org-contrib/babel/][Babel]] is Org-mode's ability to execute source code within
