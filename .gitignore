@@ -9,3 +9,4 @@ straight/repos/*
 transient/*
 
 
+/eln-cache/

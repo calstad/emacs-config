@@ -19,7 +19,7 @@ Where we persist files between emacs sessions.
 
 The directory that will sync files across all machines.
 #+BEGIN_SRC emacs-lisp
-  (setq calstad/sync-dir "~/Dropbox")
+  (setq calstad/sync-dir "~/files")
 #+END_SRC
 
 The directory for all things =org-mode= related.
@@ -470,8 +470,8 @@ environments and math.
 **** Auto pair "$"
 #+BEGIN_SRC emacs-lisp
   (add-hook 'TeX-mode-hook
-            '(lambda ()
-               (define-key LaTeX-mode-map (kbd "$") 'self-insert-command)))
+            #'(lambda ()
+                (define-key LaTeX-mode-map (kbd "$") 'self-insert-command)))
 #+END_SRC
 *** Magit
 #+BEGIN_SRC emacs-lisp
@@ -516,6 +516,7 @@ latex, and development environment.
                                           ; File locations
     (org-archive-location "%s_archive::datetree/")
     (org-id-locations-file (expand-file-name "org-id-locations" calstad/persistence-dir))
+    (org-persist-directory (expand-file-name "org-persist" calstad/persistence-dir))
     :hook
     (org-mode . visual-line-mode))
 #+END_SRC
