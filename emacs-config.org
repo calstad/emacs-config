@@ -93,6 +93,11 @@ Next we setup straight to use the [[https://github.com/jwiegley/use-package][use
 #+BEGIN_SRC emacs-lisp
   (set-default 'indicate-empty-lines t)
 #+END_SRC
+**** Turn off bookmark fringe marker
+Turn off the orange fringe marker for bookmarks introduced in Emacs 28.1.
+#+BEGIN_SRC emacs-lisp
+  (setq bookmark-set-fringe-mark nil)
+#+END_SRC
 **** Mode line settings
 #+BEGIN_SRC emacs-lisp
   (line-number-mode t)
