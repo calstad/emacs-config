@@ -822,6 +822,19 @@ links instead of white.
           "${hierarchy:60} ${tags:10}"))
 #+END_SRC
 ***** TODO Fix org-roam org-protocol capture
+**** org-roam-ui
+[[https://github.com/org-roam/org-roam-ui][org-roam-ui]] is a frontend for exploring and interacting with =org-roam= notes.
+#+BEGIN_SRC emacs-lisp
+  (use-package org-roam-ui
+    :straight
+    (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
+    :after org-roam
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
+#+END_SRC
 **** org-roam-bibtex
 #+BEGIN_SRC emacs-lisp
   (use-package org-roam-bibtex
