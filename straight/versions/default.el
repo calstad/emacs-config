@@ -48,7 +48,7 @@
  ("org-pandoc-import" . "21807e51f4897652649852aebd4e62acbf644f52")
  ("org-ref" . "6f3e4a7ea14e6900acffe88303491b64b96ecb59")
  ("org-roam" . "74422df546a515bc984c2f3d3a681c09d6f43916")
- ("org-roam-bibtex" . "cf811abf273ad28d32caad3a93318f92da034556")
+ ("org-roam-bibtex" . "3810ddcd9d69ab27a40d5ba88b553df8db1b4884")
  ("ox-gfm" . "99f93011b069e02b37c9660b8fcb45dab086a07f")
  ("ox-pandoc" . "aa37dc7e94213d4ebedb85c384c1ba35007da18e")
  ("paredit" . "8330a41e8188fe18d3fa805bb9aa529f015318e8")
