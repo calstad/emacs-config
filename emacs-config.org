@@ -844,6 +844,7 @@ links instead of white.
     :custom
     (orb-insert-interface 'helm-bibtex)
     (orb-note-actions-interface 'helm)
+    (orb-roam-ref-format 'org-ref-v3)
     (orb-preformat-keywords
      '(("citekey" . "=key=") "title" "file" "author-or-editor" "year"))
     :config
