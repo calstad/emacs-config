@@ -791,10 +791,9 @@ links instead of white.
   :END:")
         :unnarrowed t)))
     (org-roam-capture-ref-templates
-     '(("r" "ref" plain "%?"
-        :if-new (file+head "%<%Y%m%d%H%M%S%2N>.org"
-                           "#+TITLE: ${title}")
-        :jump-to-captured t)))
+     '(("r" "ref" plain "%?" :target
+       (file+head "%<%Y%m%d%H%M%S%2N>.org" "#+TITLE: ${title}")
+       :unnarrowed t)))
     (org-roam-dailies-capture-templates
      '(("d" "default" entry
         "** %<%H:%M> %i%?\n"
@@ -816,6 +815,7 @@ links instead of white.
            ("C-c n d" . org-roam-dailies-goto-today)
            ("C-c n D" . org-roam-dailies-goto-date))
     :config
+    (require 'org-roam-protocol)
     (org-roam-db-autosync-mode)
     (cl-defmethod org-roam-node-hierarchy ((node org-roam-node))
       "Return the hierarchy for the node."
@@ -842,7 +842,6 @@ links instead of white.
     (setq org-roam-node-display-template
           "${hierarchy:60} ${tags:10}"))
 #+END_SRC
-***** TODO Fix org-roam org-protocol capture
 **** org-roam-ui
 [[https://github.com/org-roam/org-roam-ui][org-roam-ui]] is a frontend for exploring and interacting with =org-roam= notes.
 #+BEGIN_SRC emacs-lisp
