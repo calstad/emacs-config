@@ -727,6 +727,13 @@ The code below was taken from [[https://stackoverflow.com/a/68279415/143721][thi
 
   (add-hook 'org-after-todo-state-change-hook 'calstad/org-reset-checkbox-when-done)
 #+END_SRC
+**** org-crypt
+=org-crypt= is used for encrypting the text of headline.
+#+BEGIN_SRC emacs-lisp
+  (require 'org-crypt)
+  (org-crypt-use-before-save-magic)
+  (setq org-tags-exclude-from-inheritance (quote ("crypt")))
+  (setq org-crypt-key "me@colinalstad.com")
 #+END_SRC
 **** org-ref
 Org-ref is a library for org-mode that provides rich support for
@@ -768,12 +775,12 @@ links instead of white.
     (org-roam-dailies-directory "daily/")
     (org-roam-capture-templates
      '(("d" "default" plain "%?"
-        :if-new (file+head "%<%Y%m%d%H%M%S%2N>.org.gpg"
-                           "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+TITLE: ${title}\n")
+        :if-new (file+head "%<%Y%m%d%H%M%S%2N>.org"
+                           "#+TITLE: ${title}\n")
         :unnarrowed t)
        ("b" "bibliography reference" plain "%?"
-        :if-new (file+head "%<%Y%m%d%H%M%S%2N>.org.gpg"
-                           "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+TITLE: ${title}
+        :if-new (file+head "%<%Y%m%d%H%M%S%2N>.org"
+                           "#+TITLE: ${title}
 
   ,* Notes
   :PROPERTIES:
@@ -785,15 +792,14 @@ links instead of white.
         :unnarrowed t)))
     (org-roam-capture-ref-templates
      '(("r" "ref" plain "%?"
-        :if-new (file+head "%<%Y%m%d%H%M%S%2N>.org.gpg"
-                           "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-\n#+TITLE: ${title}")
+        :if-new (file+head "%<%Y%m%d%H%M%S%2N>.org"
+                           "#+TITLE: ${title}")
         :jump-to-captured t)))
     (org-roam-dailies-capture-templates
      '(("d" "default" entry
         "** %<%H:%M> %i%?\n"
-        :if-new (file+head+olp "%<%Y-%m-%d>.org.gpg"
-                               "# -*- epa-file-encrypt-to: (\"me@colinalstad.com\") -*-
-  ,#+CATEGORY: daily
+        :if-new (file+head+olp "%<%Y-%m-%d>.org"
+                               "#+CATEGORY: daily
   ,#+TITLE: %<%A, %m/%d/%y>
 
   ,* Time Block Plan
@@ -892,7 +898,7 @@ websites like allrecipes.com
 #+END_SRC
 **** Capture
 #+BEGIN_SRC emacs-lisp
-  (setq org-default-notes-file (expand-file-name "roam/tasks/inbox.org.gpg" calstad/org-dir))
+  (setq org-default-notes-file (expand-file-name "roam/tasks/inbox.org" calstad/org-dir))
   (setq org-capture-templates
         '(("c" "OrgProtocol capture" entry (file+headline org-default-notes-file "Links")
            "* TODO [[%:link][%:description]]\n%i"
