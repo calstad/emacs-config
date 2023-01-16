@@ -703,15 +703,30 @@ Add ability to bulk remove todo keywords from the agenda view, which is useful w
 #+BEGIN_SRC emacs-lisp
   (setq org-agenda-bulk-custom-functions '((?R (lambda nil (org-agenda-todo "")))))
 #+END_SRC
-***** Enable inline tasks
+***** Enable Inline Tasks
 #+BEGIN_SRC emacs-lisp
   (require 'org-inlinetask)
   (setq org-inlinetask-min-level 10)
 #+END_SRC
-***** Enable habit tracking
+***** Enable Habit Tracking
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'org-modules 'org-habit)
-  ;; (add-to-list 'org-modules 'org-checklist)
+#+END_SRC
+***** Reset Checkboxes for Repeating Tasks
+The code below was taken from [[https://stackoverflow.com/a/68279415/143721][this StackExchange post]].
+#+BEGIN_SRC emacs-lisp
+  (defun calstad/org-reset-checkbox-state-maybe ()
+    "Reset all checkboxes in an entry if the `RESET_CHECK_BOXES' property is set"
+    (interactive "*")
+    (if (org-entry-get (point) "RESET_CHECK_BOXES")
+        (org-reset-checkbox-state-subtree)))
+
+  (defun calstad/org-reset-checkbox-when-done ()
+    (when (member org-state org-done-keywords)
+      (calstad/org-reset-checkbox-state-maybe)))
+
+  (add-hook 'org-after-todo-state-change-hook 'calstad/org-reset-checkbox-when-done)
+#+END_SRC
 #+END_SRC
 **** org-ref
 Org-ref is a library for org-mode that provides rich support for
