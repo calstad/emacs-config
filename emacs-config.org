@@ -817,30 +817,58 @@ links instead of white.
     :config
     (require 'org-roam-protocol)
     (org-roam-db-autosync-mode)
-    (cl-defmethod org-roam-node-hierarchy ((node org-roam-node))
-      "Return the hierarchy for the node."
-      (let* ((title (org-roam-node-title node))
-             (olp (mapcar (lambda (s) (if (> (length s) 10) (concat (substring s 0 10)  "…") s)) (org-roam-node-olp node)))
-             (level (org-roam-node-level node))
-             (filetitle (org-roam-node-file-title node))
-             (shortentitle (if (> (length filetitle) 20) (concat (substring filetitle 0 20)  "...") filetitle))
-             (separator (concat " " (all-the-icons-material "chevron_right") " "))
-             )
-        (cond
-         ((>= level 1) (concat (all-the-icons-material "list" :face 'all-the-icons-green :v-adjust 0.02 :height 0.8) " "
-                               (propertize shortentitle 'face 'org-roam-dim)
-                               (propertize separator 'face 'org-roam-dim)
-                               title))
-         ;; ((> level 1) (concat (all-the-icons-material "list" :face 'all-the-icons-dpurple :v-adjust 0.02 :height 0.8)
-         ;;                      " "
-         ;;                      (propertize (concat shortentitle separator (string-join olp separator)) 'face 'org-roam-dim)
-         ;;                      (propertize separator 'face 'org-roam-dim)
-         ;;                      title))
-         (t (concat (all-the-icons-faicon "file-text-o" :face 'all-the-icons-lyellow :v-adjust 0.02 :height 0.7) " " title))
-         )
-        ))
+
+    (cl-defmethod org-roam-node-doom-filetitle ((node org-roam-node))
+      "Return the value of \"#+title:\" (if any) from file that NODE resides in.
+  If there's no file-level title in the file, return empty string."
+      (or (if (= (org-roam-node-level node) 0)
+              (org-roam-node-title node)
+            (org-roam-get-keyword "TITLE" (org-roam-node-file node)))
+          ""))
+
+  (cl-defmethod org-roam-node-doom-hierarchy ((node org-roam-node))
+    "Return hierarchy for NODE, constructed of its file title, OLP and direct title.
+    If some elements are missing, they will be stripped out."
+    (let ((title     (org-roam-node-title node))
+          (olp       (org-roam-node-olp   node))
+          (level     (org-roam-node-level node))
+          (filetitle (org-roam-node-doom-filetitle node))
+          (separator (propertize " > " 'face 'shadow)))
+      (cl-case level
+        ;; node is a top-level file
+        (0 filetitle)
+        ;; node is a level 1 heading
+        (1 (concat (propertize filetitle 'face '(shadow italic))
+                   separator title))
+        ;; node is a heading with an arbitrary outline path
+        (t (concat (propertize filetitle 'face '(shadow italic))
+                   separator (propertize (string-join olp " > ") 'face '(shadow italic))
+                   separator title)))))
+
+    ;; (cl-defmethod org-roam-node-hierarchy ((node org-roam-node))
+    ;;   "Return the hierarchy for the node."
+    ;;   (let* ((title (org-roam-node-title node))
+    ;;          (olp (mapcar (lambda (s) (if (> (length s) 10) (concat (substring s 0 10)  "…") s)) (org-roam-node-olp node)))
+    ;;          (level (org-roam-node-level node))
+    ;;          (filetitle (org-roam-node-file-title node))
+    ;;          (shortentitle (if (> (length filetitle) 20) (concat (substring filetitle 0 20)  "...") filetitle))
+    ;;          (separator (concat " " (all-the-icons-material "chevron_right") " "))
+    ;;          )
+    ;;     (cond
+    ;;      ((>= level 1) (concat (all-the-icons-material "list" :face 'all-the-icons-green :v-adjust 0.02 :height 0.8) " "
+    ;;                            (propertize shortentitle 'face 'org-roam-dim)
+    ;;                            (propertize separator 'face 'org-roam-dim)
+    ;;                            title))
+    ;;      ((> level 1) (concat (all-the-icons-material "list" :face 'all-the-icons-dpurple :v-adjust 0.02 :height 0.8)
+    ;;                           " "
+    ;;                           (propertize (concat shortentitle separator (string-join olp separator)) 'face 'org-roam-dim)
+    ;;                           (propertize separator 'face 'org-roam-dim)
+    ;;                           title))
+    ;;      (t (concat (all-the-icons-faicon "file-text-o" :face 'all-the-icons-lyellow :v-adjust 0.02 :height 0.7) " " title))
+    ;;      )
+    ;;     ))
     (setq org-roam-node-display-template
-          "${hierarchy:60} ${tags:10}"))
+          "${doom-hierarchy:*} ${tags:10}"))
 #+END_SRC
 **** org-roam-ui
 [[https://github.com/org-roam/org-roam-ui][org-roam-ui]] is a frontend for exploring and interacting with =org-roam= notes.
