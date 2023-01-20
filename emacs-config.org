@@ -485,8 +485,10 @@ environments and math.
 *** Macaulay2
 Tell emacs where to find the Macaulay2 elisp files.
 #+BEGIN_SRC emacs-lisp
-  (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/Macaulay2")
-  (load "M2-init")
+  (when (file-directory-p "/opt/homebrew/share/emacs/site-lisp/macaulay2")
+    (progn
+      (add-to-list 'load-path "/opt/homebrew/share/emacs/site-lisp/macaulay2")
+      (load "M2-init")))
 #+END_SRC
 
 Disable =company-mode= in Macaulay2 buffers.
