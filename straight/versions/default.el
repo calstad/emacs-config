@@ -63,7 +63,7 @@
  ("restclient.el" . "abc307b965bf6720bc466281f2e204cd5ce37dc3")
  ("s.el" . "e957dcb0677da18b2bb60ad867db5df5c35b5616")
  ("sage-shell-mode" . "80fbb4ee9ed8507d22214ed7a4ffd135c9e8c7c8")
- ("straight.el" . "af5437f2afd00936c883124d6d3098721c2d306c")
+ ("straight.el" . "3eca39dfc6797243ec7d1c6a7d45142407f73f88")
  ("string-inflection" . "fd7926ac17293e9124b31f706a4e8f38f6a9b855")
  ("tablist" . "faab7a035ef2258cc4ea2182f67e3aedab7e2af9")
  ("transient" . "e90481000f071e9a26a1cc0f40d347f7d3e2201e")
