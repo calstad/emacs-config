@@ -47,7 +47,7 @@
  ("org-fragtog" . "15861261a437aca2ec858317de71603d2957b423")
  ("org-noter" . "9ead81d42dd4dd5074782d239b2efddf9b8b7b3d")
  ("org-pandoc-import" . "21807e51f4897652649852aebd4e62acbf644f52")
- ("org-ref" . "6f3e4a7ea14e6900acffe88303491b64b96ecb59")
+ ("org-ref" . "34262fa6d36c69fba3c3e2f30149c183a027a49d")
  ("org-roam" . "74422df546a515bc984c2f3d3a681c09d6f43916")
  ("org-roam-bibtex" . "3810ddcd9d69ab27a40d5ba88b553df8db1b4884")
  ("org-roam-ui" . "5ac74960231db0bf7783c2ba7a19a60f582e91ab")
