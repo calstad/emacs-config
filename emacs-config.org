@@ -1176,7 +1176,9 @@ Use [[https://github.com/jorgenschaefer/pyvenv][pyvenv]] to manage python and co
 [[http://www.sagemath.org][Sage]] is an open source mathematics software system that wraps a
 lot of different math packages.
 #+BEGIN_SRC emacs-lisp
-  (use-package sage-shell-mode)
+  (use-package sage-shell-mode
+    :custom
+    (sage-shell:sage-executable "/usr/local/bin/sage"))
 #+END_SRC
 *** YAML
 #+BEGIN_SRC emacs-lisp
