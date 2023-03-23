@@ -1164,7 +1164,8 @@ on-demand and stored in memory.
   (use-package pdf-tools
     :straight (pdf-tools :type git :host github :repo "vedang/pdf-tools")
     :mode ("\\.pdf\\'" . pdf-view-mode)
-    :config (pdf-tools-install))
+    :config (pdf-tools-install)
+    :custom (pdf-view-continuous nil))
 #+END_SRC
 *** Pyvenv
 Use [[https://github.com/jorgenschaefer/pyvenv][pyvenv]] to manage python and conda virtual environments.
