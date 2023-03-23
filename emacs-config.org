@@ -752,6 +752,7 @@ citations, labels, and cross-references in org-mode.
     (org-ref-insert-label-function 'org-ref-insert-label-link)
     (org-ref-insert-ref-function 'org-ref-insert-ref-link)
     (org-ref-cite-onclick-function (lambda (_) (org-ref-citation-hydra/body)))
+    (org-ref-latex-bib-resolve-func #'expand-file-name)
     :bind ("<f6>" . org-ref-cite-insert-helm))
   (require 'org-ref-helm)
 
