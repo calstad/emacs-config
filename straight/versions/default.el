@@ -18,7 +18,7 @@
  ("emacs-deferred" . "2239671d94b38d92e9b28d4e12fd79814cfb9c16")
  ("emacs-dotenv-mode" . "e3701bf739bde44f6484eb7753deadaf691b73fb")
  ("emacs-htmlize" . "dd27bc3f26efd728f2b1f01f9e4ac4f61f2ffbf9")
- ("emacs-jupyter" . "1f0612eb936d36abab0f27b09cca691e81fc6e74")
+ ("emacs-jupyter" . "eebeef1293287075f65d27f5442bb151bf27d92a")
  ("emacs-request" . "68003b3f859724de621d0e5a8b0aae51ce708d1e")
  ("emacs-web-server" . "22ce66ea43e0eadb9ec1d691a35d9695fc29cee6")
  ("emacs-websocket" . "be99c4636ad72bcea535392d9097c32b98ec0056")
@@ -39,6 +39,7 @@
  ("magit" . "fa620ed3e45b08c45466f9930e348bf957c27e66")
  ("markdown-mode" . "8c6775a000bf40d7c7b35a529011a99231a4a4f7")
  ("melpa" . "1b04b46020d56067898cb4445f271381d7996ddf")
+ ("nongnu-elpa" . "85c7a060c6174bf544f0ff8fe2480aaa1f70ed46")
  ("ob-sagemath" . "79645bce0c25a650bae61e550434bed836995dce")
  ("olivetti" . "08611268bb19509ec087ec416f4a7f76ebae0518")
  ("org" . "b8656a2cef3d5da7270e391222d8139fc042edd5")
@@ -73,4 +74,4 @@
  ("yaml-mode" . "68fecb5f0dec712a10c8655df6881392a4613617")
  ("yasnippet" . "5cbdbf0d2015540c59ed8ee0fcf4788effdf75b6")
  ("zenburn-emacs" . "58097fa44cc747b212501a70ad9d30b8a4f6b7d2"))
-:beta
+:gamma
