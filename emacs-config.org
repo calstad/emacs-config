@@ -501,6 +501,11 @@ Remap key binding for evaluating a Macaulay2 buffer.
   (eval-after-load 'M2
     '(define-key M2-mode-map (kbd "C-c C-c") 'M2-send-to-program))
 #+END_SRC
+
+org-babel support for Macaulay2
+#+BEGIN_SRC emacs-lisp
+  (straight-use-package '(ob-M2 :type git :host github :repo "d-torrance/ob-M2"))
+#+END_SRC
 *** Magit
 #+BEGIN_SRC emacs-lisp
   (use-package magit
@@ -1025,6 +1030,7 @@ Org-mode documents.
    '((emacs-lisp . t)
      (shell . t)
      (latex . t)
+     (M2 . t)
      (python . t)
      (jupyter . t)))
 
