@@ -40,6 +40,7 @@
  ("markdown-mode" . "8c6775a000bf40d7c7b35a529011a99231a4a4f7")
  ("melpa" . "1b04b46020d56067898cb4445f271381d7996ddf")
  ("nongnu-elpa" . "85c7a060c6174bf544f0ff8fe2480aaa1f70ed46")
+ ("ob-M2" . "433ab7608cb3658babb26de0c21002dac53e1122")
  ("ob-sagemath" . "79645bce0c25a650bae61e550434bed836995dce")
  ("olivetti" . "08611268bb19509ec087ec416f4a7f76ebae0518")
  ("org" . "b8656a2cef3d5da7270e391222d8139fc042edd5")
