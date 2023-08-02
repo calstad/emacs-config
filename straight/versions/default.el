@@ -31,7 +31,7 @@
  ("flymake" . "08e98963c06b03bf194f3a29c43c01655c0920e6")
  ("gnu-elpa-mirror" . "87168508db0553275e6638988f8be1b25782b007")
  ("helm" . "c010f5eefcdb7be42d25207d87d258bed99c0f76")
- ("helm-bibtex" . "aa775340ba691d2322948bfdc6a88158568a1399")
+ ("helm-bibtex" . "ef07adfeda1e25d891875cb9a11983d5e26fc36d")
  ("ht.el" . "fff8c43f0e03d5b98deb9f988522b839ce2ca253")
  ("hydra" . "2d553787aca1aceb3e6927e426200e9bb9f056f1")
  ("jsonrpc" . "a5affb16a6f997e2d25e1a4ea07dbc18be8f8326")
