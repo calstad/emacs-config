@@ -1004,8 +1004,8 @@ fragment.
   (use-package org-fragtog
     :custom
     (org-fragtog-preview-delay 0.5)
-    ;; :hook
-    ;; (org-mode . org-fragtog-mode)
+    :hook
+    (org-mode . org-fragtog-mode)
     )
 #+END_SRC
 
