@@ -61,6 +61,13 @@ Next we setup straight to use the [[https://github.com/jwiegley/use-package][use
   ;; Tell use-package to always install from straight
   (setq straight-use-package-by-default t)
 #+END_SRC
+
+This tells straight how to find my forks of packages on github.
+#+BEGIN_SRC emacs-lisp
+  (setq straight-host-usernames
+        '((github . "calstd")))
+#+END_SRC
+
 *** UI
 **** Skip splash screen on startup
 #+BEGIN_SRC emacs-lisp
@@ -436,6 +443,7 @@ be found at commit [[https://github.com/calstad/emacs-config/commit/667cbdcf1051
 bibliographies.
 #+BEGIN_SRC emacs-lisp
   (use-package helm-bibtex
+    :straight (helm-bibtex :type git :host github :repo "calstad/helm-bibtex")
     :custom
     (bibtex-completion-bibliography calstad/lib-bib)
     (bibtex-completion-library-path calstad/lib-docs)
@@ -915,7 +923,7 @@ links instead of white.
     (orb-note-actions-interface 'helm)
     (orb-roam-ref-format 'org-ref-v3)
     (orb-preformat-keywords
-     '(("citekey" . "=key=") "title" "file" "author-or-editor" "year"))
+     '(("citekey" . "=key=") "file" "author-or-editor" "year"))
     :config
     (require 'org-ref)
     (org-roam-bibtex-mode))
