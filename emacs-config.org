@@ -5,11 +5,10 @@
 #+PROPERTY: header-args:emacs-lisp :results none
 
 * Emacs Configuration
-This is my "dot emacs" configuration using =org-mode=.  It has been heavily influenced/stolen from [[https://github.com/abedra/emacs.d][Aaron Bedra's emacs config]].
+This is my "dot emacs" configuration using =org-mode=.
 ** Global Configuration
-*** Constants
-These are constants that are used throughout the configuration
-(mostly for file path locations).
+*** File Paths
+These are file paths that are used throughout the configuration
 
 Where we persist files between emacs sessions.
 #+BEGIN_SRC emacs-lisp
@@ -88,8 +87,8 @@ This tells straight how to find my forks of packages on github.
 #+END_SRC
 **** Set a color theme
 #+BEGIN_SRC emacs-lisp
-  (use-package zenburn-theme
-    :config (load-theme 'zenburn t))
+  ;; (use-package zenburn-theme
+  ;;   :config (load-theme 'zenburn t))
 #+END_SRC
 **** Turn off visual and audio bells
 #+BEGIN_SRC emacs-lisp
@@ -376,7 +375,7 @@ current dired buffer
 *** Eglot
 [[https://github.com/joaotavora/eglot][Emacs Polyglot]] is a [[https://microsoft.github.io/language-server-protocol/][LSP]] client for Emacs.
 #+BEGIN_SRC emacs-lisp
-  (use-package eglot)
+  ;; (use-package eglot)
 #+END_SRC
 *** Emacs Lisp
 Add hooks for navigation and documentation
@@ -559,20 +558,25 @@ latex, and development environment.
     (org-archive-location "%s_archive::datetree/")
     (org-id-locations-file (expand-file-name "org-id-locations" calstad/persistence-dir))
     (org-persist-directory (expand-file-name "org-persist" calstad/persistence-dir))
+    (org-attach-id-dir (expand-file-name "attachements" calstad/org-dir))
     :hook
     (org-mode . visual-line-mode))
 #+END_SRC
 **** UI
 #+BEGIN_SRC emacs-lisp
-  (use-package org-bullets
-      :config
-      (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  ;; (use-package org-modern-mode)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  (custom-theme-set-faces
-   'user
-   '(variable-pitch ((t (:family "CMU Serif" :height 1.25 :weight thin)))))
+  ;; (use-package org-bullets
+  ;;     :config
+  ;;     (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  ;; (custom-theme-set-faces
+  ;;  'user
+  ;;  '(variable-pitch ((t (:family "CMU Serif" :height 1.25 :weight thin)))))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -774,9 +778,9 @@ citations, labels, and cross-references in org-mode.
 Update the color of =org-ref= cite links to be the same as other =org-mod=
 links instead of white.
 #+BEGIN_SRC emacs-lisp
-  (set-face-foreground
-   'org-ref-cite-face
-   (cdr (assoc "zenburn-yellow-2" zenburn-default-colors-alist)))
+  ;; (set-face-foreground
+  ;;  'org-ref-cite-face
+  ;;  (cdr (assoc "zenburn-yellow-2" zenburn-default-colors-alist)))
 #+END_SRC
 **** org-roam
 #+BEGIN_SRC emacs-lisp
