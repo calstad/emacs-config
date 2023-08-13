@@ -87,8 +87,11 @@ This tells straight how to find my forks of packages on github.
 #+END_SRC
 **** Set a color theme
 #+BEGIN_SRC emacs-lisp
-  ;; (use-package zenburn-theme
-  ;;   :config (load-theme 'zenburn t))
+  (use-package zenburn-theme
+    :config (load-theme 'zenburn t))
+
+  ;; (use-package spacemacs-theme
+  ;;   :config (load-theme 'spacemacs-light))
 #+END_SRC
 **** Turn off visual and audio bells
 #+BEGIN_SRC emacs-lisp
@@ -568,15 +571,15 @@ latex, and development environment.
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  ;; (use-package org-bullets
-  ;;     :config
-  ;;     (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  (use-package org-bullets
+      :config
+      (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  ;; (custom-theme-set-faces
-  ;;  'user
-  ;;  '(variable-pitch ((t (:family "CMU Serif" :height 1.25 :weight thin)))))
+  (custom-theme-set-faces
+   'user
+   '(variable-pitch ((t (:family "CMU Serif" :height 1.25 :weight thin)))))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -770,7 +773,10 @@ citations, labels, and cross-references in org-mode.
     (org-ref-insert-ref-function 'org-ref-insert-ref-link)
     (org-ref-cite-onclick-function (lambda (_) (org-ref-citation-hydra/body)))
     (org-ref-latex-bib-resolve-func #'expand-file-name)
-    :bind ("<f6>" . org-ref-cite-insert-helm))
+    :bind
+    ("<f6>" . org-ref-cite-insert-helm)
+    (:map org-mode-map
+          ("C-c ]" . org-ref-insert-link-hydra/body)))
   (require 'org-ref-helm)
 
 #+END_SRC

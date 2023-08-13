@@ -40,6 +40,7 @@
  ("ob-sagemath" . "79645bce0c25a650bae61e550434bed836995dce")
  ("olivetti" . "08611268bb19509ec087ec416f4a7f76ebae0518")
  ("org" . "b8656a2cef3d5da7270e391222d8139fc042edd5")
+ ("org-bullets" . "767f55feb58b840a5a04eabfc3fbbf0d257c4792")
  ("org-chef" . "a97232b4706869ecae16a1352487a99bc3cf97af")
  ("org-fragtog" . "15861261a437aca2ec858317de71603d2957b423")
  ("org-noter" . "9ead81d42dd4dd5074782d239b2efddf9b8b7b3d")
@@ -66,5 +67,6 @@
  ("use-package" . "4fb1f9a68f1e7e7d614652afc017a6652fd029f1")
  ("with-editor" . "5519b6a67ecd66865b4fdd5447425eee900c54f4")
  ("yaml-mode" . "68fecb5f0dec712a10c8655df6881392a4613617")
- ("yasnippet" . "5cbdbf0d2015540c59ed8ee0fcf4788effdf75b6"))
+ ("yasnippet" . "5cbdbf0d2015540c59ed8ee0fcf4788effdf75b6")
+ ("zenburn-emacs" . "58097fa44cc747b212501a70ad9d30b8a4f6b7d2"))
 :gamma
