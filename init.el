@@ -1,3 +1,4 @@
+(defvar native-comp-deferred-compilation-deny-list nil)
 ;; Install straight.el to manage packages
 (defvar bootstrap-version)
 (let ((bootstrap-file
