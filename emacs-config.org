@@ -193,6 +193,10 @@ them.
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-x C-b") 'ibuffer)
 #+END_SRC
+**** Go to previous window
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x O") 'previous-multiframe-window)
+#+END_SRC
 **** Swap windows
 If I have two windows open, it swaps them.
 #+BEGIN_SRC emacs-lisp
