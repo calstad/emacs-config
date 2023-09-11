@@ -935,6 +935,7 @@ links instead of white.
     (orb-roam-ref-format 'org-ref-v3)
     (orb-preformat-keywords
      '(("citekey" . "=key=") "file" "author-or-editor" "year"))
+    :bind (("C-c n r" . orb-insert-link))
     :config
     (require 'org-ref)
     (org-roam-bibtex-mode))
