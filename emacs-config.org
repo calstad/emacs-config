@@ -836,7 +836,6 @@ links instead of white.
                                "#+CATEGORY: daily
   ,#+TITLE: %<%A, %m/%d/%y>
 
-  ,* Time Block Plan
   ,* Journal"
                                ("Journal"))
         :jump-to-captured t)))
