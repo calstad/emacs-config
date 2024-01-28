@@ -780,6 +780,19 @@ citations, labels, and cross-references in org-mode.
     (org-ref-insert-ref-function 'org-ref-insert-ref-link)
     (org-ref-cite-onclick-function (lambda (_) (org-ref-citation-hydra/body)))
     (org-ref-latex-bib-resolve-func #'expand-file-name)
+    (org-ref-clean-bibtex-entry-hook '(org-ref-bibtex-format-url-if-doi
+                                       orcb-key-comma
+                                       org-ref-replace-nonascii
+                                       orcb-&
+                                       orcb-%
+                                       org-ref-title-case-article
+                                       orcb-clean-year
+                                       orcb-key
+                                       orcb-clean-doi
+                                       orcb-clean-pages
+                                       org-ref-sort-bibtex-entry
+                                       orcb-fix-spacing
+                                       orcb-download-pdf))
     :bind
     ("<f6>" . org-ref-cite-insert-helm)
     (:map org-mode-map
