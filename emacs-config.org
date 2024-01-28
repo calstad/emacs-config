@@ -987,7 +987,7 @@ websites like allrecipes.com
   (setq org-default-notes-file (expand-file-name "roam/tasks/inbox.org" calstad/org-dir))
   (setq org-capture-templates
         '(("c" "OrgProtocol capture" entry (file+headline org-default-notes-file "Links")
-           "* TODO [[%:link][%:description]]\n%i"
+           "* [[%:link][%:description]]\n%i"
            :immediate-finish t)
           ("t" "Task" entry (file+headline org-default-notes-file "Tasks")
            "* TODO %i%?")))
