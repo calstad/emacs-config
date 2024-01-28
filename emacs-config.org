@@ -1035,8 +1035,7 @@ fragment.
     :custom
     (org-fragtog-preview-delay 0.5)
     :hook
-    (org-mode . org-fragtog-mode)
-    )
+    (org-mode . org-fragtog-mode))
 #+END_SRC
 
 Load these LaTeX packages by default in all org-mode documents.
