@@ -626,6 +626,12 @@ of the agenda view above the time slots instead of below.
   (setq org-agenda-sort-notime-is-late nil)
 #+END_SRC
 
+Don't duplicate a task in the deadline section if it is scheduled
+#+BEGIN_SRC emacs-lisp
+  (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
+#+END_SRC
+org-agenda-skip-deadline-prewarning-if-scheduled
+
 Default the agenda view to the daily instead of weekly view.
 #+BEGIN_SRC emacs-lisp
   (setq org-agenda-span 'day)
