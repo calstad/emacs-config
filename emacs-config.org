@@ -342,6 +342,108 @@ Dont create backup or temporary files
   (when (eq system-type 'darwin) (customize-set-variable 'native-comp-driver-options '("-Wl,-w")))
 #+END_SRC
 ** Mode and Language Specific Configuration
+*** Trying new completion
+#+BEGIN_SRC emacs-lisp
+  ;; Enable vertico
+  (use-package vertico
+    :straight (:files (:defaults "extensions/*"))
+    :init
+    (vertico-mode)
+
+    ;; Different scroll margin
+    (setq vertico-scroll-margin 0)
+
+    ;; Show more candidates
+    (setq vertico-count 20)
+
+    ;; Grow and shrink the Vertico minibuffer
+    (setq vertico-resize t)
+
+    ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
+    (setq vertico-cycle t)
+    )
+
+  ;; Add prompt indicator to `completing-read-multiple'.
+  ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
+  (defun crm-indicator (args)
+    (cons (format "[CRM%s] %s"
+                  (replace-regexp-in-string
+                   "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
+                   crm-separator)
+                  (car args))
+          (cdr args)))
+  (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
+
+  ;; Do not allow the cursor in the minibuffer prompt
+  (setq minibuffer-prompt-properties
+        '(read-only t cursor-intangible t face minibuffer-prompt))
+  (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+
+  (setq enable-recursive-minibuffers t)
+
+  (use-package savehist
+    :custom
+    (savehist-file "~/.emacs.d/persistence/history")
+    :init
+    (savehist-mode))
+
+
+  ;; Configure directory extension.
+  (use-package vertico-directory
+    :after vertico
+    :straight nil
+    :ensure nil
+    ;; More convenient directory navigation commands
+    :bind (:map vertico-map
+                ("RET" . vertico-directory-enter)
+                ("DEL" . vertico-directory-delete-char)
+                ("M-DEL" . vertico-directory-delete-word))
+    ;; Tidy shadowed file names
+    :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
+
+
+  ;; Optionally use the `orderless' completion style.
+  (use-package orderless
+    :init
+    ;; Configure a custom style dispatcher (see the Consult wiki)
+    ;; (setq orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch)
+    ;;       orderless-component-separator #'orderless-escapable-split-on-space)
+    (setq completion-styles '(orderless basic)
+          completion-category-defaults nil
+          completion-category-overrides '((file (styles partial-completion)))))
+
+  (use-package consult
+    :bind (("C-s" . consult-line)
+           ("C-x b" . consult-buffer)
+           ("C-M-l" . consult-imenu)
+           ("C-M-j" . persp-switch-to-buffer*)
+           :map minibuffer-local-map
+           ("C-r" . consult-history))
+    :custom
+    (completion-in-region-function #'consult-completion-in-region)
+    )
+
+  ;; Enable rich annotations using the Marginalia package
+  (use-package marginalia
+    ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
+    ;; available in the *Completions* buffer, add it to the
+    ;; `completion-list-mode-map'.
+    :bind (:map minibuffer-local-map
+           ("M-A" . marginalia-cycle))
+
+    ;; The :init section is always executed.
+    :init
+
+    ;; Marginalia must be activated in the :init section of use-package such that
+    ;; the mode gets enabled right away. Note that this forces loading the
+    ;; package.
+    (marginalia-mode))
+
+
+  (use-package citar
+    :custom
+    (citar-bibliography '("~/Dropbox/library/library.bib")))
+#+END_SRC
 *** All the Icons
 #+BEGIN_SRC emacs-lisp
   (use-package all-the-icons)
@@ -358,10 +460,10 @@ Dont create backup or temporary files
 stands for "complete anything". It uses pluggable back-ends and
 front-ends to retrieve and display completion candidates.
 #+BEGIN_SRC emacs-lisp
-  (use-package company
-    :bind (("<C-return>" . company-complete)
-           :map company-active-map ("M-d" . company-show-doc-buffer))
-    :init (add-hook 'after-init-hook 'global-company-mode))
+  ;; (use-package company
+  ;;   :bind (("<C-return>" . company-complete)
+  ;;          :map company-active-map ("M-d" . company-show-doc-buffer))
+  ;;   :init (add-hook 'after-init-hook 'global-company-mode))
 #+END_SRC
 *** Dired
 **** Use =a= to reuse dired buffer
@@ -435,33 +537,33 @@ narrowing selections.  There is a good tutorial [[http://tuhdo.github.io/helm-in
 is also very helpful.  The old =ido= and =smex= configuration can
 be found at commit [[https://github.com/calstad/emacs-config/commit/667cbdcf10517f3495767536739e3fc74ffa7ac7][667cbdc]].
 #+BEGIN_SRC emacs-lisp
-  (use-package helm
-    :bind (("M-x" . helm-M-x)
-           ("C-x C-f" . helm-find-files)
-           ("C-x b" . helm-mini)
-           ("C-x r b" . helm-filtered-bookmarks))
-    :config
-    (helm-mode 1)
-    (helm-autoresize-mode 1))
+  ;; (use-package helm
+  ;;   :bind (("M-x" . helm-M-x)
+  ;;          ("C-x C-f" . helm-find-files)
+  ;;          ("C-x b" . helm-mini)
+  ;;          ("C-x r b" . helm-filtered-bookmarks))
+  ;;   :config
+  ;;   (helm-mode 1)
+  ;;   (helm-autoresize-mode 1))
 #+END_SRC
 **** Helm BibTex
 [[https://github.com/tmalsburg/helm-bibtex][Helm-bibtex]] is a [[*Helm][Helm]] interface for managing BibTex
 bibliographies.
 #+BEGIN_SRC emacs-lisp
-  (use-package helm-bibtex
-    :straight (helm-bibtex :type git :host github :repo "calstad/helm-bibtex")
-    :custom
-    (bibtex-completion-bibliography calstad/lib-bib)
-    (bibtex-completion-library-path calstad/lib-docs)
-    (bibtex-completion-pdf-symbol "⌘")
-    (bibtex-completion-notes-symbol "✎")
-    (bibtex-completion-additional-search-fields '(keywords)))
+  ;; (use-package helm-bibtex
+  ;;   :straight (helm-bibtex :type git :host github :repo "calstad/helm-bibtex")
+  ;;   :custom
+  ;;   (bibtex-completion-bibliography calstad/lib-bib)
+  ;;   (bibtex-completion-library-path calstad/lib-docs)
+  ;;   (bibtex-completion-pdf-symbol "⌘")
+  ;;   (bibtex-completion-notes-symbol "✎")
+  ;;   (bibtex-completion-additional-search-fields '(keywords)))
 #+END_SRC
 
 Sort BibTex entries in order they are in the BibTex file
 #+BEGIN_SRC emacs-lisp
-  (advice-add 'bibtex-completion-candidates
-              :filter-return 'reverse)
+  ;; (advice-add 'bibtex-completion-candidates
+  ;;             :filter-return 'reverse)
 #+END_SRC
 *** Jupyter
 [[https://github.com/dzop/emacs-jupyter][emacs-jupyter]] is an interface to communicate with Jupyter
@@ -772,32 +874,32 @@ The code below was taken from [[https://stackoverflow.com/a/68279415/143721][thi
 Org-ref is a library for org-mode that provides rich support for
 citations, labels, and cross-references in org-mode.
 #+BEGIN_SRC emacs-lisp
-  (use-package org-ref
-    :custom
-    (org-ref-insert-link-function 'org-ref-insert-link-hydra/body)
-    (org-ref-insert-cite-function 'org-ref-cite-insert-helm)
-    (org-ref-insert-label-function 'org-ref-insert-label-link)
-    (org-ref-insert-ref-function 'org-ref-insert-ref-link)
-    (org-ref-cite-onclick-function (lambda (_) (org-ref-citation-hydra/body)))
-    (org-ref-latex-bib-resolve-func #'expand-file-name)
-    (org-ref-clean-bibtex-entry-hook '(org-ref-bibtex-format-url-if-doi
-                                       orcb-key-comma
-                                       org-ref-replace-nonascii
-                                       orcb-&
-                                       orcb-%
-                                       org-ref-title-case-article
-                                       orcb-clean-year
-                                       orcb-key
-                                       orcb-clean-doi
-                                       orcb-clean-pages
-                                       org-ref-sort-bibtex-entry
-                                       orcb-fix-spacing
-                                       orcb-download-pdf))
-    :bind
-    ("<f6>" . org-ref-cite-insert-helm)
-    (:map org-mode-map
-          ("C-c ]" . org-ref-insert-link-hydra/body)))
-  (require 'org-ref-helm)
+  ;; (use-package org-ref
+  ;;   :custom
+  ;;   (org-ref-insert-link-function 'org-ref-insert-link-hydra/body)
+  ;;   (org-ref-insert-cite-function 'org-ref-cite-insert-helm)
+  ;;   (org-ref-insert-label-function 'org-ref-insert-label-link)
+  ;;   (org-ref-insert-ref-function 'org-ref-insert-ref-link)
+  ;;   (org-ref-cite-onclick-function (lambda (_) (org-ref-citation-hydra/body)))
+  ;;   (org-ref-latex-bib-resolve-func #'expand-file-name)
+  ;;   (org-ref-clean-bibtex-entry-hook '(org-ref-bibtex-format-url-if-doi
+  ;;                                      orcb-key-comma
+  ;;                                      org-ref-replace-nonascii
+  ;;                                      orcb-&
+  ;;                                      orcb-%
+  ;;                                      org-ref-title-case-article
+  ;;                                      orcb-clean-year
+  ;;                                      orcb-key
+  ;;                                      orcb-clean-doi
+  ;;                                      orcb-clean-pages
+  ;;                                      org-ref-sort-bibtex-entry
+  ;;                                      orcb-fix-spacing
+  ;;                                      orcb-download-pdf))
+  ;;   :bind
+  ;;   ("<f6>" . org-ref-cite-insert-helm)
+  ;;   (:map org-mode-map
+  ;;         ("C-c ]" . org-ref-insert-link-hydra/body)))
+  ;; (require 'org-ref-helm)
 
 #+END_SRC
 
@@ -943,20 +1045,20 @@ links instead of white.
 #+END_SRC
 **** org-roam-bibtex
 #+BEGIN_SRC emacs-lisp
-  (use-package org-roam-bibtex
-    :after org-roam
-    :demand t
-    :hook (org-roam-mode . org-roam-bibtex-mode)
-    :custom
-    (orb-insert-interface 'helm-bibtex)
-    (orb-note-actions-interface 'helm)
-    (orb-roam-ref-format 'org-ref-v3)
-    (orb-preformat-keywords
-     '(("citekey" . "=key=") "file" "author-or-editor" "year"))
-    :bind (("C-c n r" . orb-insert-link))
-    :config
-    (require 'org-ref)
-    (org-roam-bibtex-mode))
+  ;; (use-package org-roam-bibtex
+  ;;   :after org-roam
+  ;;   :demand t
+  ;;   :hook (org-roam-mode . org-roam-bibtex-mode)
+  ;;   :custom
+  ;;   (orb-insert-interface 'helm-bibtex)
+  ;;   (orb-note-actions-interface 'helm)
+  ;;   (orb-roam-ref-format 'org-ref-v3)
+  ;;   (orb-preformat-keywords
+  ;;    '(("citekey" . "=key=") "file" "author-or-editor" "year"))
+  ;;   :bind (("C-c n r" . orb-insert-link))
+  ;;   :config
+  ;;   (require 'org-ref)
+  ;;   (org-roam-bibtex-mode))
 #+END_SRC
 **** org-noter
 #+BEGIN_SRC emacs-lisp
