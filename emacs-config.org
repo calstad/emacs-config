@@ -1221,7 +1221,8 @@ Use [[https://github.com/jorgenschaefer/pyvenv][pyvenv]] to manage python and co
 *** Rest Client
 [[https://github.com/pashky/restclient.el][Restclient]] is a major mode for exploring HTTP REST web services.
 #+BEGIN_SRC emacs-lisp
-  (use-package restclient)
+  (use-package restclient
+    :mode ("\\.http\\'" . restclient-mode))
 #+END_SRC
 *** SageMath
 [[http://www.sagemath.org][Sage]] is an open source mathematics software system that wraps a
