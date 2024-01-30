@@ -439,11 +439,11 @@ Dont create backup or temporary files
     ;; package.
     (marginalia-mode))
 
-
   (use-package citar
     :custom
     (citar-bibliography '("~/Dropbox/library/library.bib")))
 #+END_SRC
+**** TODO [[https://joostkremers.github.io/ebib/][Ebib]] for managing bibliography database
 *** All the Icons
 #+BEGIN_SRC emacs-lisp
   (use-package all-the-icons)
