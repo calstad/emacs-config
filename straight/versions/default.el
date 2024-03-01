@@ -65,6 +65,7 @@
  ("tablist" . "faab7a035ef2258cc4ea2182f67e3aedab7e2af9")
  ("transient" . "e90481000f071e9a26a1cc0f40d347f7d3e2201e")
  ("use-package" . "4fb1f9a68f1e7e7d614652afc017a6652fd029f1")
+ ("wfnames" . "19b452fb698a5ba3b0f1d6e7d69a5e19af2c83e7")
  ("with-editor" . "5519b6a67ecd66865b4fdd5447425eee900c54f4")
  ("yaml-mode" . "68fecb5f0dec712a10c8655df6881392a4613617")
  ("yasnippet" . "5cbdbf0d2015540c59ed8ee0fcf4788effdf75b6")
