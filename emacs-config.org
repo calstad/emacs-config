@@ -1136,9 +1136,16 @@ Use the =tabularx= package for exporting org-mode tables
   (add-to-list 'org-latex-packages-alist '("" "tabularx"))
 #+END_SRC
 ***** Markdown
+****** GitHub Flavor
 This package allows for GitHub flavored markdown
 #+BEGIN_SRC emacs-lisp
   (use-package ox-gfm
+    :after ox)
+#+END_SRC
+****** Hugo Flavor
+This package allows for exporting =org-mode= to [[https://gohugo.io][Hugo]] flavored markdown
+#+BEGIN_SRC emacs-lisp
+  (use-package ox-hugo
     :after ox)
 #+END_SRC
 ***** Pandoc
