@@ -349,6 +349,7 @@ Dont create backup or temporary files
 *** Anki
 #+BEGIN_SRC emacs-lisp
   (use-package anki-editor
+    :straight (anki-editor :type git :host github :repo "anki-editor/anki-editor")
     :after org-noter
     :config
     (setq anki-editor-create-decks 't))
