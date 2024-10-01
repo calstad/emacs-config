@@ -43,6 +43,7 @@
  ("org-bullets" . "767f55feb58b840a5a04eabfc3fbbf0d257c4792")
  ("org-chef" . "a97232b4706869ecae16a1352487a99bc3cf97af")
  ("org-fragtog" . "15861261a437aca2ec858317de71603d2957b423")
+ ("org-journal" . "17b34ce8df9649a73b715c13698220bde1628668")
  ("org-noter" . "9ead81d42dd4dd5074782d239b2efddf9b8b7b3d")
  ("org-pandoc-import" . "21807e51f4897652649852aebd4e62acbf644f52")
  ("org-ref" . "34262fa6d36c69fba3c3e2f30149c183a027a49d")

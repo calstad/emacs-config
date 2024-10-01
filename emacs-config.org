@@ -829,7 +829,6 @@ links instead of white.
            #'org-roam-reflinks-section
            ;; #'org-roam-unlinked-references-section
            ))
-    (org-roam-dailies-directory "daily/")
     (org-roam-capture-templates
      '(("d" "default" plain "%?"
         :if-new (file+head "evergreen/%<%Y%m%d%H%M%S%2N>.org"
@@ -852,25 +851,12 @@ links instead of white.
      '(("r" "ref" plain "%?" :target
        (file+head "reference/%<%Y%m%d%H%M%S%2N>.org" "#+TITLE: ${title}")
        :unnarrowed t)))
-    (org-roam-dailies-capture-templates
-     '(("d" "default" entry
-        "** %<%H:%M> %i%?\n"
-        :if-new (file+head+olp "%<%Y-%m-%d>.org"
-                               "#+CATEGORY: daily
-  ,#+TITLE: %<%A, %m/%d/%y>
 
-  ,* Journal"
-                               ("Journal"))
-        :jump-to-captured t)))
     :bind (("C-c n l" . org-roam-buffer-toggle)
            ("C-c n f" . org-roam-node-find)
            ("C-c n g" . org-roam-graph)
            ("C-c n i" . org-roam-node-insert)
-           ("C-c n c" . org-roam-capture)
-           ;; Dailies
-           ("C-c n j" . org-roam-dailies-capture-today)
-           ("C-c n d" . org-roam-dailies-goto-today)
-           ("C-c n D" . org-roam-dailies-goto-date))
+           ("C-c n c" . org-roam-capture))
     :config
     (require 'org-roam-protocol)
     (org-roam-db-autosync-mode)
@@ -961,6 +947,32 @@ links instead of white.
     :config
     (require 'org-ref)
     (org-roam-bibtex-mode))
+#+END_SRC
+**** org-journal
+[[https://github.com/bastibe/org-journal][org-journal]] is a package to maintain a simple personal diary / journal using org-mode.
+#+BEGIN_SRC emacs-lisp
+  (defun calstad/insert-journal-body ()
+    (save-excursion
+      (goto-char (point-max))
+      (insert "\n** Time Block Plan\n** Journal\n")))
+
+  (use-package org-journal
+    :bind
+    ("C-c n j" . org-journal-new-entry)
+    ("C-c n J" . org-journal-new-scheduled-entry)
+    :custom
+    (org-journal-file-format "%Y%m%d_week_%V.org")
+    (org-journal-dir (expand-file-name "journal" calstad/org-roam-dir))
+    (org-journal-enable-cache t)
+    (org-journal-enable-agenda-integration t)
+    (org-journal-file-type 'weekly)
+    (org-journal-file-header "#+CATEGORY: journal\n#+TITLE: %Y - Week %W")
+    (org-journal-time-prefix "*** ")
+    :config
+    (setq org-journal--cache-file (expand-file-name "org-journal.cache" calstad/persistence-dir))
+    :init
+    (add-hook 'org-journal-after-header-create-hook #'calstad/insert-journal-body)
+    )
 #+END_SRC
 **** org-noter
 #+BEGIN_SRC emacs-lisp
