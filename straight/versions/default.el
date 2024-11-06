@@ -30,6 +30,7 @@
  ("ht.el" . "fff8c43f0e03d5b98deb9f988522b839ce2ca253")
  ("hydra" . "2d553787aca1aceb3e6927e426200e9bb9f056f1")
  ("jupyter" . "da306a6dbda6f1e285281765a311938a1d9db022")
+ ("latex-extra" . "81507c1b63eb3898b654818de047544f662c1f73")
  ("let-alist" . "d2d0cac92851d4480328bc3f41d30c518beb1f99")
  ("magit" . "fa620ed3e45b08c45466f9930e348bf957c27e66")
  ("map" . "48fa72ddd02002ce30d400f04ce2bd88ef02d577")
