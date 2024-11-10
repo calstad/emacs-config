@@ -485,7 +485,9 @@ writing input files for TeX/LaTeX/ConTeXt/Texinfo using Emacs.
     ;; Treat environments defined in other packages as math envs
     (TeX-parse-self 't)
     ;; Follow underscores and carets by brackets
-    (TeX-electric-sub-and-superscript 't))
+    (TeX-electric-sub-and-superscript 't)
+    ;; Open compiled PDFs using pdf-tools
+    (TeX-view-program-selection '((output-pdf "PDF Tools"))))
 #+END_SRC
 **** CDLaTex
 [[https://orgmode.org/manual/CDLaTeX-mode.html#CDLaTeX-mode][CDLaTex]] is a minor mode for fast input methods for LaTex
