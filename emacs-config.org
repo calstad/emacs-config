@@ -510,6 +510,17 @@ A package that adds content folding, navigation, and other features to =LaTeX-mo
     :init
     (add-hook 'LaTeX-mode-hook #'latex-extra-mode))
 #+END_SRC
+*** Lean
+#+BEGIN_SRC emacs-lisp
+  (use-package lean4-mode
+    :straight (lean4-mode
+               :type git
+               :host github
+               :repo "leanprover/lean4-mode"
+               :files ("*.el" "data"))
+    ;; to defer loading the package until required
+    :commands (lean4-mode))
+#+END_SRC
 *** Macaulay2
 Tell emacs where to find the Macaulay2 elisp files.
 #+BEGIN_SRC emacs-lisp
