@@ -1190,13 +1190,13 @@ This package allows for exporting =org-mode= to [[https://gohugo.io][Hugo]] flav
     :after ox)
 #+END_SRC
 **** External Applications
-Tell =org-mode= to open certain file types using an external
-application.
+Tell =org-mode= to open certain file types using an external application.
 #+BEGIN_SRC emacs-lisp
   (mapcar
-   (lambda (file-type) (add-to-list 'org-file-apps file-type :append))
+   (lambda (file-type) (add-to-list 'org-file-apps file-type))
    '(("\\.docx" . default)
-     ("\\.pptx" . default)))
+     ("\\.pptx" . default)
+     ("\\.pdf\\'" . emacs)))
 #+END_SRC
 **** Saving Org Buffers
 Use =advice= to save all the current =org-mode= buffers before/certain
