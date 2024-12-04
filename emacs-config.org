@@ -995,6 +995,22 @@ links instead of white.
     (add-hook 'org-journal-after-header-create-hook #'calstad/insert-journal-body)
     )
 #+END_SRC
+**** org-timeblock
+A package that provides interactive multiple-day timeblock view for org-mode tasks.
+#+BEGIN_SRC emacs-lisp
+  (use-package org-timeblock
+    :straight (org-timeblock :type git
+                             :host github
+                             :repo "ichernyshovvv/org-timeblock")
+    :bind
+    ("C-c b" . org-timeblock)
+    :custom
+    (org-timeblock-span 1)
+    (org-timeblock-tag-colors '(("meeting" . org-timeblock-cyan)
+                                ("deep" . org-timeblock-green)
+                                ("shallow" . org-timeblock-yellow)
+                                ("off" . org-timeblock-blue))))
+#+END_SRC
 **** org-noter
 #+BEGIN_SRC emacs-lisp
   (use-package org-noter
