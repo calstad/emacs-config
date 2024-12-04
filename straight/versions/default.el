@@ -44,7 +44,6 @@
  ("nongnu-elpa" . "14e9631cd2b81f66ed551b14d31811a75cc53a4b")
  ("ob-M2" . "433ab7608cb3658babb26de0c21002dac53e1122")
  ("ob-sagemath" . "79645bce0c25a650bae61e550434bed836995dce")
- ("olivetti" . "08611268bb19509ec087ec416f4a7f76ebae0518")
  ("org" . "25c786f0fb5e49af27ed1790f966b3958e210d7f")
  ("org-bullets" . "767f55feb58b840a5a04eabfc3fbbf0d257c4792")
  ("org-chef" . "a97232b4706869ecae16a1352487a99bc3cf97af")
