@@ -831,15 +831,13 @@ links instead of white.
 #+END_SRC
 **** org-roam
 #+BEGIN_SRC emacs-lisp
-  (use-package emacsql-sqlite3)
-
   (use-package org-roam
     :straight (:host github :repo "org-roam/org-roam"
                      :files (:defaults "extensions/*"))
     :custom
     (org-roam-v2-ack t)
     (org-roam-directory (file-truename calstad/org-roam-dir))
-    (org-roam-database-connector 'sqlite3)
+    (org-roam-database-connector 'sqlite-builtin)
     (org-roam-db-location (expand-file-name "org-roam.db" calstad/persistence-dir))
     (org-roam-mode-sections
      (list #'org-roam-backlinks-section
