@@ -641,8 +641,7 @@ Set where agenda items are pulled from
   (setq org-agenda-files (list (expand-file-name "tasks" calstad/org-roam-dir)))
 #+END_SRC
 
-Have todo items with no associated timestamp show up at the top
-of the agenda view above the time slots instead of below.
+Have todo items with no associated timestamp show up at the top of the agenda view above the time slots instead of below.
 #+BEGIN_SRC emacs-lisp
   (setq org-agenda-sort-notime-is-late nil)
 #+END_SRC
@@ -651,7 +650,6 @@ Don't duplicate a task in the deadline section if it is scheduled
 #+BEGIN_SRC emacs-lisp
   (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
 #+END_SRC
-org-agenda-skip-deadline-prewarning-if-scheduled
 
 Default the agenda view to the daily instead of weekly view.
 #+BEGIN_SRC emacs-lisp
@@ -660,14 +658,10 @@ Default the agenda view to the daily instead of weekly view.
 
 Show breadcrumbs for nested headline todos in the agenda views.
 #+BEGIN_SRC emacs-lisp
-  ;; (setq org-agenda-prefix-format
-  ;;       '((agenda . " %i %-12:c%?-12t% s")
-  ;;         (timeline . "  % s")
-  ;;         (todo .
-  ;;               " %i %-12:c %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
-  ;;         (tags .
-  ;;               " %i %-12:c %(concat \"[ \"(org-format-outline-path (org-get-outline-path)) \" ]\") ")
-  ;;         (search . " %i %-12:c")))
+  (setq org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t% s")
+                                   (todo . " %i %-12:c %b")
+                                   (tags . " %i %-12:c % b")
+                                   (search . " %i %-12:c")))
 #+END_SRC
 
 Configure how the time grid is shown in the daily agenda view
