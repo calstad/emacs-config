@@ -658,9 +658,9 @@ Default the agenda view to the daily instead of weekly view.
 
 Show breadcrumbs for nested headline todos in the agenda views.
 #+BEGIN_SRC emacs-lisp
-  (setq org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t% s")
+  (setq org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t%s %b")
                                    (todo . " %i %-12:c %b")
-                                   (tags . " %i %-12:c % b")
+                                   (tags . " %i %-12:c %b")
                                    (search . " %i %-12:c")))
 #+END_SRC
 
