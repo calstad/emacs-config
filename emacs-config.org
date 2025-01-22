@@ -524,9 +524,9 @@ A package that adds content folding, navigation, and other features to =LaTeX-mo
 *** Macaulay2
 Tell emacs where to find the Macaulay2 elisp files.
 #+BEGIN_SRC emacs-lisp
-  (when (file-directory-p "/opt/homebrew/share/emacs/site-lisp/macaulay2")
+  (when (file-directory-p "/Users/colin/projects/macaulay2/M2/Macaulay2/editors/emacs")
     (progn
-      (add-to-list 'load-path "/opt/homebrew/share/emacs/site-lisp/macaulay2")
+      (add-to-list 'load-path "/Users/colin/projects/macaulay2/M2/Macaulay2/editors/emacs")
       (load "M2-init")))
 #+END_SRC
 
