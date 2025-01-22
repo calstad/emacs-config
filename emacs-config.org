@@ -1110,6 +1110,7 @@ Org-mode documents.
      (latex . t)
      (M2 . t)
      (python . t)
+     (octave . t)
      (jupyter . t)))
 
   (use-package ob-sagemath
