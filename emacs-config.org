@@ -503,13 +503,6 @@ environments and math.
             #'(lambda ()
                 (define-key LaTeX-mode-map (kbd "$") 'self-insert-command)))
 #+END_SRC
-**** [[https://github.com/Malabarba/latex-extra][LaTeX Extras]]
-A package that adds content folding, navigation, and other features to =LaTeX-mode=.
-#+BEGIN_SRC emacs-lisp
-  (use-package latex-extra
-    :init
-    (add-hook 'LaTeX-mode-hook #'latex-extra-mode))
-#+END_SRC
 *** Lean
 #+BEGIN_SRC emacs-lisp
   (use-package lean4-mode
