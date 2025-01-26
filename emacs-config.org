@@ -23,7 +23,7 @@ The directory that will sync files across all machines.
 
 The directory for all things =org-mode= related.
 #+BEGIN_SRC emacs-lisp
-  (setq calstad/org-dir (expand-file-name "org" calstad/sync-dir))
+  (setq calstad/org-dir (expand-file-name "cognitorium" calstad/sync-dir))
 #+END_SRC
 
 Where we keep capture templates for =org-mode= and related packages.
@@ -37,12 +37,6 @@ The location of my reference library including bibliographies and PDFs.
   (setq calstad/ref-lib-dir (expand-file-name "library" calstad/sync-dir)
         calstad/lib-bib (expand-file-name "library.bib" calstad/ref-lib-dir)
         calstad/lib-docs (expand-file-name "documents/" calstad/ref-lib-dir))
-#+END_SRC
-
-Directory where we keep all of the =org-roam= files.
-#+BEGIN_SRC emacs-lisp
-  (setq calstad/org-roam-dir
-        (expand-file-name "roam" calstad/org-dir))
 #+END_SRC
 *** User details
 Emacs will normally pick this up automatically, but this way I can be sure the right information is always present.
@@ -631,7 +625,10 @@ latex, and development environment.
 **** Agenda
 Set where agenda items are pulled from
 #+BEGIN_SRC emacs-lisp
-  (setq org-agenda-files (list (expand-file-name "tasks" calstad/org-roam-dir)))
+  (setq org-agenda-files
+        (list
+         (expand-file-name "projects" calstad/org-dir)
+         (expand-file-name "dailies" calstad/org-dir)))
 #+END_SRC
 
 Have todo items with no associated timestamp show up at the top of the agenda view above the time slots instead of below.
@@ -823,7 +820,7 @@ links instead of white.
                      :files (:defaults "extensions/*"))
     :custom
     (org-roam-v2-ack t)
-    (org-roam-directory (file-truename calstad/org-roam-dir))
+    (org-roam-directory (file-truename calstad/org-dir))
     (org-roam-database-connector 'sqlite-builtin)
     (org-roam-db-location (expand-file-name "org-roam.db" calstad/persistence-dir))
     (org-roam-mode-sections
@@ -831,14 +828,27 @@ links instead of white.
            #'org-roam-reflinks-section
            ;; #'org-roam-unlinked-references-section
            ))
+    (org-roam-dailies-directory "dailies/")
     (org-roam-capture-templates
-     '(("d" "default" plain "%?"
-        :if-new (file+head "evergreen/%<%Y%m%d%H%M%S%2N>.org"
-                           "#+TITLE: ${title}\n")
+     '(("n" "note" plain "%?"
+        :if-new (file+head "notes/%<%Y%m%d%H%M%S>-${slug}.org"
+                           ":PROPERTIES:
+  :CATEGORY: note
+  :END:
+  ,#+FILETAGS: ::
+  ,#+TITLE: ${title}\n")
         :unnarrowed t)
-       ("b" "bibliography reference" plain "%?"
-        :if-new (file+head "reference/%<%Y%m%d%H%M%S%2N>.org"
-                           "#+TITLE: ${title}
+       ("p" "project" plain "%?"
+        :if-new (file+head "projects/%<%Y%m%d%H%M%S>-${slug}.org"
+                           ":PROPERTIES:
+  :CATEGORY: project
+  :END:
+  ,#+FILETAGS: ::
+  ,#+TITLE: ${title}\n")
+        :unnarrowed t)
+       ("r" "document reference" plain "%?"
+        :if-new (file+head "references/%<%Y%m%d%H%M%S>-${slug}.org"
+                           "#+CATEGORY: reference\n#+FILETAGS: ::\n#+TITLE: ${title}
   ,#+AUTHOR: ${author-or-editor}
 
   ,* Notes
@@ -848,77 +858,38 @@ links instead of white.
   :NOTER_DOCUMENT: %(orb-process-file-field \"${citekey}\")
   :NOTER_PAGE:
   :END:")
+        :unnarrowed t)
+       ("R" "reference" plain "%?"
+        :if-new (file+head "references/%<%Y%m%d%H%M%S>-${slug}.org"
+                           ":PROPERTIES:
+[[cite:&adamsIntroductionGrobnerBases1994]]  :ROAM_REFS: %^{Key}
+  :CATEGORY: reference
+  :END:
+  ,#+FILETAGS: ::
+  ,#+TITLE: ${title}\n")
         :unnarrowed t)))
     (org-roam-capture-ref-templates
      '(("r" "ref" plain "%?" :target
-       (file+head "reference/%<%Y%m%d%H%M%S%2N>.org" "#+TITLE: ${title}")
+       (file+head "references/%<%Y%m%d%H%M%S>-${slug}.org" "#+CATEGORY: reference\n#+FILETAGS: ::\n#+TITLE: ${title}")
        :unnarrowed t)))
+    (org-roam-dailies-capture-templates
+     '(("d" "daily" entry
+        "* %?"
+        :target (file+head "%<%Y-%m-%d>.org"
+                           "#+CATEGORY: daily\n#+TITLE: %<%Y-%m-%d>\n"))))
 
     :bind (("C-c n l" . org-roam-buffer-toggle)
            ("C-c n f" . org-roam-node-find)
            ("C-c n g" . org-roam-graph)
            ("C-c n i" . org-roam-node-insert)
-           ("C-c n c" . org-roam-capture))
+           ("C-c n c" . org-roam-capture)
+           ("C-c n d" . org-roam-dailies-capture-today)
+           ("C-c n D" . org-roam-dailies-goto-today)))
     :config
     (require 'org-roam-protocol)
     (org-roam-db-autosync-mode)
 
-    (cl-defmethod org-roam-node-doom-filetitle ((node org-roam-node))
-      "Return the value of \"#+title:\" (if any) from file that NODE resides in.
-  If there's no file-level title in the file, return empty string."
-      (or (if (= (org-roam-node-level node) 0)
-              (org-roam-node-title node)
-            (org-roam-get-keyword "TITLE" (org-roam-node-file node)))
-          ""))
-
-  (cl-defmethod org-roam-node-doom-hierarchy ((node org-roam-node))
-    "Return hierarchy for NODE, constructed of its file title, OLP and direct title.
-    If some elements are missing, they will be stripped out."
-    (let ((title     (org-roam-node-title node))
-          (olp       (org-roam-node-olp   node))
-          (level     (org-roam-node-level node))
-          (filetitle (org-roam-node-doom-filetitle node))
-          (separator (propertize " > " 'face 'shadow)))
-      (cl-case level
-        ;; node is a top-level file
-        (0 filetitle)
-        ;; node is a level 1 heading
-        (1 (concat (propertize filetitle 'face '(shadow italic))
-                   separator title))
-        ;; node is a heading with an arbitrary outline path
-        (t (concat (propertize filetitle 'face '(shadow italic))
-                   separator (propertize (string-join olp " > ") 'face '(shadow italic))
-                   separator title)))))
-
-    ;; (cl-defmethod org-roam-node-hierarchy ((node org-roam-node))
-    ;;   "Return the hierarchy for the node."
-    ;;   (let* ((title (org-roam-node-title node))
-    ;;          (olp (mapcar (lambda (s) (if (> (length s) 10) (concat (substring s 0 10)  "…") s)) (org-roam-node-olp node)))
-    ;;          (level (org-roam-node-level node))
-    ;;          (filetitle (org-roam-node-file-title node))
-    ;;          (shortentitle (if (> (length filetitle) 20) (concat (substring filetitle 0 20)  "...") filetitle))
-    ;;          (separator (concat " " (all-the-icons-material "chevron_right") " "))
-    ;;          )
-    ;;     (cond
-    ;;      ((>= level 1) (concat (all-the-icons-material "list" :face 'all-the-icons-green :v-adjust 0.02 :height 0.8) " "
-    ;;                            (propertize shortentitle 'face 'org-roam-dim)
-    ;;                            (propertize separator 'face 'org-roam-dim)
-    ;;                            title))
-    ;;      ((> level 1) (concat (all-the-icons-material "list" :face 'all-the-icons-dpurple :v-adjust 0.02 :height 0.8)
-    ;;                           " "
-    ;;                           (propertize (concat shortentitle separator (string-join olp separator)) 'face 'org-roam-dim)
-    ;;                           (propertize separator 'face 'org-roam-dim)
-    ;;                           title))
-    ;;      (t (concat (all-the-icons-faicon "file-text-o" :face 'all-the-icons-lyellow :v-adjust 0.02 :height 0.7) " " title))
-    ;;      )
-  ;;     ))
-
-  (cl-defmethod org-roam-node-category ((node org-roam-node))
-    "Return the currently set category for the NODE."
-    (cdr (assoc-string "CATEGORY" (org-roam-node-properties node))))
-
-  (setq org-roam-node-display-template
-        "${doom-hierarchy:*} ${category:10} ${tags:10}"))
+  (setq org-roam-node-display-template "${title:60} ${category:10} ${tags:10}")
 #+END_SRC
 **** org-roam-ui
 [[https://github.com/org-roam/org-roam-ui][org-roam-ui]] is a frontend for exploring and interacting with =org-roam= notes.
@@ -949,32 +920,6 @@ links instead of white.
     :config
     (require 'org-ref)
     (org-roam-bibtex-mode))
-#+END_SRC
-**** org-journal
-[[https://github.com/bastibe/org-journal][org-journal]] is a package to maintain a simple personal diary / journal using org-mode.
-#+BEGIN_SRC emacs-lisp
-  (defun calstad/insert-journal-body ()
-    (save-excursion
-      (goto-char (point-max))
-      (insert "\n** Time Block Plan\n** Journal\n")))
-
-  (use-package org-journal
-    :bind
-    ("C-c n j" . org-journal-new-entry)
-    ("C-c n J" . org-journal-new-scheduled-entry)
-    :custom
-    (org-journal-file-format "%Y%m%d_week_%V.org")
-    (org-journal-dir (expand-file-name "journal" calstad/org-roam-dir))
-    (org-journal-enable-cache t)
-    (org-journal-enable-agenda-integration t)
-    (org-journal-file-type 'weekly)
-    (org-journal-file-header "#+CATEGORY: journal\n#+TITLE: %Y - Week %W")
-    (org-journal-time-prefix "*** ")
-    :config
-    (setq org-journal--cache-file (expand-file-name "org-journal.cache" calstad/persistence-dir))
-    :init
-    (add-hook 'org-journal-after-header-create-hook #'calstad/insert-journal-body)
-    )
 #+END_SRC
 **** org-timeblock
 A package that provides interactive multiple-day timeblock view for org-mode tasks.
@@ -1018,7 +963,7 @@ websites like allrecipes.com
 #+END_SRC
 **** Capture
 #+BEGIN_SRC emacs-lisp
-  (setq org-default-notes-file (expand-file-name "roam/tasks/inbox.org" calstad/org-dir))
+  (setq org-default-notes-file (expand-file-name "projects/inbox.org" calstad/org-dir))
   (setq org-capture-templates
         '(("c" "OrgProtocol capture" entry (file+headline org-default-notes-file "Links")
            "* [[%:link][%:description]]\n%i"
