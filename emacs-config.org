@@ -945,6 +945,18 @@ A package that provides interactive multiple-day timeblock view for org-mode tas
     (org-noter-always-create-frame nil)
     (org-noter-auto-save-last-location t))
 #+END_SRC
+**** org-media-note
+[[https://github.com/yuchen-lea/org-media-note][org-media-note]] is a package for taking notes on video and audio files in =org-mode= similar to [[*org-noter][org-noter]].
+#+BEGIN_SRC emacs-lisp
+  (use-package org-media-note
+    :straight (org-media-note :type git :host github :repo "yuchen-lea/org-media-note")
+    :init (setq org-media-note-use-org-ref t)
+    :hook (org-mode .  org-media-note-mode)
+    :custom
+    (org-media-note-screenshot-image-dir "~/files/Videos/screenshots")  ;; Folder to save screenshot
+    (org-media-note-use-refcite-first t)  ;; use videocite link instead of video link if possible
+  )
+#+END_SRC
 **** elfeed-org
 #+BEGIN_SRC emacs-lisp
   (use-package elfeed-org
