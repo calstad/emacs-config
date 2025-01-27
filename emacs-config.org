@@ -348,16 +348,6 @@ Dont create backup or temporary files
     :config
     (setq anki-editor-create-decks 't))
 #+END_SRC
-*** Company
-[[http://company-mode.github.io][company-mode]] is a text completion framework for Emacs. The name
-stands for "complete anything". It uses pluggable back-ends and
-front-ends to retrieve and display completion candidates.
-#+BEGIN_SRC emacs-lisp
-  (use-package company
-    :bind (("<C-return>" . company-complete)
-           :map company-active-map ("M-d" . company-show-doc-buffer))
-    :init (add-hook 'after-init-hook 'global-company-mode))
-#+END_SRC
 *** Dired
 **** Use =a= to reuse dired buffer
 The command =dired-find-alternate-file= is disabled by default so
@@ -515,11 +505,6 @@ Tell emacs where to find the Macaulay2 elisp files.
     (progn
       (add-to-list 'load-path "/Users/colin/projects/macaulay2/M2/Macaulay2/editors/emacs")
       (load "M2-init")))
-#+END_SRC
-
-Disable =company-mode= in Macaulay2 buffers.
-#+BEGIN_SRC emacs-lisp
-  (setq company-global-modes '(not M2-mode))
 #+END_SRC
 
 Remap key binding for evaluating a Macaulay2 buffer.
@@ -951,7 +936,7 @@ A package that provides interactive multiple-day timeblock view for org-mode tas
   (use-package org-media-note
     :straight (org-media-note :type git :host github :repo "yuchen-lea/org-media-note")
     :init (setq org-media-note-use-org-ref t)
-    :hook (org-mode .  org-media-note-mode)
+    :hook (org-mode . org-media-note-mode)
     :custom
     (org-media-note-screenshot-image-dir "~/files/Videos/screenshots")  ;; Folder to save screenshot
     (org-media-note-use-refcite-first t)  ;; use videocite link instead of video link if possible
