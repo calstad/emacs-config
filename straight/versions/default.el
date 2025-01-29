@@ -5,7 +5,6 @@
  ("biblio.el" . "517ec18f00f91b61481214b178f7ae0b8fbc499b")
  ("cdlatex" . "f215b70c5cb02bbc43f5a7d5c8e5e3460ff82428")
  ("citeproc-el" . "f8bfe4c339b054c74dc32cdfd8b0bb2cf0e598fa")
- ("company-mode" . "25f6a2717ade173c37dc4d013ce68312673596d7")
  ("compat" . "d21b1cde40a71f07ba07f95a2e461813b822bdcc")
  ("dash.el" . "1de9dcb83eacfb162b6d9a118a4770b1281bcd84")
  ("dockerfile-mode" . "52c6c00da1d31c0b6c29c74335b3af63ed6bf06c")
