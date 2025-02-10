@@ -439,9 +439,9 @@ bibliographies.
   (use-package helm-bibtex
     :straight (helm-bibtex :type git :host github :repo "calstad/helm-bibtex")
     :custom
-    (bibtex-completion-bibliography (expand-file-name "zotero.bib" calstad/ref-lib-dir))
-    (bibtex-completion-pdf-field "file")
-    ;; (bibtex-completion-library-path calstad/lib-docs)
+    (bibtex-completion-bibliography (expand-file-name "library.bib" calstad/ref-lib-dir))
+    ;; (bibtex-completion-pdf-field "file")
+    (bibtex-completion-library-path calstad/lib-docs)
     (bibtex-completion-pdf-symbol "⌘")
     (bibtex-completion-notes-symbol "✎")
     (bibtex-completion-additional-search-fields '(keywords)))
