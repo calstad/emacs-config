@@ -820,7 +820,6 @@ links instead of white.
                            ":PROPERTIES:
   :CATEGORY: note
   :END:
-  ,#+FILETAGS: ::
   ,#+TITLE: ${title}\n")
         :unnarrowed t)
        ("p" "project" plain "%?"
@@ -847,7 +846,7 @@ links instead of white.
        ("R" "reference" plain "%?"
         :if-new (file+head "references/%<%Y%m%d%H%M%S>-${slug}.org"
                            ":PROPERTIES:
-[[cite:&adamsIntroductionGrobnerBases1994]]  :ROAM_REFS: %^{Key}
+  :ROAM_REFS: %^{Key}
   :CATEGORY: reference
   :END:
   ,#+FILETAGS: ::
@@ -855,8 +854,8 @@ links instead of white.
         :unnarrowed t)))
     (org-roam-capture-ref-templates
      '(("r" "ref" plain "%?" :target
-       (file+head "references/%<%Y%m%d%H%M%S>-${slug}.org" "#+CATEGORY: reference\n#+FILETAGS: ::\n#+TITLE: ${title}")
-       :unnarrowed t)))
+        (file+head "references/%<%Y%m%d%H%M%S>-${slug}.org" "#+CATEGORY: reference\n#+FILETAGS: ::\n#+TITLE: ${title}")
+        :unnarrowed t)))
     (org-roam-dailies-capture-templates
      '(("d" "daily" entry
         "* %?"
@@ -870,9 +869,9 @@ links instead of white.
            ("C-c n c" . org-roam-capture)
            ("C-c n d" . org-roam-dailies-capture-today)
            ("C-c n D" . org-roam-dailies-goto-today)))
-    :config
-    (require 'org-roam-protocol)
-    (org-roam-db-autosync-mode)
+  :config
+  (require 'org-roam-protocol)
+  (org-roam-db-autosync-mode)
 
   (setq org-roam-node-display-template "${title:60} ${category:10} ${tags:10}")
 #+END_SRC
