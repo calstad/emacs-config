@@ -23,7 +23,7 @@ The directory that will sync files across all machines.
 
 The directory for all things =org-mode= related.
 #+BEGIN_SRC emacs-lisp
-  (setq calstad/org-dir (expand-file-name "cognitorium" calstad/sync-dir))
+  (setq calstad/org-dir (expand-file-name "org" calstad/sync-dir))
 #+END_SRC
 
 Where we keep capture templates for =org-mode= and related packages.
@@ -439,8 +439,7 @@ bibliographies.
   (use-package helm-bibtex
     :straight (helm-bibtex :type git :host github :repo "calstad/helm-bibtex")
     :custom
-    (bibtex-completion-bibliography (expand-file-name "library.bib" calstad/ref-lib-dir))
-    ;; (bibtex-completion-pdf-field "file")
+    (bibtex-completion-bibliography calstad/lib-bib)
     (bibtex-completion-library-path calstad/lib-docs)
     (bibtex-completion-pdf-symbol "⌘")
     (bibtex-completion-notes-symbol "✎")
@@ -558,7 +557,7 @@ latex, and development environment.
     (org-archive-location "%s_archive::datetree/")
     (org-id-locations-file (expand-file-name "org-id-locations" calstad/persistence-dir))
     (org-persist-directory (expand-file-name "org-persist" calstad/persistence-dir))
-    (org-attach-id-dir (expand-file-name "attachements" calstad/org-dir))
+    (org-attach-id-dir (expand-file-name "attachments" calstad/org-dir))
     :hook
     (org-mode . visual-line-mode))
 #+END_SRC
@@ -612,8 +611,8 @@ Set where agenda items are pulled from
 #+BEGIN_SRC emacs-lisp
   (setq org-agenda-files
         (list
-         (expand-file-name "projects" calstad/org-dir)
-         (expand-file-name "dailies" calstad/org-dir)))
+         (expand-file-name "cognitorium/projects" calstad/org-dir)
+         (expand-file-name "cognitorium/dailies" calstad/org-dir)))
 #+END_SRC
 
 Have todo items with no associated timestamp show up at the top of the agenda view above the time slots instead of below.
@@ -805,7 +804,7 @@ links instead of white.
                      :files (:defaults "extensions/*"))
     :custom
     (org-roam-v2-ack t)
-    (org-roam-directory (file-truename calstad/org-dir))
+    (org-roam-directory (file-truename (expand-file-name "cognitorium" calstad/org-dir)))
     (org-roam-database-connector 'sqlite-builtin)
     (org-roam-db-location (expand-file-name "org-roam.db" calstad/persistence-dir))
     (org-roam-mode-sections
@@ -815,24 +814,23 @@ links instead of white.
            ))
     (org-roam-dailies-directory "dailies/")
     (org-roam-capture-templates
-     '(("n" "note" plain "%?"
-        :if-new (file+head "notes/%<%Y%m%d%H%M%S>-${slug}.org"
+     '(("e" "evergreen" plain "%?"
+        :if-new (file+head "evergreens/%<%Y%m%d%H%M%S>-${slug}.org"
                            ":PROPERTIES:
-  :CATEGORY: note
   :END:
   ,#+TITLE: ${title}\n")
         :unnarrowed t)
-       ("p" "project" plain "%?"
-        :if-new (file+head "projects/%<%Y%m%d%H%M%S>-${slug}.org"
-                           ":PROPERTIES:
-  :CATEGORY: project
-  :END:
-  ,#+FILETAGS: ::
-  ,#+TITLE: ${title}\n")
-        :unnarrowed t)
-       ("r" "document reference" plain "%?"
+       ("r" "reference" plain "%?"
         :if-new (file+head "references/%<%Y%m%d%H%M%S>-${slug}.org"
-                           "#+CATEGORY: reference\n#+FILETAGS: ::\n#+TITLE: ${title}
+                           ":PROPERTIES:
+  :ROAM_REFS: %^{roam-ref}
+  :END:
+  ,#+FILETAGS: :%^{tags}:
+  ,#+TITLE: ${title}\n")
+        :unnarrowed t)
+       ("R" "document reference" plain "%?"
+        :if-new (file+head "references/%<%Y%m%d%H%M%S>-${slug}.org"
+                           "#+FILETAGS: ::\n#+TITLE: ${title}
   ,#+AUTHOR: ${author-or-editor}
 
   ,* Notes
@@ -842,19 +840,10 @@ links instead of white.
   :NOTER_DOCUMENT: %(orb-process-file-field \"${citekey}\")
   :NOTER_PAGE:
   :END:")
-        :unnarrowed t)
-       ("R" "reference" plain "%?"
-        :if-new (file+head "references/%<%Y%m%d%H%M%S>-${slug}.org"
-                           ":PROPERTIES:
-  :ROAM_REFS: %^{Key}
-  :CATEGORY: reference
-  :END:
-  ,#+FILETAGS: ::
-  ,#+TITLE: ${title}\n")
         :unnarrowed t)))
     (org-roam-capture-ref-templates
      '(("r" "ref" plain "%?" :target
-        (file+head "references/%<%Y%m%d%H%M%S>-${slug}.org" "#+CATEGORY: reference\n#+FILETAGS: ::\n#+TITLE: ${title}")
+        (file+head "references/%<%Y%m%d%H%M%S>-${slug}.org" "#+FILETAGS: ::\n#+TITLE: ${title}")
         :unnarrowed t)))
     (org-roam-dailies-capture-templates
      '(("d" "daily" entry
@@ -872,8 +861,29 @@ links instead of white.
   :config
   (require 'org-roam-protocol)
   (org-roam-db-autosync-mode)
+#+END_SRC
+***** Finding Nodes
+Build a node hierarchy based on the heading nest level.
+#+BEGIN_SRC emacs-lisp
+  (cl-defmethod org-roam-node-hierarchy ((node org-roam-node))
+    (let ((level (org-roam-node-level node)))
+      (concat
+       (when (> level 0) (concat (org-roam-node-file-title node) " > "))
+       (when (> level 1) (concat (string-join (org-roam-node-olp node) " > ") " > "))
+       (org-roam-node-title node))))
+#+END_SRC
 
-  (setq org-roam-node-display-template "${title:60} ${category:10} ${tags:10}")
+Use which directory the note lives in as a "category".
+#+BEGIN_SRC emacs-lisp
+  (cl-defmethod org-roam-node-directories ((node org-roam-node))
+    (if-let ((dirs (file-name-directory (file-relative-name (org-roam-node-file node) org-roam-directory))))
+        (format "(%s)" (car (split-string dirs "/")))
+      ""))
+#+END_SRC
+
+How the nodes are displayed in =find-node=.
+#+BEGIN_SRC emacs-lisp
+  (setq org-roam-node-display-template "${directories:12} ${hierarchy:*} ${tags:40}")
 #+END_SRC
 **** org-roam-ui
 [[https://github.com/org-roam/org-roam-ui][org-roam-ui]] is a frontend for exploring and interacting with =org-roam= notes.
@@ -959,7 +969,7 @@ websites like allrecipes.com
 #+END_SRC
 **** Capture
 #+BEGIN_SRC emacs-lisp
-  (setq org-default-notes-file (expand-file-name "projects/inbox.org" calstad/org-dir))
+  (setq org-default-notes-file (expand-file-name "cognitorium/projects/inbox.org" calstad/org-dir))
   (setq org-capture-templates
         '(("c" "OrgProtocol capture" entry (file+headline org-default-notes-file "Links")
            "* [[%:link][%:description]]\n%i"
