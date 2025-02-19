@@ -812,7 +812,6 @@ links instead of white.
            #'org-roam-reflinks-section
            ;; #'org-roam-unlinked-references-section
            ))
-    (org-roam-dailies-directory "dailies/")
     (org-roam-capture-templates
      '(("e" "evergreen" plain "%?"
         :if-new (file+head "evergreens/%<%Y%m%d%H%M%S>-${slug}.org"
@@ -845,19 +844,12 @@ links instead of white.
      '(("r" "ref" plain "%?" :target
         (file+head "references/%<%Y%m%d%H%M%S>-${slug}.org" "#+FILETAGS: ::\n#+TITLE: ${title}")
         :unnarrowed t)))
-    (org-roam-dailies-capture-templates
-     '(("d" "daily" entry
-        "* %?"
-        :target (file+head "%<%Y-%m-%d>.org"
-                           "#+CATEGORY: daily\n#+TITLE: %<%Y-%m-%d>\n"))))
-
+    
     :bind (("C-c n l" . org-roam-buffer-toggle)
            ("C-c n f" . org-roam-node-find)
            ("C-c n g" . org-roam-graph)
            ("C-c n i" . org-roam-node-insert)
-           ("C-c n c" . org-roam-capture)
-           ("C-c n d" . org-roam-dailies-capture-today)
-           ("C-c n D" . org-roam-dailies-goto-today)))
+           ("C-c n c" . org-roam-capture)))
   :config
   (require 'org-roam-protocol)
   (org-roam-db-autosync-mode)
