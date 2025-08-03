@@ -769,6 +769,7 @@ citations, labels, and cross-references in org-mode.
     (org-ref-insert-ref-function 'org-ref-insert-ref-link)
     (org-ref-cite-onclick-function (lambda (_) (org-ref-citation-hydra/body)))
     (org-ref-latex-bib-resolve-func #'expand-file-name)
+    ;; This removes orcb-check-journal from cleaning a an entry
     (org-ref-clean-bibtex-entry-hook '(org-ref-bibtex-format-url-if-doi
                                        orcb-key-comma
                                        org-ref-replace-nonascii
