@@ -1139,6 +1139,12 @@ Tell =org-mode= to open certain file types using an external application.
      ("\\.pptx" . default)
      ("\\.pdf\\'" . emacs)))
 #+END_SRC
+***** org-mac-link
+This packages allows you to grab the current link or selection from an open macOS application and insert it as a hyperlink at point in an =org-mode= document.
+#+BEGIN_SRC emacs-lisp
+  (use-package org-mac-link
+    :bind (("C-c m" . org-mac-link-get-link)))
+#+END_SRC
 **** Saving Org Buffers
 Use =advice= to save all the current =org-mode= buffers before/certain
 actions are taken.
