@@ -612,7 +612,7 @@ Set where agenda items are pulled from
   (setq org-agenda-files
         (list
          (expand-file-name "cognitorium/projects" calstad/org-dir)
-         (expand-file-name "cognitorium/dailies" calstad/org-dir)))
+         (expand-file-name "cognitorium/journal" calstad/org-dir)))
 #+END_SRC
 
 Have todo items with no associated timestamp show up at the top of the agenda view above the time slots instead of below.
