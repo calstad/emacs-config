@@ -451,6 +451,11 @@ Sort BibTex entries in order they are in the BibTex file
   (advice-add 'bibtex-completion-candidates
               :filter-return 'reverse)
 #+END_SRC
+*** Julia
+Major mode for editing [[https://julialang.org][Julia]] source code.
+#+BEGIN_SRC emacs-lisp
+  (use-package julia-mode)
+#+END_SRC
 *** Jupyter
 [[https://github.com/dzop/emacs-jupyter][emacs-jupyter]] is an interface to communicate with Jupyter
 kernels with built-in REPL and =org-mode= frontends.
@@ -1046,6 +1051,7 @@ Org-mode documents.
      (shell . t)
      (latex . t)
      (M2 . t)
+     (julia . t)
      (python . t)
      (octave . t)
      (jupyter . t)))
