@@ -1156,6 +1156,8 @@ Tell =org-mode= to open certain file types using an external application.
 This packages allows you to grab the current link or selection from an open macOS application and insert it as a hyperlink at point in an =org-mode= document.
 #+BEGIN_SRC emacs-lisp
   (use-package org-mac-link
+    :after (org)
+    :demand t
     :bind (("C-c m" . org-mac-link-get-link)))
 #+END_SRC
 **** Saving Org Buffers
