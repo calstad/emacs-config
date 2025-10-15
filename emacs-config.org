@@ -389,6 +389,11 @@ Key bindings
   (define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
   (define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
 #+END_SRC
+*** Emacs Speaks Statistics (ESS)
+Compute environment for [[https://www.r-project.org][R]].
+#+BEGIN_SRC emacs-lisp
+  (use-package ess)
+#+END_SRC
 *** Eshell
 Start eshell or switch to it if it's active.
 #+BEGIN_SRC emacs-lisp
@@ -1054,6 +1059,7 @@ Org-mode documents.
      (julia . t)
      (python . t)
      (octave . t)
+     (R . t)
      (jupyter . t)))
 
   (use-package ob-sagemath
