@@ -510,9 +510,9 @@ environments and math.
 *** Macaulay2
 Tell emacs where to find the Macaulay2 elisp files.
 #+BEGIN_SRC emacs-lisp
-  (when (file-directory-p "/Users/colin/projects/macaulay2/M2/Macaulay2/editors/emacs")
+  (when (file-directory-p "/opt/homebrew/share/emacs/site-lisp/macaulay2")
     (progn
-      (add-to-list 'load-path "/Users/colin/projects/macaulay2/M2/Macaulay2/editors/emacs")
+      (add-to-list 'load-path "/opt/homebrew/share/emacs/site-lisp/macaulay2")
       (load "M2-init")))
 #+END_SRC
 
